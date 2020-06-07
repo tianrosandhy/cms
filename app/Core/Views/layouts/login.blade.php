@@ -38,7 +38,6 @@
 
                                             <div class="form-group mt-4">
                                                 <label class="form-control-label">Password</label>
-                                                <a href="#" class="float-right text-muted text-unline-dashed ml-1">Forgot your password?</a>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">
@@ -56,6 +55,7 @@
                                                         id="checkbox-signin" checked name="remember" value="1">
                                                     <label class="custom-control-label" for="checkbox-signin">Remember
                                                         me</label>
+                                                    <a href="#" class="float-right text-muted text-unline-dashed ml-1">Forgot your password?</a>
                                                 </div>
                                             </div>
 

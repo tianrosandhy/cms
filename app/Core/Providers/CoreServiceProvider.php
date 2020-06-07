@@ -6,6 +6,8 @@ use Illuminate\Routing\Router;
 use Validator;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Database\Schema\Builder;
+use App\Core\Models\Setting;
+use App\Core\Models\Role;
 
 class CoreServiceProvider extends BaseServiceProvider{
 	protected $namespace = 'App\Core\Http\Controllers';
@@ -27,9 +29,9 @@ class CoreServiceProvider extends BaseServiceProvider{
 	}
 
 	protected function mergeMainConfig(){
-		// $this->mergeConfigFrom(
-		//     __DIR__.'/Config/permission.php', 'permission'
-		// );
+		$this->mergeConfigFrom(
+		    __DIR__.'/../Configs/module-setting.php', 'module-setting'
+		);
 	}
 
 
@@ -37,7 +39,7 @@ class CoreServiceProvider extends BaseServiceProvider{
 		$router->group([
 			'namespace' => $this->namespace, 
 			'middleware' => [
-				'web', 
+				'backend', 
 			]
 		], function($router){
 			$router->group(['prefix' => admin_prefix()], function(){
@@ -58,12 +60,12 @@ class CoreServiceProvider extends BaseServiceProvider{
 	}
 
 	public function registerContainer(){
-		// $this->app->singleton('setting', function($app){
-		// 	return SettingStructure::get();
-		// });
-		// $this->app->singleton('role', function($app){
-		// 	return Role::with('owner', 'children')->get();
-		// });
+		$this->app->singleton('setting', function($app){
+			return Setting::get();
+		});
+		$this->app->singleton('role', function($app){
+			return Role::with('owner', 'children')->get();
+		});
 	}
 
 

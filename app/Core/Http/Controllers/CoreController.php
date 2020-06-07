@@ -5,6 +5,7 @@ use App\Core\Http\Controllers\BaseController;
 use App\Core\Presenters\DashboardPresenter;
 use App\Core\Presenters\LoginPresenter;
 use App\Core\Presenters\RegisterPresenter;
+use App\Core\Http\Process\LoginProcess;
 
 class CoreController extends BaseController
 {
@@ -16,6 +17,11 @@ class CoreController extends BaseController
 	public function login(){
 		$p = new LoginPresenter;
 		return $p->render();
+	}
+
+	public function storeLogin(){
+		$process = new LoginProcess;
+		return $process->handle();
 	}
 
 	public function register(){

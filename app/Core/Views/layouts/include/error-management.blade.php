@@ -15,7 +15,11 @@ $(function(){
 	@if(session('error'))
 		@if(is_array(session('error')))
 			@foreach(session('error') as $err)
-			toastr["error"]("{{ $err[0] }}");
+				@if(is_array($err) && isset($err[0]))
+				toastr["error"]("{{ $err[0] }}");
+				@else
+				toastr["error"]("{{ $err }}");
+				@endif
 			@endforeach
 		@else
 		toastr["error"]("{{ session('error') }}");

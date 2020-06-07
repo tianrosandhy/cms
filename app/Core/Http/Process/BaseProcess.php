@@ -34,6 +34,9 @@ class BaseProcess{
 				$this->setHttpCode($e->getCode());
 			}
 			$this->setErrorMessage($e->getMessage());
+			if(method_exists($this, 'revert')){
+				$this->revert();
+			}
 			return $this->generateResponse();
 		}
 
