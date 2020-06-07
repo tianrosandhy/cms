@@ -1,0 +1,62 @@
+<?php
+namespace App\Core\Http\Process;
+
+use App\Core\Http\Process\BaseProcess;
+use App\Core\Exceptions\ProcessException;
+use App\Core\Http\Traits\InstallerTrait;
+use Validator;
+use Artisan;
+
+class InstallProcess extends BaseProcess
+{
+	use InstallerTrait;
+
+	public function config(){
+		return [
+			'error_redirect_target' => route('cms.install'),
+			'success_redirect_target' => admin_url('/'),
+			'success_message' => 'Your site has been installed successfully',
+			'error_message' => null
+		];
+	}
+
+	public function validate(){
+		Artisan::call('migrate');
+		//validation process
+		$validator = Validator::make($this->request->all(), [
+			'title' => 'required',
+			'name' => 'required',
+			'email' => 'required|email|unique:users',
+			'password' => 'required|confirmed|min:6'
+		]);
+
+		if($validator->fails()){
+			throw new ProcessException($validator);
+		}
+	}
+
+	public function process(){
+		$db = $this->checkDatabaseConnection();
+		if($db){
+			//check if has database config has changed parameters
+			$env = $this->updateEnv();
+			if($env){
+				$this->setSuccessMessage('File .env has been updated.');
+				return true;
+			}
+			else{
+				throw new ProcessException('Please update the .env file manually before you can continue install this CMS');
+			}
+		}
+
+		$this->installAction();
+
+        $this->setSuccessMessage('CMS Installation has been finished. Now you can use this CMS');
+        return true;
+	}
+
+	public function installAction(){
+        $this->createInstallHint();
+	}
+
+}
