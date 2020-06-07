@@ -1,12 +1,12 @@
 <!-- ========== Left Sidebar Start ========== -->
 <div class="left-side-menu">
     <div class="media user-profile mt-2 mb-2">
-        <img src="assets/images/users/avatar-7.jpg" class="avatar-sm rounded-circle mr-2" alt="Shreyu" />
-        <img src="assets/images/users/avatar-7.jpg" class="avatar-xs rounded-circle mr-2" alt="Shreyu" />
+        <img src="{{ admin_asset('images/default-user.png') }}" class="avatar-sm rounded-circle mr-2" alt="Shreyu" />
+        <img src="{{ admin_asset('images/default-user.png') }}" class="avatar-xs rounded-circle mr-2" alt="Shreyu" />
 
         <div class="media-body">
-            <h6 class="pro-user-name mt-0 mb-0">Nik Patel</h6>
-            <span class="pro-user-desc">Administrator</span>
+            <h6 class="pro-user-name mt-0 mb-0">{{ $user->name }}</h6>
+            <span class="pro-user-desc">{{ $role->name }}</span>
         </div>
         <div class="dropdown align-self-center profile-dropdown-menu">
             <a class="dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
@@ -19,24 +19,9 @@
                     <span>My Account</span>
                 </a>
 
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i data-feather="settings" class="icon-dual icon-xs mr-2"></i>
-                    <span>Settings</span>
-                </a>
-
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i data-feather="help-circle" class="icon-dual icon-xs mr-2"></i>
-                    <span>Support</span>
-                </a>
-
-                <a href="pages-lock-screen.html" class="dropdown-item notify-item">
-                    <i data-feather="lock" class="icon-dual icon-xs mr-2"></i>
-                    <span>Lock Screen</span>
-                </a>
-
                 <div class="dropdown-divider"></div>
 
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="{{ route('admin.logout') }}" class="dropdown-item notify-item">
                     <i data-feather="log-out" class="icon-dual icon-xs mr-2"></i>
                     <span>Logout</span>
                 </a>

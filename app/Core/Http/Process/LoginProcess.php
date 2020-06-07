@@ -44,6 +44,7 @@ class LoginProcess extends BaseProcess
         if(!$login){
         	throw new ProcessException('Invalid username or password. Please try again');
         }
+        $this->clearLoginAttempts($this->request);
 	}
 
 	public function revert(){

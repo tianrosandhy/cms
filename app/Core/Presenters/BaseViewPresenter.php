@@ -6,7 +6,9 @@ use Str;
 
 class BaseViewPresenter
 {
-	public $view;
+	public 
+		$view,
+		$user;
 
 	// dynamic property set
 	public function __call($name, $arguments){
@@ -25,11 +27,20 @@ class BaseViewPresenter
 		}
 	}
 
+	public function setDefaultProperty(){
+		$request = request();
+		$this->user = $request->get('user');
+		$this->role = $request->get('role');
+		$this->is_sa = $request->get('is_sa');
+		$this->base_permission = $request->get('base_permission');
+	}
 
 	public function render(){
 		if(!$this->view){
 			throw new PresenterException('You need to set the view target with "->setView(...)" before render the presenter');
 		}
+
+		$this->setDefaultProperty();
 		
 		$data = get_object_vars($this);
 		return view($this->view, $data);

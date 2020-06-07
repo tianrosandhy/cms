@@ -24,6 +24,11 @@ class CoreController extends BaseController
 		return $process->handle();
 	}
 
+	public function logout(){
+		admin_guard()->logout();
+		return redirect(admin_url('/'));
+	}
+
 	public function register(){
 		$p = new RegisterPresenter;
 		return $p->render();

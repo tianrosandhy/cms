@@ -4,11 +4,11 @@
         <!-- LOGO -->
         <a href="index.html" class="navbar-brand mr-0 mr-md-2 logo">
             <span class="logo-lg">
-                <img src="assets/images/logo.png" alt="" height="24" />
-                <span class="d-inline h5 ml-1 text-logo">Shreyu</span>
+                <img src="{{ admin_asset('images/logo.png') }}" alt="" height="24" />
+                <span class="d-inline h5 ml-1 text-logo">Site Title</span>
             </span>
             <span class="logo-sm">
-                <img src="assets/images/logo.png" alt="" height="24">
+                <img src="{{ admin_asset('images/logo.png') }}" alt="" height="24">
             </span>
         </a>
 
@@ -33,7 +33,7 @@
                 </div>
             </li>
 
-            <li class="dropdown d-none d-lg-block" data-toggle="tooltip" data-placement="left" title="Change language">
+            <li class="dropdown d-none d-lg-block" title="Change language">
                 <a class="nav-link dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button"
                     aria-haspopup="false" aria-expanded="false">
                     <i data-feather="globe"></i>
@@ -41,33 +41,18 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <img src="assets/images/flags/germany.jpg" alt="user-image" class="mr-2" height="12"> <span
-                            class="align-middle">German</span>
+                        <img src="{{ admin_asset('images/flag/EN.png') }}" alt="user-image" class="mr-2" height="12"> <span
+                            class="align-middle">English</span>
                     </a>
-
-                    <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <img src="assets/images/flags/italy.jpg" alt="user-image" class="mr-2" height="12"> <span
-                            class="align-middle">Italian</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <img src="assets/images/flags/spain.jpg" alt="user-image" class="mr-2" height="12"> <span
-                            class="align-middle">Spanish</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <img src="assets/images/flags/russia.jpg" alt="user-image" class="mr-2" height="12"> <span
-                            class="align-middle">Russian</span>
+                        <img src="{{ admin_asset('images/flag/ID.png') }}" alt="user-image" class="mr-2" height="12"> <span
+                            class="align-middle">Indonesian</span>
                     </a>
                 </div>
             </li>
 
 
-            <li class="dropdown notification-list" data-toggle="tooltip" data-placement="left"
-                title="8 new unread notifications">
+            <li class="dropdown notification-list" title="8 new unread notifications">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                     aria-expanded="false">
                     <i data-feather="bell"></i>
@@ -154,7 +139,7 @@
                 </div>
             </li>
 
-            <li class="dropdown notification-list" data-toggle="tooltip" data-placement="left" title="Settings">
+            <li class="dropdown notification-list" title="Settings">
                 <a href="javascript:void(0);" class="nav-link right-bar-toggle">
                     <i data-feather="settings"></i>
                 </a>
