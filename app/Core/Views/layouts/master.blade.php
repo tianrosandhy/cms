@@ -11,9 +11,7 @@
         <div class="content-page">
             <div class="content">
                 <div class="container-fluid mt-3">
-                	@section ('content')
-                	<div class="alert alert-info">You can fill your content here</div>
-                	@endsection
+                	@yield ('content')
                 </div> <!-- container-fluid -->
             </div> <!-- content -->
             @include ('core::layouts.partials.footer')

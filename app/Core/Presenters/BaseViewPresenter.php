@@ -33,6 +33,10 @@ class BaseViewPresenter
 		$this->role = $request->get('role');
 		$this->is_sa = $request->get('is_sa');
 		$this->base_permission = $request->get('base_permission');
+
+		if(!property_exists($this, 'breadcrumb')){
+			$this->breadcrumb = [];
+		}
 	}
 
 	public function render(){

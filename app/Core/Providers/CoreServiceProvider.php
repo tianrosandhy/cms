@@ -89,13 +89,13 @@ class CoreServiceProvider extends BaseServiceProvider{
 		//     return new Services\ImageServices($app);
 		// });
 
-		// //automatically load alias
-		// $aliasData = [
-		//     'ImageService' => \Core\Main\Facades\ImageFacades::class,
-		// ];
+		//automatically load alias
+		$aliasData = [
+		    'Input' => \App\Core\Facades\InputComponentFacade::class,
+		];
 
-		// foreach($aliasData as $al => $src){
-		// 	AliasLoader::getInstance()->alias($al, $src);
-		// }
+		foreach($aliasData as $al => $src){
+			AliasLoader::getInstance()->alias($al, $src);
+		}
 	}
 }
