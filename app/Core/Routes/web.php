@@ -2,6 +2,7 @@
 Route::get('/', 'CoreController@index')->name('admin.splash');
 Route::get('my-profile', 'CoreController@myProfile')->name('admin.my-profile');
 Route::post('my-profile', 'CoreController@storeMyProfile')->name('admin.my-profile.store');
+Route::post('store-setting', 'CoreController@storeSetting')->name('admin.setting.store');
 Route::match(['get', 'post'], 'logout', 'CoreController@logout')->name('admin.logout');
 
 

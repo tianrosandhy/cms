@@ -85,13 +85,10 @@ class CoreServiceProvider extends BaseServiceProvider{
 	}	
 
 	protected function registerAlias(){
-		// $this->app->bind('image-facade', function ($app) {
-		//     return new Services\ImageServices($app);
-		// });
-
 		//automatically load alias
 		$aliasData = [
 		    'Input' => \App\Core\Facades\InputComponentFacade::class,
+		    'Setting' => \App\Core\Facades\SettingComponentFacade::class,
 		];
 
 		foreach($aliasData as $al => $src){

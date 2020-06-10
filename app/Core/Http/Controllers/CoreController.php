@@ -5,6 +5,7 @@ use App\Core\Http\Controllers\BaseController;
 use App\Core\Presenters\BaseViewPresenter;
 use App\Core\Http\Process\LoginProcess;
 use App\Core\Http\Process\ProfileProcess;
+use App\Core\Http\Process\SettingProcess;
 
 class CoreController extends BaseController
 {
@@ -41,6 +42,11 @@ class CoreController extends BaseController
 
 	public function storeMyProfile(){
 		$process = new ProfileProcess;
+		return $process->handle();
+	}
+
+	public function storeSetting(){
+		$process = new SettingProcess;
 		return $process->handle();
 	}
 

@@ -3,6 +3,7 @@ namespace App\Core\Presenters;
 
 use App\Core\Exceptions\ViewPresenterException;
 use Str;
+use Setting;
 
 class BaseViewPresenter
 {
@@ -33,6 +34,8 @@ class BaseViewPresenter
 		$this->role = $request->get('role');
 		$this->is_sa = $request->get('is_sa');
 		$this->base_permission = $request->get('base_permission');
+
+		$this->setting = Setting::data();
 
 		if(!property_exists($this, 'breadcrumb')){
 			$this->breadcrumb = [];

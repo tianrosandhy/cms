@@ -14,14 +14,11 @@ class Settings extends Migration
     public function up()
     {
         $this->down();
-        Schema::create('settings_structure', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('param');
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->text('default_value')->nullable();
-            $table->string('type')->nullable();
             $table->string('group')->nullable();
+            $table->text('default_value')->nullable();
             $table->timestamps();
         });
     }
