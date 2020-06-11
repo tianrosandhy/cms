@@ -32,6 +32,9 @@ class CoreServiceProvider extends BaseServiceProvider{
 		$this->mergeConfigFrom(
 		    __DIR__.'/../Configs/module-setting.php', 'module-setting'
 		);
+		$this->mergeConfigFrom(
+		    __DIR__.'/../Configs/image.php', 'image'
+		);
 	}
 
 
@@ -89,6 +92,7 @@ class CoreServiceProvider extends BaseServiceProvider{
 		$aliasData = [
 		    'Input' => \App\Core\Facades\InputComponentFacade::class,
 		    'Setting' => \App\Core\Facades\SettingComponentFacade::class,
+		    'Media' => \App\Core\Facades\MediaComponentFacade::class,
 		];
 
 		foreach($aliasData as $al => $src){

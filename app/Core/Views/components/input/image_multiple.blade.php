@@ -27,5 +27,5 @@ if(is_array($value)){
 }
 ?>
 <div>
-{!! MediaInstance::inputMultiple($name, $value, $config) !!}
+{!! Media::multiple($name, $value, $config) !!}
 </div>

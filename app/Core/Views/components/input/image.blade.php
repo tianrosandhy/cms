@@ -21,6 +21,4 @@ if(is_array($value)){
 	}
 }
 ?>
-<div>
-{!! MediaInstance::input($name, $value, $config) !!}
-</div>
+{!! Media::single($name, $value, $config) !!}

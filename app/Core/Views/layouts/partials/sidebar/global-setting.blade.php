@@ -1,3 +1,4 @@
+@if(isset($setting))
 <form action="{{ route('admin.setting.store') }}" method="post" class="setting-form">
     {{ csrf_field() }}
     <div class="accordion custom-accordionwitharrow" id="settingGroupAccordion">
@@ -38,3 +39,4 @@
 
     </div>		
 </form>
+@endif

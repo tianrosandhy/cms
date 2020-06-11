@@ -9,6 +9,11 @@ use App\Core\Http\Process\SettingProcess;
 
 class CoreController extends BaseController
 {
+
+	public function testFilemanager(){
+		return view('core::components.media.test');
+	}
+
 	public function index(){
 		$p = (new BaseViewPresenter)
 			->setTitle('Dashboard')

@@ -5,8 +5,8 @@
             <img src="{{ admin_asset('images/default-user.png') }}" alt="user-image" class="rounded-circle align-self-center" />
             <div class="media-body text-left">
                 <h6 class="pro-user-name ml-2 my-0">
-                    <span>{{ $user->name }}</span>
-                    <span class="pro-user-desc text-muted d-block mt-1">{{ $role->name }} </span>
+                    <span>{{ $user->name ?? null }}</span>
+                    <span class="pro-user-desc text-muted d-block mt-1">{{ $role->name ?? null }} </span>
                 </h6>
             </div>
             <span data-feather="chevron-down" class="ml-2 align-self-center"></span>

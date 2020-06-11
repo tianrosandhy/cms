@@ -3,8 +3,8 @@
     <img src="{{ admin_asset('images/default-user.png') }}" class="avatar-xs rounded-circle mr-2" alt="Shreyu" />
 
     <div class="media-body">
-        <h6 class="pro-user-name mt-0 mb-0">{{ $user->name }}</h6>
-        <span class="pro-user-desc">{{ $role->name }}</span>
+        <h6 class="pro-user-name mt-0 mb-0">{{ $user->name ?? null }}</h6>
+        <span class="pro-user-desc">{{ $role->name ?? null }}</span>
     </div>
     <div class="dropdown align-self-center profile-dropdown-menu">
         <a class="dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"

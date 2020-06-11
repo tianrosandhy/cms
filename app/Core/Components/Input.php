@@ -91,8 +91,7 @@ class Input
 		return $this->loadView('text', $name, $config);
 	}
 	public function image($name, $config=[]){
-		return $this->loadView('text', $name, $config);
-//		return $this->loadView('image', $name, $config);
+		return $this->loadView('image', $name, $config);
 	}
 	public function imageMultiple($name, $config=[]){
 		return $this->loadView('text', $name, $config);

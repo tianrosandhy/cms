@@ -18,6 +18,9 @@
         </div>
     </div>
     @include ('core::layouts.partials.modal')
+    <div id="page-loader">
+        <i class="icon" data-feather="refresh-cw"></i>
+    </div>
 	@include ('core::layouts.partials.script')
 </body>
 </html>
