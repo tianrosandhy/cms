@@ -8,6 +8,17 @@ use Media;
 
 class ComponentController extends BaseController
 {
+	// tests methods
+	public function testFilemanager(){
+		return view('core::components.media.test');
+	}
+
+	public function testFileManagerPost(){
+		dd($this->request->all());
+	}
+
+
+
 
 	public function mediaUpload(){
 		try{

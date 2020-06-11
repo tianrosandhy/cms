@@ -22,7 +22,7 @@ class Media
 	}
 
 	public function multiple($name, $value=null, $config=[]){
-		return view('core::components.media.assets', [
+		return view('core::components.media.multiple', [
 			'name' => $name,
 			'config' => $config
 		]);
