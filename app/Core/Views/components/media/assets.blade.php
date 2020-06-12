@@ -1,6 +1,7 @@
 <style>
 #media-modal{
 	overflow:hidden;
+	z-index: 10000;
 }
 #media-modal .modal-content{
 	background:transparent;
@@ -152,7 +153,6 @@
 	display:block;
 	position:relative;
 	text-align:center;
-	line-height:80px;
 	background:#fff;
 	cursor:pointer;
 	border-radius:5px;
@@ -169,9 +169,19 @@
 .square-image svg{
 	position:relative;
 	top:-5px;
+	width:20px;
+	height:20px;
 }
 .square-image.add{
 	border:2px dashed #ccc;	
+	display:flex;
+	justify-content: center;
+	align-content: center;
+	flex-flow: column;
+}
+.square-image.add:hover{
+	border-color:#5369f8;
+	color:#5369f8;
 }
 
 .multi-closer{

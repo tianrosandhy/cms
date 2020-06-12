@@ -2,6 +2,7 @@
 namespace App\Core\Components;
 
 use App\Core\Models\Media as Model;
+use App\Core\Components\Media\MediaCacheManager;
 
 class Media
 {
@@ -13,14 +14,11 @@ class Media
 	}
 
 	public function getById($id){
-		return Model::find($id);
+		return (new MediaCacheManager)->getMediaCacheById($id);
 	}
 
 	public function getByJson($json){
-		$decode = json_decode($json, true);
-		if($decode){
-			return Model::find($decode['id']);
-		}
+		return (new MediaCacheManager)->getMediaCacheByJson($json);
 	}
 
 
@@ -32,6 +30,7 @@ class Media
 	public function single($name, $value=null, $config=[]){
 		return view('core::components.media.single', [
 			'name' => $name,
+			'value' => $value,
 			'config' => $config
 		]);
 	}
@@ -39,6 +38,7 @@ class Media
 	public function multiple($name, $value=null, $config=[]){
 		return view('core::components.media.multiple', [
 			'name' => $name,
+			'value' => $value,
 			'config' => $config
 		]);
 	}

@@ -2,7 +2,7 @@
 <div class="navbar navbar-expand flex-column flex-md-row navbar-custom">
     <div class="container-fluid">
         <!-- LOGO -->
-        <a href="index.html" class="navbar-brand mr-0 mr-md-2 logo">
+        <a href="{{ admin_url('/') }}" class="navbar-brand mr-0 mr-md-2 logo">
             <span class="logo-lg">
                 <img src="{{ admin_asset('images/logo.png') }}" alt="" height="24" />
                 <span class="d-inline h5 ml-1 text-logo">Site Title</span>

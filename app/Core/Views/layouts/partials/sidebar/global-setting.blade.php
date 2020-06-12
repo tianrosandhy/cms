@@ -33,7 +33,7 @@
 
         <div class="p-3">
             <button class="btn btn-primary btn-block">
-                <i class="icon" data-feather="icon-save"></i> Save Setting
+                <i class="icon" data-feather="save"></i> Save Setting
             </button>
         </div>
 

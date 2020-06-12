@@ -172,7 +172,11 @@ function ($) {
                 return;
             }
 
-            $('body').removeClass('right-bar-enabled');
+            // click di modal tidak membuat right side tertutup
+            if(!$("body").hasClass('modal-open')){
+                $('body').removeClass('right-bar-enabled');
+            }
+
             $('body').removeClass('sidebar-enable');
             return;
         });

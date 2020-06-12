@@ -1,8 +1,4 @@
 <?php
-// test route
-Route::get('test-filemanager', 'ComponentController@testFileManager');
-Route::post('test-filemanager', 'ComponentController@testFileManagerPost');
-
 Route::get('/', 'CoreController@index')->name('admin.splash');
 Route::get('my-profile', 'CoreController@myProfile')->name('admin.my-profile');
 Route::post('my-profile', 'CoreController@storeMyProfile')->name('admin.my-profile.store');
