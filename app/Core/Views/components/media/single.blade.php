@@ -3,10 +3,10 @@ $hash = md5(sha1(rand(1, 100000) . uniqid() . time()));
 $mode = $mode ?? 'vertical';
 ?>
 <div class="input-image-holder text-center" data-hash="{{ $hash }}">
-	<input type="hidden" name="{{ $name }}" class="listen-image-upload">
+	<input type="hidden" name="{{ $name }}" class="listen-image-upload" value="{{ $value ?? null }}">
 	<div class="pull-left {{ $mode == 'vertical' ? 'float-left' : '' }}">
 		<a href="#" class="trigger-upload-image">
-			<img data-fallback="{{ admin_asset('images/broken-image.jpg') }}" src="{{ $value ?? admin_asset('images/broken-image.jpg') }}" alt="Image Uploader" class="avatar rounded-circle media-item">
+			<img data-fallback="{{ admin_asset('images/broken-image.jpg') }}" src="{{ $thumbs ?? admin_asset('images/broken-image.jpg') }}" alt="Image Uploader" class="avatar rounded-circle media-item">
 		</a>
 	</div>
 	<div class="pull-right {{ $mode == 'vertical' ? 'float-left' : '' }} px-2">

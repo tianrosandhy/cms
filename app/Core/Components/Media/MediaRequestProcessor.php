@@ -2,6 +2,7 @@
 namespace App\Core\Components\Media;
 
 use App\Core\Models\Media as Model;
+use Storage;
 
 trait MediaRequestProcessor
 {
@@ -21,6 +22,25 @@ trait MediaRequestProcessor
 		}
 
 		return $data->orderBy('id', $sort_dir)->paginate($per_page, ['*'], 'page', $page);
+	}
 
+
+	public function removeById($media_id){
+		$media = $this->getById($media_id);
+		if($media){
+			//remove all image & thumbnails
+			foreach($media->pathList() as $thumb => $thumbdata){
+				if(Storage::exists($thumbdata)){
+					Storage::delete($thumbdata);
+				}
+			}
+
+			//remove media data from database
+			$media->delete();
+
+			//refresh cache
+		}
+
+		return true;
 	}
 }

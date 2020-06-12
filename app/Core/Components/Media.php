@@ -1,6 +1,8 @@
 <?php
 namespace App\Core\Components;
 
+use App\Core\Models\Media as Model;
+
 class Media
 {
 	use Media\Uploader;
@@ -9,6 +11,19 @@ class Media
 	public function __construct(){
 		$this->request = request();
 	}
+
+	public function getById($id){
+		return Model::find($id);
+	}
+
+	public function getByJson($json){
+		$decode = json_decode($json, true);
+		if($decode){
+			return Model::find($decode['id']);
+		}
+	}
+
+
 
 	public function assets(){
 		return view('core::components.media.assets');

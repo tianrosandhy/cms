@@ -2,6 +2,30 @@
 #media-modal{
 	overflow:hidden;
 }
+#media-modal .modal-content{
+	background:transparent;
+	border:none;
+	box-shadow:none;
+}
+#media-modal .modal-body{
+	padding:0;
+	border-radius:5px 0 5px 5px;
+	-moz-border-radius:5px 0 5px 5px;
+	overflow: hidden;
+}
+#media-modal .modal-header{
+	border:none;
+}
+#media-modal .close{
+	background:#d00;
+	color:#fff;
+	opacity:1;
+	padding:.25em 1em;
+	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+}
+
+
 .media-item{
 	object-fit:cover;
 }
@@ -190,7 +214,7 @@
 
 
 <!-- popup content -->
-<div class="modal fade" tabindex="-1" role="dialog" id="media-modal">
+<div class="modal fade" tabindex="-1" role="dialog" id="media-modal" data-backdrop="static">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -417,6 +441,28 @@ $(function(){
 		resetModalFilemanager();
 
 	});
+
+	$(document).on('click', '.delete-permanently', function(e){
+		cf = confirm('Are you sure you want to delete this data? This action cannot be undone.');
+		if(cf){
+			showLoading();
+			media_id = $(this).closest('.filemanager-detail').find('select').attr('data-id');
+			$.ajax({
+				url : window.BASE_URL + '/remove-media/' + media_id,
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					_token : window.CSRF_TOKEN
+				},
+				success : function(resp){
+					loadFileManager(window.FILEMANAGER_PAGE);
+				},
+				error : function(resp){
+					hideLoading();
+				}
+			});
+		}
+	});
 });
 
 function resetModalFilemanager(){
@@ -426,20 +472,21 @@ function resetModalFilemanager(){
 }
 
 function gotoUpload(){
+	$("#media-modal .card-header").fadeOut();
 	$(".filemanager-content").slideUp();
 	$(".filemanager-upload").slideDown();
-	$(".trigger-upload-tab").fadeOut();
 }
 
 function gotoFilemanager(reload){
 	reload = reload || true;
 	$(".filemanager-content").slideDown();
 	$(".filemanager-upload").slideUp();
-	$(".trigger-upload-tab").fadeIn();
+	$("#media-modal .card-header").fadeIn();
 
 	if(reload){
 		loadFileManager();
 	}
+	feather.replace();
 }
 
 function afterFinishUpload(){
@@ -467,6 +514,7 @@ function loadFileManager(page, ignore_loading){
 		},
 		success : function(resp){
 			$(".filemanager-content").html(resp);
+			feather.replace();
 			hideLoading();
 		},
 		error : function(resp){
@@ -487,7 +535,7 @@ function loadImageDetail(click_instance){
 
 	$(".filemanager-detail img").attr('src', thumb_src);
 	$(".filemanager-detail .holder-title").html(filename);
-	$(".filemanager-detail .holder-url").attr('src', media_url);
+	$(".filemanager-detail .holder-url").attr('href', media_url).html(media_url);
 	$(".filemanager-detail .filemanager-thumb-selection").attr('data-id', media_id);
 	$(".filemanager-detail .filemanager-thumb-selection").attr('data-path', path);
 	$(".filemanager-content, .media-image-container, .filemanager-detail").addClass('opened');

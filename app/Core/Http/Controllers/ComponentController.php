@@ -50,4 +50,12 @@ class ComponentController extends BaseController
 		));
 	}
 
+	public function removeMedia($id){
+		Media::removeById($id);
+		return response()->json([
+			'type' => 'success',
+			'message' => 'Image has been removed'
+		]);
+	}
+
 }
