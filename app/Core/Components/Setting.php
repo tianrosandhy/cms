@@ -2,6 +2,7 @@
 namespace App\Core\Components;
 
 use App\Core\Models\Setting as Model;
+use Media;
 
 class Setting
 {
@@ -13,15 +14,25 @@ class Setting
 		$this->db_setting = app('setting');
 		$this->loadSettingRegistrations();
 		$this->setSettingValueFromDb();
+		$this->formattedOutput();
 	}
 
 	public function all(){
-		return $this->formattedOutput();
+		return $this->formatted;
 	}
 
-	public function get($key){
+	public function get($key, $fallback=null){
 		$key = strtolower($key);
-		return $this->formatted[$key] ?? null;
+		$value = $this->formatted[$key] ?? null;
+
+		//try decode, to check that the value is image
+		$decode = json_decode($value, true);
+		if($decode){
+			if(isset($decode['id']) && isset($decode['thumb'])){
+				return Media::getSelectedImage($value);
+			}
+		}
+		return $value ?? $fallback;
 	}
 
 	public function data(){
@@ -33,7 +44,7 @@ class Setting
 	}
 
 	public function loadSettingRegistrations(){
-		$reg_suffix = 'Generators\\SettingGenerator';
+		$reg_suffix = 'Extenders\\SettingGenerator';
 		$lists = config('modules.list');
 		if(empty($lists)){
 			$lists = [];

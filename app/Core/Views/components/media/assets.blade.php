@@ -2,6 +2,7 @@
 #media-modal{
 	overflow:hidden;
 	z-index: 10000;
+	background:rgba(0,0,0,.5);
 }
 #media-modal .modal-content{
 	background:transparent;
@@ -217,9 +218,6 @@
 	height:100%;
 	display:block;
 }
-
-
-
 </style>
 
 
@@ -306,6 +304,7 @@ $(function(){
 		$("#media-modal").attr('data-hash', hash);
 		$("#media-modal [data-hash]").attr('data-hash', hash);
 		$("#media-modal").modal('show');
+		loadFileManager(1, true);
 	});
 
 	$(document).on('click', '.input-image-holder .remove-image', function(e){
@@ -383,9 +382,6 @@ function initImageDropzone(){
 	});		
 }
 $(function(){
-
-	loadFileManager(1, true);
-
 	$(document).on('click', ".trigger-upload-tab", function(){
 		gotoUpload();
 	});

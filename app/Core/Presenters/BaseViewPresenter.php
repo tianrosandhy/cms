@@ -4,12 +4,14 @@ namespace App\Core\Presenters;
 use App\Core\Exceptions\ViewPresenterException;
 use Str;
 use Setting;
+use Sidebar;
 
 class BaseViewPresenter
 {
 	public 
 		$view,
-		$user;
+		$user,
+		$selected_menu;
 
 	// dynamic property set
 	public function __call($name, $arguments){
@@ -36,6 +38,8 @@ class BaseViewPresenter
 		$this->base_permission = $request->get('base_permission');
 
 		$this->setting = Setting::data();
+		$this->sidebar = Sidebar::generate();
+		$this->selected_menu = Sidebar::fallbackSelectedMenu();
 
 		if(!property_exists($this, 'breadcrumb')){
 			$this->breadcrumb = [];

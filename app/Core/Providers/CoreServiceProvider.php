@@ -94,6 +94,8 @@ class CoreServiceProvider extends BaseServiceProvider{
 		    'Input' => \App\Core\Facades\InputComponentFacade::class,
 		    'Setting' => \App\Core\Facades\SettingComponentFacade::class,
 		    'Media' => \App\Core\Facades\MediaComponentFacade::class,
+		    'Sidebar' => \App\Core\Facades\SidebarComponentFacade::class,
+		    'SidebarItem' => \App\Core\Facades\SidebarItemComponentFacade::class,
 		];
 
 		foreach($aliasData as $al => $src){

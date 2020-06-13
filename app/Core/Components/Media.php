@@ -21,6 +21,22 @@ class Media
 		return (new MediaCacheManager)->getMediaCacheByJson($json);
 	}
 
+	public function getSelectedImage($json, $mode='url'){
+		$instance = $this->getByJson($json);
+		if(isset($instance->id)){
+			$decode = json_decode($json, true);
+			$thumb = $decode['thumb'] ?? 'origin';
+
+			if($mode == 'url'){
+				return $instance->url($thumb);
+			}
+			else{
+				return $instance->path($thumb);
+			}
+		}
+		return (new Model)->fallback();
+	}
+
 
 
 	public function assets(){

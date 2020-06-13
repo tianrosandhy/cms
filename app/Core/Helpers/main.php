@@ -33,37 +33,7 @@ function generateAdminRoute($url_name, $controller, $route_name=null){
 }
 
 function setting($hint, $default=''){
-  $hint = strtolower($hint);
-  $exp = explode('.', $hint);
-  if(isset($exp[0])){
-    $group = $exp[0];
-  }
-  else{
-    return $default;
-  }
-  if(isset($exp[1])){
-    $param = $exp[1];
-  }
-  else{
-    return $default;
-  }
-
-  $cek = app('setting')->where('group', $group)->where('param', $param)->first();
-  if(isset($cek->default_value)){
-    if(strlen($cek->default_value) == 0){
-      return $default;
-    }
-    else{
-      //check setting type. if type=image, then output the image path
-      if($cek->type == 'image'){
-        return $cek->getThumbnail('default_value');
-      }
-      else{
-        return $cek->default_value;
-      }
-    }
-  }
-  return $default;
+  return Setting::get($hint, $default);
 }
 
 function admin_url($url=''){

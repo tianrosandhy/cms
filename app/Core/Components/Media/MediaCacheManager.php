@@ -7,7 +7,6 @@ use App\Core\Models\Media;
 class MediaCacheManager
 {
 	public $cache_prefix = 'MEDIA';
-	public $cache_age = 864000; // 10 days
 
 	public function __construct(){
 

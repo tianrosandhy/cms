@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Generators;
+namespace App\Core\Extenders;
 
 use App\Core\Components\Setting\SettingRegistration;
 use App\Core\Components\Setting\SettingItem;

@@ -4,11 +4,11 @@
         <!-- LOGO -->
         <a href="{{ admin_url('/') }}" class="navbar-brand mr-0 mr-md-2 logo">
             <span class="logo-lg">
-                <img src="{{ admin_asset('images/logo.png') }}" alt="" height="24" />
-                <span class="d-inline h5 ml-1 text-logo">Site Title</span>
+                <img src="{{ setting('general.logo') }}" alt="" height="24" />
+                <span class="d-inline h5 ml-1 text-logo">{{ setting('general.title') }}</span>
             </span>
             <span class="logo-sm">
-                <img src="{{ admin_asset('images/logo.png') }}" alt="" height="24">
+                <img src="{{ setting('general.logo') }}" alt="" height="24">
             </span>
         </a>
 
