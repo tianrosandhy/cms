@@ -30,6 +30,6 @@ class Settings extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings_structure');
+        Schema::dropIfExists('settings');
     }
 }

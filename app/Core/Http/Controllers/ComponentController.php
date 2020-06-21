@@ -39,6 +39,20 @@ class ComponentController extends BaseController
 		));
 	}
 
+	public function getImageUrl(){
+		$this->request->validate([
+			'id' => 'required',
+			'thumb' => 'required'
+		]);
+
+		$img_instance = Media::getById($this->request->id);
+		if($img_instance){
+			$img_url = $img_instance->url($this->request->thumb);
+			return '<img src="'.$img_url.'" class="media-image">';
+		}
+	}
+
+
 	public function removeMedia($id){
 		Media::removeById($id);
 		return response()->json([

@@ -11,5 +11,6 @@
 <link href="{{ admin_asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="{{ admin_asset('libs/toastr/toastr.min.css') }}">
 <link href="{{ admin_asset('css/app.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ admin_asset('libs/switchery/css/switchery.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ admin_asset('css/additional.css') }}" rel="stylesheet" type="text/css" />
 @stack ('style')

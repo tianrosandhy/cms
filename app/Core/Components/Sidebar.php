@@ -26,10 +26,15 @@ class Sidebar
 
 	public function loadSidebarRegistrations(){
 		$reg_suffix = 'Extenders\\SidebarGenerator';
-		$lists = config('modules.list');
+		$lists = config('modules.load');
 		if(empty($lists)){
 			$lists = [];
 		}
+
+		$lists = array_map(function($item) use($reg_suffix){
+			$split = explode('Providers\\', $item);
+			return $split[0] . $reg_suffix;
+		}, $lists);
 		$lists = array_merge(['\\App\\Core\\' . $reg_suffix], $lists);
 
 		//load class lists

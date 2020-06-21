@@ -39,7 +39,13 @@ class BaseViewPresenter
 
 		$this->setting = Setting::data();
 		$this->sidebar = Sidebar::generate();
-		$this->selected_menu = Sidebar::fallbackSelectedMenu();
+
+		if(method_exists($this, 'setSelectedMenuName')){
+			$this->selected_menu = $this->setSelectedMenuName();
+		}
+		else{
+			$this->selected_menu = Sidebar::fallbackSelectedMenu();
+		}
 
 		if(!property_exists($this, 'breadcrumb')){
 			$this->breadcrumb = [];

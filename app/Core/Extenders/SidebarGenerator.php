@@ -16,18 +16,25 @@ class SidebarGenerator extends SidebarRegistration
 				->setSortNo(0)
 				->setActiveKey('homepage'),
 
-			SidebarItem::setName('admin.user')
-				->setLabel('User Managements')
-				->setPrivilege(['admin.user.index', 'admin.privilege.index'])
-				->setIcon('users')
+			SidebarItem::setName('admin.setting')
+				->setLabel('Managements')
+				->setPrivilege(['admin.user.index', 'admin.privilege.index', 'admin.language.index'])
+				->setIcon('settings')
 				->setSortNo(100)
 				->setActiveKey(['user', 'privilege']),
+
+				SidebarItem::setName('admin.language')
+					->setLabel('Language Setting')
+					->setPrivilege('admin.language.index')
+					->setUrl(route('admin.language'))
+					->setParent('admin.setting')
+					->setActiveKey('language'),
 
 				SidebarItem::setName('admin.user.privilege')
 					->setLabel('Privilege Management')
 					->setPrivilege('admin.privilege.index')
 					->setUrl('#')
-					->setParent('admin.user')
+					->setParent('admin.setting')
 					->setSortNo(1)
 					->setActiveKey('privilege'),
 
@@ -35,7 +42,7 @@ class SidebarGenerator extends SidebarRegistration
 					->setLabel('User Lists')
 					->setPrivilege('admin.user.index')
 					->setUrl('#')
-					->setParent('admin.user')
+					->setParent('admin.setting')
 					->setSortNo(1)
 					->setActiveKey('user'),
 		]);

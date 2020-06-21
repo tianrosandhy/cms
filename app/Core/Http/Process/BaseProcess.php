@@ -2,6 +2,7 @@
 namespace App\Core\Http\Process;
 
 use App\Core\Exceptions\ProcessException;
+use App\Core\Exceptions\DataTableException;
 
 class BaseProcess{
 	public $type = 'http'; //default request type
@@ -17,10 +18,11 @@ class BaseProcess{
 	}
 
 	public function type($process_type=null){
-		$available_process_type = ['http', 'ajax'];
+		$available_process_type = ['http', 'ajax', 'datatable'];
 		if(in_array(strtolower($process_type), $available_process_type)){
 			$this->type = strtolower($process_type);
 		}
+		return $this;
 	}
 
 	public function handle(){
@@ -29,7 +31,7 @@ class BaseProcess{
 				$this->validate();
 			}
 			$this->data = $this->process();
-		}catch(ProcessException $e){
+		}catch(ProcessException | DataTableException $e){
 			if(method_exists($e, 'getCode')){
 				$this->setHttpCode($e->getCode());
 			}
@@ -51,6 +53,9 @@ class BaseProcess{
 		else{
 			$this->response_type = 'success';
 		}
+		if($http_code == 0){
+			$http_code = 500;
+		}
 		$this->http_code = $http_code;
 	}
 
@@ -62,6 +67,9 @@ class BaseProcess{
 		}
 		if($this->type == 'ajax'){
 			return $this->generateAjaxResponse();
+		}
+		if($this->type == 'datatable'){
+			return $this->generateDatatableResponse();
 		}
 	}
 
@@ -82,6 +90,10 @@ class BaseProcess{
 			'error' => $this->response_type == 'error' ? $this->getErrorMessage() : [],
 			'redirect' => $this->config['success_redirect_target'] ?? null
 		], $this->http_code);
+	}
+
+	private function generateDatatableResponse(){
+		return response()->json($this->data, $this->http_code);
 	}
 
 

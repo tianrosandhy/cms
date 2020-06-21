@@ -96,6 +96,8 @@ class CoreServiceProvider extends BaseServiceProvider{
 		    'Media' => \App\Core\Facades\MediaComponentFacade::class,
 		    'Sidebar' => \App\Core\Facades\SidebarComponentFacade::class,
 		    'SidebarItem' => \App\Core\Facades\SidebarItemComponentFacade::class,
+		    'DataStructure' => \App\Core\Facades\DataStructureComponentFacade::class,
+		    'DataTable' => \App\Core\Facades\DataTableComponentFacade::class,
 		];
 
 		foreach($aliasData as $al => $src){

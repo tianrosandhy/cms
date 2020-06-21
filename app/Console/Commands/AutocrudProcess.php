@@ -31,7 +31,7 @@ class AutocrudProcess extends Command
             $this->mpath = 'Core';
         }
         else{
-            $this->mpath = 'Modules/'.$this->module_name;
+            $this->mpath = 'Modules\\'.$this->module_name;
         }
         $namespace = 'App/' . $this->mpath.'/Http/Process';
 

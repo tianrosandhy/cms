@@ -297,6 +297,7 @@
 <!-- for media input -->
 <script>
 var FILEMANAGER_PAGE = 1;
+var ACTIVE_EDITOR;
 $(function(){
 	$(document).on('click', ".trigger-upload-image", function(){
 		//set data-hash to filemanager modal
@@ -435,16 +436,32 @@ $(function(){
 		//output format : JSON stringify & url path
 		string_response = window.JSON.stringify(response);
 		hash_target = $("#media-modal").attr('data-hash');
-		if($(".input-image-holder[data-hash='"+hash_target+"']").length){
+
+		//output format : string path utk wysiwyg
+		if(window.ACTIVE_EDITOR){
+			//for tinymce input : get thumb final URL from ajax
+			$.ajax({
+				url : window.BASE_URL + '/media/get-image-url',
+				type : 'GET',
+				dataType : 'html',
+				data : response,
+				success : function(resp){
+					window.ACTIVE_EDITOR.insertContent(resp);
+					window.ACTIVE_EDITOR = null;
+					resetModalFilemanager();
+				},
+				error : function(resp){
+					alert('Sorry, some error occured when select the image');
+					hideLoading();
+				}
+			});
+		}
+		else if($(".input-image-holder[data-hash='"+hash_target+"']").length){
 			input_target = $(".input-image-holder[data-hash='"+hash_target+"']");
 			input_target.find('.listen-image-upload').val(string_response);
 			input_target.find('.media-item').attr('src', $(".holder-image").attr('src'));
+			resetModalFilemanager();
 		}
-
-		//output format : string path utk wysiwyg
-		//later
-
-		resetModalFilemanager();
 
 	});
 
@@ -557,5 +574,9 @@ function hideImageDetail(){
 
 <!-- for input -->
 <script>
-	
+function openTinyMceMedia(target){
+	window.ACTIVE_EDITOR = target;
+	$("#media-modal").modal('show');
+	loadFileManager(1, true);
+}	
 </script>

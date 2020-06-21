@@ -6,6 +6,8 @@ use App\Core\Presenters\BaseViewPresenter;
 use App\Core\Http\Process\LoginProcess;
 use App\Core\Http\Process\ProfileProcess;
 use App\Core\Http\Process\SettingProcess;
+use App\Core\Presenters\LanguagePresenter;
+use App\Core\Http\Process\LanguageDatatableProcess;
 
 class CoreController extends BaseController
 {
@@ -25,8 +27,7 @@ class CoreController extends BaseController
 	}
 
 	public function storeLogin(){
-		$process = new LoginProcess;
-		return $process->handle();
+		return (new LoginProcess)->handle();
 	}
 
 	public function logout(){
@@ -42,15 +43,21 @@ class CoreController extends BaseController
 	}
 
 	public function storeMyProfile(){
-		$process = new ProfileProcess;
-		return $process->handle();
+		return (new ProfileProcess)->handle();
 	}
 
 	public function storeSetting(){
-		$process = new SettingProcess;
-		return $process->handle();
+		return (new SettingProcess)->handle();
 	}
 
-	public function register(){
+
+	public function language(){
+		return (new LanguagePresenter)->render();
+	}
+
+	public function languageDataTable(){
+		return (new LanguageDatatableProcess)
+			->type('datatable')
+			->handle();
 	}
 }

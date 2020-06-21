@@ -13,7 +13,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \App\Console\Commands\AutocrudProcess::class,
+        \App\Console\Commands\AutocrudPresenter::class,
+        \App\Console\Commands\AutocrudRole::class,
+        \App\Console\Commands\AutocrudSuperAdmin::class,
     ];
 
     /**
