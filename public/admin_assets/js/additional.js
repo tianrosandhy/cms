@@ -1,6 +1,31 @@
 $(function(){
 	hideLoading();
 	initPlugins();
+
+  $(document).on('change', '[yesno][data-table-switch]', function(e){
+    instance = $(this);
+    $.ajax({
+      url : window.BASE_URL + '/switcher-master',
+      type : 'POST',
+      dataType : 'json',
+      data : {
+        _token : window.CSRF_TOKEN,
+        id : $(this).attr('data-id'),
+        pk : $(this).attr('data-pk'),
+        table : $(this).attr('table'),
+        field : $(this).attr('field'),
+        value : $(this).prop('checked') ? 1 : 0
+      },
+      success : function(resp){
+        if(typeof tb_data != 'undefined'){
+          tb_data.ajax.reload();
+        }
+      },
+      error : function(resp){
+        instance.prop('checked', !instance.prop('checked'));
+      }
+    });
+  });
 });
 
 function showLoading(){
@@ -56,6 +81,11 @@ function initPlugins(){
 
 	//init tinymce
 	loadTinyMce();
+
+  // init featherjs
+  if(typeof feather != 'undefined'){
+    feather.replace();
+  }
 }
 
 

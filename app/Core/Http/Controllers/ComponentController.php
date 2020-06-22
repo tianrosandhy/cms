@@ -5,6 +5,7 @@ use App\Core\Http\Controllers\BaseController;
 use App\Core\Presenters\BaseViewPresenter;
 use App\Core\Exceptions\MediaException;
 use Media;
+use DB;
 
 class ComponentController extends BaseController
 {
@@ -59,6 +60,28 @@ class ComponentController extends BaseController
 			'type' => 'success',
 			'message' => 'Image has been removed'
 		]);
+	}
+
+
+	public function switcherMaster(){
+		$this->request->validate([
+			'id' => 'required',
+			'pk' => 'required',
+			'table' => 'required',
+			'field' => 'required'
+		]);
+
+		try{
+			$tb = DB::table($this->request->table)->where($this->request->pk, $this->request->id)->update([
+				$this->request->field => intval($this->request->value) 
+			]);
+			return response()->json([
+				'type' => 'success'
+			]);
+		}catch(\Exception $e){
+			return abort(403);
+		}
+
 	}
 
 }

@@ -1,10 +1,6 @@
 <link rel="stylesheet" href="{{ admin_asset('libs/datatables/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ admin_asset('libs/datatables/buttons.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ admin_asset('libs/datatables/responsive.bootstrap4.min.css') }}">
 <script type="text/javascript" src="{!! admin_asset('libs/datatables/jquery.dataTables.min.js') !!}"></script>
-<script type="text/javascript" src="{!! admin_asset('libs/datatables/extensions/dataTables.buttons.min.js') !!}"></script>
-<script type="text/javascript" src="{!! admin_asset('libs/datatables/extensions/buttons.html5.min.js') !!}"></script>
-<script type="text/javascript" src="{!! admin_asset('libs/datatables/extensions/buttons.flash.min.js') !!}"></script>
 <script type="text/javascript" src="{!! admin_asset('libs/datatables/extensions/dataTables.responsive.min.js') !!}"></script>
 
 <script>
@@ -34,12 +30,7 @@ $(function(){
 		    },
 
 			"drawCallback": function(settings) {
-				$('[data-init-plugin="switchery"]').each(function() {
-					var el = $(this);
-					new Switchery(el.get(0), {
-						size : el.data("size")
-					});
-				});
+		        initPlugins();
 			},
 			'columns' : [
 				{!! $skeleton->datatableColumns() !!}

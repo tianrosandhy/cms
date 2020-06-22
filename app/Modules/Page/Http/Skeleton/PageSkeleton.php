@@ -38,7 +38,7 @@ class PageSkeleton extends BaseSkeleton
 			'id' => $this->checkerFormat($row),
 			'title' => $row->title,
 			'description' => $row->description,
-			'is_active' => $row->is_active ?? 0,
+			'is_active' => $this->switcherFormat($row, 'is_active'),
 			'action' => $this->actionButton($row)
 		];
 	}

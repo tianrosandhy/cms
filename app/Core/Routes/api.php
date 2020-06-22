@@ -3,3 +3,4 @@ Route::post('media-upload', 'ComponentController@mediaUpload')->name('admin.medi
 Route::post('file-manager', 'ComponentController@filemanager')->name('admin.filemanager');
 Route::post('remove-media/{id}', 'ComponentController@removeMedia')->name('admin.media.remove');
 Route::match(['get', 'post'], 'media/get-image-url', 'ComponentController@getImageUrl')->name('admin.media.get-image-url');
+Route::post('switcher-master', 'ComponentController@switcherMaster')->name('admin.switcher');

@@ -12,6 +12,26 @@ trait SkeletonHelper
 		return '<input type="checkbox" data-id="'.$row->{$primary_key}.'" name="multi_check['.$row->{$primary_key}.']" class="multichecker_datatable"><span style="color:transparent; position:absolute;">'.$row->{$primary_key}.'</span>';		
 	}
 
+	public function switcherFormat($row, $field='is_active', $mode='toggle'){
+		if($mode == 'toggle'){
+			$table = $row->getTable();
+			return view('core::components.input.yesno', [
+				'value' => $row->{$field},
+				'name' => $field,
+				'attr' => [
+					'data-id' => $row->getKey(),
+					'data-pk' => $row->getKeyName(),
+					'table' => $table,
+					'field' => $field,
+					'data-table-switch' => 1
+				]
+			])->render();
+		}
+		else{
+			return $row->field ? '<span class="badge badge-success" title="Active"><i data-feather="check"></i></span>' : '<span class="badge badge-danger" title="Not Active"><i data-feather="x"></i></span>';
+		}
+	}
+
 
 
 
