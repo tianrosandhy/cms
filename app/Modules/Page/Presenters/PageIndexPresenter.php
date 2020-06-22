@@ -10,6 +10,7 @@ class PageIndexPresenter extends BaseViewPresenter
 	public function __construct(){
 		$this->title = 'Pages Data';
 		$this->view = 'page::index';
+		$this->batch_delete_url = route('admin.page.delete');
 		$this->skeleton = new PageSkeleton;
 		$this->datatable = DataTable::setSkeleton($this->skeleton);
 	}

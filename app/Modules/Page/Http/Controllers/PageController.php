@@ -38,4 +38,12 @@ class PageController extends BaseController
 			->handle();
 	}
 	
+	public function delete($id=null){
+		return (new \App\Modules\Page\Http\Process\PageDeleteProcess)
+			->setModel(new Page)
+			->setId($id)
+			->type('ajax')
+			->handle();
+	}
+
 }

@@ -3,6 +3,7 @@ namespace App\Core\Http\Process;
 
 use App\Core\Exceptions\ProcessException;
 use App\Core\Exceptions\DataTableException;
+use Str;
 
 class BaseProcess{
 
@@ -16,6 +17,23 @@ class BaseProcess{
 	public function __construct(){
 		$this->request = request();
 		$this->config = $this->config();
+	}
+
+	// dynamic property set
+	public function __call($name, $arguments){
+		$method = substr($name, 0, 3);
+		if(in_array($method, ['get', 'set'])){
+			$prop = substr($name, 3);
+			$prop = Str::snake($prop);
+
+			if($method == 'get' && property_exists($this, $prop)){
+				return $this->{$prop};
+			}
+			if($method == 'set' && isset($arguments[0])){
+				$this->{$prop} = $arguments[0];
+			}
+			return $this;
+		}
 	}
 
 	public function type($process_type=null){

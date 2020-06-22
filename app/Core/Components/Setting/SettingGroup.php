@@ -33,8 +33,8 @@ class SettingGroup
 			}
 			if($method == 'set' && isset($arguments[0])){
 				$this->{$prop} = $arguments[0];
-				return $this;
 			}
+			return $this;
 		}
 	}
 

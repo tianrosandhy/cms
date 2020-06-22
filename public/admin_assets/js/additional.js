@@ -26,6 +26,21 @@ $(function(){
       }
     });
   });
+
+  $(document).on("click", ".delete-button", function(e){
+    e.preventDefault();
+    delete_url = $(this).attr('href');
+    delete_url = delete_url || $(this).attr('data-target');
+    removedDiv = $(this).closest('.close-target');
+    if($(this).attr('data-callback')){
+      deletePrompt(delete_url, $(this).attr('data-callback'));
+    }
+    else{
+      deletePrompt(delete_url);
+    }
+  });
+
+
 });
 
 function showLoading(){
@@ -143,4 +158,72 @@ function loadTinyMce(){
 
   });
 }
-loadTinyMce();
+
+function deletePrompt(url, callback){
+  dtcl = callback || '';
+
+  output = '<p>Are you sure? Once deleted, you will not be able to recover the data</p><button class="btn btn-primary" data-dismiss="modal">Cancel</button> <button class="btn btn-danger" onclick="ajaxUrlProcess(\''+url+'\' '+ (dtcl ? ',\''+dtcl+'\'' : '') +')">Yes, Delete</button>';
+  toastr.info(output);
+}
+
+function ajaxUrlProcess(url, callback, ajax_type){
+  ajax_type = ajax_type || 'POST';
+  cll = function(){};
+  if(callback){
+    cll = callback;
+  }
+
+  $.ajax({
+    url : url,
+    type : ajax_type,
+    dataType : 'json',
+    data : {
+      _token : window.CSRF_TOKEN
+    },
+    success : function(resp){
+      if(resp.type == 'success'){
+        toastr.success(resp.message);
+
+        var fn = window[cll];
+        if(typeof fn == 'function'){
+          fn();
+        }
+
+        if(removedDiv != 'undefined'){
+          removedDiv.fadeOut(300);
+          setTimeout(function(){
+            removedDiv.remove();
+          }, 300);
+        }
+
+        if(typeof tb_data != 'undefined'){
+          tb_data.ajax.reload();
+        }
+      }
+      else if(resp.type == 'error'){
+        toastr.error(resp.message);
+      }
+    },
+    error : function(resp){
+      error_handling(resp);
+    }
+  });
+}
+
+function error_handling(resp){
+  if(resp.responseJSON){ //kalo berbentuk xhr object, translate ke json dulu
+    resp = resp.responseJSON;
+  }
+
+  if(resp.errors){
+    $.each(resp.errors, function(k, v){
+      toastr.error(v[0]);
+    });
+  }
+  else if(resp.type && resp.message){
+    toastr.error(resp.message);
+  }
+  else{
+    toastr.error('Sorry, we cannot process your last request');
+  }
+}

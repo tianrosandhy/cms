@@ -19,5 +19,12 @@
 				@endif
 			@endforeach
 		@endif
+		@if(isset($batch_delete_url))
+		<div style="display:inline-block;">
+			<a href="{{ $batch_delete_url }}" class="btn btn-danger multi-delete batchbox" style="display:none;">
+				<i data-feather="x"></i> Delete Selected Data
+			</a>
+		</div>
+		@endif
 	</div>
 </div>
