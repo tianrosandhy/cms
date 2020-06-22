@@ -9,14 +9,15 @@ class PageCrudPresenter extends BaseViewPresenter
 {
 	public function __construct($instance=null){
 		if($instance){
-			$this->title = 'Edit Pages Data';
+			$this->title = __('page::module.edit');
 		}
 		else{
-			$this->title = 'Create New Pages';
+			$this->title = __('page::module.add');
 		}
 		$this->data = $instance;
 		$this->view = 'page::crud';
 		$this->skeleton = new PageSkeleton;
+		$this->config = config('module-setting.page');
 	}
 
 	public function setSelectedMenuName(){

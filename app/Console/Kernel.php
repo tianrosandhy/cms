@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\AutocrudPresenter::class,
         \App\Console\Commands\AutocrudRole::class,
         \App\Console\Commands\AutocrudSuperAdmin::class,
+        \App\Console\Commands\AutocrudModule::class,
     ];
 
     /**

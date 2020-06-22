@@ -1,35 +1,35 @@
 <?php
-namespace App\Modules\Page\Presenters;
+namespace [NAMESPACE]\Presenters;
 
 use App\Core\Presenters\BaseViewPresenter;
 use DataTable;
-use App\Modules\Page\Http\Skeleton\PageSkeleton;
+use [NAMESPACE]\Http\Skeleton\[MODULE_NAME]Skeleton;
 
-class PageIndexPresenter extends BaseViewPresenter
+class [MODULE_NAME]IndexPresenter extends BaseViewPresenter
 {
 	public function __construct(){
-		$this->title = __('page::module.index');
-		$this->view = 'page::index';
-		$this->batch_delete_url = route('admin.page.delete');
-		$this->skeleton = new PageSkeleton;
+		$this->title = __('[LOWERCASE_MODULE_NAME]::module.index');
+		$this->view = '[LOWERCASE_MODULE_NAME]::index';
+		$this->batch_delete_url = route('admin.[LOWERCASE_MODULE_NAME].delete');
+		$this->skeleton = new [MODULE_NAME]Skeleton;
 		$this->datatable = DataTable::setSkeleton($this->skeleton);
 		$this->control_buttons = [];
-		if(!config('module-setting.page.hide_back_to_homepage_button')){
+		if(!config('module-setting.[LOWERCASE_MODULE_NAME].hide_back_to_homepage_button')){
 			$this->control_buttons[] = [
 				'url' => admin_url('/'),
 				'label' => 'Back to Homepage',
 				'icon' => 'home'
 			];
 		}
-		if(!config('module-setting.page.hide_add_button')){
+		if(!config('module-setting.[LOWERCASE_MODULE_NAME].hide_add_button')){
 			$this->control_buttons[] = [
-				'url' => route('admin.page.create'),
+				'url' => route('admin.[LOWERCASE_MODULE_NAME].create'),
 				'label' => 'Add Data',
 				'type' => 'success',
 				'icon' => 'plus'
 			];
 		}
-		if(!config('module-setting.page.hide_filter')){
+		if(!config('module-setting.[LOWERCASE_MODULE_NAME].hide_filter')){
 			$this->control_buttons[] = [
 				'label' => 'Filter',
 				'icon' => 'filter',
@@ -43,6 +43,6 @@ class PageIndexPresenter extends BaseViewPresenter
 	}
 
 	public function setSelectedMenuName(){
-		return 'page';
+		return '[LOWERCASE_MODULE_NAME]';
 	}
 }

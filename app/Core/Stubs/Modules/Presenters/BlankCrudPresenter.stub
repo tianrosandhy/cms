@@ -1,0 +1,26 @@
+<?php
+namespace [NAMESPACE]\Presenters;
+
+use App\Core\Presenters\BaseViewPresenter;
+use DataTable;
+use [NAMESPACE]\Http\Skeleton\[MODULE_NAME]Skeleton;
+
+class [MODULE_NAME]CrudPresenter extends BaseViewPresenter
+{
+	public function __construct($instance=null){
+		if($instance){
+			$this->title = __('[LOWERCASE_MODULE_NAME]::module.edit');
+		}
+		else{
+			$this->title = __('page::module.add');
+		}
+		$this->data = $instance;
+		$this->view = 'page::crud';
+		$this->skeleton = new [MODULE_NAME]Skeleton;
+		$this->config = config('module-setting.[LOWERCASE_MODULE_NAME]');
+	}
+
+	public function setSelectedMenuName(){
+		return '[LOWERCASE_MODULE_NAME]';
+	}
+}
