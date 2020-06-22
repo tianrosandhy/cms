@@ -11,6 +11,7 @@ class BaseSkeleton
 	public $structure = [];
 
 	public function __construct(){
+		$this->request = request();
 		if(method_exists($this, 'handle')){
 			$this->handle();
 		}

@@ -46,8 +46,8 @@ class PageSkeleton extends BaseSkeleton
 	protected function actionButton($row){
 		return '
 		<a href="#" class="btn btn-primary">Detail</a>
-		<a href="#" class="btn btn-info">Edit</a>
-		<a href="#" class="btn btn-danger">Delete</a>
+		<a href="'.route('admin.page.edit', ['id' => $row->id]).'" class="btn btn-info">Edit</a>
+		<a href="'.route('admin.page.delete', ['id' => $row->id]).'" class="btn btn-danger delete-button">Delete</a>
 		';
 	}
 }

@@ -41,25 +41,25 @@
 					$width = 0;
 					?>
 					@foreach(collect($forms)->where('tab_group', $tabname) as $row)
-						@if($row->hide_form == true)
+						@if($row->getHideForm() == true)
 							@php continue; @endphp
 						@endif
 						<?php
-						$width += $row->form_column;
+						$width += $row->getFormColumn();
 						if($width > 12){ //kalo lebarnya lebih dari 12 kolom, langsung tutup
 							$width = 0;
 							echo '</div><div class="row">'; //bikin baris baru
 						}
 
 						if(isset($data->id)){
-							$validation_rule = $row->update_validation;
+							$validation_rule = $row->getUpdateValidation();
 						}
 						else{
-							$validation_rule = $row->create_validation;
+							$validation_rule = $row->getCreateValidation();
 						}
 						?>
-						<div class="col-md-{{ $row->form_column }} col-sm-12">
-							<div class="form-group custom-form-group {!! $row->input_type == 'radio' ? 'radio-box' : '' !!}">
+						<div class="col-md-{{ $row->getFormColumn() }} col-sm-12">
+							<div class="form-group custom-form-group {!! $row->getInputType() == 'radio' ? 'radio-box' : '' !!}">
 								<label for="{{ $row->input_attribute['id'] }}" class="{{ strpos($validation_rule, 'required') !== false ? 'required' : '' }}">{{ $row->name }}</label>
 								{!! $row->createInput($data) !!}
 							</div>

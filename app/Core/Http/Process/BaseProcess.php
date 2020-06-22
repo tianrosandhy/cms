@@ -5,6 +5,7 @@ use App\Core\Exceptions\ProcessException;
 use App\Core\Exceptions\DataTableException;
 
 class BaseProcess{
+
 	public $type = 'http'; //default request type
 	public 
 		$config = [],
@@ -132,5 +133,6 @@ class BaseProcess{
 	public function getSuccessRedirectTarget(){
 		return isset($this->config['success_redirect_target']) ? redirect($this->config['success_redirect_target']) : redirect()->back();
 	}
+
 
 }
