@@ -72,7 +72,7 @@ class AutocrudModule extends Command
             	'Http/Process/'.$this->module_name.'DatatableProcess.php',
             	'Http/Process/'.$this->module_name.'DeleteProcess.php',
             	'Http/Skeleton/'.$this->module_name.'Skeleton.php',
-            	'Migrations/2020_06_20_000000_'.$this->module_name.'.php',
+            	'Migrations/2020_06_20_000000_'.$this->lowercase_name.'.php',
             	'Models/'.$this->module_name.'.php',
             	'Presenters/'.$this->module_name.'CrudPresenter.php',
             	'Presenters/'.$this->module_name.'IndexPresenter.php',

@@ -59,7 +59,7 @@ class Input
 	}
 	public function number($name, $config=[]){
 		$config['type'] = 'number';
-		return $this->loadView('text', $name, $config);
+		return $this->loadView('number', $name, $config);
 	}
 	public function email($name, $config=[]){
 		$config['type'] = 'email';
@@ -94,8 +94,7 @@ class Input
 		return $this->loadView('image', $name, $config);
 	}
 	public function imageMultiple($name, $config=[]){
-		return $this->loadView('text', $name, $config);
-		// return $this->loadView('image_multiple', $name, $config);
+		return $this->loadView('image_multiple', $name, $config);
 	}
 	public function slug($name, $config=[]){
 		$this->mandatoryConfig($config, ['slug_target'], 'slug');
@@ -114,6 +113,7 @@ class Input
 		return $this->loadView('datetime', $name, $config);
 	}
 	public function dateRange($name, $config=[]){
+		$config['type'] = 'daterange';
 		return $this->loadView('daterange', $name, $config);
 	}
 	public function file($name, $config=[]){
@@ -121,7 +121,7 @@ class Input
 		return $this->loadView('file', $name, $config);
 	}
 	public function fileMultiple($name, $config=[]){
-		$config['type'] = 'file_multiple';
+		$config['type'] = 'multiple';
 		return $this->loadView('file', $name, $config);
 	}
 	public function select($name, $config=[]){

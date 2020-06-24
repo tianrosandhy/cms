@@ -1,10 +1,15 @@
 <!-- Vendor js -->
-<script src="{{ admin_asset('js/vendor.min.js') }}"></script>
 <script src="{{ admin_asset('js/app.js') }}"></script>
 <script src="{{ admin_asset('libs/toastr/toastr.min.js') }}"></script>
 <script src="{{ admin_asset('libs/switchery/js/switchery.min.js') }}"></script>
+<script src="{{ admin_asset('libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
+<script src="{{ admin_asset('libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
+<script src="{{ admin_asset('libs/select2/select2.min.js') }}"></script>
+<script src="{{ admin_asset('libs/flatpickr/flatpickr.min.js') }}"></script>
 <script src="{{ admin_asset('libs/tinymce/tinymce.min.js') }}"></script>
 <script src="{{ admin_asset('libs/tinymce/jquery.tinymce.min.js') }}"></script>
+<script src="{{ admin_asset('libs/dropzone/dropzone.min.js') }}"></script>
+<script src="{{ admin_asset('js/dropzone-input.js') }}"></script>
 <script src="{{ admin_asset('js/additional.js') }}"></script>
 <script>
 var BASE_URL = '{{ admin_url('/') }}';

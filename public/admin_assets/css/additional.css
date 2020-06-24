@@ -40,3 +40,54 @@ label.required::after{
 	color:#d00;
 	padding:0 .5em;
 }
+
+.bootstrap-tagsinput{
+	width:100%;
+	border:1px solid #e2e7f1;
+	padding:6px 10px;
+}
+
+.bootstrap-tagsinput .label{
+	background:#5369f8;
+	color:#fff;
+	border-radius:4px;
+	-moz-border-radius:4px;
+	padding:.15em .5em;
+}
+
+.custom-dropzone{
+	min-height:50px;
+}
+.custom-dropzone .dz-message, .custom-dropzone .dz-default.dz-message{
+	margin:0;
+	padding:0;
+}
+.uploaded-holder{
+	padding:1em 0;
+}
+.uploaded-holder .uploaded{
+	display:inline-block;
+	margin-right:.75em;
+	margin-bottom:.5em;
+}
+.uploaded-holder .uploaded .file-alias{
+	line-height:30px;
+	height:30px;
+	display:inline-block;
+	background:#333;
+	color:#fff;
+	padding:0 .5em;
+	border-radius:5px 0 0 5px;
+	-moz-border-radius:5px 0 0 5px;
+}
+.uploaded-holder .uploaded .remove-asset-file, .uploaded-holder .uploaded .remove-asset-file-multiple{
+	line-height:30px;
+	height:30px;
+	display:inline-block;
+	padding : 0 .75em;
+	color:#fff;
+	background:#d00;
+	border-radius:0 5px 5px 0;
+	-moz-border-radius:0 5px 5px 0;
+	cursor:pointer;
+}

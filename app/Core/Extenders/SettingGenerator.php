@@ -28,7 +28,9 @@ class SettingGenerator extends SettingRegistration
 		$this->addSettingGroup('seo', [
 			new SettingItem('title', 'Default SEO Title'),
 			new SettingItem('description', 'Default SEO Description', 'textarea'),
-			new SettingItem('image', 'Default SEO Image'),
+			new SettingItem('image', 'Default SEO Image', 'image', [
+				'accept' => 'image/*'
+			]),
 		], 2);
 
 	}

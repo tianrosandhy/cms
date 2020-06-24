@@ -7,8 +7,14 @@ trait DataTableProcessor
 {
 
 	public function process(){
-		$this->validateRequest();
-		$this->handleProcess();
+		try{
+			$this->validateRequest();
+			$this->handleProcess();
+		}catch(\Exception $e){
+			return [
+				'error' => $e->getMessage()
+			];
+		}
 		return [
 			'draw' => $this->request->draw,
 			'data' => $this->data,
@@ -75,8 +81,12 @@ trait DataTableProcessor
 	}
 
 	public function getDataByRequest(){
-		$data = $this->skeleton->model();
-		$this->recordsTotal = $data->count();
+		try{
+			$data = $this->skeleton->model();
+			$this->recordsTotal = $data->count();
+		}catch(\Exception $e){
+			throw new DataTableException('Failed to get data from table. Make sure you have already migrate the module');
+		}
 
 		if(!empty($this->filter)){
 			foreach($this->filter as $column => $value){

@@ -39,6 +39,9 @@ class Sidebar
 
 		//load class lists
 		foreach($lists as $class_name){
+			if(!class_exists($class_name)){
+				continue;
+			}
 			$generator = app($class_name);
 			foreach($generator->output() as $group_key => $sidebar){
 				$this->data[$sidebar->getName()] = $sidebar;

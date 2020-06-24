@@ -211,7 +211,6 @@ class DataStructure
 		$this->formColumn(12);
 		$this->name($name);
 		$this->inputType('daterange');
-		$this->viewSource('main::inc.daterange-helper');
 		$this->inputAttribute([
 			'data-mask' => '0000-00-00'
 		]);

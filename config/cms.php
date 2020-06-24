@@ -5,9 +5,5 @@ return [
 		'auth_guard_name' => 'admin',
 		'assets' => 'admin_assets',
 	],
-	'max_filesize' => [
-		//if PHP max upload size is lower, then these settings are ignored
-		'image' => 20,
-		'file' => 20
-	],
+	'max_filesize' => 20
 ];

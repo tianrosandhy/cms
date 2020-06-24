@@ -12,10 +12,10 @@ class [MODULE_NAME]CrudPresenter extends BaseViewPresenter
 			$this->title = __('[LOWERCASE_MODULE_NAME]::module.edit');
 		}
 		else{
-			$this->title = __('page::module.add');
+			$this->title = __('[LOWERCASE_MODULE_NAME]::module.add');
 		}
 		$this->data = $instance;
-		$this->view = 'page::crud';
+		$this->view = '[LOWERCASE_MODULE_NAME]::crud';
 		$this->skeleton = new [MODULE_NAME]Skeleton;
 		$this->config = config('module-setting.[LOWERCASE_MODULE_NAME]');
 	}

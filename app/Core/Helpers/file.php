@@ -17,6 +17,9 @@ function file_upload_max_size($mb=0) {
     }
   }
 
+  $setting_max_size = config('cms.max_filesize') * 1024 * 1024;
+  $max_size = min($max_size, $setting_max_size);
+
   if($mb > 0){
     return min($max_size, ($mb * 1024 * 1024));
   }

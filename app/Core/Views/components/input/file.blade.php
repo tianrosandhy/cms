@@ -25,12 +25,13 @@ $config = [
 if(isset($path)){
   $config['path'] = $path;
 }
+$accept = $attr['accept'] ?? null;
 
-$view_source = 'main::inc.file-dropzone';
-if($type == 'file_multiple'){
-  $view_source = 'main::inc.file-dropzone-multiple';
-}
+$max_size = (file_upload_max_size() / 1024 /1024);
+$type = $type ?? 'single';
 ?>
-<div>
-  @include($view_source, $config)
-</div>
+@if($type == 'single')
+  @include ('core::components.upload-file.file-dropzone')
+@else
+  @include ('core::components.upload-file.file-dropzone-multiple')
+@endif

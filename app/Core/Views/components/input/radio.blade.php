@@ -33,7 +33,7 @@ else{
 ?>
 <div class="box">
   @foreach($data_source as $vl => $lbl)
-  <label class="radio-inline">
+  <label class="radio-inline mr-2">
     <input type="{{ isset($type) ? $type : 'radio' }}" value="{{ $vl }}" name="{!! $name !!}" id="input-{{ $cleaned_name }}-{{ slugify($lbl) }}" {{ $value == $vl ? 'checked' : '' }}>
     <span>{{ $lbl }}</span>
   </label>

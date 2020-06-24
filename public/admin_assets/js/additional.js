@@ -73,35 +73,209 @@ function makeid(length) {
    return result;
 }
 
+
+
+
+
+
+
+
+
+
 function initPlugins(){
-	//init switchery
-	$("[yesno]").each(function(){
-		new Switchery($(this)[0], {
-			size : 'small'
-		});
-
-		if($(this).attr('data-target')){
-			$(this).on('change', function(){
-				chk = $(this).prop('checked');
-				if(chk){
-					cond = 1;
-				}
-				else{
-					cond = 0;
-				}
-				$($(this).attr('data-target')).val(cond);
-			});
-		}
-	});
-
-	//init tinymce
+  loadSwitchery();
+  loadTouchspin();
 	loadTinyMce();
+  loadDatepicker();
+  loadSelect2();
+  loadFile();
+  refreshIcon();
+}
 
+function loadFile(){
+  $(".btn-add-file").on('click', function(e){
+    e.preventDefault();
+    console.log($(this).closest('.input-file-holder').find('input[type=file]'));
+    $(this).closest('.input-file-holder').find('input[type=file]').click();
+  });
+
+  $(".file-upload-controller").on('change', function(){
+    list_files = $(this)[0].files;
+    if(list_files.length == 0){
+      //do nothing
+    }
+    else{
+      if($(this).attr('data-max')){
+        maxsizemb = parseInt($(this).attr('data-max'));
+        maxsize = maxsizemb * 1024 * 1024;
+        if($(this)[0].files[0].size > maxsize){
+          alert('Mohon maaf, dokumen yang boleh diupload dibatasi hanya berukuran max ' + maxsizemb + 'MB saja.');
+          obj_input.val('');
+          return;
+        }
+      }
+
+      showLoading();
+      obj_input = $(this);
+      input_container = $(this).closest('.input-file-holder');
+      real_input = $(this).closest('.input-file-holder').find('.real-input-holder');
+      var fd = new FormData;
+      var files = $(this)[0].files[0];
+      fd.append('document', files);
+      $.ajax({
+        url : window.BASE_URL + '/post-document',
+        type : 'POST',
+        dataType : 'json',
+        data : fd,
+        contentType : false,
+        processData : false,
+        success : function(resp){
+          if(resp.type == 'success'){
+            obj_input.val('');
+            real_input.val(resp.savepath);
+            preview = '<div class="item btn-group mb-2"><a title="Click to Download" href="'+resp.download_url+'" download class="btn btn-primary">'+resp.filename+'</a><a href="#" class="btn btn-danger"><i data-feather="x"></i></a></div>';
+            input_container.find('.preview-holder').html(preview);
+            feather.replace();
+          }
+          else{
+            alert(resp.message);
+          }
+          hideLoading();
+        },
+        error : function(resp){
+          error_handling(resp);
+        }
+      });
+
+
+    }
+  });
+}
+
+function loadSelect2(){
+  $(".select2").select2();
+}
+
+function loadDatepicker(){
+  $("[data-datepicker]").each(function(){
+    config = {
+      "altInput" : true,
+      "mode" : "single",
+    };
+    if($(this).attr('data-mindate')){
+      config.minDate = $(this).attr('data-mindate');
+    }
+    if($(this).attr('data-maxdate')){
+      config.maxDate = $(this).attr('data-maxdate');
+    }
+    if($(this).attr('data-format')){
+      config.altFormat = $(this).attr('data-format');
+    }
+    $(this).flatpickr(config);
+  });
+  $("[data-timepicker]").each(function(){
+    config = {
+      enableTime : true,
+      noCalendar : true,
+      dateFormat : "H:i",
+      time_24hr : true
+    };
+    if($(this).attr('data-format')){
+      config.dateFormat = $(this).attr('data-format');
+    }
+    $(this).flatpickr(config);
+  });
+  $("[data-datetimepicker]").each(function(){
+    config = {
+      enableTime : true,
+      dateFormat : "Y-m-d H:i",
+      time_24hr : true
+    };
+    if($(this).attr('data-format')){
+      config.altFormat = $(this).attr('data-format');
+    }
+    $(this).flatpickr(config);
+  });
+
+
+  //daterange function
+  $("[daterange-holder] [data-start-range]").flatpickr({
+    onChange : function(selectedDates, dateStr, instance){
+      end_date = $(instance.element).closest('[daterange-holder]').find('[data-end-range]');
+      einstance = end_date[0]._flatpickr;
+      einstance.set('minDate', dateStr);
+      einstance.redraw();
+    }
+  });
+  $("[daterange-holder] [data-end-range]").flatpickr({
+    onChange : function(selectedDates, dateStr, instance){
+      start_date = $(instance.element).closest('[daterange-holder]').find('[data-start-range]');
+      sinstance = start_date[0]._flatpickr;
+      sinstance.set('maxDate', dateStr);
+      sinstance.redraw();
+    }
+  });
+}
+
+function refreshIcon(){
   // init featherjs
   if(typeof feather != 'undefined'){
     feather.replace();
   }
 }
+
+function loadSwitchery(){
+  $("[yesno]").each(function(){
+    new Switchery($(this)[0], {
+      size : 'small'
+    });
+
+    if($(this).attr('data-target')){
+      $(this).on('change', function(){
+        chk = $(this).prop('checked');
+        if(chk){
+          cond = 1;
+        }
+        else{
+          cond = 0;
+        }
+        $($(this).attr('data-target')).val(cond);
+      });
+    }
+  });  
+}
+
+function loadTouchspin(){
+  $("[touchspin]").each(function(){
+    config = {};
+    if($(this).attr('min')){
+      config.min = $(this).attr('min');
+    }
+    if($(this).attr('max')){
+      config.max = $(this).attr('max');
+    }
+    if($(this).attr('step')){
+      config.step = $(this).attr('step');
+    }
+    if($(this).attr('decimal')){
+      config.decimals = $(this).attr('decimal');
+    }
+    if($(this).attr('prefix')){
+      config.prefix = $(this).attr('prefix');
+    }
+    if($(this).attr('postfix')){
+      config.postfix = $(this).attr('postfix');
+    }
+    if($(this).attr('data-vertical')){
+      config.verticalbuttons = true;
+    }
+    $(this).TouchSpin(config);
+  });  
+}
+
+
+
+
 
 
 function loadTinyMce(){
@@ -226,4 +400,6 @@ function error_handling(resp){
   else{
     toastr.error('Sorry, we cannot process your last request');
   }
+  hideLoading();
 }
+

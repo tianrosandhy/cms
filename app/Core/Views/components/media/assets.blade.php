@@ -292,14 +292,14 @@
 
 
 
-<script src="{{ admin_asset('libs/dropzone/dropzone.min.js') }}"></script>
 
 <!-- for media input -->
 <script>
 var FILEMANAGER_PAGE = 1;
 var ACTIVE_EDITOR;
 $(function(){
-	$(document).on('click', ".trigger-upload-image", function(){
+	$(document).on('click', ".trigger-upload-image", function(e){
+		e.preventDefault();
 		//set data-hash to filemanager modal
 		hash = $(this).closest(".input-image-holder").attr('data-hash');
 		$("#media-modal").attr('data-hash', hash);

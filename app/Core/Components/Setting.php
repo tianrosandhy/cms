@@ -58,6 +58,9 @@ class Setting
 
 		//load class lists
 		foreach($lists as $class_name){
+			if(!class_exists($class_name)){
+				continue;
+			}
 			$generator = app($class_name);
 			foreach($generator->output() as $group_key => $setting_lists){
 				$this->data[$group_key]['order'] = $setting_lists->getOrder();
