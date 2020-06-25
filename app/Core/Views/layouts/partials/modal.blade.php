@@ -1,3 +1,4 @@
+@if(Permission::has('admin.setting.store'))
 <div class="right-bar">
     <div class="rightbar-title">
         <a href="javascript:void(0);" class="right-bar-toggle float-right">
@@ -11,4 +12,5 @@
     </div>
 </div>
 <div class="rightbar-overlay"></div>
+@endif
 @stack ('modal')

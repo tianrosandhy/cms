@@ -1,8 +1,9 @@
+
 <li class="dropdown notification-list" title="8 new unread notifications">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
         aria-expanded="false">
         <i data-feather="bell"></i>
-        <span class="noti-icon-badge"></span>
+        <!-- <span class="noti-icon-badge"></span> -->
     </a>
     <div class="dropdown-menu dropdown-menu-right dropdown-lg">
 
@@ -10,15 +11,23 @@
         <div class="dropdown-item noti-title border-bottom">
             <h5 class="m-0 font-size-16">
                 <span class="float-right">
+<?php
+/*
                     <a href="" class="text-dark">
                         <small>Clear All</small>
                     </a>
+*/
+?>
                 </span>Notification
             </h5>
         </div>
 
         <div class="slimscroll noti-scroll">
-
+            <div class="dropdown-item">
+                <p class="text-mute">No notifications</p>
+            </div>
+<?php
+/*            
             <!-- item-->
             <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
                 <div class="notify-icon bg-primary"><i class="uil uil-user-plus"></i></div>
@@ -73,14 +82,18 @@
                     <small class="text-muted">13 days ago</small>
                 </p>
             </a>
+*/
+?>            
         </div>
-
+<?php
+/*
         <!-- All-->
         <a href="javascript:void(0);"
             class="dropdown-item text-center text-primary notify-item notify-all border-top">
             View all
             <i class="fi-arrow-right"></i>
         </a>
-
+*/
+?>
     </div>
 </li>

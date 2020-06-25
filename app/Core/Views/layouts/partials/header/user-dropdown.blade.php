@@ -13,11 +13,17 @@
         </div>
     </a>
     <div class="dropdown-menu profile-dropdown-items dropdown-menu-right">
+        <a href="{{ env('APP_URL') }}" class="dropdown-item notify-item">
+            <i data-feather="globe" class="icon-dual icon-xs mr-2"></i>
+            <span>Go to Site</span>
+        </a>
+
+        <div class="dropdown-divider"></div>
+
         <a href="{{ route('admin.my-profile') }}" class="dropdown-item notify-item">
             <i data-feather="user" class="icon-dual icon-xs mr-2"></i>
             <span>My Profile</span>
         </a>
-        <div class="dropdown-divider"></div>
 
         <a href="{{ route('admin.logout') }}" class="dropdown-item notify-item">
             <i data-feather="log-out" class="icon-dual icon-xs mr-2"></i>

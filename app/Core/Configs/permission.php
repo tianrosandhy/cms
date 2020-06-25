@@ -1,6 +1,9 @@
 <?php
 return [
 	'Core' => [
+		'Setting' => [
+			'admin.setting.store'
+		],
 		'User Management' => [
 			'admin.user.index',
 			'admin.user.create',

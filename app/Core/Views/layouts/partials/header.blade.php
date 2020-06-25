@@ -33,14 +33,15 @@
                 </div>
             </li>
 
-            @include ('core::layouts.partials.header.language-toggle')
             @include ('core::layouts.partials.header.notification')
 
+            @if(Permission::has('admin.setting.store'))
             <li class="dropdown notification-list" title="Settings">
                 <a href="javascript:void(0);" class="nav-link right-bar-toggle">
                     <i data-feather="settings"></i>
                 </a>
             </li>
+            @endif
 
             @include ('core::layouts.partials.header.user-dropdown')
         </ul>
