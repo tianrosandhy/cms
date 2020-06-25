@@ -1,12 +1,13 @@
 <?php
 namespace App\Core\Components\DataTable;
 
-use Str;
 use Input;
 use Closure;
+use App\Core\Shared\DynamicProperty;
 
 class DataStructure
 {
+	use DynamicProperty;
 
 	public 
 		$field,
@@ -61,22 +62,6 @@ class DataStructure
 		$this->view = null;
 	}
 
-	// dynamic property set
-	public function __call($name, $arguments){
-		$method = substr($name, 0, 3);
-		if(in_array($method, ['get', 'set'])){
-			$prop = substr($name, 3);
-			$prop = Str::snake($prop);
-
-			if($method == 'get' && property_exists($this, $prop)){
-				return $this->{$prop};
-			}
-			if($method == 'set' && isset($arguments[0])){
-				$this->{$prop} = $arguments[0];
-			}
-			return $this;
-		}
-	}
 
 
 	public function createInput($data=null, $multi_language=false){

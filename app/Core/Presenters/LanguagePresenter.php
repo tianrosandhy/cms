@@ -2,16 +2,16 @@
 namespace App\Core\Presenters;
 
 use App\Core\Presenters\BaseViewPresenter;
-use DataTable;
 use App\Core\Http\Skeleton\LanguageSkeleton;
+use Language;
 
 class LanguagePresenter extends BaseViewPresenter
 {
 	public function __construct(){
 		$this->title = 'Language Setting';
-		$this->view = 'core::components.language';
-		$this->skeleton = new LanguageSkeleton;
-		$this->datatable = DataTable::setSkeleton($this->skeleton);
+		$this->default_language = Language::default();
+		$this->secondary_language = Language::secondary();
+		$this->view = 'core::pages.language';
 	}
 
 	public function setSelectedMenuName(){

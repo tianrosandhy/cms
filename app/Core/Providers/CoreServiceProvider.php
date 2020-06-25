@@ -8,6 +8,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Database\Schema\Builder;
 use App\Core\Models\Setting;
 use App\Core\Models\Role;
+use App\Core\Models\Language;
 
 class CoreServiceProvider extends BaseServiceProvider{
 	protected $namespace = 'App\Core\Http\Controllers';
@@ -70,6 +71,9 @@ class CoreServiceProvider extends BaseServiceProvider{
 		$this->app->singleton('setting', function($app){
 			return Setting::get();
 		});
+		$this->app->singleton('language', function($app){
+			return Language::get();
+		});
 		$this->app->singleton('role', function($app){
 			return Role::with('owner', 'children')->get();
 		});
@@ -102,6 +106,7 @@ class CoreServiceProvider extends BaseServiceProvider{
 		    'DataStructure' => \App\Core\Facades\DataStructureComponentFacade::class,
 		    'DataTable' => \App\Core\Facades\DataTableComponentFacade::class,
 		    'Permission' => \App\Core\Facades\PermissionComponentFacade::class,
+		    'Language' => \App\Core\Facades\LanguageComponentFacade::class,
 		];
 
 		foreach($aliasData as $al => $src){

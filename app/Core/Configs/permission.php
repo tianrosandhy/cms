@@ -18,9 +18,8 @@ return [
 		'Language' => [
 			'admin.language.index',
 			'admin.language.create',
-			'admin.language.edit',
+			'admin.language.set-as-default',
 			'admin.language.delete',
-			'admin.language.switch',
 		]
 	]
 ];

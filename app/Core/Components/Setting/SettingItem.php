@@ -2,11 +2,13 @@
 namespace App\Core\Components\Setting;
 
 use App\Core\Exceptions\SettingException;
-use Str;
+use App\Core\Shared\DynamicProperty;
 
 // class instance utk single setting item
 class SettingItem
 {
+	use DynamicProperty;
+
 	private 
 		$name, 
 		$title,
@@ -19,24 +21,6 @@ class SettingItem
 		$this->title = $title;
 		$this->setType($type, $config);
 		$this->value = $default_value;
-	}
-
-
-	// dynamic property set
-	public function __call($name, $arguments){
-		$method = substr($name, 0, 3);
-		if(in_array($method, ['get', 'set'])){
-			$prop = substr($name, 3);
-			$prop = Str::snake($prop);
-
-			if($method == 'get' && property_exists($this, $prop)){
-				return $this->{$prop};
-			}
-			if($method == 'set' && isset($arguments[0])){
-				$this->{$prop} = $arguments[0];
-			}
-			return $this;
-		}
 	}
 
 	public function setType($type='text', $config=[]){

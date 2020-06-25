@@ -5,7 +5,10 @@ Route::post('my-profile', 'CoreController@storeMyProfile')->name('admin.my-profi
 Route::post('store-setting', 'CoreController@storeSetting')->name('admin.setting.store');
 
 Route::get('language', 'CoreController@language')->name('admin.language.index');
-Route::match(['get', 'post'], 'datatable/language', 'CoreController@languageDataTable')->name('admin.language.datatable');
+Route::post('language', 'CoreController@addLanguage')->name('admin.language.create');
+Route::get('language/set-as-default/{id}', 'CoreController@setAsDefaultLanguage')->name('admin.language.set-as-default');
+Route::get('language/delete/{id}', 'CoreController@removeLanguage')->name('admin.language.delete');
+
 
 Route::get('privilege', 'CoreController@privilege')->name('admin.privilege.index');
 Route::get('privilege/create', 'CoreController@privilegeCreate')->name('admin.privilege.create');

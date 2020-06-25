@@ -2,11 +2,13 @@
 namespace App\Core\Components\Sidebar;
 
 use App\Core\Exceptions\SidebarException;
-use Str;
+use App\Core\Shared\DynamicProperty;
 
 // class instance utk single sidebar item
 class SidebarItem
 {
+	use DynamicProperty;
+	
 	private 
 		$name,
 		$url,
@@ -19,29 +21,6 @@ class SidebarItem
 		$children,
 		$active_key = [];
 
-	// dynamic property set
-	public function __call($name, $arguments){
-		$method = substr($name, 0, 3);
-		if(in_array($method, ['get', 'set'])){
-			$prop = substr($name, 3);
-			$prop = Str::snake($prop);
-
-			if($method == 'get' && property_exists($this, $prop)){
-				return $this->{$prop};
-			}
-			if($method == 'set' && isset($arguments[0])){
-				$this->{$prop} = $arguments[0];
-			}
-			if($method == 'has'){
-				$cond = isset($this->{$prop});
-				if($cond){
-					return !empty($cond);
-				}
-				return false;
-			}
-		}
-		return $this;
-	}
 
 	public function __construct($name=null, $config=[]){
 		$this->setName($name);

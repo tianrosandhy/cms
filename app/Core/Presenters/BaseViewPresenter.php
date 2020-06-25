@@ -2,33 +2,18 @@
 namespace App\Core\Presenters;
 
 use App\Core\Exceptions\ViewPresenterException;
-use Str;
 use Setting;
 use Sidebar;
+use App\Core\Shared\DynamicProperty;
 
 class BaseViewPresenter
 {
+	use DynamicProperty;
+	
 	public 
 		$view,
 		$user,
 		$selected_menu;
-
-	// dynamic property set
-	public function __call($name, $arguments){
-		$method = substr($name, 0, 3);
-		if(in_array($method, ['get', 'set'])){
-			$prop = substr($name, 3);
-			$prop = Str::snake($prop);
-
-			if($method == 'get' && property_exists($this->prop)){
-				return $this->{$prop};
-			}
-			if($method == 'set' && isset($arguments[0])){
-				$this->{$prop} = $arguments[0];
-			}
-			return $this;
-		}
-	}
 
 	public function setDefaultProperty(){
 		$request = request();
