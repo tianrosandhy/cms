@@ -7,6 +7,13 @@ Route::post('store-setting', 'CoreController@storeSetting')->name('admin.setting
 Route::get('language', 'CoreController@language')->name('admin.language');
 Route::match(['get', 'post'], 'datatable/language', 'CoreController@languageDataTable')->name('admin.language.datatable');
 
+Route::get('privilege', 'CoreController@privilege')->name('admin.privilege.index');
+Route::get('privilege/create', 'CoreController@privilegeCreate')->name('admin.privilege.create');
+Route::post('privilege/store', 'CoreController@privilegeStore')->name('admin.privilege.store');
+Route::get('privilege/edit/{id}', 'CoreController@privilegeEdit')->name('admin.privilege.edit');
+Route::post('privilege/update/{id}', 'CoreController@privilegeUpdate')->name('admin.privilege.update');
+Route::post('privilege/delete/{id}', 'CoreController@privilegeDelete')->name('admin.privilege.delete');
+Route::post('privilege/manage-privilege/{id}', 'CoreController@privilegeManage')->name('admin.privilege.manage');
 
 Route::match(['get', 'post'], 'logout', 'CoreController@logout')->name('admin.logout');
 

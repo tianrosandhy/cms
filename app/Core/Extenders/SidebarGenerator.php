@@ -33,7 +33,7 @@ class SidebarGenerator extends SidebarRegistration
 				SidebarItem::setName('admin.user.privilege')
 					->setLabel('Privilege Management')
 					->setPrivilege('admin.privilege.index')
-					->setUrl('#')
+					->setUrl(route('admin.privilege.index'))
 					->setParent('admin.setting')
 					->setSortNo(1)
 					->setActiveKey('privilege'),
