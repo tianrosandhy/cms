@@ -13,7 +13,8 @@ Route::post('privilege/store', 'CoreController@privilegeStore')->name('admin.pri
 Route::get('privilege/edit/{id}', 'CoreController@privilegeEdit')->name('admin.privilege.edit');
 Route::post('privilege/update/{id}', 'CoreController@privilegeUpdate')->name('admin.privilege.update');
 Route::post('privilege/delete/{id}', 'CoreController@privilegeDelete')->name('admin.privilege.delete');
-Route::post('privilege/manage-privilege/{id}', 'CoreController@privilegeManage')->name('admin.privilege.manage');
+Route::get('privilege/manage-privilege/{id}', 'CoreController@privilegeManage')->name('admin.privilege.manage');
+Route::post('privilege/manage-privilege/{id}', 'CoreController@privilegeStoreManage')->name('admin.privilege.store-manage');
 
 Route::match(['get', 'post'], 'logout', 'CoreController@logout')->name('admin.logout');
 

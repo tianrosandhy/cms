@@ -33,6 +33,9 @@ class CoreServiceProvider extends BaseServiceProvider{
 		    __DIR__.'/../Configs/module-setting.php', 'module-setting'
 		);
 		$this->mergeConfigFrom(
+		    __DIR__.'/../Configs/permission.php', 'permission'
+		);
+		$this->mergeConfigFrom(
 		    __DIR__.'/../Configs/image.php', 'image'
 		);
 	}
@@ -98,6 +101,7 @@ class CoreServiceProvider extends BaseServiceProvider{
 		    'SidebarItem' => \App\Core\Facades\SidebarItemComponentFacade::class,
 		    'DataStructure' => \App\Core\Facades\DataStructureComponentFacade::class,
 		    'DataTable' => \App\Core\Facades\DataTableComponentFacade::class,
+		    'Permission' => \App\Core\Facades\PermissionComponentFacade::class,
 		];
 
 		foreach($aliasData as $al => $src){

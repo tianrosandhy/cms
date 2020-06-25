@@ -3,6 +3,7 @@ namespace App\Core\Presenters;
 
 use App\Core\Presenters\BaseViewPresenter;
 use App\Core\Components\RoleStructure;
+use Permission;
 
 class PrivilegePresenter extends BaseViewPresenter
 {
@@ -10,6 +11,7 @@ class PrivilegePresenter extends BaseViewPresenter
 		$this->title = 'Privilege Management';
 		$this->role_structure = new RoleStructure();
 		$this->view = 'core::pages.privilege';
+		$this->permission = Permission::lists();
 	}
 
 	public function setSelectedMenuName(){

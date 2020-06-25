@@ -40,7 +40,7 @@
 							<small>This privilege has <strong>all</strong> permission</small>
 						</div>
 						@else
-						<a href="#" class="btn btn-sm btn-primary">Manage Privileges</a>
+							<a href="#" data-target="{{ route('admin.privilege.manage', ['id' => $row['id']]) }}" data-action="add" class="btn btn-sm btn-primary">Manage Privileges ({{ count($row['priviledge_list']) }})</a>
 						@endif
 					</td>
 					<td>
@@ -82,8 +82,61 @@ $(function(){
 	$("[data-action='add']").on('click', function(e){
 		e.preventDefault();
 		loadPrivilegeCrud($(this).attr('data-target'));
-	})
+	});
+
+
+
+	$(document).on('change', '.priviledge-check input[type=checkbox]', function(){
+		inputCheckEvent($(this));
+		groupCheckCondition();
+	});
+
+	$(document).on('change', '.group-checkbox', function(){
+		items = $(this).closest('td').next('td').find('.priviledge-check');
+		condition = $(this).is(':checked');
+		$.each(items, function(){
+			$(this).find('input[type=checkbox]').prop('checked', condition).change();
+		});
+	});
+
 });
+
+function loadCheckEvent(){
+	$(".priviledge-check").each(function(){
+		input = $(this).find('input[type=checkbox]');
+		inputCheckEvent(input);
+	});
+	groupCheckCondition();
+}
+
+function groupCheckCondition(){
+	$(".group-checkbox").each(function(){
+		items = $(this).closest('td').next('td').find('.priviledge-check');
+		cond = true;
+		$.each(items, function(){
+			cond = cond && $(this).find('input[type=checkbox]').prop('checked');
+		});
+
+		if(cond == true){
+			$(this).prop('checked', true);
+		}
+		else{
+			$(this).prop('checked', false);
+		}
+	});
+}
+
+function inputCheckEvent(input){
+	paren = input.closest('.priviledge-check');
+	if(input.is(':checked')){
+		paren.addClass('active');
+	}
+	else{
+		paren.removeClass('active');
+	}
+}
+
+
 function loadPrivilegeCrud(target){
 	showLoading();
 	$.ajax({
@@ -101,5 +154,7 @@ function loadPrivilegeCrud(target){
 		}
 	});
 }
+
+
 </script>
 @endpush

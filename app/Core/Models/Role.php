@@ -25,6 +25,18 @@ class Role extends Model
         return $this->where('name', $role_name)->first();
     }
 
+    public function getPermissionList(){
+        $data = json_decode($this->priviledge_list, true);
+        if($data){
+            return $data;
+        }
+        return [];
+    }
+
+    public function getPermissionListCount(){
+        return count($this->getPermissionList());
+    }
+
     public function owners(){
         $out = [];
         if($this->owner){

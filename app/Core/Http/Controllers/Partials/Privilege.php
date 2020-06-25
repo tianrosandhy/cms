@@ -4,6 +4,7 @@ namespace App\Core\Http\Controllers\Partials;
 use App\Core\Presenters\PrivilegePresenter;
 use App\Core\Components\RoleStructure;
 use App\Core\Models\Role;
+use Permission;
 
 trait Privilege
 {
@@ -94,7 +95,37 @@ trait Privilege
 	}
 
 	public function privilegeManage($id){
+		$data = app('role')->where('id', $id)->first();
+		if(empty($data)){
+			abort(404);
+		}
+		$target = route('admin.privilege.store-manage', ['id' => $id]);
+		$all = Permission::all();
+		$checked = json_decode($data->priviledge_list, true);
+		if(!$checked){
+			$checked = [];
+		}
+		return view('core::pages.partials.privilege-management', compact(
+			'data',
+			'target',
+			'all',
+			'checked'
+		));
+	}
 
+	public function privilegeStoreManage($id){
+		$data = app('role')->where('id', $id)->first();
+		if(empty($data)){
+			abort(404);
+		}
+
+		$permission_string = '';
+		if(is_array($this->request->check)){
+			$permission_string = json_encode($this->request->check);
+		}
+		$data->priviledge_list = $permission_string;
+		$data->save();
+		return redirect()->route('admin.privilege.index')->with('success', 'The privilege data has been saved for role "'.$data->name.'"');
 	}
 
 

@@ -96,6 +96,7 @@ class RoleStructure
 			'priviledge' => json_decode($row->priviledge_list, true),
 			'role_owner' => $row->role_owner,
 			'is_sa' => $row->is_sa,
+			'priviledge_list' => $row->getPermissionList()
 		];
 		if($row->children->count() > 0){
 			foreach($row->children as $child){
@@ -120,6 +121,7 @@ class RoleStructure
 				'label' => $arr['label'],
 				'level' => $i,
 				'role_owner' => isset($arr['role_owner']) ? $arr['role_owner'] : null,
+				'priviledge_list' => $arr['priviledge_list'] ?? []
 			];
 		}
 		
