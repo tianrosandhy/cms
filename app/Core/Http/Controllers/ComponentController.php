@@ -140,8 +140,12 @@ class ComponentController extends BaseController
 		]);
 
 		try{
-			$tb = DB::table($this->request->table)->where($this->request->pk, $this->request->id)->update([
-				$this->request->field => intval($this->request->value) 
+			$table = decrypt($this->request->table);
+			$pk = decrypt($this->request->pk);
+			$id = decrypt($this->request->id);
+			$field = decrypt($this->request->field);
+			$tb = DB::table($table)->where($pk, $id)->update([
+				$field => intval($this->request->value) 
 			]);
 			return response()->json([
 				'type' => 'success'

@@ -19,10 +19,10 @@ trait SkeletonHelper
 				'value' => $row->{$field},
 				'name' => $field,
 				'attr' => [
-					'data-id' => $row->getKey(),
-					'data-pk' => $row->getKeyName(),
-					'table' => $table,
-					'field' => $field,
+					'data-id' => encrypt($row->getKey()),
+					'data-pk' => encrypt($row->getKeyName()),
+					'table' => encrypt($table),
+					'field' => encrypt($field),
 					'data-table-switch' => 1
 				]
 			])->render();
