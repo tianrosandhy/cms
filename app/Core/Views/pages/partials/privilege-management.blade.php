@@ -1,11 +1,6 @@
 <form action="{{ $target }}" method="post">
 	{{ csrf_field() }}
 	<table class="table">
-		<thead>
-			<tr>
-				<th>Priviledge Item</th>
-			</tr>
-		</thead>
 		<tbody>
 			@foreach($all as $group => $data)
 				@foreach($data as $title => $list)
@@ -40,3 +35,9 @@
 		<button class="btn btn-primary">Save Permission Data</button>
 	</div>
 </form>
+<script>
+$(function(){
+	groupCheckCondition();
+	loadCheckEvent();
+});
+</script>

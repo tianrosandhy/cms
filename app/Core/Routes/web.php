@@ -4,7 +4,7 @@ Route::get('my-profile', 'CoreController@myProfile')->name('admin.my-profile');
 Route::post('my-profile', 'CoreController@storeMyProfile')->name('admin.my-profile.store');
 Route::post('store-setting', 'CoreController@storeSetting')->name('admin.setting.store');
 
-Route::get('language', 'CoreController@language')->name('admin.language');
+Route::get('language', 'CoreController@language')->name('admin.language.index');
 Route::match(['get', 'post'], 'datatable/language', 'CoreController@languageDataTable')->name('admin.language.datatable');
 
 Route::get('privilege', 'CoreController@privilege')->name('admin.privilege.index');

@@ -9,40 +9,40 @@ class SidebarGenerator extends SidebarRegistration
 	public function handle(){
 		// generate sidebar for core menus
 		$this->registerSidebars([
-			SidebarItem::setName('admin.dashboard')
+			SidebarItem::setName('ADMIN.DASHBOARD')
 				->setLabel('Dashboard')
 				->setUrl(admin_url('/'))
 				->setIcon('home')
 				->setSortNo(0)
 				->setActiveKey('homepage'),
 
-			SidebarItem::setName('admin.setting')
+			SidebarItem::setName('ADMIN.MANAGEMENT')
 				->setLabel('Managements')
 				->setPrivilege(['admin.user.index', 'admin.privilege.index', 'admin.language.index'])
 				->setIcon('settings')
 				->setSortNo(100)
 				->setActiveKey(['user', 'privilege']),
 
-				SidebarItem::setName('admin.language')
+				SidebarItem::setName('ADMIN.LANGUAGE')
 					->setLabel('Language Setting')
 					->setPrivilege('admin.language.index')
-					->setUrl(route('admin.language'))
-					->setParent('admin.setting')
+					->setRoute('admin.language.index')
+					->setParent('ADMIN.MANAGEMENT')
 					->setActiveKey('language'),
 
-				SidebarItem::setName('admin.user.privilege')
+				SidebarItem::setName('ADMIN.PRIVILEGE')
 					->setLabel('Privilege Management')
 					->setPrivilege('admin.privilege.index')
-					->setUrl(route('admin.privilege.index'))
-					->setParent('admin.setting')
+					->setRoute('admin.privilege.index')
+					->setParent('ADMIN.MANAGEMENT')
 					->setSortNo(1)
 					->setActiveKey('privilege'),
 
-				SidebarItem::setName('admin.user.index')
+				SidebarItem::setName('ADMIN.USER')
 					->setLabel('User Lists')
 					->setPrivilege('admin.user.index')
-					->setUrl(route('admin.user.index'))
-					->setParent('admin.setting')
+					->setRoute('admin.user.index')
+					->setParent('ADMIN.MANAGEMENT')
 					->setSortNo(1)
 					->setActiveKey('user'),
 		]);

@@ -5,6 +5,7 @@ namespace App\Core\Http\Middleware;
 use Closure;
 use Auth;
 use Redirect;
+use Permission;
 
 class AdminAuth
 {
@@ -37,6 +38,14 @@ class AdminAuth
                     'subordinate_role' => $roles_bawahan,
                     'accessible_role' => $accessible_role,
                 ]);
+
+
+                //check if current user have access to current route
+                $route_name = $request->route()->getName();
+                if(!Permission::has($route_name)){
+                    //forbidden access
+                    abort(403);
+                }
 
                 return $next($request);
             }

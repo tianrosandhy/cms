@@ -15,7 +15,10 @@ class [MODULE_NAME]CrudPresenter extends BaseViewPresenter
 			$this->title = __('[LOWERCASE_MODULE_NAME]::module.add');
 		}
 		$this->data = $instance;
-		$this->view = '[LOWERCASE_MODULE_NAME]::crud';
+		$this->view = 'core::master.crud';
+		#if you want to override this crud view, you can use below view instead
+		// $this->view = '[LOWECASE_MODULE_NAME]::crud';
+
 		$this->skeleton = new [MODULE_NAME]Skeleton;
 		$this->config = config('module-setting.[LOWERCASE_MODULE_NAME]');
 	}

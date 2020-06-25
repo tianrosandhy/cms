@@ -2,6 +2,20 @@ $(function(){
 	hideLoading();
 	initPlugins();
 
+  //remove blank sidebar
+  $(".nav-third-level").each(function(){
+    if($(this).find('li').length == 0){
+      $(this).closest('li').remove();
+    }
+  });
+  $(".nav-second-level").each(function(){
+    if($(this).find('li').length == 0){
+      $(this).closest('li').remove();
+    }
+  });
+
+
+
   $(document).on('change', '[yesno][data-table-switch]', function(e){
     instance = $(this);
     $.ajax({

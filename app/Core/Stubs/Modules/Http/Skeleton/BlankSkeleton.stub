@@ -4,6 +4,7 @@ namespace [NAMESPACE]\Http\Skeleton;
 use DataStructure;
 use App\Core\Http\Skeleton\BaseSkeleton;
 use [NAMESPACE]\Models\[MODULE_NAME];
+use Permission;
 
 class [MODULE_NAME]Skeleton extends BaseSkeleton
 {
@@ -38,16 +39,19 @@ class [MODULE_NAME]Skeleton extends BaseSkeleton
 			'id' => $this->checkerFormat($row),
 			'title' => $row->title,
 			'description' => $row->description,
-			'is_active' => $this->switcherFormat($row, 'is_active'),
+			'is_active' => $this->switcherFormat($row, 'is_active', (Permission::has('admin.[LOWERCASE_MODULE_NAME].switch') ? 'toggle' : 'label')),
 			'action' => $this->actionButton($row)
 		];
 	}
 
 	protected function actionButton($row){
-		return '
-		<a href="#" class="btn btn-primary">Detail</a>
-		<a href="'.route('admin.[LOWERCASE_MODULE_NAME].edit', ['id' => $row->id]).'" class="btn btn-info">Edit</a>
-		<a href="'.route('admin.[LOWERCASE_MODULE_NAME].delete', ['id' => $row->id]).'" class="btn btn-danger delete-button">Delete</a>
-		';
+		$out = '';
+		if(Permission::has('admin.[LOWERCASE_MODULE_NAME].edit')){
+			$out .= '<a href="'.route('admin.[LOWERCASE_MODULE_NAME].edit', ['id' => $row->id]).'" class="btn btn-info">Edit</a>';
+		}
+		if(Permission::has('admin.[LOWECASE_MODULE_NAME].delete')){
+			$out .= '<a href="'.route('admin.[LOWERCASE_MODULE_NAME].delete', ['id' => $row->id]).'" class="btn btn-danger delete-button">Delete</a>';
+		}
+		return $out;
 	}
 }

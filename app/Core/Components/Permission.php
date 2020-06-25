@@ -7,6 +7,7 @@ class Permission
 {
 	public function __construct(){
 		$this->config = config('permission');
+		$this->role = $this->getCurrentRole();
 	}
 
 	public function all(){
@@ -25,14 +26,13 @@ class Permission
 
 	public function has($permission_key=null, $role=null){
 		if(in_array($permission_key, $this->lists())){
-			$current_role = $this->getCurrentRole($role);
-			if($current_role->is_sa){
+			if($this->role->is_sa){
 				//superadmin selalu punya akses ke segala halaman
 				return true;
 			}
 			else{
 				//cek permission si role ybs
-				$current_role_permissions = json_decode($current_role->priviledge_list, true);
+				$current_role_permissions = json_decode($this->role->priviledge_list, true);
 				if(!$current_role_permissions){
 					//jika gagal diparsing, anggap role ybs tidak punya akses 
 					return false;

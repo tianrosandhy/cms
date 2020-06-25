@@ -25,7 +25,12 @@ class Media
 		$instance = $this->getByJson($json);
 		if(isset($instance->id)){
 			$decode = json_decode($json, true);
-			$thumb = $decode['thumb'] ?? 'origin';
+			if(empty($grabbed_thumb)){
+				$thumb = $decode['thumb'] ?? 'origin';
+			}
+			else{
+				$thumb = $grabbed_thumb;
+			}
 
 			if($mode == 'url'){
 				return $instance->url($thumb);

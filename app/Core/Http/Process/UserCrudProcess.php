@@ -61,6 +61,10 @@ class UserCrudProcess extends BaseProcess
 				if($this->mode == 'update' && $field == 'password' && empty($value)){
 					continue;
 				}
+				if($field == 'password'){
+					$value = bcrypt($value);
+				}
+
 				$instance->{$field} = $value;
 			}
 			$instance->save();

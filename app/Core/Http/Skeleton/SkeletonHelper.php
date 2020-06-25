@@ -28,7 +28,7 @@ trait SkeletonHelper
 			])->render();
 		}
 		else{
-			return $row->field ? '<span class="badge badge-success" title="Active"><i data-feather="check"></i></span>' : '<span class="badge badge-danger" title="Not Active"><i data-feather="x"></i></span>';
+			return $row->{$field} ? '<span class="badge badge-success" title="Active"><i data-feather="check"></i></span>' : '<span class="badge badge-danger" title="Not Active"><i data-feather="x"></i></span>';
 		}
 	}
 

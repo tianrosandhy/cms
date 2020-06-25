@@ -10,6 +10,7 @@ class SidebarItem
 	private 
 		$name,
 		$url,
+		$route,
 		$label,
 		$icon,
 		$sort_no = 999,
@@ -65,7 +66,11 @@ class SidebarItem
 	}
 
 
-
+	public function setRoute($var){
+		$this->route = $var;
+		$this->url = route($var);
+		return $this;
+	}
 
 	public function url(){
 		if($this->url){

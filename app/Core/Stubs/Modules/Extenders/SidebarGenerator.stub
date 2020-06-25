@@ -9,9 +9,9 @@ class SidebarGenerator extends SidebarRegistration
 	public function handle(){
 		// generate sidebar for core menus
 		$this->registerSidebars([
-			SidebarItem::setName('admin.[LOWERCASE_MODULE_NAME]')
+			SidebarItem::setName('ADMIN.[MODULE_NAME]')
 				->setLabel('[PROPER_MODULE_NAME]')
-				->setUrl(route('admin.[LOWERCASE_MODULE_NAME].index'))
+				->setRoute('admin.[LOWERCASE_MODULE_NAME].index')
 				->setIcon('paperclip')
 				->setSortNo(5)
 				->setActiveKey('[LOWERCASE_MODULE_NAME]'),

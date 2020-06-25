@@ -93,8 +93,7 @@
 
 
 		<div class="save-buttons">
-			<button type="submit" name="save_only" value="1" class="btn btn-lg btn-success"><i class="fa fa-save"></i> Save</button>
-			<button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-save"></i> Save & Exit</button>
+			<button type="submit" class="btn btn-lg btn-primary"><i data-feather="save"></i> Save & Exit</button>
 		</div>
 
 	</form>

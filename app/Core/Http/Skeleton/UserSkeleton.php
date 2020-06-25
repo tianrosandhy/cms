@@ -5,6 +5,7 @@ use DataStructure;
 use App\Core\Http\Skeleton\BaseSkeleton;
 use App\Core\Models\User;
 use Media;
+use Permission;
 
 class UserSkeleton extends BaseSkeleton
 {
@@ -66,21 +67,28 @@ class UserSkeleton extends BaseSkeleton
 			'name' => $row->name,
 			'email' => $row->email,
 			'role_id' => $row->role->name ?? '<small class="text-danger">Unassigned</small>',
-			'image' => '<img src="'.Media::getSelectedImage($row->image).'" style="height:50px;">',
-			'is_active' => $this->switcherFormat($row, 'is_active'),
+			'image' => '<img src="'.Media::getSelectedImage($row->image, 'thumb').'" style="height:50px;">',
+			'is_active' => $this->switcherFormat($row, 'is_active', (Permission::has('admin.user.switch') ? 'toggle' : 'label')),
 			'action' => $this->actionButton($row)
 		];
 	}
 
 	protected function actionButton($row){
 		$out = '
-		<a href="'.route('admin.user.edit', ['id' => $row->id]).'" class="btn btn-info">Edit</a>';
+		<div class="btn-group">
+		';
+		if(Permission::has('admin.user.edit'))
+		$out .= '<a href="'.route('admin.user.edit', ['id' => $row->id]).'" class="btn btn-info">Edit</a>';
+
 		$is_sa = $row->role->is_sa ?? false;
 		if(!$is_sa){
-			$out .= '
-			<a href="'. route('admin.user.delete', ['id' => $row->id]) .'" class="btn btn-danger delete-button">Delete</a>
-			';
+			if(Permission::has('admin.user.delete')){
+				$out .= '
+				<a href="'. route('admin.user.delete', ['id' => $row->id]) .'" class="btn btn-danger delete-button">Delete</a>
+				';
+			}
 		}
+		$out .= '</div>';
 
 		return $out;
 	}

@@ -15,7 +15,10 @@ class PageCrudPresenter extends BaseViewPresenter
 			$this->title = __('page::module.add');
 		}
 		$this->data = $instance;
-		$this->view = 'page::crud';
+		$this->back_url = route('admin.page.index');
+		$this->view = 'core::master.crud';
+		#if you want to override this crud view, you can use below view instead
+		// $this->view = 'page::crud';
 		$this->skeleton = new PageSkeleton;
 		$this->config = config('module-setting.page');
 	}
