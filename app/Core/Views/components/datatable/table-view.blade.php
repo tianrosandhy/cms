@@ -17,9 +17,15 @@
 								]
 							]) !!}
 						@else
-							@if(is_array($row->getDataSource()))
+							<?php
+							$source = $row->getDataSource();
+							if(is_callable($source)){
+								$source = call_user_func($source);
+							}
+							?>
+							@if(is_array($source))
 							{!! Input::select('datatable_filter['.$rfield.']', [
-								'source' => $row->getDataSource(),
+								'source' => $source,
 								'attr' => [
 									'id' => 'datatable-filter-' . $rfield
 								]

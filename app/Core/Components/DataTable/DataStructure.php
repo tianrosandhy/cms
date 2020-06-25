@@ -3,6 +3,7 @@ namespace App\Core\Components\DataTable;
 
 use Str;
 use Input;
+use Closure;
 
 class DataStructure
 {
@@ -14,6 +15,10 @@ class DataStructure
 		$searchable,
 		$data_source,
 		$hide_form,
+		$show_on_create,
+		$show_on_update,
+		$crud_show_condition,
+		$table_show_condition,
 		$hide_table,
 		$hide_export,
 		$form_column,
@@ -27,10 +32,10 @@ class DataStructure
 		$value_source,
 		$array_source,
 		$value_data,
-		$imagedir_path,
 		$translate,
 		$view_source,
-		$tab_group;
+		$tab_group,
+		$view;
 
 	public function __construct(){
 		//manage default value
@@ -38,6 +43,10 @@ class DataStructure
 		$this->searchable = true;
 		$this->hide_form = false;
 		$this->hide_table = false;
+		$this->show_on_create = true;
+		$this->show_on_update = true;
+		$this->crud_show_condition = null;
+		$this->table_show_condition = null;
 		$this->hide_export = false;
 		$this->form_column = 12;
 		$this->data_source = 'text';
@@ -46,10 +55,10 @@ class DataStructure
 		$this->slug_target = false;
 		$this->value_source = false;
 		$this->array_source = null;
-		$this->imagedir_path = false;
 		$this->translate = true;
 		$this->tab_group = 'General';
 		$this->validation_translation = [];
+		$this->view = null;
 	}
 
 	// dynamic property set
@@ -240,12 +249,7 @@ class DataStructure
 	}
 
 	public function dataSource($data){
-		// if($data instanceof DataSource){
-		// 	$this->data_source = $data->output();
-		// }
-		// else{
-			$this->data_source = $data;
-		// }
+		$this->data_source = $data;
 		return $this;
 	}
 
@@ -381,11 +385,6 @@ class DataStructure
 		return $this;
 	}
 
-    public function setImageDirPath($path=''){
-        $this->imagedir_path = $path;
-        return $this;
-    }
-
     public function setTranslate($bool=false){
     	$this->translate = $bool;
     	return $this;
@@ -406,5 +405,30 @@ class DataStructure
     	return $this;
     }
 
+	public function showOnCreate(bool $bool){
+		$this->show_on_create = $bool;
+		return $this;
+	}
+
+	public function showOnUpdate(bool $bool){
+		$this->show_on_update = $bool;
+		return $this;
+	}
+
+	public function crudShowCondition(Closure $fn){
+		$this->crud_show_condition = $fn;
+		return $this;
+	}
+
+	public function tableShowCondition(Closure $fn){
+		$this->table_show_condition = $fn;
+		return $this;
+	}
+
+	public function view($custom_view){
+		$this->view = $custom_view;
+		$this->hide_table = true;
+		return $this;
+	}
 
 }

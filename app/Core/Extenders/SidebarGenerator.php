@@ -41,7 +41,7 @@ class SidebarGenerator extends SidebarRegistration
 				SidebarItem::setName('admin.user.index')
 					->setLabel('User Lists')
 					->setPrivilege('admin.user.index')
-					->setUrl('#')
+					->setUrl(route('admin.user.index'))
 					->setParent('admin.setting')
 					->setSortNo(1)
 					->setActiveKey('user'),

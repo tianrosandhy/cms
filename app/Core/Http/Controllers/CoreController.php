@@ -11,6 +11,7 @@ class CoreController extends BaseController
 	use Partials\Profile;
 	use Partials\Language;
 	use Partials\Privilege;
+	use Partials\UserManagement;
 
 	public function index(){
 		$p = (new BaseViewPresenter)

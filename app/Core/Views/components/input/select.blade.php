@@ -11,14 +11,12 @@ $cleaned_name = str_replace('[]', '', $name);
 $value = old($cleaned_name, isset($value) ? $value : null);
 $type = isset($type) ? $type : 'select';
 
+$data_source = [];
 if(is_array($source)){
   $data_source = $source;
 }
-else{
-  $data_source = isset($source->output) ? $source->output : $source;
-  if(is_callable($data_source)){
-    $data_source = call_user_func($data_source, $data);
-  }
+else if(is_callable($source)){
+  $data_source = call_user_func($source, $data);
 }
 
 if($type == 'select_multiple' && strpos($name, '[]') === false){

@@ -16,6 +16,15 @@ Route::post('privilege/delete/{id}', 'CoreController@privilegeDelete')->name('ad
 Route::get('privilege/manage-privilege/{id}', 'CoreController@privilegeManage')->name('admin.privilege.manage');
 Route::post('privilege/manage-privilege/{id}', 'CoreController@privilegeStoreManage')->name('admin.privilege.store-manage');
 
+
+Route::match(['get', 'post'], 'datatable/user', 'CoreController@userManagementDataTable')->name('admin.user.datatable');
+Route::get('user-management', 'CoreController@userManagement')->name('admin.user.index');
+Route::get('user-management/create', 'CoreController@userManagementCreate')->name('admin.user.create');
+Route::post('user-management/create', 'CoreController@userManagementStore')->name('admin.user.store');
+Route::get('user-management/edit/{id}', 'CoreController@userManagementEdit')->name('admin.user.edit');
+Route::post('user-management/edit/{id}', 'CoreController@userManagementUpdate')->name('admin.user.update');
+Route::post('user-management/delete/{id?}', 'CoreController@userManagementDelete')->name('admin.user.delete');
+
 Route::match(['get', 'post'], 'logout', 'CoreController@logout')->name('admin.logout');
 
 

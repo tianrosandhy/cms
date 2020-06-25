@@ -21,7 +21,7 @@ class Media
 		return (new MediaCacheManager)->getMediaCacheByJson($json);
 	}
 
-	public function getSelectedImage($json, $mode='url'){
+	public function getSelectedImage($json, $grabbed_thumb=null, $mode='url'){
 		$instance = $this->getByJson($json);
 		if(isset($instance->id)){
 			$decode = json_decode($json, true);
