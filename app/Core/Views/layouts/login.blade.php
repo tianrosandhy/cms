@@ -55,7 +55,7 @@
                                                         id="checkbox-signin" checked name="remember" value="1">
                                                     <label class="custom-control-label" for="checkbox-signin">Remember
                                                         me</label>
-                                                    <a href="#" class="float-right text-muted text-unline-dashed ml-1">Forgot your password?</a>
+                                                    <a href="#" class="float-right text-muted text-unline-dashed ml-1" data-toggle="modal" data-target="#forgot-password-modal">Forgot your password?</a>
                                                 </div>
                                             </div>
 
@@ -76,13 +76,6 @@
                         </div>
                         <!-- end card -->
 
-                        <div class="row mt-3">
-                            <div class="col-12 text-center">
-                                <p class="text-muted">Don't have an account? <a href="#" class="text-primary font-weight-bold ml-1">Sign Up</a></p>
-                            </div> <!-- end col -->
-                        </div>
-                        <!-- end row -->
-
                     </div> <!-- end col -->
                 </div>
                 <!-- end row -->
@@ -90,6 +83,31 @@
             <!-- end container -->
         </div>
         <!-- end page -->
+
+        <div class="modal fade" id="forgot-password-modal" tabindex="-1">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('admin.forgot-password') }}" method="post">
+                    {{ csrf_field() }}
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Forgot Password?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>If you forgot your password, please type your account email and we will send the password reset link to your email.</p>
+                        <input type="email" name="email" class="form-control" placeholder="your@email.com">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Reset Password</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>        
+
         @include ('core::layouts.partials.script')
     </body>
 </html>

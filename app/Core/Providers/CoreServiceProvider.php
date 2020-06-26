@@ -55,6 +55,18 @@ class CoreServiceProvider extends BaseServiceProvider{
 				require realpath(__DIR__."/../Routes/testing.php");
 			});
 		});
+		
+		$router->group([
+			'namespace' => $this->namespace, 
+			'middleware' => [
+				'backend_guest', 
+			]
+		], function($router){
+			$router->group(['prefix' => admin_prefix()], function(){
+				require realpath(__DIR__."/../Routes/public.php");
+			});
+		});
+		
 
 		$router->group([
 			'namespace' => $this->namespace, 

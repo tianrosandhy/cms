@@ -29,14 +29,3 @@ Route::post('user-management/edit/{id}', 'CoreController@userManagementUpdate')-
 Route::post('user-management/delete/{id?}', 'CoreController@userManagementDelete')->name('admin.user.delete');
 
 Route::match(['get', 'post'], 'logout', 'CoreController@logout')->name('admin.logout');
-
-
-
-// guest only route
-Route::group([
-	'middleware' => 'backend_guest'
-], function(){
-	Route::get('login', 'CoreController@login')->name('admin.login');
-	Route::post('login', 'CoreController@storeLogin')->name('admin.login.process');
-	Route::get('register', 'CoreController@register')->name('admin.register');
-});
