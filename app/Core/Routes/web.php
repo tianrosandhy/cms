@@ -28,4 +28,9 @@ Route::get('user-management/edit/{id}', 'CoreController@userManagementEdit')->na
 Route::post('user-management/edit/{id}', 'CoreController@userManagementUpdate')->name('admin.user.update');
 Route::post('user-management/delete/{id?}', 'CoreController@userManagementDelete')->name('admin.user.delete');
 
+Route::get('log', 'CoreController@log')->name('admin.log.index');
+Route::get('log/export', 'CoreController@logExport')->name('admin.log.export');
+Route::get('log-detail/{id}', 'CoreController@logDetail')->name('admin.log.detail');
+Route::get('log/mark-as-reported', 'CoreController@logMarkAsReported')->name('admin.log.mark-as-reported');
+
 Route::match(['get', 'post'], 'logout', 'CoreController@logout')->name('admin.logout');

@@ -45,6 +45,13 @@ class SidebarGenerator extends SidebarRegistration
 					->setParent('ADMIN.MANAGEMENT')
 					->setSortNo(1)
 					->setActiveKey('user'),
+
+				SidebarItem::setName('ADMIN.LOG')
+					->setLabel('Log Management')
+					->setPrivilege('admin.log.index')
+					->setRoute('admin.log.index')
+					->setParent('ADMIN.MANAGEMENT')
+					->setActiveKey('log')
 		]);
 	}
 

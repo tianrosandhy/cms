@@ -24,7 +24,7 @@ class SettingItem
 	}
 
 	public function setType($type='text', $config=[]){
-		$available_type = ['text', 'textarea', 'number', 'email', 'tel', 'select_static', 'select_data', 'color', 'yesno', 'image', 'file'];
+		$available_type = ['text', 'textarea', 'number', 'email', 'tel', 'select_static', 'select_data', 'color', 'yesno', 'image'];
 		$type = strtolower($type);
 		if(!in_array($type, $available_type)){
 			throw new SettingException('Undefined "'.$type.'" setting item type.');

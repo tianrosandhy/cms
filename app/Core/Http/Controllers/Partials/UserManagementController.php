@@ -7,7 +7,7 @@ use App\Core\Http\Skeleton\UserSkeleton;
 use App\Core\Models\User;
 use App\Core\Http\Process\UserCrudProcess;
 
-trait UserManagement
+trait UserManagementController
 {
 	public function userManagement(){
 		return (new UserPresenter)->render();

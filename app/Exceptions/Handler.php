@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use App\Core\Components\LogMaster;
 
 class Handler extends ExceptionHandler
 {
@@ -36,6 +37,8 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
+        $lm = new LogMaster($exception);
+        $lm->store();
         parent::report($exception);
     }
 

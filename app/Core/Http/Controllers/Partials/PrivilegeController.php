@@ -6,7 +6,7 @@ use App\Core\Components\RoleStructure;
 use App\Core\Models\Role;
 use Permission;
 
-trait Privilege
+trait PrivilegeController
 {
 	public function privilege(){
 		return (new PrivilegePresenter)->render();

@@ -1,8 +1,11 @@
 #### List of CMS Next Feature
-- Log
 - SEO
 - Artisan Runner
-- Mail template
+
+- Update Composer 
+    "maatwebsite/excel": "^3.1",
+    "niklasravnsborg/laravel-pdf": "^4.0",
+    "doctrine/dbal": "^2.10",
 
 - Modul Bawaan
 	- Page

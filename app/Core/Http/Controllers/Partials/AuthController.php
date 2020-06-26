@@ -8,7 +8,7 @@ use App\Core\Jobs\ResetPasswordJob;
 use App\Core\Http\Process\PasswordResetProcess;
 use DB;
 
-trait Auth
+trait AuthController
 {
 	public function login(){
 		$p = (new BaseViewPresenter)

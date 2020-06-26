@@ -23,6 +23,11 @@ return [
 			'admin.language.create',
 			'admin.language.set-as-default',
 			'admin.language.delete',
+		],
+		'Log' => [
+			'admin.log.index',
+			'admin.log.export',
+			'admin.log.detail'
 		]
 	]
 ];

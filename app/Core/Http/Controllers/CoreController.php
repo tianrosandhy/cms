@@ -7,11 +7,12 @@ use App\Core\Http\Process\SettingProcess;
 
 class CoreController extends BaseController
 {
-	use Partials\Auth;
-	use Partials\Profile;
-	use Partials\Language;
-	use Partials\Privilege;
-	use Partials\UserManagement;
+	use Partials\AuthController;
+	use Partials\ProfileController;
+	use Partials\LanguageController;
+	use Partials\PrivilegeController;
+	use Partials\UserManagementController;
+	use Partials\LogController;
 
 	public function index(){
 		$p = (new BaseViewPresenter)

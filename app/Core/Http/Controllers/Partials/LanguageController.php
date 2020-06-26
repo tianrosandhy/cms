@@ -5,7 +5,7 @@ use App\Core\Presenters\LanguagePresenter;
 use App\Core\Http\Process\LanguageDatatableProcess;
 use Language as Helper;
 
-trait Language
+trait LanguageController
 {
 	public function language(){
 		return (new LanguagePresenter)->render();

@@ -29,4 +29,11 @@ trait DynamicProperty
 		return $this;
 	}
 
+	public function with($array=[]){
+		foreach($array as $key => $value){
+			$this->{$key} = $value;
+		}
+		return $this;
+	}
+
 }

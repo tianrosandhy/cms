@@ -4,7 +4,7 @@ namespace App\Core\Http\Controllers\Partials;
 use App\Core\Presenters\BaseViewPresenter;
 use App\Core\Http\Process\ProfileProcess;
 
-trait Profile
+trait ProfileController
 {
 	public function myProfile(){
 		$p = (new BaseViewPresenter)
