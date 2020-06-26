@@ -115,3 +115,36 @@ label.required::after{
 	background:#25ba68;
 	color:#fff;
 }
+
+.pos-rel{
+	position:relative;
+}
+.language-toggle{
+	top:-50px;
+	right:0;
+	position:absolute;
+}
+.btn-white{
+	background:#fff;
+}
+
+.language-toggle .btn{
+	opacity:.5;
+	transition:.3s ease;
+	-moz-transition:.3s ease;
+	-o-transition:.3s ease;
+	-webkit-transition:.3s ease;
+	position:relative;
+}
+.language-toggle .active{
+	opacity:1;
+}
+.language-toggle .btn.default::after{
+	content : "*";
+	position:absolute;
+	color:#d00;
+	padding-left:.5em;
+	font-size:30px;
+	right:0;
+	top:-10px;
+}

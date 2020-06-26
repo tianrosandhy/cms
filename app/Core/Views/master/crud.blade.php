@@ -10,14 +10,18 @@
 		]
 	])
 
-	<form action="" method="post">
+	<form action="" method="post" class="pos-rel">
 		{{ csrf_field() }}
+		@if(isset($multi_language))
+			@include ('core::components.language-toggle')
+		@endif
+
 		<?php
 		$forms = $skeleton->output();
 		$tabs = array_unique(Arr::pluck($forms, 'tab_group'));
 		?>
 		@if(count($tabs) > 0)
-		<div class="card">
+		<div class="card mb-0">
 			@if(count($tabs) > 1 || isset($seo))
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				@foreach($tabs as $tabname)
@@ -68,8 +72,11 @@
 								}
 								?>
 								<div class="form-group custom-form-group {!! $row->getInputType() == 'radio' ? 'radio-box' : '' !!}" data-crud="{{ $row->getField() }}">
-									<label for="{{ $row->input_attribute['id'] }}" class="{{ strpos($validation_rule, 'required') !== false ? 'required' : '' }}">{{ $row->name }}</label>
-									{!! $row->createInput($data) !!}
+									<label for="{{ $row->input_attribute['id'] }}" class="{{ strpos($validation_rule, 'required') !== false ? 'required' : '' }}">
+										{{ $row->name }}
+										<span class="label-language-holder text-uppercase"></span>
+									</label>
+									{!! $row->createInput($data, ($multi_language ?? false)) !!}
 								</div>
 							@endif
 						</div>

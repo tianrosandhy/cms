@@ -8,6 +8,8 @@ use Permission;
 
 class PageSkeleton extends BaseSkeleton
 {
+	public $multi_language = true;
+
 	public function handle(){
 		$this->registers([
 			DataStructure::checker(),

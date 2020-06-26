@@ -3,12 +3,14 @@ namespace App\Core\Http\Skeleton;
 
 use App\Core\Components\DataTable\DataStructure;
 use Validator;
+use Language;
 
 class BaseSkeleton
 {
 	use SkeletonHelper;
 
 	public $structure = [];
+	public $multi_language = false;
 
 	public function __construct(){
 		$this->request = request();
@@ -18,16 +20,21 @@ class BaseSkeleton
 	}
 
 	public function generateValidation($mode='create'){
+		$prefix = '';
+		if($this->multi_language){
+			$prefix = '.' . Language::default();
+		}
+
 		$rule = [];
 		$trans = [];
 		$mode = strtolower($mode);
 		foreach($this->output() as $row){
 			if($row->getCreateValidation() && in_array($mode, ['store', 'insert', 'create'])){
-				$rule[$row->getField()] = $row->getCreateValidation();
+				$rule[$row->getField().$prefix] = $row->getCreateValidation();
 				$trans = array_merge($trans, $row->getValidationTranslation());
 			}
 			if($row->getUpdateValidation() && in_array($mode, ['update', 'edit'])){
-				$rule[$row->getField()] = $row->getUpdateValidation();
+				$rule[$row->getField().$prefix] = $row->getUpdateValidation();
 				$trans = array_merge($trans, $row->getValidationTranslation());
 			}
 		}

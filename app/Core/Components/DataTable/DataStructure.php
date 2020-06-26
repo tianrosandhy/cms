@@ -4,6 +4,7 @@ namespace App\Core\Components\DataTable;
 use Input;
 use Closure;
 use App\Core\Shared\DynamicProperty;
+use Language;
 
 class DataStructure
 {
@@ -84,7 +85,7 @@ class DataStructure
 		}
 
 		if($multi_language){
-			// return Input::multiLanguage()->type($this->input_type, $this->field, $config);
+			return Input::multiLanguage()->type($this->input_type, $this->field, $config);
 		}
 		else{
 			return Input::type($this->input_type, $this->field, $config);
@@ -95,7 +96,7 @@ class DataStructure
 		if($this->value_source){
 			$grab_ = \DB::table($this->value_source[0])->find($this->value_source[1]);
 			if($multi_language){
-				$value[def_lang()] = $grab_->{$this->value_source[2]};
+				$value[Language::default()] = $grab_->{$this->value_source[2]};
 			}
 			else{
 				$value = $grab_->{$this->value_source[2]};
@@ -106,9 +107,9 @@ class DataStructure
 		}
 		elseif($this->value_data){
 			if($multi_language){
-				// foreach(LanguageInstance::available(true) as $lang){
-				// 	$value[$lang['code']] = call_user_func($this->value_data, $data, $lang['code']);
-				// }
+				foreach(Language::available() as $lang => $langname){
+					$value[$lang] = call_user_func($this->value_data, $data, $lang);
+				}
 			}
 			else{
 				$value = call_user_func($this->value_data, $data);
@@ -116,9 +117,9 @@ class DataStructure
 		}
 		else{
 			if($multi_language){
-				// foreach(LanguageInstance::available(true) as $lang){
-				// 	$value[$lang['code']] = isset($data->{$this->field}) ? $data->outputTranslate($this->field, $lang['code'], true) : null;
-				// }
+				foreach(Language::available() as $lang => $langname){
+					$value[$lang] = isset($data->{$this->field}) ? $data->outputTranslate($this->field, $lang, true) : null;
+				}
 			}
 			else{
 				$value = isset($data->{$this->field}) ? $data->{$this->field} : null;
@@ -181,13 +182,13 @@ class DataStructure
 		$this->inputType('slug');
 		$this->slugTarget($target);
 
-		if(!LanguageInstance::active()){
+		if(!Language::active()){
 			$this->setTranslate(false);
 		}
 
 		$this->valueData(function($data, $lang=null){
 			if(empty($lang)){
-				$lang = def_lang();
+				$lang = Language::default();
 			}
 			if(isset($data->id)){
 				return \SlugInstance::get($data, $data->id, $lang);

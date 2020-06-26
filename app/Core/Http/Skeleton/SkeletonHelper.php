@@ -4,6 +4,7 @@ namespace App\Core\Http\Skeleton;
 use App\Core\Exceptions\SkeletonException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Language;
 
 trait SkeletonHelper
 {
@@ -64,20 +65,41 @@ trait SkeletonHelper
 	}
 
 	// generate auto CRUD prepared data by skeleton's data
-	public function autoCrud(){
+	public function autoCrud($lang=null){
 		$table_listing = $this->modelTableListing();
 		$table_name = $this->getTableName();
+
+		if(empty($lang)){
+			$lang = Language::default();
+		}
 
 		$post = [];
 		foreach($this->output() as $row){
 			if(!$row->getHideForm()){
 				if(in_array($row->getField(), $table_listing)){
-					$post[$row->getField()] = $this->request->{$row->getField()} ?? null;
+					$value_for_saved = $this->request->{$row->getField()} ?? null;
+					if($this->multi_language){
+						$fallback = $value_for_saved[Language::default()] ?? null;
+						$value_for_saved = $value_for_saved[$lang] ?? $fallback;
+					}
+
+					//we cannot save the array value to database
+					if(is_array($value_for_saved)){
+						$value_for_saved = null;
+					}
+					$post[$row->getField()] = $value_for_saved;
 				}
 			}
 		}
 		return $post;
+	}
 
+	public function autoCrudMultiLanguage(){
+		$out = [];
+		foreach(Language::available() as $lang => $langname){
+			$out[$lang] = $this->autoCrud($lang);
+		}
+		return $out;
 	}
 
 }

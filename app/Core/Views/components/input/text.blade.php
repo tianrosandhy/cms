@@ -22,17 +22,17 @@ if(!isset($multi_language)){
 }
 ?>
 @if($multi_language)
-  @foreach(LanguageInstance::available(true) as $lang)
+  @foreach(Language::available() as $lang => $langdata)
     <?php
     if(strpos($name, '[]') !== false){
-      $input_name = str_replace('[]', '['.$lang['code'].'][]', $name);
+      $input_name = str_replace('[]', '['.$lang.'][]', $name);
     }
     else{
-      $input_name = $name.'['.$lang['code'].']';
+      $input_name = $name.'['.$lang.']';
     }
     ?>
-    <div class="input-language" data-lang="{{ $lang['code'] }}" style="{!! def_lang() == $lang['code'] ? '' : 'display:none;' !!}">
-      <input type="{{ $type }}" name="{!! $input_name !!}" class="{!! implode(' ', $base_class) !!}" {!! isset($attr) ? array_to_html_prop($attr, ['class', 'type', 'name']) : null !!} value="{{ old($cleaned_name.'.'.$lang['code'], (isset($value[$lang['code']]) ? $value[$lang['code']] : null)) }}" id="input-{{ $cleaned_name }}-{{ $lang['code'] }}">
+    <div class="input-language" data-lang="{{ $lang }}" style="{!! Language::default() == $lang ? '' : 'display:none;' !!}">
+      <input type="{{ $type }}" name="{!! $input_name !!}" class="{!! implode(' ', $base_class) !!}" {!! isset($attr) ? array_to_html_prop($attr, ['class', 'type', 'name']) : null !!} value="{{ old($cleaned_name.'.'.$lang, (isset($value[$lang]) ? $value[$lang] : null)) }}" id="input-{{ $cleaned_name }}-{{ $lang }}">
     </div>
   @endforeach
 @else

@@ -5,6 +5,7 @@ use App\Core\Http\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
 use App\Modules\Page\Http\Skeleton\PageSkeleton;
 use Validator;
+use Language;
 
 class PageCrudProcess extends BaseProcess
 {
@@ -40,15 +41,49 @@ class PageCrudProcess extends BaseProcess
 
 	public function process(){
 		//your logic after validation success
-		$skeleton_inputs = $this->skeleton->autoCrud();
+		if($this->skeleton->multi_language){
+			$skeleton_inputs = $this->skeleton->autoCrudMultiLanguage();
+		}
+		else{
+			$skeleton_inputs = $this->skeleton->autoCrud();
+		}
+
 		if(!empty($skeleton_inputs)){
+			$inputs = $skeleton_inputs;
+			if($this->skeleton->multi_language){
+				$inputs = $skeleton_inputs[Language::default()] ?? $skeleton_inputs;
+			}
+
+
+			#DYNAMIC SINGLE MODE
 			//create new instance if not exists, but use selected instance if exists
 			$instance = $this->instance ?? $this->skeleton->model();
-			foreach($skeleton_inputs as $field => $value){
+			foreach($inputs as $field => $value){
 				$instance->{$field} = $value;
 			}
 			$instance->save();
+
+			#DYNAMIC MULTI LANGUAGE MODE
+			if(method_exists($instance, 'translatorInstance')){
+				#clear translate data setiap kali insert/update data
+				$instance->clearTranslate();
+				foreach(Language::available() as $lang => $langname){
+					$trans = $instance->translatorInstance();
+					$trans->lang = $lang;
+					$inputs = $skeleton_inputs[$lang] ?? [];
+					$added = 0;
+					foreach($inputs as $field => $value){
+						$trans->{$field} = $value;
+						$added++;
+					}
+					//kalau gaada field yg ditambah, gausa save data translate
+					if($added > 0){
+						$trans->save();
+					}
+				}
+			}
 		}
+
 		if($this->request->save_only){
 			$this->setSuccessRedirectTarget(route('admin.page.edit', ['id' => $instance->id]));
 		}
