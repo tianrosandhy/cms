@@ -8,8 +8,6 @@ use App\Modules\Page\Http\Skeleton\PageSkeleton;
 class PageCrudPresenter extends BaseViewPresenter
 {
 	public function __construct($instance=null){
-		$this->multi_language = true;
-
 		if(isset($instance->id)){
 			$this->title = __('page::module.edit');
 		}

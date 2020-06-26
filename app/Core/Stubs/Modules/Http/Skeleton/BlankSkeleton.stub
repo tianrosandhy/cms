@@ -8,6 +8,9 @@ use Permission;
 
 class [MODULE_NAME]Skeleton extends BaseSkeleton
 {
+	#ENABLE THIS PROPERTY IF YOU WANT TO USE MULTI LANGUAGE FEATURE
+	//public $multi_language = true;
+
 	public function handle(){
 		$this->registers([
 			DataStructure::checker(),

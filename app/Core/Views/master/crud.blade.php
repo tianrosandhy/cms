@@ -9,10 +9,9 @@
 			],
 		]
 	])
-
 	<form action="" method="post" class="pos-rel">
 		{{ csrf_field() }}
-		@if(isset($multi_language))
+		@if(isset($skeleton->multi_language))
 			@include ('core::components.language-toggle')
 		@endif
 
