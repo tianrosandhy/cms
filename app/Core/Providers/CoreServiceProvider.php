@@ -107,6 +107,7 @@ class CoreServiceProvider extends BaseServiceProvider{
 		    'DataTable' => \App\Core\Facades\DataTableComponentFacade::class,
 		    'Permission' => \App\Core\Facades\PermissionComponentFacade::class,
 		    'Language' => \App\Core\Facades\LanguageComponentFacade::class,
+		    'SlugMaster' => \App\Core\Facades\SlugMasterComponentFacade::class,
 		];
 
 		foreach($aliasData as $al => $src){

@@ -21,7 +21,8 @@ trait UserManagement
 	}
 
 	public function userManagementCreate(){
-		return (new UserCrudPresenter())->render();		
+		$user = new User;
+		return (new UserCrudPresenter($user))->render();
 	}
 
 	public function userManagementStore(){

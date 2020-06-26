@@ -23,7 +23,8 @@ class PageSkeleton extends BaseSkeleton
 			DataStructure::field('description')
 				->name('Description')
 				->hideTable()
-				->inputType('richtext'),
+				->inputType('richtext')
+				->tabGroup('Description'),
 			DataStructure::switcher('is_active', 'Is Active')
 		]);
 	}

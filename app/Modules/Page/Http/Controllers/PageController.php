@@ -17,7 +17,8 @@ class PageController extends BaseController
 	}
 
 	public function create(){
-		return (new \App\Modules\Page\Presenters\PageCrudPresenter())->render();
+		$instance = new Page;
+		return (new \App\Modules\Page\Presenters\PageCrudPresenter($instance))->render();
 	}
 
 	public function store(){

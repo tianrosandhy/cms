@@ -20,6 +20,23 @@
 		$forms = $skeleton->output();
 		$tabs = array_unique(Arr::pluck($forms, 'tab_group'));
 		?>
+
+		@if(method_exists($data, 'slugTarget'))
+		<div class="card card-body">
+			<span>Public URL</span>
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text">{{ url('/') }}/</span>
+				</div>
+				<input slug-master type="text" name="slug_master" class="form-control" placeholder="your-url-slug" readonly data-target="#input-{{ $data->slugTarget()  }}" value="{{ $data->getCurrentSlug() }}" {{ $data->hasSavedSlug() ? 'saved-slug' : '' }}>
+				<div class="input-group-append">
+					<button type="button" class="btn btn-secondary btn-change-slug">Change Manually</button>
+				</div>
+			</div>
+		</div>
+		@endif
+
+
 		@if(count($tabs) > 0)
 		<div class="card mb-0">
 			@if(count($tabs) > 1 || isset($seo))

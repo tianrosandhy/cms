@@ -10,7 +10,7 @@ class PageCrudPresenter extends BaseViewPresenter
 	public function __construct($instance=null){
 		$this->multi_language = true;
 
-		if($instance){
+		if(isset($instance->id)){
 			$this->title = __('page::module.edit');
 		}
 		else{

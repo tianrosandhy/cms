@@ -148,3 +148,7 @@ label.required::after{
 	right:0;
 	top:-10px;
 }
+
+input:read-only{
+	background:#f6f6f7!important;
+}

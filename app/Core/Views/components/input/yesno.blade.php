@@ -16,5 +16,5 @@ $value = old($name, isset($value) ? (bool)$value : false);
 ?>
 <div style="padding:.5em">
 	<input type="hidden" name="{{ $name }}" id="yesno_{{ $hash }}" value="{{ $value ? 1 : 0 }}">
-	<input type="checkbox" yesno data-target="#yesno_{{ $hash }}" data-size="small" class="js-switch" value="1" {{ $value == 1 ? 'checked' : '' }} {!! isset($attr) ? array_to_html_prop($attr, ['class', 'type', 'name']) : null !!}>	
+	<input type="checkbox" yesno data-target="#yesno_{{ $hash }}" data-size="small" class="js-switch" value="1" {{ $value == 1 ? 'checked' : '' }} {!! isset($attr) ? array_to_html_prop($attr, ['class', 'type', 'name', 'id']) : null !!}>	
 </div>

@@ -16,6 +16,7 @@ var BASE_URL = '{{ admin_url('/') }}';
 var SITE_URL = '{{ url('/') }}';
 var STORAGE_URL = '{{ Storage::url('/') }}';
 var CSRF_TOKEN = '{{ csrf_token() }}';
+var DEFAULT_LANGUAGE = '{{ Language::default() }}';
 </script>
 @include ('core::layouts.include.error-management')
 {!! Media::assets() !!}

@@ -15,7 +15,7 @@ $(function(){
   });
 
 
-
+  // yesno auto switcher
   $(document).on('change', '[yesno][data-table-switch]', function(e){
     instance = $(this);
     $.ajax({
@@ -41,6 +41,7 @@ $(function(){
     });
   });
 
+  // prompt on delete button click
   $(document).on("click", ".delete-button", function(e){
     e.preventDefault();
     delete_url = $(this).attr('href');
@@ -54,6 +55,50 @@ $(function(){
     }
   });
 
+
+  // slug master if exists
+  if($("[slug-master]:not([saved-slug])").length){
+    slug_target = $("[slug-master]").attr('data-target');
+    if($(slug_target).length == 0){
+      slug_target = slug_target + '-' + window.DEFAULT_LANGUAGE;
+    }
+    if($(slug_target).length){
+      //give change event to this input
+      first_load_slug = convertToSlug($(slug_target).val());
+      $("[slug-master]").val(first_load_slug);
+
+      $(slug_target).on('change', function(){
+        slug_val = convertToSlug($(this).val());
+        $("[slug-master]:not([saved-slug])").val(slug_val);
+      });
+    }
+  }
+
+  $(document).on('click', ".btn-change-slug", function(){
+    $(this).addClass('btn-success');
+    $(this).html('Set as Slug');
+    $(this).removeClass('btn-secondary btn-change-slug');
+    $(this).addClass('btn-save-slug');
+    $("[slug-master]").addClass('manual').removeAttr('readonly').focus();
+  });
+
+  $(document).on('change', "[slug-master].manual", function(){
+    $(this).attr('saved-slug', '1');
+  });
+
+  $("[slug-master]").on('keypress', function(e){
+    if(e.which == 13){
+      e.preventDefault();
+      console.log('prevented');
+      $(".btn-save-slug").click();
+    }
+  });
+
+  $(document).on('click', '.btn-save-slug', function(){
+    $("[slug-master]").attr('readonly', 'readonly').removeClass('manual');
+    $(this).html('Change Manually');
+    $(this).removeClass('btn-success btn-save-slug').addClass('btn-change-slug btn-secondary');
+  });
 
 });
 
@@ -417,3 +462,12 @@ function error_handling(resp){
   hideLoading();
 }
 
+
+function convertToSlug(Text)
+{
+  return Text
+    .toLowerCase()
+    .replace(/[^\w ]+/g,'')
+    .replace(/ +/g,'-')
+    ;
+}
