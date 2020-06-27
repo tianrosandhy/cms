@@ -3,10 +3,10 @@ namespace [NAMESPACE]\Http\Process;
 
 use App\Core\Http\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
-use [NAMESPACE]\Http\Skeleton\[NAMESPACE]Skeleton;
+use [NAMESPACE]\Http\Skeleton\[MODULE_NAME]Skeleton;
 use Validator;
 
-class [NAMESPACE]DeleteProcess extends BaseProcess
+class [MODULE_NAME]DeleteProcess extends BaseProcess
 {
 	public function config(){
 		return [

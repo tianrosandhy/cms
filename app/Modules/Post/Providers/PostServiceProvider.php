@@ -49,6 +49,7 @@ class PostServiceProvider extends BaseServiceProvider{
 		//automatically load alias
 		$aliasData = [
 		    'PostInstance' => \App\Modules\Post\Facades\PostFacade::class,
+		    'PostCategoryInstance' => \App\Modules\Post\Facades\PostCategoryFacade::class,
 		];
 
 		foreach($aliasData as $al => $src){

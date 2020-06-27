@@ -10,11 +10,24 @@ class SidebarGenerator extends SidebarRegistration
 		// generate sidebar for core menus
 		$this->registerSidebars([
 			SidebarItem::setName('ADMIN.POST')
-				->setLabel('Post')
-				->setRoute('admin.post.index')
+				->setLabel('Posts')
 				->setIcon('paperclip')
 				->setSortNo(5)
-				->setActiveKey('post'),
+				->setActiveKey(['post', 'post_category']),
+
+			SidebarItem::setName('ADMIN.POST.INDEX')
+				->setLabel('Post')
+				->setRoute('admin.post.index')
+				->setSortNo(1)
+				->setActiveKey('post')
+				->setParent('ADMIN.POST'),
+			SidebarItem::setName('ADMIN.POST_CATEGORY.INDEX')
+				->setLabel('Post Category')
+				->setRoute('admin.post_category.index')
+				->setSortNo(1)
+				->setActiveKey('post_category')
+				->setParent('ADMIN.POST'),
+
 		]);
 	}
 }

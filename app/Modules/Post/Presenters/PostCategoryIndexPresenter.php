@@ -3,39 +3,39 @@ namespace App\Modules\Post\Presenters;
 
 use App\Core\Presenters\BaseViewPresenter;
 use DataTable;
-use App\Modules\Post\Http\Skeleton\PostSkeleton;
+use App\Modules\Post\Http\Skeleton\PostCategorySkeleton;
 use Permission;
 
-class PostIndexPresenter extends BaseViewPresenter
+class PostCategoryIndexPresenter extends BaseViewPresenter
 {
 	public function __construct(){
-		$this->title = __('post::module.post.index');
+		$this->title = __('post::module.post_category.index');
 		$this->view = 'core::master.index';
 		#if you want to override this index view, you can use below view instead
-		//$this->view = 'post::index';
+		//$this->view = 'post_category::index';
 
-		$this->batch_delete_url = route('admin.post.delete');
-		$this->skeleton = new PostSkeleton;
+		$this->batch_delete_url = route('admin.post_category.delete');
+		$this->skeleton = new PostCategorySkeleton;
 		$this->datatable = DataTable::setSkeleton($this->skeleton);
 		$this->control_buttons = [];
-		if(!config('module-setting.post.hide_back_to_homepage_button')){
+		if(!config('module-setting.post_category.hide_back_to_homepage_button')){
 			$this->control_buttons[] = [
 				'url' => admin_url('/'),
 				'label' => 'Back to Homepage',
 				'icon' => 'home'
 			];
 		}
-		if(!config('module-setting.post.hide_add_button')){
-			if(Permission::has('admin.post.create')){
+		if(!config('module-setting.post_category.hide_add_button')){
+			if(Permission::has('admin.post_category.create')){
 				$this->control_buttons[] = [
-					'url' => route('admin.post.create'),
+					'url' => route('admin.post_category.create'),
 					'label' => 'Add Data',
 					'type' => 'success',
 					'icon' => 'plus'
 				];
 			}
 		}
-		if(!config('module-setting.post.hide_filter')){
+		if(!config('module-setting.post_category.hide_filter')){
 			$this->control_buttons[] = [
 				'label' => 'Filter',
 				'icon' => 'filter',
@@ -49,6 +49,6 @@ class PostIndexPresenter extends BaseViewPresenter
 	}
 
 	public function setSelectedMenuName(){
-		return 'post';
+		return 'post_category';
 	}
 }
