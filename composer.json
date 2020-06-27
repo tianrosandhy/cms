@@ -1,10 +1,11 @@
 {
-    "name": "laravel/laravel",
+    "name": "tianrosandhy/cms",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Admin generator based on Laravel.",
     "keywords": [
         "framework",
-        "laravel"
+        "laravel",
+        "autocrud"
     ],
     "license": "MIT",
     "require": {
