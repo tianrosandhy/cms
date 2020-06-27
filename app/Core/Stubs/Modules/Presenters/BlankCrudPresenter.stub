@@ -8,7 +8,7 @@ use [NAMESPACE]\Http\Skeleton\[MODULE_NAME]Skeleton;
 class [MODULE_NAME]CrudPresenter extends BaseViewPresenter
 {
 	public function __construct($instance=null){
-		if($instance){
+		if(isset($instance->id)){
 			$this->title = __('[LOWERCASE_MODULE_NAME]::module.edit');
 		}
 		else{

@@ -22,7 +22,8 @@ class [MODULE_NAME]Controller extends BaseController
 	}
 
 	public function create(){
-		return (new [MODULE_NAME]CrudPresenter())->render();
+		$data = new [MODULE_NAME];
+		return (new [MODULE_NAME]CrudPresenter($data))->render();
 	}
 
 	public function store(){

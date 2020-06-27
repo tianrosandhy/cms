@@ -3,41 +3,21 @@
 	@include ('core::components.header-box', [
 		'control_buttons' => [
 			[
-				'url' => $back_url ?? admin_url('/'),
+				'url' => route('admin.page.index'),
 				'label' => 'Back',
 				'icon' => 'arrow-left'
 			],
 		]
 	])
-	<form action="" method="post" class="pos-rel">
-		{{ csrf_field() }}
-		@if(isset($skeleton->multi_language))
-			@include ('core::components.language-toggle')
-		@endif
 
+	<form action="" method="post">
+		{{ csrf_field() }}
 		<?php
 		$forms = $skeleton->output();
 		$tabs = array_unique(Arr::pluck($forms, 'tab_group'));
 		?>
-
-		@if(method_exists($data, 'slugTarget'))
-		<div class="card card-body">
-			<span>Public URL</span>
-			<div class="input-group">
-				<div class="input-group-prepend">
-					<span class="input-group-text">{{ url('/') }}/</span>
-				</div>
-				<input slug-master type="text" name="slug_master" class="form-control" placeholder="your-url-slug" readonly data-target="#input-{{ $data->slugTarget()  }}" value="{{ $data->getCurrentSlug() }}" {{ $data->hasSavedSlug() ? 'saved-slug' : '' }}>
-				<div class="input-group-append">
-					<button type="button" class="btn btn-secondary btn-change-slug">Change Manually</button>
-				</div>
-			</div>
-		</div>
-		@endif
-
-
 		@if(count($tabs) > 0)
-		<div class="card mb-0">
+		<div class="card">
 			@if(count($tabs) > 1 || isset($seo))
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				@foreach($tabs as $tabname)
@@ -70,31 +50,19 @@
 							$width = 0;
 							echo '</div><div class="row">'; //bikin baris baru
 						}
+
+						if(isset($data->id)){
+							$validation_rule = $row->getUpdateValidation();
+						}
+						else{
+							$validation_rule = $row->getCreateValidation();
+						}
 						?>
 						<div class="col-md-{{ $row->getFormColumn() }} col-sm-12">
-							@if($row->getView())
-								@if(view()->exists($row->getView()))
-									@include ($row->getView())
-								@else
-									{!! $row->getView() !!}
-								@endif
-							@else
-								<?php
-								if(isset($data->id)){
-									$validation_rule = $row->getUpdateValidation();
-								}
-								else{
-									$validation_rule = $row->getCreateValidation();
-								}
-								?>
-								<div class="form-group custom-form-group {!! $row->getInputType() == 'radio' ? 'radio-box' : '' !!}" data-crud="{{ $row->getField() }}">
-									<label for="{{ $row->input_attribute['id'] }}" class="{{ strpos($validation_rule, 'required') !== false ? 'required' : '' }}">
-										{{ $row->name }}
-										<span class="label-language-holder text-uppercase"></span>
-									</label>
-									{!! $row->createInput($data, ($skeleton->multi_language ?? false)) !!}
-								</div>
-							@endif
+							<div class="form-group custom-form-group {!! $row->getInputType() == 'radio' ? 'radio-box' : '' !!}">
+								<label for="{{ $row->input_attribute['id'] }}" class="{{ strpos($validation_rule, 'required') !== false ? 'required' : '' }}">{{ $row->name }}</label>
+								{!! $row->createInput($data) !!}
+							</div>
 						</div>
 						<?php
 						if($width == 12){
@@ -116,7 +84,8 @@
 
 
 		<div class="save-buttons">
-			<button type="submit" class="btn btn-lg btn-primary"><i data-feather="save"></i> Save & Exit</button>
+			<button type="submit" name="save_only" value="1" class="btn btn-lg btn-success"><i class="fa fa-save"></i> Save</button>
+			<button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-save"></i> Save & Exit</button>
 		</div>
 
 	</form>
