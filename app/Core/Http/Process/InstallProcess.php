@@ -56,7 +56,22 @@ class InstallProcess extends BaseProcess
 	}
 
 	public function installAction(){
+        $this->createUser($this->request->email, $this->request->name, $this->request->password);
+        Artisan::call('autocrud:role');
         $this->createInstallHint();
 	}
+
+    protected function createUser($email, $username, $password){
+        DB::table('users')->insert([
+            'name' => $username,
+            'email' => $email,
+            'password' => bcrypt($password),
+            'role_id' => 1, //default
+            'image' => '',
+            'activation_key' => null,
+            'is_active' => 1,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+    }
 
 }
