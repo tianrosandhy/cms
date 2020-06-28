@@ -1,7 +1,7 @@
 {
-    "name": "tianrosandhy/cms",
+    "name": "tianrosandhy/autocrud-laravel",
     "type": "project",
-    "description": "Admin generator based on Laravel.",
+    "description": "Admin generator auto CRUD based on Laravel.",
     "keywords": [
         "framework",
         "laravel",
