@@ -8,8 +8,7 @@ use Permission;
 
 class [MODULE_NAME]Skeleton extends BaseSkeleton
 {
-	#ENABLE THIS PROPERTY IF YOU WANT TO USE MULTI LANGUAGE FEATURE
-	//public $multi_language = true;
+	public $multi_language = true;
 
 	public function handle(){
 		$this->registers([
@@ -25,6 +24,12 @@ class [MODULE_NAME]Skeleton extends BaseSkeleton
 				->name('Description')
 				->hideTable()
 				->inputType('richtext'),
+			DataStructure::field('image')
+				->name('Image')
+				->inputType('image')
+				->searchable(false)
+				->orderable(false)
+				->tabGroup('Details'),
 			DataStructure::switcher('is_active', 'Is Active')
 		]);
 	}
@@ -41,7 +46,7 @@ class [MODULE_NAME]Skeleton extends BaseSkeleton
 		return [
 			'id' => $this->checkerFormat($row),
 			'title' => $row->title,
-			'description' => $row->description,
+			'image' => '<img src="'.$row->getImageUrl('image', 'thumb').'" style="height:50px;">',
 			'is_active' => $this->switcherFormat($row, 'is_active', (Permission::has('admin.[LOWERCASE_MODULE_NAME].switch') ? 'toggle' : 'label')),
 			'action' => $this->actionButton($row)
 		];
