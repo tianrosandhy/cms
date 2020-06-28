@@ -6,6 +6,7 @@ use App\Core\Exceptions\ProcessException;
 use App\Core\Http\Traits\InstallerTrait;
 use Validator;
 use Artisan;
+use DB;
 
 class InstallProcess extends BaseProcess
 {
