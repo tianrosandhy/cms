@@ -29,7 +29,8 @@ function generateAdminRoute($url_name, $controller, $route_name=null){
   $bs_url = $url_name;
   $bs_route = strlen($route_name) > 0 ? $route_name : $url_name;
   $bs_controller = $controller;
-  include (base_path('core/Main/Routes/base_route.php'));
+  
+  include (base_path('app/Core/Routes/autocrud.php'));
 }
 
 function setting($hint, $default=''){

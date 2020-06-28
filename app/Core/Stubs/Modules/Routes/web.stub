@@ -1,15 +1,2 @@
 <?php
-Route::group([
-	'prefix' => '[LOWERCASE_MODULE_NAME]'
-], function(){
-	Route::get('/', '[MODULE_NAME]Controller@index')->name('admin.[LOWERCASE_MODULE_NAME].index');
-	Route::get('create', '[MODULE_NAME]Controller@create')->name('admin.[LOWERCASE_MODULE_NAME].create');
-	Route::get('edit/{id}', '[MODULE_NAME]Controller@edit')->name('admin.[LOWERCASE_MODULE_NAME].edit');
-	Route::post('create', '[MODULE_NAME]Controller@store')->name('admin.[LOWERCASE_MODULE_NAME].store');
-	Route::post('edit/{id}', '[MODULE_NAME]Controller@update')->name('admin.[LOWERCASE_MODULE_NAME].update');
-	Route::post('switch/{id}', '[MODULE_NAME]Controller@switch')->name('admin.[LOWERCASE_MODULE_NAME].switch');
-	Route::post('delete/{id?}', '[MODULE_NAME]Controller@delete')->name('admin.[LOWERCASE_MODULE_NAME].delete');
-
-	// ajax route
-	Route::match(['get', 'post'], 'datatable/[LOWERCASE_MODULE_NAME]', '[MODULE_NAME]Controller@dataTable')->name('admin.[LOWERCASE_MODULE_NAME].datatable');
-});
+generateAdminRoute('[LOWERCASE_MODULE_NAME]', '[MODULE_NAME]Controller');
