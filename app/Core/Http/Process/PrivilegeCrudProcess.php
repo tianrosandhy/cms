@@ -50,9 +50,15 @@ class PrivilegeCrudProcess extends BaseProcess
 			$this->instance = new Role;
 		}
 
+		$role_owner = $this->request->role_owner;
+		if(!$this->request->get('is_sa') && !$this->request->role_owner && $this->instance->id <> $this->request->get('user')->id){
+			//in case yg insert privilege bukan admin, set role_owner ke dirinya sendiri
+			$role_owner = $this->request->get('user')->id;
+		}
+
 		$this->instance->name = $this->request->name;
 		if(!$this->instance->is_sa){
-			$this->instance->role_owner = $this->request->role_owner;
+			$this->instance->role_owner = $role_owner;
 		}
 		$this->instance->save();
 	}

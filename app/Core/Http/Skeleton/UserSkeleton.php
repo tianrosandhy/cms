@@ -37,11 +37,8 @@ class UserSkeleton extends BaseSkeleton
 				->inputType('select')
 				->createValidation('required', true)
 				->dataSource(function(){
-					$out = [];
-					foreach(app('role') as $role){
-						$out[$role->id] = $role->name;
-					}
-					return $out;
+					$lists = new \App\Core\Components\RoleStructure;
+					return $lists->dropdown_list;
 				}),
 			DataStructure::field('image')
 				->name('Image')
