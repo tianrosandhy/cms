@@ -19,6 +19,10 @@ class BaseSkeleton
 		}
 	}
 
+	public function customFilter($context){
+		return $context;
+	}	
+
 	public function generateValidation($mode='create'){
 		$prefix = '';
 		if($this->multi_language){

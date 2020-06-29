@@ -38,6 +38,10 @@ class [MODULE_NAME]Skeleton extends BaseSkeleton
 		return route('admin.[LOWERCASE_MODULE_NAME].datatable');
 	}
 
+	//public function customFilter($context){
+	//	return $context;
+	//}
+
 	public function model(){
 		return new [MODULE_NAME];
 	}

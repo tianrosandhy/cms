@@ -83,7 +83,6 @@ trait DataTableProcessor
 	public function getDataByRequest(){
 		try{
 			$data = $this->skeleton->model();
-			$this->recordsTotal = $data->count();
 		}catch(\Exception $e){
 			throw new DataTableException('Failed to get data from table. Make sure you have already migrate the module');
 		}
@@ -94,7 +93,13 @@ trait DataTableProcessor
 				$data = $data->where($column, $value);
 			}
 		}
+
+		if(method_exists($this->skeleton, 'customFilter')){
+			$data = $this->skeleton->customFilter($data);
+		}
+
 		$this->recordsFiltered = $data->count();
+		$this->recordsTotal = $data->count();
 		$this->raw_data = $data->get();
 	}
 

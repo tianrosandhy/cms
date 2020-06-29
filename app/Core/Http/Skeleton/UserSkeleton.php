@@ -53,6 +53,11 @@ class UserSkeleton extends BaseSkeleton
 		]);
 	}
 
+	public function customFilter($context){
+		$roles = new \App\Core\Components\RoleStructure;
+		return $context->whereIn('id', $roles->array_only);
+	}
+
 	public function dataTableRoute(){
 		return route('admin.user.datatable');
 	}
