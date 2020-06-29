@@ -4,8 +4,8 @@
 - Artisan Runner
 
 - Modul Bawaan
-	- Page
-	- Posts
+	- Page OK
+	- Posts OK
 	- Navigations
 - Theme
 - Dashboard connect to Google Analytic API

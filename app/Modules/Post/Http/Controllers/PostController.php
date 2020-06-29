@@ -46,7 +46,7 @@ class PostController extends BaseController
 	
 	public function delete($id=null){
 		return (new PostDeleteProcess)
-			->setModel(new Page)
+			->setModel(new Post)
 			->setId($id)
 			->type('ajax')
 			->handle();

@@ -46,7 +46,7 @@ class [MODULE_NAME]Controller extends BaseController
 	
 	public function delete($id=null){
 		return (new [MODULE_NAME]DeleteProcess)
-			->setModel(new PageCategory)
+			->setModel(new [MODULE_NAME])
 			->setId($id)
 			->type('ajax')
 			->handle();
