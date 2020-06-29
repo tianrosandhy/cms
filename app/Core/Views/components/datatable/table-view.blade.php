@@ -13,7 +13,7 @@
 						@if($row->getDataSource() == 'text')
 							{!! Input::text('datatable_filter['.$rfield.']', [
 								'attr' => [
-									'id' => 'datatable-filter-' . $rfield
+									'data-id' => 'datatable-filter-' . $rfield
 								]
 							]) !!}
 						@else
@@ -21,13 +21,16 @@
 							$source = $row->getDataSource();
 							if(is_callable($source)){
 								$source = call_user_func($source);
+								if($source instanceof \Illuminate\Support\Collection){
+									$source = collect()->unwrap($source);
+								}
 							}
 							?>
 							@if(is_array($source))
 							{!! Input::select('datatable_filter['.$rfield.']', [
 								'source' => $source,
 								'attr' => [
-									'id' => 'datatable-filter-' . $rfield
+									'data-id' => 'datatable-filter-' . $rfield
 								]
 							]) !!}
 							@endif
@@ -51,7 +54,7 @@
 
 	</div>
 </div>
-<div class="card card-body">
+<div class="card card-body" style="overflow-x:scroll;">
 	<table class="table datatable" data-skeleton="{{ $skeleton->name() }}">
 		<thead>
 			<tr>

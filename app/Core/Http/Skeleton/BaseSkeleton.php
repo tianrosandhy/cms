@@ -83,7 +83,7 @@ class BaseSkeleton
 		foreach($this->output() as $row){
 			if(!$row->getHideTable()){
 				$fld = str_replace('[]', '', $row->getField());
-				$out .= 'data.columns['.$i.']["search"]["value"] = $("#datatable-filter-'.$fld.'").val(), ';
+				$out .= 'data.columns['.$i.']["search"]["value"] = $("[data-id=\'datatable-filter-'.$fld.'\']").val(), ';
 				$i++;
 			}
 		}
