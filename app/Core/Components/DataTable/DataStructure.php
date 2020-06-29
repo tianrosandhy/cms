@@ -298,7 +298,7 @@ class DataStructure
 			'daterange',
 			'view',
 			'color',
-			'gutenberg',
+			'currency',
 		];
 
 		if(!in_array($type, $lists)){

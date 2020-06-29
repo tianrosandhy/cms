@@ -148,7 +148,19 @@ function initPlugins(){
   loadDatepicker();
   loadSelect2();
   loadFile();
+  loadMask();
   refreshIcon();
+}
+
+function loadMask(){
+  $(".input-currency").each(function(){
+    str_decimal = '';
+    decimal = parseInt($(this).attr('data-decimal'));
+    if(decimal > 0){
+      str_decimal += ',' + '0'.repeat(decimal);
+    }
+    $(this).mask('#.##0' + str_decimal, {reverse: true});  
+  });
 }
 
 function loadFile(){

@@ -8,6 +8,7 @@
 <script src="{{ admin_asset('libs/flatpickr/flatpickr.min.js') }}"></script>
 <script src="{{ admin_asset('libs/tinymce/tinymce.min.js') }}"></script>
 <script src="{{ admin_asset('libs/tinymce/jquery.tinymce.min.js') }}"></script>
+<script src="{{ admin_asset('libs/jquery-mask/jquery.mask.min.js') }}"></script>
 <script src="{{ admin_asset('libs/dropzone/dropzone.min.js') }}"></script>
 <script src="{{ admin_asset('js/dropzone-input.js') }}"></script>
 <script src="{{ admin_asset('js/additional.js') }}"></script>

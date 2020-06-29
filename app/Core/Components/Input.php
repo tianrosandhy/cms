@@ -61,6 +61,10 @@ class Input
 		$config['type'] = 'number';
 		return $this->loadView('number', $name, $config);
 	}
+	public function currency($name, $config=[]){
+		$config['type'] = 'text';
+		return $this->loadView('currency', $name, $config);
+	}
 	public function email($name, $config=[]){
 		$config['type'] = 'email';
 		return $this->loadView('text', $name, $config);
