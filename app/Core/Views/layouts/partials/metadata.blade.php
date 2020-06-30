@@ -17,6 +17,6 @@
 <link href="{{ admin_asset('css/app.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ admin_asset('libs/switchery/css/switchery.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ admin_asset('css/additional.css') }}" rel="stylesheet" type="text/css" />
-<script src="{{ admin_asset('js/vendor.min.js') }}"></script>
+<script src="{{ admin_asset('js/vendor.js') }}"></script>
 
 @stack ('style')

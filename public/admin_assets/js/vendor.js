@@ -18086,16 +18086,29 @@ return jQuery;
 
 })(jQuery);
 
+
+
+
+
+
+
+
+
 /*!
-* metismenujs - v1.1.0
+* metismenujs - v1.2.0
 * MetisMenu with Vanilla-JS
 * https://github.com/onokumus/metismenujs#readme
 *
 * Made by Osman Nuri Okumus <onokumus@gmail.com> (https://github.com/onokumus)
 * Under MIT License
 */
-!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t=t||self).MetisMenu=e()}(this,function(){"use strict";
-/*! *****************************************************************************
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (global = global || self, global.MetisMenu = factory());
+}(this, (function () { 'use strict';
+
+    /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
     Licensed under the Apache License, Version 2.0 (the "License"); you may not use
     this file except in compliance with the License. You may obtain a copy of the
@@ -18108,8 +18121,253 @@ return jQuery;
 
     See the Apache Version 2.0 License for specific language governing permissions
     and limitations under the License.
-    ***************************************************************************** */var i=function(){return(i=Object.assign||function(t){for(var e,i=1,s=arguments.length;i<s;i++)for(var n in e=arguments[i])Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t}).apply(this,arguments)},s={parentTrigger:"li",subMenu:"ul",toggle:!0,triggerElement:"a"},h="mm-active",c="mm-collapse",d="mm-collapsed",u="mm-collapsing",l="metismenu",f="mm-show";function t(t,e){this.element="string"==typeof t?document.querySelector(t):t,this.cacheEl=this.element,this.config=i({},s,e),this.cacheConfig=this.config,this.disposed=!1,this.ulArr=[],this.listenerOb=[],this.init()}return t.prototype.update=function(){this.disposed=!1,this.element=this.cacheEl,this.config=this.cacheConfig,this.init()},t.prototype.dispose=function(){for(var t=0,e=this.listenerOb;t<e.length;t++){var i=e[t];for(var s in i)if(i.hasOwnProperty(s)){var n=i[s];n[1].removeEventListener(n[0],n[2])}}this.ulArr=[],this.listenerOb=[],this.config=null,this.element=null,this.disposed=!0},t.prototype.on=function(t,e){return this.element.addEventListener(t,e,!1),this},t.prototype.off=function(t,e){return this.element.removeEventListener(t,e),this},t.prototype.emit=function(t,e,i){var s;return void 0===i&&(i=!1),"function"==typeof CustomEvent?s=new CustomEvent(t,{bubbles:i,detail:e}):(s=document.createEvent("CustomEvent")).initCustomEvent(t,i,!1,e),this.element.dispatchEvent(s),this},t.prototype.init=function(){this.element.classList.add(l),this.ulArr=[].slice.call(this.element.querySelectorAll(this.config.subMenu));for(var t=0,e=this.ulArr;t<e.length;t++){var i=e[t],s=i.parentNode;i.classList.add(c),s.classList.contains(h)?this.show(i):this.hide(i);var n=s.querySelector(this.config.triggerElement);if("true"===n.getAttribute("aria-disabled"))return;n.setAttribute("aria-expanded","false");var r={aClick:["click",n,this.clickEvent.bind(this)]};for(var o in r)if(r.hasOwnProperty(o)){var a=r[o];a[1].addEventListener(a[0],a[2])}this.listenerOb.push(r)}},t.prototype.clickEvent=function(t){if(!this.disposed){"A"===t.currentTarget.tagName&&t.preventDefault();var e=t.currentTarget.parentNode.querySelector(this.config.subMenu);this.toggle(e)}},t.prototype.toggle=function(t){t.parentNode.classList.contains(h)?this.hide(t):this.show(t)},t.prototype.show=function(t){var e=this;if(!this.isTransitioning&&!t.classList.contains(u)){var i=function(){t.classList.remove(u),t.style.height="",t.removeEventListener("transitionend",i),e.setTransitioning(!1),e.emit("shown.metisMenu",{shownElement:t})},s=t.parentNode;s.classList.add(h);var n=s.querySelector(this.config.triggerElement);n.setAttribute("aria-expanded","true"),n.classList.remove(d),t.style.height="0px",t.classList.remove(c),t.classList.remove(f),t.classList.add(u);var r=[].slice.call(s.parentNode.children).filter(function(t){return t!==s});if(this.config.toggle&&0<r.length)for(var o=0,a=r;o<a.length;o++){var l=a[o].querySelector(this.config.subMenu);null!==l&&this.hide(l)}this.setTransitioning(!0),t.classList.add(c),t.classList.add(f),t.style.height=t.scrollHeight+"px",this.emit("show.metisMenu",{showElement:t}),t.addEventListener("transitionend",i)}},t.prototype.hide=function(t){var e=this;if(!this.isTransitioning&&t.classList.contains(f)){this.emit("hide.metisMenu",{hideElement:t});var i=t.parentNode;i.classList.remove(h);var s=function(){t.classList.remove(u),t.classList.add(c),t.style.height="",t.removeEventListener("transitionend",s),e.setTransitioning(!1),e.emit("hidden.metisMenu",{hiddenElement:t})};t.style.height=t.getBoundingClientRect().height+"px",t.style.height=t.offsetHeight+"px",t.classList.add(u),t.classList.remove(c),t.classList.remove(f),this.setTransitioning(!0),t.addEventListener("transitionend",s),t.style.height="0px";var n=i.querySelector(this.config.triggerElement);n.setAttribute("aria-expanded","false"),n.classList.add(d)}},t.prototype.setTransitioning=function(t){this.isTransitioning=t},t});
-//# sourceMappingURL=metismenujs.min.js.map
+    ***************************************************************************** */
+
+    var __assign = function() {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+
+    var Default = {
+        parentTrigger: 'li',
+        subMenu: 'ul',
+        toggle: true,
+        triggerElement: 'a',
+    };
+    var ClassName = {
+        ACTIVE: 'mm-active',
+        COLLAPSE: 'mm-collapse',
+        COLLAPSED: 'mm-collapsed',
+        COLLAPSING: 'mm-collapsing',
+        METIS: 'metismenu',
+        SHOW: 'mm-show',
+    };
+
+    function matches(element, selector) {
+        var nativeMatches = element.matches
+            || element.webkitMatchesSelector
+            || element.msMatchesSelector;
+        return nativeMatches.call(element, selector);
+    }
+    function closest(element, selector) {
+        if (element.closest) {
+            return element.closest(selector);
+        }
+        var el = element;
+        while (el) {
+            if (matches(el, selector)) {
+                return el;
+            }
+            el = el.parentElement;
+        }
+        return null;
+    }
+
+    var MetisMenu = /** @class */ (function () {
+        /**
+         * Creates an instance of MetisMenu.
+         *
+         * @constructor
+         * @param {Element | string} element
+         * @param {IMMOptions} [options]
+         * @memberof MetisMenu
+         */
+        function MetisMenu(element, options) {
+            this.element = MetisMenu.isElement(element) ? element : document.querySelector(element);
+            this.config = __assign(__assign({}, Default), options);
+            this.disposed = false;
+            this.triggerArr = [];
+            this.init();
+        }
+        MetisMenu.attach = function (el, opt) {
+            return new MetisMenu(el, opt);
+        };
+        MetisMenu.prototype.init = function () {
+            var _this = this;
+            var METIS = ClassName.METIS, ACTIVE = ClassName.ACTIVE, COLLAPSE = ClassName.COLLAPSE;
+            this.element.classList.add(METIS);
+            [].slice.call(this.element.querySelectorAll(this.config.subMenu)).forEach(function (ul) {
+                ul.classList.add(COLLAPSE);
+                var li = closest(ul, _this.config.parentTrigger);
+                if (li === null || li === void 0 ? void 0 : li.classList.contains(ACTIVE)) {
+                    _this.show(ul);
+                }
+                else {
+                    _this.hide(ul);
+                }
+                var a = li === null || li === void 0 ? void 0 : li.querySelector(_this.config.triggerElement);
+                if ((a === null || a === void 0 ? void 0 : a.getAttribute('aria-disabled')) === 'true') {
+                    return;
+                }
+                a === null || a === void 0 ? void 0 : a.setAttribute('aria-expanded', 'false');
+                a === null || a === void 0 ? void 0 : a.addEventListener('click', _this.clickEvent.bind(_this));
+                _this.triggerArr.push(a);
+            });
+        };
+        MetisMenu.prototype.clickEvent = function (evt) {
+            if (!this.disposed) {
+                var target = evt === null || evt === void 0 ? void 0 : evt.currentTarget;
+                if (target && target.tagName === 'A') {
+                    evt.preventDefault();
+                }
+                var li = closest(target, this.config.parentTrigger);
+                var ul = li === null || li === void 0 ? void 0 : li.querySelector(this.config.subMenu);
+                this.toggle(ul);
+            }
+        };
+        MetisMenu.prototype.update = function () {
+            this.disposed = false;
+            this.init();
+        };
+        MetisMenu.prototype.dispose = function () {
+            var _this = this;
+            this.triggerArr.forEach(function (arr) {
+                arr.removeEventListener('click', _this.clickEvent.bind(_this));
+            });
+            this.disposed = true;
+        };
+        MetisMenu.prototype.on = function (evtType, handler, options) {
+            this.element.addEventListener(evtType, handler, options);
+            return this;
+        };
+        MetisMenu.prototype.off = function (evtType, handler, options) {
+            this.element.removeEventListener(evtType, handler, options);
+            return this;
+        };
+        MetisMenu.prototype.emit = function (evtType, evtData, shouldBubble) {
+            if (shouldBubble === void 0) { shouldBubble = false; }
+            var evt;
+            if (typeof CustomEvent === 'function') {
+                evt = new CustomEvent(evtType, {
+                    bubbles: shouldBubble,
+                    detail: evtData,
+                });
+            }
+            else {
+                evt = document.createEvent('CustomEvent');
+                evt.initCustomEvent(evtType, shouldBubble, false, evtData);
+            }
+            this.element.dispatchEvent(evt);
+            return this;
+        };
+        MetisMenu.prototype.toggle = function (ul) {
+            var li = closest(ul, this.config.parentTrigger);
+            if (li === null || li === void 0 ? void 0 : li.classList.contains(ClassName.ACTIVE)) {
+                this.hide(ul);
+            }
+            else {
+                this.show(ul);
+            }
+        };
+        MetisMenu.prototype.show = function (el) {
+            var _this = this;
+            var _a;
+            var ul = el;
+            var ACTIVE = ClassName.ACTIVE, COLLAPSE = ClassName.COLLAPSE, COLLAPSED = ClassName.COLLAPSED, COLLAPSING = ClassName.COLLAPSING, SHOW = ClassName.SHOW;
+            if (this.isTransitioning || ul.classList.contains(COLLAPSING)) {
+                // return;
+            }
+            var complete = function () {
+                ul.classList.remove(COLLAPSING);
+                ul.style.height = '';
+                ul.removeEventListener('transitionend', complete);
+                _this.setTransitioning(false);
+                _this.emit('shown.metisMenu', {
+                    shownElement: ul,
+                });
+            };
+            var li = closest(ul, this.config.parentTrigger);
+            li === null || li === void 0 ? void 0 : li.classList.add(ACTIVE);
+            var a = li === null || li === void 0 ? void 0 : li.querySelector(this.config.triggerElement);
+            a === null || a === void 0 ? void 0 : a.setAttribute('aria-expanded', 'true');
+            a === null || a === void 0 ? void 0 : a.classList.remove(COLLAPSED);
+            ul.style.height = '0px';
+            ul.classList.remove(COLLAPSE);
+            ul.classList.remove(SHOW);
+            ul.classList.add(COLLAPSING);
+            var eleParentSiblins = [].slice
+                .call((_a = li === null || li === void 0 ? void 0 : li.parentNode) === null || _a === void 0 ? void 0 : _a.children)
+                .filter(function (c) { return c !== li; });
+            if (this.config.toggle && eleParentSiblins.length > 0) {
+                eleParentSiblins.forEach(function (sibli) {
+                    var sibUl = sibli.querySelector(_this.config.subMenu);
+                    if (sibUl) {
+                        _this.hide(sibUl);
+                    }
+                });
+            }
+            this.setTransitioning(true);
+            ul.classList.add(COLLAPSE);
+            ul.classList.add(SHOW);
+            ul.style.height = ul.scrollHeight + "px";
+            this.emit('show.metisMenu', {
+                showElement: ul,
+            });
+            ul.addEventListener('transitionend', complete);
+        };
+        MetisMenu.prototype.hide = function (el) {
+            var _this = this;
+            var ACTIVE = ClassName.ACTIVE, COLLAPSE = ClassName.COLLAPSE, COLLAPSED = ClassName.COLLAPSED, COLLAPSING = ClassName.COLLAPSING, SHOW = ClassName.SHOW;
+            var ul = el;
+            if (this.isTransitioning || !ul.classList.contains(SHOW)) {
+                return;
+            }
+            this.emit('hide.metisMenu', {
+                hideElement: ul,
+            });
+            var li = closest(ul, this.config.parentTrigger);
+            li === null || li === void 0 ? void 0 : li.classList.remove(ACTIVE);
+            var complete = function () {
+                ul.classList.remove(COLLAPSING);
+                ul.classList.add(COLLAPSE);
+                ul.style.height = '';
+                ul.removeEventListener('transitionend', complete);
+                _this.setTransitioning(false);
+                _this.emit('hidden.metisMenu', {
+                    hiddenElement: ul,
+                });
+            };
+            ul.style.height = ul.getBoundingClientRect().height + "px";
+            ul.style.height = ul.offsetHeight + "px";
+            ul.classList.add(COLLAPSING);
+            ul.classList.remove(COLLAPSE);
+            ul.classList.remove(SHOW);
+            this.setTransitioning(true);
+            ul.addEventListener('transitionend', complete);
+            ul.style.height = '0px';
+            var a = li === null || li === void 0 ? void 0 : li.querySelector(this.config.triggerElement);
+            a === null || a === void 0 ? void 0 : a.setAttribute('aria-expanded', 'false');
+            a === null || a === void 0 ? void 0 : a.classList.add(COLLAPSED);
+        };
+        MetisMenu.prototype.setTransitioning = function (isTransitioning) {
+            this.isTransitioning = isTransitioning;
+        };
+        MetisMenu.isElement = function (element) {
+            return Boolean(element.classList);
+        };
+        return MetisMenu;
+    }());
+
+    return MetisMenu;
+
+})));
+//# sourceMappingURL=metismenujs.js.map
+
+
+
+
+
+
+
+
+
+
 !function(e,n){"object"==typeof exports&&"object"==typeof module?module.exports=n():"function"==typeof define&&define.amd?define([],n):"object"==typeof exports?exports.feather=n():e.feather=n()}("undefined"!=typeof self?self:this,function(){return function(e){var n={};function i(t){if(n[t])return n[t].exports;var l=n[t]={i:t,l:!1,exports:{}};return e[t].call(l.exports,l,l.exports,i),l.l=!0,l.exports}return i.m=e,i.c=n,i.d=function(e,n,t){i.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:t})},i.r=function(e){Object.defineProperty(e,"__esModule",{value:!0})},i.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(n,"a",n),n},i.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},i.p="",i(i.s=80)}([function(e,n,i){(function(n){var i="object",t=function(e){return e&&e.Math==Math&&e};e.exports=t(typeof globalThis==i&&globalThis)||t(typeof window==i&&window)||t(typeof self==i&&self)||t(typeof n==i&&n)||Function("return this")()}).call(this,i(75))},function(e,n){var i={}.hasOwnProperty;e.exports=function(e,n){return i.call(e,n)}},function(e,n,i){var t=i(0),l=i(11),r=i(33),o=i(62),a=t.Symbol,c=l("wks");e.exports=function(e){return c[e]||(c[e]=o&&a[e]||(o?a:r)("Symbol."+e))}},function(e,n,i){var t=i(6);e.exports=function(e){if(!t(e))throw TypeError(String(e)+" is not an object");return e}},function(e,n){e.exports=function(e){try{return!!e()}catch(e){return!0}}},function(e,n,i){var t=i(8),l=i(7),r=i(10);e.exports=t?function(e,n,i){return l.f(e,n,r(1,i))}:function(e,n,i){return e[n]=i,e}},function(e,n){e.exports=function(e){return"object"==typeof e?null!==e:"function"==typeof e}},function(e,n,i){var t=i(8),l=i(35),r=i(3),o=i(18),a=Object.defineProperty;n.f=t?a:function(e,n,i){if(r(e),n=o(n,!0),r(i),l)try{return a(e,n,i)}catch(e){}if("get"in i||"set"in i)throw TypeError("Accessors not supported");return"value"in i&&(e[n]=i.value),e}},function(e,n,i){var t=i(4);e.exports=!t(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(e,n){e.exports={}},function(e,n){e.exports=function(e,n){return{enumerable:!(1&e),configurable:!(2&e),writable:!(4&e),value:n}}},function(e,n,i){var t=i(0),l=i(19),r=i(17),o=t["__core-js_shared__"]||l("__core-js_shared__",{});(e.exports=function(e,n){return o[e]||(o[e]=void 0!==n?n:{})})("versions",[]).push({version:"3.1.3",mode:r?"pure":"global",copyright:"© 2019 Denis Pushkarev (zloirock.ru)"})},function(e,n,i){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var t=o(i(43)),l=o(i(41)),r=o(i(40));function o(e){return e&&e.__esModule?e:{default:e}}n.default=Object.keys(l.default).map(function(e){return new t.default(e,l.default[e],r.default[e])}).reduce(function(e,n){return e[n.name]=n,e},{})},function(e,n){e.exports=["constructor","hasOwnProperty","isPrototypeOf","propertyIsEnumerable","toLocaleString","toString","valueOf"]},function(e,n,i){var t=i(72),l=i(20);e.exports=function(e){return t(l(e))}},function(e,n){e.exports={}},function(e,n,i){var t=i(11),l=i(33),r=t("keys");e.exports=function(e){return r[e]||(r[e]=l(e))}},function(e,n){e.exports=!1},function(e,n,i){var t=i(6);e.exports=function(e,n){if(!t(e))return e;var i,l;if(n&&"function"==typeof(i=e.toString)&&!t(l=i.call(e)))return l;if("function"==typeof(i=e.valueOf)&&!t(l=i.call(e)))return l;if(!n&&"function"==typeof(i=e.toString)&&!t(l=i.call(e)))return l;throw TypeError("Can't convert object to primitive value")}},function(e,n,i){var t=i(0),l=i(5);e.exports=function(e,n){try{l(t,e,n)}catch(i){t[e]=n}return n}},function(e,n){e.exports=function(e){if(void 0==e)throw TypeError("Can't call method on "+e);return e}},function(e,n){var i=Math.ceil,t=Math.floor;e.exports=function(e){return isNaN(e=+e)?0:(e>0?t:i)(e)}},function(e,n,i){var t;
 /*!
   Copyright (c) 2016 Jed Watson.
