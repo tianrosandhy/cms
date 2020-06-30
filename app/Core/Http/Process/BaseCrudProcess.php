@@ -92,6 +92,11 @@ class BaseCrudProcess extends BaseProcess
 				//store current slug master to 
 				$slug_instance = SlugMaster::insert($instance, $this->request->slug_master);
 			}
+
+			if(method_exists($this, 'afterCrud')){
+				$this->afterCrud($instance);
+			}
+
 		}
 
 		if($this->request->save_only){
