@@ -28,7 +28,7 @@ $current_user_sa = $data->role->is_sa ?? null;
 @if($current_user_sa)
 <script>
 $(function(){
-	$("[data-crud='role_id']").remove();
+	$("[data-crud='role_id']").hide();
 });
 </script>
 @endif

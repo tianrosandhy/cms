@@ -91,6 +91,10 @@ trait SkeletonHelper
 					if(is_array($value_for_saved)){
 						$value_for_saved = null;
 					}
+					//set fallback non existent string as null
+					if(strlen($value_for_saved) == 0){
+						$value_for_saved = null;
+					}
 					$post[$row->getField()] = $value_for_saved;
 				}
 			}
