@@ -2,7 +2,13 @@
     <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button"
         aria-haspopup="false" aria-expanded="false">
         <div class="media user-profile ">
-            <img src="{{ admin_asset('images/default-user.png') }}" alt="user-image" class="rounded-circle align-self-center" />
+            <?php
+            $img_src = admin_asset('images/default-user.png');
+            if($user->image){
+                $img_src = $user->getImageUrl('image', 'thumb');
+            }
+            ?>
+            <img src="{{ $img_src }}" alt="user-image" class="rounded-circle align-self-center" />
             <div class="media-body text-left">
                 <h6 class="pro-user-name ml-2 my-0">
                     <span>{{ $user->name ?? null }}</span>

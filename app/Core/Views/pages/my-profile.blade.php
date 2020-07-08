@@ -80,6 +80,9 @@
 			<div class="col-md-4">
 				<div class="form-group">
 					<label>Profile Photo</label>
+					{!! Input::image('image', [
+						'value' => $user->image,
+					]) !!}					
 				</div>
 			</div>
 		</div>

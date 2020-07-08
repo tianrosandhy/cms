@@ -26,17 +26,6 @@
         </ul>
 
         <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
-            <li class="d-none d-sm-block">
-                <div class="app-search">
-                    <form>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span data-feather="search"></span>
-                        </div>
-                    </form>
-                </div>
-            </li>
-
             @include ('core::layouts.partials.header.notification')
 
             @if(Permission::has('admin.setting.store'))
