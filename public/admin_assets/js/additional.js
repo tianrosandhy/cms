@@ -1,6 +1,6 @@
 $(function(){
-	hideLoading();
-	initPlugins();
+  hideLoading();
+  initPlugins();
 
   //remove blank sidebar
   $(".nav-third-level").each(function(){
@@ -103,23 +103,23 @@ $(function(){
 });
 
 function showLoading(){
-	$("#page-loader").fadeIn(250);
+  $("#page-loader").fadeIn(250);
 }
 
 function hideLoading(){
-	$("#page-loader").fadeOut(250);
+  $("#page-loader").fadeOut(250);
 }
 
 function enableAllButtons(){
-	$("a.js-disabled, button.js-disabled").each(function(){
-		$(this).removeClass('js-disabled disabled').removeAttr('disabled');
-	});
+  $("a.js-disabled, button.js-disabled").each(function(){
+    $(this).removeClass('js-disabled disabled').removeAttr('disabled');
+  });
 }
 
 function disableAllButtons(){
-	$("a:not([disabled]), button:not([disabled])").each(function(){
-		$(this).addClass('js-disabled disabled').attr('disabled', 'disabled');
-	});
+  $("a:not([disabled]), button:not([disabled])").each(function(){
+    $(this).addClass('js-disabled disabled').attr('disabled', 'disabled');
+  });
 }
 
 function makeid(length) {
@@ -144,7 +144,7 @@ function makeid(length) {
 function initPlugins(){
   loadSwitchery();
   loadTouchspin();
-	loadTinyMce();
+  loadTinyMce();
   loadDatepicker();
   loadSelect2();
   loadFile();
@@ -270,21 +270,38 @@ function loadDatepicker(){
 
 
   //daterange function
-  $("[daterange-holder] [data-start-range]").flatpickr({
-    onChange : function(selectedDates, dateStr, instance){
-      end_date = $(instance.element).closest('[daterange-holder]').find('[data-end-range]');
-      einstance = end_date[0]._flatpickr;
-      einstance.set('minDate', dateStr);
-      einstance.redraw();
+  $("[daterange-holder] input").each(function(){
+    console.log($(this));
+    config = {};
+
+    if($(this).attr('data-mindate')){
+      config.minDate = $(this).attr('data-mindate');
     }
-  });
-  $("[daterange-holder] [data-end-range]").flatpickr({
-    onChange : function(selectedDates, dateStr, instance){
-      start_date = $(instance.element).closest('[daterange-holder]').find('[data-start-range]');
-      sinstance = start_date[0]._flatpickr;
-      sinstance.set('maxDate', dateStr);
-      sinstance.redraw();
+    if($(this).attr('data-maxdate')){
+      config.maxDate = $(this).attr('data-maxdate');
     }
+    if($(this).attr('data-format')){
+      config.altFormat = $(this).attr('data-format');
+    }
+  
+    if($(this).attr('data-start-range')){
+      config.onChange = function(selectedDates, dateStr, instance){
+        end_date = $(instance.element).closest('[daterange-holder]').find('[data-end-range]');
+        einstance = end_date[0]._flatpickr;
+        einstance.set('minDate', dateStr);
+        einstance.redraw();
+      }
+    }  
+    if($(this).attr('data-end-range')){
+      config.onChange = function(selectedDates, dateStr, instance){
+        start_date = $(instance.element).closest('[daterange-holder]').find('[data-start-range]');
+        sinstance = start_date[0]._flatpickr;
+        sinstance.set('maxDate', dateStr);
+        sinstance.redraw();
+      }
+    }  
+    console.log(config);
+    $(this).flatpickr(config);
   });
 }
 
