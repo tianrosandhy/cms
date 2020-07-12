@@ -32,7 +32,7 @@ class SettingProcess extends BaseProcess
 			}
 
 			$from_input = $post[$split[0]][$split[1]] ?? null;
-			if($from_input && $from_input <> $old_value){
+			if(strlen($from_input) > 0 && $from_input <> $old_value){
 				$savedata[] = [
 					'param' => $split[1],
 					'group' => $split[0],
