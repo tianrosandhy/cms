@@ -87,6 +87,8 @@ trait DataTableProcessor
 			throw new DataTableException('Failed to get data from table. Make sure you have already migrate the module');
 		}
 
+		$without_filter = $data;
+
 		if(!empty($this->filter)){
 			foreach($this->filter as $column => $value){
 				//custom filtering diset lagi nanti
@@ -96,10 +98,13 @@ trait DataTableProcessor
 
 		if(method_exists($this->skeleton, 'customFilter')){
 			$data = $this->skeleton->customFilter($data);
+			$without_filter = $this->skeleton->customFilter($without_filter);
 		}
 
-		$this->recordsFiltered = $data->count();
-		$this->recordsTotal = $data->count();
+		$data = $data->skip($this->start);
+		$data = $data->take($this->length);
+		$this->recordsFiltered = $without_filter->count();
+		$this->recordsTotal = $without_filter->count();
 		$this->raw_data = $data->get();
 	}
 
