@@ -153,6 +153,9 @@ class Input
 	public function yesno($name, $config=[]){
 		return $this->loadView('yesno', $name, $config);
 	}
+	public function map($name, $config=[]){
+		return $this->loadView('map', $name, $config);
+	}
 
 
 }

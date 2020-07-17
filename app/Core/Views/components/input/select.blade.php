@@ -52,6 +52,6 @@ if($value instanceof \Illuminate\Support\Collection){
   <option value=""></option>
   @endif
   @foreach($data_source as $key => $vl)
-  <option {{ is_array($value) ? (in_array($key, $value) ? 'selected' : '') : ($key === $value ? 'selected' : null) }} value="{{ $key }}">{{ $vl }}</option>
+  <option {{ is_array($value) ? (in_array($key, $value) ? 'selected' : '') : (($key == $value && strlen($key) == strlen($value)) ? 'selected' : null) }} value="{{ $key }}">{{ $vl }}</option>
   @endforeach
 </select>

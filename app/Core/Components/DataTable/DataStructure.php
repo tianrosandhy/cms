@@ -299,6 +299,7 @@ class DataStructure
 			'view',
 			'color',
 			'currency',
+			'map',
 		];
 
 		if(!in_array($type, $lists)){

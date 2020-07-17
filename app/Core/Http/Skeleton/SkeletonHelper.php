@@ -78,13 +78,17 @@ trait SkeletonHelper
 			if(!$row->getHideForm()){
 				if(in_array($row->getField(), $table_listing)){
 					$value_for_saved = $this->request->{$row->getField()} ?? null;
+					if($this->multi_language){
+						$fallback = $value_for_saved[Language::default()] ?? null;
+						$value_for_saved = $value_for_saved[$lang] ?? $fallback;
+					}
 					if($row->input_type == 'currency'){
 						$value_for_saved = str_replace('.', '', $value_for_saved);
 						$value_for_saved = str_replace(',', '.', $value_for_saved);	
 					}
-					if($this->multi_language){
-						$fallback = $value_for_saved[Language::default()] ?? null;
-						$value_for_saved = $value_for_saved[$lang] ?? $fallback;
+
+					if($row->input_type == 'map'){
+						$value_for_saved = !empty($value_for_saved) ? json_encode($value_for_saved) : null;
 					}
 
 					//we cannot save the array value to database

@@ -4,10 +4,12 @@ namespace App\Core\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Core\Shared\ImageGrabable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use ImageGrabable;
 
     /**
      * The attributes that are mass assignable.
