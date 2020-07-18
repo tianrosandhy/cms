@@ -63,6 +63,10 @@ class BaseCrudProcess extends BaseProcess
 			#DYNAMIC SINGLE MODE
 			//create new instance if not exists, but use selected instance if exists
 			$instance = $this->instance ?? $this->skeleton->model();
+			if($instance instanceof \Illuminate\Database\Eloquent\Builder || $instance instanceof \Illuminate\Database\Query\Builder){
+				$instance = $instance->getModel();
+			}
+
 			foreach($inputs as $field => $value){
 				$instance->{$field} = $value;
 			}

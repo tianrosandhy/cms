@@ -16,6 +16,7 @@ class PostCrudPresenter extends BaseViewPresenter
 		}
 		$this->data = $instance;
 		$this->view = 'core::master.crud';
+		$this->back_url = route('admin.post.index');
 		#if you want to override this crud view, you can use below view instead
 		// $this->view = '[LOWECASE_MODULE_NAME]::crud';
 

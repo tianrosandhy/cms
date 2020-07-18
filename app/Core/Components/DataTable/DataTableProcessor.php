@@ -101,6 +101,7 @@ trait DataTableProcessor
 			$without_filter = $this->skeleton->customFilter($without_filter);
 		}
 
+		$data = $data->orderBy($this->order_by, $this->order_dir);
 		$data = $data->skip($this->start);
 		$data = $data->take($this->length);
 		$this->recordsFiltered = $without_filter->count();
