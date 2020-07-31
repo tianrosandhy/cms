@@ -390,6 +390,12 @@ $(function(){
 		gotoFilemanager();
 	});
 
+	$(document).on('click', '.filemanager-content .pagination a.page-link', function(e){
+		e.preventDefault();
+		page = parseInt($(this).attr('data-page'));
+		loadFileManager(page);
+	});
+
 	// trigger utk menjalankan refresh file manager
 	$(document).on('click', '.btn.sort-desc', function(){
 		$(this).addClass('active');

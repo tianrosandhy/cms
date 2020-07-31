@@ -1,6 +1,7 @@
 <?php
 
 function slugify($input, $delimiter='-'){
+  $input = preg_replace("/[^a-zA-Z0-9- &]/", "", $input);
   $string = strtolower(str_replace(' ', $delimiter, $input));
   if(strpos($string, '&') !== false){
     $string = str_replace('&', 'and', $string);
