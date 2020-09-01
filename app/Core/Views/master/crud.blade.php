@@ -12,7 +12,9 @@
 	<form action="" method="post" class="pos-rel">
 		{{ csrf_field() }}
 		@if(isset($skeleton->multi_language))
-			@include ('core::components.language-toggle')
+			@if($skeleton->multi_language)
+				@include ('core::components.language-toggle')
+			@endif
 		@endif
 
 		<?php
