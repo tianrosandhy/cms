@@ -18,7 +18,7 @@ class [MODULE_NAME]CrudPresenter extends BaseViewPresenter
 		$this->back_url = route('admin.[LOWERCASE_MODULE_NAME].index');
 		$this->view = 'core::master.crud';
 		#if you want to override this crud view, you can use below view instead
-		// $this->view = '[LOWECASE_MODULE_NAME]::crud';
+		// $this->view = '[LOWERCASE_MODULE_NAME]::crud';
 
 		$this->skeleton = new [MODULE_NAME]Skeleton;
 		$this->config = config('module-setting.[LOWERCASE_MODULE_NAME]');

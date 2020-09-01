@@ -6,6 +6,7 @@
 <script src="{{ admin_asset('libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
 <script src="{{ admin_asset('libs/select2/select2.min.js') }}"></script>
 <script src="{{ admin_asset('libs/flatpickr/flatpickr.min.js') }}"></script>
+<script src="{{ admin_asset('libs/flatpickr/monthselect.js') }}"></script>
 <script src="{{ admin_asset('libs/tinymce/tinymce.min.js') }}"></script>
 <script src="{{ admin_asset('libs/tinymce/jquery.tinymce.min.js') }}"></script>
 <script src="{{ admin_asset('libs/jquery-mask/jquery.mask.min.js') }}"></script>

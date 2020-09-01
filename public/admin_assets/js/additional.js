@@ -242,6 +242,14 @@ function loadDatepicker(){
     if($(this).attr('data-format')){
       config.altFormat = $(this).attr('data-format');
     }
+    if($(this).attr('data-monthpicker')){
+      config.plugins = [
+        new monthSelectPlugin({
+          shorthand : true,
+          dateFormat : 'Y-m-d',
+        })
+      ];
+    }
     $(this).flatpickr(config);
   });
   $("[data-timepicker]").each(function(){

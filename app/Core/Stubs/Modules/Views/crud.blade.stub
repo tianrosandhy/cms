@@ -3,7 +3,7 @@
 	@include ('core::components.header-box', [
 		'control_buttons' => [
 			[
-				'url' => route('admin.page.index'),
+				'url' => route('admin.[LOWERCASE_MODULE_NAME].index'),
 				'label' => 'Back',
 				'icon' => 'arrow-left'
 			],
