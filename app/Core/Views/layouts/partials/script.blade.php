@@ -24,3 +24,4 @@ var DEFAULT_LANGUAGE = '{{ Language::default() }}';
 {!! Media::assets() !!}
 @stack ('script')
 @yield ('datatable_script')
+@include ('core::layouts.partials.pwa')
