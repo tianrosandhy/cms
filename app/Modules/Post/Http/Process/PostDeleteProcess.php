@@ -6,7 +6,7 @@ use App\Core\Exceptions\ProcessException;
 use App\Modules\Post\Http\Skeleton\PostCategorySkeleton;
 use Validator;
 
-class PostCategoryDeleteProcess extends BaseProcess
+class PostDeleteProcess extends BaseProcess
 {
 	public function config(){
 		return [

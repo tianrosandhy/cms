@@ -1,5 +1,5 @@
 <?php
-namespace App\Modules\page\Extenders;
+namespace App\Modules\Page\Extenders;
 
 use App\Core\Components\Sidebar\SidebarRegistration;
 use SidebarItem;
