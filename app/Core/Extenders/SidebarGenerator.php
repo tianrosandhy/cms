@@ -51,7 +51,15 @@ class SidebarGenerator extends SidebarRegistration
 					->setPrivilege('admin.log.index')
 					->setRoute('admin.log.index')
 					->setParent('ADMIN.MANAGEMENT')
-					->setActiveKey('log')
+					->setActiveKey('log'),
+				
+				SidebarItem::setName('ADMIN.PUSHTOKEN')
+					->setLabel('Push Token Device')
+					->setPrivilege('admin.push-notif.index')
+					->setRoute('admin.push-notif.index')
+					->setParent('ADMIN.MANAGEMENT')
+					->setActiveKey('push-notif'),
+				
 		]);
 	}
 

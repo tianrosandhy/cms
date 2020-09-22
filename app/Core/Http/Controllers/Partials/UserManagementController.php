@@ -6,6 +6,7 @@ use App\Core\Presenters\UserCrudPresenter;
 use App\Core\Http\Skeleton\UserSkeleton;
 use App\Core\Models\User;
 use App\Core\Http\Process\UserCrudProcess;
+use App\Core\Http\Process\BaseDeleteProcess;
 
 trait UserManagementController
 {
@@ -44,7 +45,11 @@ trait UserManagementController
 	}
 
 	public function userManagementDelete($id){
-
+		return (new BaseDeleteProcess)
+			->setModel(new User)
+			->setId($id)
+			->type('ajax')
+			->handle();
 	}
 
 }

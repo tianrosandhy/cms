@@ -41,4 +41,9 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo('App\Core\Models\Role', 'role_id');
     }
+
+    public function pushToken(){
+        return $this->hasMany('App\Core\Models\UserPushToken', 'user_id');
+    }
+    
 }

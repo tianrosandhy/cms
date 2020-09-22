@@ -13,6 +13,7 @@ class CoreController extends BaseController
 	use Partials\PrivilegeController;
 	use Partials\UserManagementController;
 	use Partials\LogController;
+	use Partials\PushNotifController;
 
 	public function index(){
 		$p = (new BaseViewPresenter)
@@ -24,7 +25,6 @@ class CoreController extends BaseController
 	public function storeSetting(){
 		return (new SettingProcess)->handle();
 	}
-
 
 
 }

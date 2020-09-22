@@ -33,4 +33,15 @@ Route::get('log/export', 'CoreController@logExport')->name('admin.log.export');
 Route::get('log-detail/{id}', 'CoreController@logDetail')->name('admin.log.detail');
 Route::get('log/mark-as-reported', 'CoreController@logMarkAsReported')->name('admin.log.mark-as-reported');
 
+
+Route::match(['get', 'post'], 'datatable/push-notif', 'CoreController@pushNotifManagementDataTable')->name('admin.push-notif.datatable');
+Route::get('push-notif', 'CoreController@pushNotif')->name('admin.push-notif.index');
+Route::post('push-notif', 'CoreController@storePushNotif');
+Route::get('push-notif/create', 'CoreController@pushNotifCreate')->name('admin.push-notif.create');
+Route::post('push-notif/create', 'CoreController@pushNotifStore')->name('admin.push-notif.store');
+Route::get('push-notif/edit/{id}', 'CoreController@pushNotifEdit')->name('admin.push-notif.edit');
+Route::post('push-notif/edit/{id}', 'CoreController@pushNotifUpdate')->name('admin.push-notif.update');
+Route::post('push-notif/delete/{id?}', 'CoreController@pushNotifDelete')->name('admin.push-notif.delete');
+
+
 Route::match(['get', 'post'], 'logout', 'CoreController@logout')->name('admin.logout');
