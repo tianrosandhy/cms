@@ -1,19 +1,5 @@
 <div id="offline-overlay" style="display:none;"></div>
 
-<!-- service worker notification alert -->
-<div id="notification-wrapper">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-6">
-        <p class="notification-title">New Updates are available</p>
-      </div>
-      <div class="col-sm-6 text-right">
-        <a href="#" class="btn btn-sm btn-primary refresh-btn">Refresh</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- service worker offline/online notification -->
 <div id="offline-notification" class="online">
   <div class="offline-wrapper bg-danger text-white">
