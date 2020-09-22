@@ -53,14 +53,19 @@ class SidebarGenerator extends SidebarRegistration
 					->setParent('ADMIN.MANAGEMENT')
 					->setActiveKey('log'),
 				
+		]);
+
+		//only show push notif menu if can
+		if(canSendPushNotif()){
+			$this->registerSidebars([
 				SidebarItem::setName('ADMIN.PUSHTOKEN')
 					->setLabel('Push Token Device')
 					->setPrivilege('admin.push-notif.index')
 					->setRoute('admin.push-notif.index')
 					->setParent('ADMIN.MANAGEMENT')
 					->setActiveKey('push-notif'),
-				
-		]);
+			]);
+		}
 	}
 
 }

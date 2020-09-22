@@ -68,3 +68,8 @@ function ajax_response($type, $message=''){
 function def_lang(){
   return Language::default();
 }
+
+function canSendPushNotif(){
+  //push notif can be sent if all .env below is filled
+  return env('FCM_SERVER_KEY') && env('FCM_SENDER_ID') && env('FCM_API_KEY') && env('FCM_PROJECT_ID') && env('FCM_APP_ID');
+}

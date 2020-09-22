@@ -36,7 +36,7 @@ Route::get('log/mark-as-reported', 'CoreController@logMarkAsReported')->name('ad
 
 Route::match(['get', 'post'], 'datatable/push-notif', 'CoreController@pushNotifManagementDataTable')->name('admin.push-notif.datatable');
 Route::get('push-notif', 'CoreController@pushNotif')->name('admin.push-notif.index');
-Route::post('push-notif', 'CoreController@storePushNotif');
+Route::post('push-notif', 'CoreController@storePushNotif')->name('admin.push-notif.register');
 Route::get('push-notif/create', 'CoreController@pushNotifCreate')->name('admin.push-notif.create');
 Route::post('push-notif/create', 'CoreController@pushNotifStore')->name('admin.push-notif.store');
 Route::get('push-notif/edit/{id}', 'CoreController@pushNotifEdit')->name('admin.push-notif.edit');

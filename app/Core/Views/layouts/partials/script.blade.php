@@ -25,3 +25,6 @@ var DEFAULT_LANGUAGE = '{{ Language::default() }}';
 @stack ('script')
 @yield ('datatable_script')
 @include ('core::layouts.partials.pwa')
+@if(canSendPushNotif())
+    @include ('core::components.firebase-handler')
+@endif
