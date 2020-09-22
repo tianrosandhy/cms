@@ -16,6 +16,10 @@ class NotificationInstance extends BaseInstance
 	}
 
 	public function blast($title, $message, $image=null, $additional_param = []){
+		if(!canSendPushNotif()){
+			return false;
+		}
+		
 		//list receiver sementara ambil semua dari tabel user push token
 		$receiver_collecions = $this->getReceivers();
 		$receivers = $receiver_collecions->pluck('push_token')->toArray();

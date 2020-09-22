@@ -39,6 +39,8 @@ class NotificationSkeleton extends BaseSkeleton
 
 			DataStructure::field('sent')
 				->name('Sent')
+				->searchable(false)
+				->orderable(false)
 				->hideForm(),
 
 		]);
