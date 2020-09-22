@@ -1,0 +1,2 @@
+<?php
+generateAdminRoute('notification', 'NotificationController');

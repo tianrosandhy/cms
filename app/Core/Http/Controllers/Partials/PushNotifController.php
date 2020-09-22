@@ -18,8 +18,8 @@ trait PushNotifController
     public function storePushNotif(){
         if($this->request->pushtoken){
             $current_user = $this->request->get('user');
-            $get = UserPushToken::where('push_token', $this->request->pushtoken)->count();
-            if($get == 0){
+            $get = UserPushToken::where('push_token', $this->request->pushtoken)->first();
+            if(empty($get)){
                 //simpan push token
                 $up = new UserPushToken;
                 $up->user_id = $current_user->id;
@@ -32,6 +32,11 @@ trait PushNotifController
                     'type' => 'success'
                 ]);
             }
+			else if($get->is_active == 0){
+				//update the inactive pushtoken
+				$get->is_active = 1;
+				$get->save();
+			}
         }
     }
 
