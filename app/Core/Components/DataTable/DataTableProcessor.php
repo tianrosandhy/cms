@@ -92,7 +92,7 @@ trait DataTableProcessor
 		if(!empty($this->filter)){
 			foreach($this->filter as $column => $value){
 				//custom filtering diset lagi nanti
-				$data = $data->where($column, $value);
+				$data = $data->where($column, 'like', '%'.trim($value).'%');
 			}
 		}
 
