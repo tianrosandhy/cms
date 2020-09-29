@@ -13,7 +13,9 @@ class BaseViewPresenter
 	public 
 		$view,
 		$user,
-		$selected_menu;
+		$selected_menu,
+		$custom_css,
+		$custom_js;
 
 	public function setDefaultProperty(){
 		$request = request();

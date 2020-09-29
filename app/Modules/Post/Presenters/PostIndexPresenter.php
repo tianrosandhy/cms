@@ -15,6 +15,7 @@ class PostIndexPresenter extends BaseViewPresenter
 		//$this->view = 'post::index';
 
 		$this->batch_delete_url = route('admin.post.delete');
+		$this->custom_css = admin_asset('css/custom-post.css');
 		$this->skeleton = new PostSkeleton;
 		$this->datatable = DataTable::setSkeleton($this->skeleton);
 		$this->control_buttons = [];

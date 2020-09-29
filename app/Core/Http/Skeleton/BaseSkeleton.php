@@ -11,6 +11,8 @@ class BaseSkeleton
 
 	public $structure = [];
 	public $multi_language = false;
+	public $mode = 'datatable';
+	public $custom_html = null;
 
 	public function __construct(){
 		$this->request = request();
@@ -93,6 +95,31 @@ class BaseSkeleton
 		}
 		return $out;
 	}
+	
+	public function generateJsonSearchQuery(){
+		$out = [];
+		$i = 0;
+		$replacer = [];
+		foreach($this->output() as $row){
+			if(!$row->getHideTable()){
+				$fld = str_replace('[]', '', $row->getField());
+				$out['columns'][$i]['data'] = $fld;
+				$out['columns'][$i]['search']['value'] = 'REPLACER-'.$i;
+				$out['columns'][$i]['searchable'] = $row->searchable;
+				$out['columns'][$i]['orderable'] = $row->orderable;
+				$replacer[$i] = '$("[data-id=\'datatable-filter-'.$fld.'\']").val()';
+				$i++;
+			}
+		}
+		$string = json_encode($out);
+		for($x=0; $x<=$i; $x++){
+			if(isset($replacer[$x])){
+				$string = str_replace('"REPLACER-'.$x.'"', $replacer[$x], $string);
+			}
+		}
+		return $string;
+	}
+	
 
 
 	public function datatableOrderable(){

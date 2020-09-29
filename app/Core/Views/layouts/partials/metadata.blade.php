@@ -19,4 +19,8 @@
 <link href="{{ admin_asset('css/additional.css') }}" rel="stylesheet" type="text/css" />
 <script src="{{ admin_asset('js/vendor.js') }}"></script>
 
+@if(isset($custom_css))
+<link rel="stylesheet" href="{{ $custom_css }}">
+@endif
+
 @stack ('style')

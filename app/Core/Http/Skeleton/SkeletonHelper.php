@@ -8,6 +8,12 @@ use Language;
 
 trait SkeletonHelper
 {
+	public function getSkeletonName(){
+		$class_name = (string)get_class($this);
+		$split = explode("\\", $class_name);
+		return $split[count($split)-1];
+	}
+
 	//utk generate checker datatable
 	public function checkerFormat($row, $primary_key='id'){
 		return '<input type="checkbox" data-id="'.$row->{$primary_key}.'" name="multi_check['.$row->{$primary_key}.']" class="multichecker_datatable"><span style="color:transparent; position:absolute;">'.$row->{$primary_key}.'</span>';		

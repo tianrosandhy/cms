@@ -24,6 +24,10 @@ var DEFAULT_LANGUAGE = '{{ Language::default() }}';
 {!! Media::assets() !!}
 @stack ('script')
 @yield ('datatable_script')
+@if(isset($custom_js))
+<script type="text/javascript" src="{{ $custom_js }}"></script>
+@endif
+
 @include ('core::layouts.partials.pwa')
 @if(canSendPushNotif())
     @include ('core::components.firebase-handler')

@@ -9,6 +9,8 @@ use Permission;
 class PostSkeleton extends BaseSkeleton
 {
 	public $multi_language = true;
+	public $mode = 'custom'; // set ke mode custom untuk custom view menggantikan datatable
+	public $custom_html = 'post::custom-data';
 
 	public function handle(){
 		$this->registers([
@@ -63,7 +65,7 @@ class PostSkeleton extends BaseSkeleton
 			'excerpt' => descriptionMaker($row->excerpt, 15),
 			'author' => $row->author,
 			'description' => $row->description,
-			'image' => '<img src="'.$row->getImageUrl('image', 'thumb').'" style="height:50px;">',
+			'image' => '<img src="'.$row->getImageUrl('image', 'thumb').'">',
 			'is_active' => $this->switcherFormat($row, 'is_active', (Permission::has('admin.post.switch') ? 'toggle' : 'label')),
 			'action' => $this->actionButton($row)
 		];

@@ -204,3 +204,22 @@ a.disabled{
 body.is-offline{
 	overflow:hidden;
 }
+
+.datatable-custom-view{
+	position:relative;
+}
+.datatable-custom-view.in-progress::after{
+	content : 'Please wait...';
+	display:block;
+	display:flex;
+	display:-moz-flex;
+	text-center;
+	justify-content:center;
+	align-items:center;
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	background:rgba(255,255,255,.85);
+}

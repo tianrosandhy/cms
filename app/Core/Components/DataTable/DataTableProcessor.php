@@ -8,30 +8,46 @@ trait DataTableProcessor
 
 	public function process(){
 		try{
+			$html = '';
 			$this->validateRequest();
 			$this->handleProcess();
+			if($this->mode == 'custom'){
+				if(view()->exists($this->skeleton->custom_html)){
+					$html = view($this->skeleton->custom_html, [
+						'data' => $this->data
+					])->render();
+				}
+			}
 		}catch(\Exception $e){
 			return [
 				'error' => $e->getMessage()
 			];
 		}
+
+		$page = ($this->start / 10) + 1;
+		$pagination = view('core::components.datatable.custom-pagination', [
+			'page' => $page,
+			'max_page' => ceil($this->recordsTotal / $this->length)
+		])->render();
 		return [
 			'draw' => $this->request->draw,
 			'data' => $this->data,
 			'recordsFiltered' => $this->recordsFiltered,
-			'recordsTotal' => $this->recordsTotal
+			'recordsTotal' => $this->recordsTotal,
+			'page' => $page,
+			'html' => $html,
+			'pagination' => $pagination,
 		];
 	}
 
 	public function validateRequest(){
 		//prepare variabel disini aja sekalian
-		$this->draw = $this->request->draw;
+		$this->draw = $this->request->draw ?? 1;
 		$this->columns = $this->request->columns;
-		$this->start = $this->request->start;
-		$this->length = $this->request->length;
+		$this->start = $this->request->start ?? 0;
+		$this->length = $this->request->length ?? 10;
 
 		$validator = $this->request->validate([
-			'draw' => 'required|numeric',
 			'columns' => 'required|array',
 			'order' => 'array',
 			'start' => 'required',
@@ -98,8 +114,8 @@ trait DataTableProcessor
 
 		if(method_exists($this->skeleton, 'customFilter')){
 			$data = $this->skeleton->customFilter($data);
-			$without_filter = $this->skeleton->customFilter($without_filter);
 		}
+		$without_filter = clone $data;
 
 		$data = $data->orderBy($this->order_by, $this->order_dir);
 		$data = $data->skip($this->start);

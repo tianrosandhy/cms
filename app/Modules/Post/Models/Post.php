@@ -5,9 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Core\Shared\Translateable;
 use App\Core\Shared\Sluggable;
 use App\Core\Shared\ImageGrabable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
+	use HasFactory;
 	use Translateable;
 	use Sluggable;
 	use ImageGrabable;
@@ -16,6 +18,10 @@ class Post extends Model
 
 	public function slugTarget(){
 		return 'title';
+	}
+
+	protected static function newFactory(){
+		return \Database\Factories\PostFactory::new();
 	}
 	
 }
