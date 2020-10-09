@@ -137,7 +137,7 @@
 					<option value="">No Parent</option>
 					@foreach($struct as $label => $param)
 						@include ('navigation::partials.select-menu-item', [
-							'label' => $label,
+							'label' => $param['label'],
 							'param' => $param,
 							'level' => 0,
 							'selected' => isset($navigation->parent) ? $navigation->parent : null

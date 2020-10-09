@@ -11,7 +11,7 @@ for($i=0; $i<=$level; $i++){
 	?>
 	@foreach($param['submenu'] as $sublabel => $subparam)
 		@include ('navigation::partials.select-menu-item', [
-			'label' => $sublabel,
+			'label' => $subparam['label'],
 			'param' => $subparam,
 			'level' => $level,
 			'selected' => $selected
