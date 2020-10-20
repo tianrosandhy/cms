@@ -38,7 +38,7 @@ $(function(){
 			'columnDefs' : [
 				{!! $skeleton->datatableOrderable() !!}
 			],
-			"aaSorting": [[0,"desc"]],
+			"aaSorting": [{!! $skeleton->datatableDefaultOrder() !!}],
 		});
 
 	}, 500);

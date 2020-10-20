@@ -136,6 +136,23 @@ class BaseSkeleton
 		return $out;
 	}
 
+	public function datatableDefaultOrder(){
+		$order_data = '[0,"desc"]'; //fallback
+		$i = 0;
+		foreach($this->output() as $row){
+			if($row->getHideTable() == false){
+				if($row->getDefaultOrder()){
+					//kalau ada salah satu field yang set default order, langsung hentikan loop
+					$order_data = '['.$i.', "'.$row->getDefaultOrder().'"]';
+					break;
+				}
+				$i++;
+			}
+		}
+
+		return $order_data;
+	}
+
 	public function datatableColumns(){
 		$i = 0;
 		$out = '';

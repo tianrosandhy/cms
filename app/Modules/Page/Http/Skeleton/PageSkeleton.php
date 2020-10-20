@@ -25,9 +25,10 @@ class PageSkeleton extends BaseSkeleton
 				->hideTable()
 				->inputType('richtext')
 				->tabGroup('Description'),
-			DataStructure::field('map')
-				->name('Map')
-				->inputType('map'),
+			DataStructure::field('sort_no')
+				->name('Sort No')
+				->defaultOrder('asc')
+				->inputType('number'),
 			DataStructure::switcher('is_active', 'Is Active')
 		]);
 	}
@@ -45,7 +46,7 @@ class PageSkeleton extends BaseSkeleton
 			'id' => $this->checkerFormat($row),
 			'title' => $row->title,
 			'description' => $row->description,
-			'map' => '',
+			'sort_no' => $row->sort_no,
 			'is_active' => $this->switcherFormat($row, 'is_active', (Permission::has('admin.page.switch') ? 'toggle' : 'label')),
 			'action' => $this->actionButton($row)
 		];

@@ -13,6 +13,7 @@ class DataStructure
 	public 
 		$field,
 		$name,
+		$default_order,
 		$orderable,
 		$searchable,
 		$data_source,
@@ -221,6 +222,17 @@ class DataStructure
 
 	public function orderable($orderable=true){
 		$this->orderable = (bool)$orderable;
+		return $this;
+	}
+
+	public function defaultOrder($dir='desc'){
+		$allowed_dir = ['asc', 'desc'];
+		$dir = strtolower($dir);
+		if(!in_array($dir, $allowed_dir)){
+			$dir = 'desc';
+		}
+
+		$this->default_order = $dir;
 		return $this;
 	}
 
