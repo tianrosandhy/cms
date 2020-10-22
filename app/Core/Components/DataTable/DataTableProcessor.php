@@ -2,6 +2,7 @@
 namespace App\Core\Components\DataTable;
 
 use App\Core\Exceptions\DataTableException;
+use ColumnListing;
 
 trait DataTableProcessor
 {
@@ -105,8 +106,13 @@ trait DataTableProcessor
 
 		$without_filter = $data;
 
+		//data-data yang diluar column listing boleh diabaikan dari filter
+		$model_fields = ColumnListing::model($data);
 		if(!empty($this->filter)){
 			foreach($this->filter as $column => $value){
+				if(!in_array($column, $model_fields)){
+					continue;
+				}
 				//custom filtering diset lagi nanti
 				$data = $data->where($column, 'like', '%'.trim($value).'%');
 			}

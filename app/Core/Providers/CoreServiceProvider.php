@@ -121,6 +121,7 @@ class CoreServiceProvider extends BaseServiceProvider{
 		    'Language' => \App\Core\Facades\LanguageComponentFacade::class,
 		    'SlugMaster' => \App\Core\Facades\SlugMasterComponentFacade::class,
 		    'SEO' => \App\Core\Facades\SeoComponentFacade::class,
+		    'ColumnListing' => \App\Core\Facades\ColumnListingComponentFacade::class,
 		];
 
 		foreach($aliasData as $al => $src){
