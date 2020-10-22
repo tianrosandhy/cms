@@ -38,6 +38,7 @@ class [MODULE_NAME]Skeleton extends BaseSkeleton
 	}
 
 	//public function customFilter($context){
+	//	$searched_field = $this->getSearchField('field_name');
 	//	return $context;
 	//}
 

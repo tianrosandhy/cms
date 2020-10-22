@@ -39,6 +39,17 @@ trait SkeletonHelper
 		}
 	}
 
+	public function getSearchField($field_name){
+		$columns = $this->request->columns ?? [];
+		foreach($columns as $item){
+			$field = $item['data'] ?? null;
+			$value = $item['search']['value'] ?? null;
+			if(strtolower($field) == strtolower($field_name)){
+				return $value;
+			}
+		}
+		return null;
+	}
 
 
 
