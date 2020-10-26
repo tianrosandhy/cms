@@ -14,7 +14,7 @@
                     <label>Sort By</label>
                     <select id="{{ $skeleton->getSkeletonName() }}-sortby" class="form-control custom-datatable-filter">
                         @foreach($skeleton->structure as $ids => $structure)
-                            @if($structure->searchable)
+                            @if($structure->orderable)
                                 <?php
                                 $field_name = str_replace('[]', '', $structure->field);
                                 ?>
