@@ -80,7 +80,8 @@ function loadCustomDatatable(){
                     loadCustomDatatable();
                 }
                 else{
-                    objTarget.removeClass('in-progress');                
+                    objTarget.removeClass('in-progress');
+                    refreshPlugins();
                 }
             }
         },

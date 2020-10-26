@@ -152,6 +152,19 @@ function initPlugins(){
   refreshIcon();
 }
 
+function refreshPlugins(){
+  refreshSwitchery();
+  loadTouchspin();
+  loadTinyMce();
+  loadDatepicker();
+  loadSelect2();
+  loadFile();
+  loadMask();
+  refreshIcon();
+}
+
+
+
 function loadMask(){
   $(".input-currency").each(function(){
     str_decimal = '';
@@ -340,6 +353,31 @@ function loadSwitchery(){
     }
   });  
 }
+
+function refreshSwitchery(){
+  $("[yesno]").each(function(){
+    if(!$(this).is(':visible')){
+      return;
+    }
+    new Switchery($(this)[0], {
+      size : 'small'
+    });
+
+    if($(this).attr('data-target')){
+      $(this).on('change', function(){
+        chk = $(this).prop('checked');
+        if(chk){
+          cond = 1;
+        }
+        else{
+          cond = 0;
+        }
+        $($(this).attr('data-target')).val(cond);
+      });
+    }
+  });    
+}
+
 
 function loadTouchspin(){
   $("[touchspin]").each(function(){
