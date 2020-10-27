@@ -115,7 +115,14 @@ class BaseSkeleton
 				$out['columns'][$i]['search']['value'] = 'REPLACER-'.$i;
 				$out['columns'][$i]['searchable'] = $row->searchable;
 				$out['columns'][$i]['orderable'] = $row->orderable;
-				$replacer[$i] = '$("[data-id=\'datatable-filter-'.$fld.'\']").val()';
+
+				if(in_array($row->getInputType(), ['date', 'daterange', 'datetime'])){
+					//jika input type date / daterange / datetime, format replacer diganti menjadi array
+					$replacer[$i] = '[ $("[data-id=\'datatable-filter-'.$fld.'\']").first().val(), $("[data-id=\'datatable-filter-'.$fld.'\']").last().val() ]';
+				}
+				else{
+					$replacer[$i] = '$("[data-id=\'datatable-filter-'.$fld.'\']").val()';
+				}
 				$i++;
 			}
 		}

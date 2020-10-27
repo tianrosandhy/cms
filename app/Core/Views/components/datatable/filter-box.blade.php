@@ -11,11 +11,19 @@
 						$rfield = str_replace('[]', '', $row->getField());
 						?>
 						@if($row->getDataSource() == 'text')
-							{!! Input::text('datatable_filter['.$rfield.']', [
-								'attr' => [
-									'data-id' => 'datatable-filter-' . $rfield
-								]
-							]) !!}
+							@if(in_array($row->getInputType(), ['date', 'daterange', 'datetime']))
+								{!! Input::dateRange('datatable_filter['.$rfield.'][]', [
+									'attr' => [
+										'data-id' => 'datatable-filter-' . $rfield
+									]
+								]) !!}
+							@else
+								{!! Input::text('datatable_filter['.$rfield.']', [
+									'attr' => [
+										'data-id' => 'datatable-filter-' . $rfield
+									]
+								]) !!}
+							@endif
 						@else
 							<?php
 							$source = $row->getDataSource();

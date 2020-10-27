@@ -89,7 +89,6 @@ $(function(){
   $("[slug-master]").on('keypress', function(e){
     if(e.which == 13){
       e.preventDefault();
-      console.log('prevented');
       $(".btn-save-slug").click();
     }
   });
@@ -163,8 +162,6 @@ function refreshPlugins(){
   refreshIcon();
 }
 
-
-
 function loadMask(){
   $(".input-currency").each(function(){
     str_decimal = '';
@@ -179,7 +176,6 @@ function loadMask(){
 function loadFile(){
   $(".btn-add-file").on('click', function(e){
     e.preventDefault();
-    console.log($(this).closest('.input-file-holder').find('input[type=file]'));
     $(this).closest('.input-file-holder').find('input[type=file]').click();
   });
 
@@ -242,6 +238,10 @@ function loadSelect2(){
 
 function loadDatepicker(){
   $("[data-datepicker]").each(function(){
+    if($(this).is('.flatpickr-input, .flatpickr-input-active')){
+      return; //gausa diinit ulang
+    }
+
     config = {
       "altInput" : true,
       "mode" : "single",
@@ -292,7 +292,9 @@ function loadDatepicker(){
 
   //daterange function
   $("[daterange-holder] input").each(function(){
-    console.log($(this));
+    if($(this).is('.flatpickr-input, .flatpickr-input-active')){
+      return;
+    }
     config = {};
 
     if($(this).attr('data-mindate')){
@@ -321,7 +323,6 @@ function loadDatepicker(){
         sinstance.redraw();
       }
     }  
-    console.log(config);
     $(this).flatpickr(config);
   });
 }
@@ -331,27 +332,6 @@ function refreshIcon(){
   if(typeof feather != 'undefined'){
     feather.replace();
   }
-}
-
-function loadSwitchery(){
-  $("[yesno]").each(function(){
-    new Switchery($(this)[0], {
-      size : 'small'
-    });
-
-    if($(this).attr('data-target')){
-      $(this).on('change', function(){
-        chk = $(this).prop('checked');
-        if(chk){
-          cond = 1;
-        }
-        else{
-          cond = 0;
-        }
-        $($(this).attr('data-target')).val(cond);
-      });
-    }
-  });  
 }
 
 function refreshSwitchery(){
@@ -378,6 +358,26 @@ function refreshSwitchery(){
   });    
 }
 
+function loadSwitchery(){
+  $("[yesno]").each(function(){
+    new Switchery($(this)[0], {
+      size : 'small'
+    });
+
+    if($(this).attr('data-target')){
+      $(this).on('change', function(){
+        chk = $(this).prop('checked');
+        if(chk){
+          cond = 1;
+        }
+        else{
+          cond = 0;
+        }
+        $($(this).attr('data-target')).val(cond);
+      });
+    }
+  });  
+}
 
 function loadTouchspin(){
   $("[touchspin]").each(function(){
