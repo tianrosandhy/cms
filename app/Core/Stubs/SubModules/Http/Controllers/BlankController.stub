@@ -2,12 +2,12 @@
 namespace [NAMESPACE]\Http\Controllers;
 
 use App\Core\Http\Controllers\BaseController;
-use App\Modules\Post\Models\[MODULE_NAME];
-use App\Modules\Post\Presenters\[MODULE_NAME]IndexPresenter;
-use App\Modules\Post\Presenters\[MODULE_NAME]CrudPresenter;
-use App\Modules\Post\Http\Process\[MODULE_NAME]DatatableProcess;
-use App\Modules\Post\Http\Process\[MODULE_NAME]CrudProcess;
-use App\Modules\Post\Http\Process\[MODULE_NAME]DeleteProcess;
+use [NAMESPACE]\Models\[MODULE_NAME];
+use [NAMESPACE]\Presenters\[MODULE_NAME]IndexPresenter;
+use [NAMESPACE]\Presenters\[MODULE_NAME]CrudPresenter;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]DatatableProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]CrudProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]DeleteProcess;
 
 class [MODULE_NAME]Controller extends BaseController
 {

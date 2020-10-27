@@ -36,7 +36,7 @@ class BaseCrudProcess extends BaseProcess
 	}
 
 	public function validate(){
-		$validator = $this->skeleton->generateValidation($this->mode);
+		$validator = $this->skeleton->generateValidation($this->mode, $this->instance->getKey());
 		if($validator){
 			if($validator->fails()){
 				throw new ProcessException($validator);

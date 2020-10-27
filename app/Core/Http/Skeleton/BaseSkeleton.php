@@ -25,10 +25,13 @@ class BaseSkeleton
 		return $context;
 	}	
 
-	public function generateValidation($mode='create'){
+	public function generateValidation($mode='create', $id=null){
 		$prefix = '';
 		if($this->multi_language){
 			$prefix = '.' . Language::default();
+		}
+		if(empty($id)){
+			$id = 0;
 		}
 
 		$rule = [];
@@ -46,6 +49,11 @@ class BaseSkeleton
 		}
 
 		if($rule){
+			//replace [id] menjadi id yg sesuai tabel yg bersangkutan
+			$rule = array_map(function($item) use($id){
+				return str_replace('[id]', $id, $item);
+			}, $rule);
+
 			return Validator::make(request()->all(), $rule, $trans);
 		}
 	}
