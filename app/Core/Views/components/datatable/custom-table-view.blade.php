@@ -34,7 +34,8 @@
                 </div>
             </div>
         </div>
+        <div id="{{ $skeleton->getSkeletonName() }}-pagination-top" class="custom-pagination"></div>
         <div id="{{ $skeleton->getSkeletonName() }}" class="datatable-custom-view"></div>
-        <div id="{{ $skeleton->getSkeletonName() }}-pagination" class="custom-pagination"></div>
+        <div id="{{ $skeleton->getSkeletonName() }}-pagination-bottom" class="custom-pagination"></div>
     </div>
 </div>

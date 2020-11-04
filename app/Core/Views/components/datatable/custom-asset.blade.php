@@ -74,6 +74,7 @@ function loadCustomDatatable(){
             }
             else{
                 objTarget.html(resp.html);
+                objTarget.prev('.custom-pagination').html(resp.pagination);
                 objTarget.next('.custom-pagination').html(resp.pagination);
                 if(window.has_pending_progress){
                     window.has_pending_progress = false;
