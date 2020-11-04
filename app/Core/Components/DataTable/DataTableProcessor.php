@@ -25,7 +25,7 @@ trait DataTableProcessor
 			];
 		}
 
-		$page = ($this->start / 10) + 1;
+		$page = ($this->start / $this->length) + 1;
 		$pagination = view('core::components.datatable.custom-pagination', [
 			'page' => $page,
 			'max_page' => ceil($this->recordsTotal / $this->length)
