@@ -8,8 +8,10 @@ $(function(){
     }, 500);
 
     $(".custom-datatable-filter, .search-box input, .search-box select").on('change', function(){
-        $("#{{ $skeleton->getSkeletonName() }}-page").val(1);
-        loadCustomDatatable();
+        setTimeout(function(){
+            $("#{{ $skeleton->getSkeletonName() }}-page").val(1);
+            loadCustomDatatable();
+        }, 100);
     });
 
     $(document).on('click', '.custom-pagination a.page-link', function(){
@@ -27,12 +29,16 @@ $(function(){
 		$(this).fadeOut();
 	});
 
-    $('#{{ $skeleton->getSkeletonName() }}-perpage').on('keyup', function(e){
-        if(parseInt($(this).val()) > parseInt($(this).attr('max'))){
+    $('#{{ $skeleton->getSkeletonName() }}-perpage').on('change', function(e){
+        current_perpage = parseInt($(this).val());
+        if(isNaN(current_perpage)){
+            $(this).val($(this).attr('min')).trigger('change');
+        }
+        if(current_perpage > parseInt($(this).attr('max'))){
             e.preventDefault();
             $(this).val($(this).attr('max')).trigger('change');
         }
-        if(parseInt($(this).val()) < parseInt($(this).attr('min'))){
+        if(current_perpage < parseInt($(this).attr('min'))){
             e.preventDefault();
             $(this).val($(this).attr('min')).trigger('change');
         }

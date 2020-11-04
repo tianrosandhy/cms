@@ -13,12 +13,18 @@
                 <div class="form-group">
                     <label>Sort By</label>
                     <select id="{{ $skeleton->getSkeletonName() }}-sortby" class="form-control custom-datatable-filter">
+                        <?php
+                        $order_dir = 'asc';
+                        ?>
                         @foreach($skeleton->structure as $ids => $structure)
                             @if($structure->orderable)
                                 <?php
                                 $field_name = str_replace('[]', '', $structure->field);
+                                if($structure->default_order){
+                                    $order_dir = strtolower($structure->default_order);
+                                }
                                 ?>
-                                <option value="{{ $ids }}">{{ $structure->name }}</option>
+                                <option {{ $structure->default_order ? 'selected' : '' }} value="{{ $ids }}">{{ $structure->name }}</option>
                             @endif
                         @endforeach
                     </select>
@@ -28,8 +34,8 @@
                 <div class="form-group">
                     <label>Direction</label>
                     <select id="{{ $skeleton->getSkeletonName() }}-sortdir" class="form-control custom-datatable-filter">
-                        <option value="asc">Oldest First</option>
-                        <option value="desc">Newest First</option>
+                        <option value="asc" {{ $order_dir == 'asc' ? 'selected' : '' }}>Oldest First</option>
+                        <option value="desc" {{ $order_dir == 'desc' ? 'selected' : '' }}>Newest First</option>
                     </select>
                 </div>
             </div>
