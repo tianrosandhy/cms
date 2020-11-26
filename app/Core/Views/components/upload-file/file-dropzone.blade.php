@@ -24,12 +24,9 @@ if(!isset($name)){
 				$parse = json_decode($value, true);
 				?>
 				@if(isset($parse['filename']))
-					@if(ImageService::pathExists('files/'.$parse['filename']))
 					<div class="uploaded">
-						<span class="file-alias">{{ $parse['filename'] }}</span>
-						<span class="remove-asset-file" data-hash="{{ $hash }}">&times;</span>
+						<a href="{{ $parse['path'] ?? '#' }}" download class="file-alias">{{ $parse['filename'] }}</a><span class="remove-asset-file" data-hash="{{ $hash }}">&times;</span>
 					</div>
-					@endif
 				@endif
 			@endif
 		</div>		
