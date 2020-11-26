@@ -10,7 +10,7 @@ class UserCrudProcess extends BaseProcess
 {
 	public function __construct($instance=null){
 		parent::__construct();
-		if($instance){
+		if(isset($instance->id)){
 			$this->mode = 'update';
 		}
 		else{

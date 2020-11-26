@@ -7,7 +7,7 @@ use App\Core\Http\Skeleton\UserSkeleton;
 class UserCrudPresenter extends BaseViewPresenter
 {
 	public function __construct($instance=null){
-		if($instance){
+		if(isset($instance->id)){
 			$this->title = 'Edit User Data';
 		}
 		else{

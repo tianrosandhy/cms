@@ -19,7 +19,7 @@ class UserSkeleton extends BaseSkeleton
 			DataStructure::field('email')
 				->name('Email')
 				->inputType('email')
-				->createValidation('required|email', true),
+				->createValidation('required|email|unique:users,email,[id]', true),
 			DataStructure::view('core::pages.partials.user-crud-additional'),
 			DataStructure::field('password')
 				->name('Password')
