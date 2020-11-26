@@ -103,10 +103,6 @@ class BaseCrudProcess extends BaseProcess
 
 		}
 
-		if($this->request->save_only){
-			$this->setSuccessRedirectTarget(route('admin.page.edit', ['id' => $instance->id]));
-		}
-
 		// if you have another logic for storing data that doesnt cover by Skeleton, you can define them here.
 	}
 

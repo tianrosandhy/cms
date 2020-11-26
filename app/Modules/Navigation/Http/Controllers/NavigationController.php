@@ -27,7 +27,7 @@ class NavigationController extends BaseController
 	}
 
 	public function store(){
-		return (new NavigationCrudProcess)
+		return (new NavigationCrudProcess(new Navigation))
 			->type('http')
 			->handle();
 	}

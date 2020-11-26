@@ -22,7 +22,7 @@ class PageController extends BaseController
 	}
 
 	public function store(){
-		return (new \App\Modules\Page\Http\Process\PageCrudProcess)
+		return (new \App\Modules\Page\Http\Process\PageCrudProcess(new Page))
 			->type('http')
 			->handle();
 	}

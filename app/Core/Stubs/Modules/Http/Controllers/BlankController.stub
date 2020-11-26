@@ -27,7 +27,7 @@ class [MODULE_NAME]Controller extends BaseController
 	}
 
 	public function store(){
-		return (new [MODULE_NAME]CrudProcess)
+		return (new [MODULE_NAME]CrudProcess(new [MODULE_NAME]))
 			->type('http')
 			->handle();
 	}

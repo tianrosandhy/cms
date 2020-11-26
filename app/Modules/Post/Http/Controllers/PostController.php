@@ -27,7 +27,7 @@ class PostController extends BaseController
 	}
 
 	public function store(){
-		return (new PostCrudProcess)
+		return (new PostCrudProcess(new Post))
 			->type('http')
 			->handle();
 	}

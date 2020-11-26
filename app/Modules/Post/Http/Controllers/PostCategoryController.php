@@ -27,7 +27,7 @@ class PostCategoryController extends BaseController
 	}
 
 	public function store(){
-		return (new PostCategoryCrudProcess)
+		return (new PostCategoryCrudProcess(new PostCategory))
 			->type('http')
 			->handle();
 	}

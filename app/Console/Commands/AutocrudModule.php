@@ -85,6 +85,7 @@ class AutocrudModule extends Command
             	'Routes/web.php',
             	'Services/'.$this->module_name.'Instance.php',
             	'Translations/en/module.php',
+                'Views/crud.blade.php',
             ]);
 
             $this->info('New module has been created for you. Now you just need to register the service provider (in config/modules.php or in config/app.php) , manage migration, manage the model and skeleton.');
