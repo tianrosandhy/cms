@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Core\Http\Middleware\ForceHttps::class,
         ],
 
         'backend' => [
@@ -46,6 +47,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Core\Http\Middleware\AdminAuth::class,
+            \App\Core\Http\Middleware\ForceHttps::class,
         ],
 
         'backend_guest' => [
@@ -55,6 +57,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Core\Http\Middleware\AdminGuest::class,
+            \App\Core\Http\Middleware\ForceHttps::class,
         ],
 
         'api' => [
