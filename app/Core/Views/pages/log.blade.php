@@ -32,27 +32,11 @@
 </div>
 
 <div class="content-box card card-body">
-	<h4>Mail Error Reporting Feature</h4>
+	<h4>Error Reporting Service</h4>
 	<?php
 	$use_email_log = setting('log.active');
-	$email_receiver = setting('log.email_receiver');
 	?>
 	@if($use_email_log)
-<?php
-/*
-		@if(!$email_receiver)
-		<div class="alert alert-warning">You are still not set the email receiver for mail error reporting feature. You can set the email receiver in <a href="#" class="btn btn-sm btn-warning right-bar-toggle">Setting >> Log</a></div>
-		@else
-		<div class="alert alert-success">
-			Email error reporting feature is currently active. Any error log report in this site will be sent to <strong>{{ $email_receiver }}</strong>. 
-			@if(config('app.env') != 'production' && config('app.env') != 'live')
-			<br>
-			Make sure you already create the cronjob for command <strong>php artisan logmaster:send</strong> with your free interval, so the email reporting will be sent when needed.
-			@endif
-		</div>
-		@endif
-*/
-?>
 		@if($stored_log->count() > 0)
 		<div class="alert alert-info">Below are {{ $stored_log_count }} {{ $stored_log_count > $stored_log->count() ? '('.$stored_log->count().' latest data shown) ' : '' }} unreported exception in this site. You can <a href="{{ route('admin.log.mark-as-reported') }}" class="btn btn-secondary btn-sm">Mark All as Reported</a> if you dont want to receive the email error reporting notification for these records.</div>
 		<div class="card card-body">
@@ -100,9 +84,11 @@
 
 @push ('modal')
 <div class="modal fade fill-in" id="stacktrace-modal" tabindex="-1" role="dialog" aria-hidden="true">
-	<button type="button" class="modal-custom-close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
 			<div class="modal-body default-modal-content">
 
 			</div>
