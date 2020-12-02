@@ -7,3 +7,4 @@ Route::post('switcher-master', 'ComponentController@switcherMaster')->name('admi
 Route::post('post-document', 'ComponentController@postDocument')->name('admin.post-document');
 Route::post('delete-document', 'ComponentController@deleteDocument')->name('admin.delete-document');
 Route::get('analytic-dashboard', 'ComponentController@analyticDashboardReport')->name('admin.analytic.dashboard');
+Route::match(['get', 'post'], 'switchlang', 'ComponentController@switchLang')->name('admin.lang.switch');

@@ -26,6 +26,7 @@
         </ul>
 
         <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
+            @include ('core::layouts.partials.header.language-toggle')
             @include ('core::layouts.partials.header.notification')
 
             @if(Permission::has('admin.setting.store'))

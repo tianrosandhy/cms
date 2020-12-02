@@ -17,13 +17,13 @@ class UserPresenter extends BaseViewPresenter
 
 		$this->control_buttons[] = [
 			'url' => admin_url('/'),
-			'label' => 'Back to Homepage',
+			'label' => __('core::module.global.back_to_homepage'),
 			'icon' => 'home'
 		];
 		if(Permission::has('admin.user.create')){
 			$this->control_buttons[] = [
 				'url' => route('admin.user.create'),
-				'label' => 'Add User',
+				'label' => __('core::module.form.add_data'),
 				'type' => 'success',
 				'icon' => 'plus'
 			];

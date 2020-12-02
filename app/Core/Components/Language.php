@@ -3,6 +3,7 @@ namespace App\Core\Components;
 
 use App\Core\Shared\DynamicProperty;
 use App\Core\Models\Language as Model;
+use App;
 
 class Language
 {
@@ -228,7 +229,9 @@ class Language
 		return $out;
 	}
 
-
+	public function current(){
+		return session('lang');
+	}
 
 	public function default($field='code'){
 		$grab = app('language')->where('is_default_language', 1)->first();

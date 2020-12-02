@@ -21,7 +21,7 @@ class [MODULE_NAME]IndexPresenter extends BaseViewPresenter
 		if(!config('module-setting.[LOWERCASE_MODULE_NAME].hide_back_to_homepage_button')){
 			$this->control_buttons[] = [
 				'url' => admin_url('/'),
-				'label' => 'Back to Homepage',
+				'label' => '{{ __('core::module.global.back_to_homepage') }}',
 				'icon' => 'home'
 			];
 		}
@@ -29,7 +29,7 @@ class [MODULE_NAME]IndexPresenter extends BaseViewPresenter
 			if(Permission::has('admin.[LOWERCASE_MODULE_NAME].create')){
 				$this->control_buttons[] = [
 					'url' => route('admin.[LOWERCASE_MODULE_NAME].create'),
-					'label' => 'Add Data',
+					'label' => __('core::module.form.add_data'),
 					'type' => 'success',
 					'icon' => 'plus'
 				];

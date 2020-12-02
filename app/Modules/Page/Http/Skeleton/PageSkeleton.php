@@ -58,7 +58,7 @@ class PageSkeleton extends BaseSkeleton
 			$out .= '<a href="'.route('admin.page.edit', ['id' => $row->id]).'" class="btn btn-info">Edit</a>';
 		}
 		if(Permission::has('admin.page.delete')){
-			$out .= '<a href="'.route('admin.page.delete', ['id' => $row->id]).'" class="btn btn-danger delete-button">Delete</a>';
+			$out .= '<a href="'.route('admin.page.delete', ['id' => $row->id]).'" class="btn btn-danger delete-button">'. __('core::module.form.delete') .'</a>';
 		}
 		return $out;
 	}

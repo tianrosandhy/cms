@@ -9,6 +9,7 @@ use Media;
 use DB;
 use Validator;
 use Storage;
+use Language;
 
 class ComponentController extends BaseController
 {
@@ -189,4 +190,15 @@ class ComponentController extends BaseController
 		));		
 	}
 
+
+
+	public function switchLang(){
+		$available_lang = Language::available();
+		if($this->request->lang){
+			if(isset($available_lang[$this->request->lang])){
+				session(['lang' => $this->request->lang]);
+			}
+		}
+		return redirect()->back();
+	}
 }

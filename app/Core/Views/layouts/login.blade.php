@@ -18,14 +18,13 @@
                                             @include ('core::layouts.include.logo', ['height' => 50])
                                         </div>
 
-                                        <h6 class="h5 mb-0 mt-4">Welcome back!</h6>
-                                        <p class="text-muted mt-1 mb-4">Enter your email address and password to
-                                            access admin panel.</p>
+                                        <h6 class="h5 mb-0 mt-4">{{ __('core::module.login.h1') }}</h6>
+                                        <p class="text-muted mt-1 mb-4">{{ __('core::module.login.h2') }}</p>
 
                                         <form action="#" class="authentication-form" method="post">
                                             {{ csrf_field() }}
                                             <div class="form-group">
-                                                <label class="form-control-label">Email Address</label>
+                                                <label class="form-control-label">Email</label>
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">
@@ -53,9 +52,8 @@
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input"
                                                         id="checkbox-signin" checked name="remember" value="1">
-                                                    <label class="custom-control-label" for="checkbox-signin">Remember
-                                                        me</label>
-                                                    <a href="#" class="float-right text-muted text-unline-dashed ml-1" data-toggle="modal" data-target="#forgot-password-modal">Forgot your password?</a>
+                                                    <label class="custom-control-label" for="checkbox-signin">{{ __('core::module.login.remember_me') }}</label>
+                                                    <a href="#" class="float-right text-muted text-unline-dashed ml-1" data-toggle="modal" data-target="#forgot-password-modal">{{ __('core::module.login.forgot_password') }}</a>
                                                 </div>
                                             </div>
 
@@ -90,17 +88,17 @@
                 <form action="{{ route('admin.forgot-password') }}" method="post">
                     {{ csrf_field() }}
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Forgot Password?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ __('core::module.login.forgot_password') }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>If you forgot your password, please type your account email and we will send the password reset link to your email.</p>
+                        <p>{{ __('core::module.login.forgot_description') }}</p>
                         <input type="email" name="email" class="form-control" placeholder="your@email.com">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('core::module.form.close') }}</button>
                         <button type="submit" class="btn btn-primary">Reset Password</button>
                     </div>
                 </form>

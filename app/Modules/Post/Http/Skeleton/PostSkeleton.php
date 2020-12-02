@@ -77,7 +77,7 @@ class PostSkeleton extends BaseSkeleton
 			$out .= '<a href="'.route('admin.post.edit', ['id' => $row->id]).'" class="btn btn-info">Edit</a>';
 		}
 		if(Permission::has('admin.post.delete')){
-			$out .= '<a href="'.route('admin.post.delete', ['id' => $row->id]).'" class="btn btn-danger delete-button">Delete</a>';
+			$out .= '<a href="'.route('admin.post.delete', ['id' => $row->id]).'" class="btn btn-danger delete-button">'. __('core::module.form.delete') .'</a>';
 		}
 		return $out;
 	}

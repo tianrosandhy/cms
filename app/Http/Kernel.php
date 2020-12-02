@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Core\Http\Middleware\ForceHttps::class,
+            \App\Core\Http\Middleware\SetLocale::class,
         ],
 
         'backend' => [
@@ -48,6 +49,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Core\Http\Middleware\AdminAuth::class,
             \App\Core\Http\Middleware\ForceHttps::class,
+            \App\Core\Http\Middleware\SetLocale::class,
         ],
 
         'backend_guest' => [
@@ -58,6 +60,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Core\Http\Middleware\AdminGuest::class,
             \App\Core\Http\Middleware\ForceHttps::class,
+            \App\Core\Http\Middleware\SetLocale::class,
         ],
 
         'api' => [

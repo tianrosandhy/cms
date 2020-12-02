@@ -18,13 +18,13 @@
                     </a>
 */
 ?>
-                </span>Notification
+                </span>{{ __('core::module.global.notification') }}
             </h5>
         </div>
 
         <div class="slimscroll noti-scroll">
             <div class="dropdown-item">
-                <p class="text-mute">No notifications</p>
+                <p class="text-mute">{{ __('core::module.global.no_notification') }}</p>
             </div>
 <?php
 /*            

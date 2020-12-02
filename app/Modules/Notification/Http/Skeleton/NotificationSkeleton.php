@@ -72,7 +72,7 @@ class NotificationSkeleton extends BaseSkeleton
 	protected function actionButton($row){
 		$out = '';
 		if(Permission::has('admin.notification.delete')){
-			$out .= '<a href="'.route('admin.notification.delete', ['id' => $row->id]).'" class="btn btn-danger delete-button">Delete</a>';
+			$out .= '<a href="'.route('admin.notification.delete', ['id' => $row->id]).'" class="btn btn-danger delete-button">'. __('core::module.form.delete') .'</a>';
 		}
 		return $out;
 	}

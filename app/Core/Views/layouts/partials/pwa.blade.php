@@ -4,7 +4,7 @@
 <div id="offline-notification" class="online">
   <div class="offline-wrapper bg-danger text-white">
     <div class="container-fluid">
-      Oops, your internet is disconnected. Please check your signal
+      {{ __('core::global.internet_disconnect') }}
     </div>
   </div>
 </div>

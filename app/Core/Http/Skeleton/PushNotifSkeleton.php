@@ -60,7 +60,7 @@ class PushNotifSkeleton extends BaseSkeleton
 		if(!$is_sa){
 			if(Permission::has('admin.push-notif.delete')){
 				$out .= '
-				<a href="'. route('admin.push-notif.delete', ['id' => $row->id]) .'" class="btn btn-danger delete-button">Delete</a>
+				<a href="'. route('admin.push-notif.delete', ['id' => $row->id]) .'" class="btn btn-danger delete-button">'. __('core::module.form.delete') .'</a>
 				';
 			}
 		}

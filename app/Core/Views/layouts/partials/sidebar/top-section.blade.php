@@ -14,14 +14,14 @@
         <div class="dropdown-menu profile-dropdown">
             <a href="{{ route('admin.my-profile') }}" class="dropdown-item notify-item">
                 <i data-feather="user" class="icon-dual icon-xs mr-2"></i>
-                <span>My Profile</span>
+                <span>{{ __('core::module.global.my_profile') }}</span>
             </a>
 
             <div class="dropdown-divider"></div>
 
             <a href="{{ route('admin.logout') }}" class="dropdown-item notify-item">
                 <i data-feather="log-out" class="icon-dual icon-xs mr-2"></i>
-                <span>Logout</span>
+                <span>{{ __('core::module.global.logout') }}</span>
             </a>
         </div>
     </div>

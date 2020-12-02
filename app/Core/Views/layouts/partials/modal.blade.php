@@ -4,7 +4,7 @@
         <a href="javascript:void(0);" class="right-bar-toggle float-right">
             <i data-feather="x-circle"></i>
         </a>
-        <h5 class="m-0">Setting</h5>
+        <h5 class="m-0">{{ __('core::module.global.setting') }}</h5>
     </div>
 
     <div class="slimscroll-menu">

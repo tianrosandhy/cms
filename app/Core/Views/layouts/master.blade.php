@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ Language::current() }}">
 <head>
 	@include ('core::layouts.partials.metadata')
 </head>

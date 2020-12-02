@@ -86,7 +86,7 @@ class UserSkeleton extends BaseSkeleton
 		if(!$is_sa){
 			if(Permission::has('admin.user.delete')){
 				$out .= '
-				<a href="'. route('admin.user.delete', ['id' => $row->id]) .'" class="btn btn-danger delete-button">Delete</a>
+				<a href="'. route('admin.user.delete', ['id' => $row->id]) .'" class="btn btn-danger delete-button">'. __('core::module.form.delete') .'</a>
 				';
 			}
 		}

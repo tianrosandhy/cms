@@ -85,6 +85,7 @@ class AutocrudModule extends Command
             	'Routes/web.php',
             	'Services/'.$this->module_name.'Instance.php',
             	'Translations/en/module.php',
+            	'Translations/id/module.php',
                 'Views/crud.blade.php',
             ]);
 

@@ -17,7 +17,7 @@ class PushNotifPresenter extends BaseViewPresenter
 
 		$this->control_buttons[] = [
 			'url' => admin_url('/'),
-			'label' => 'Back to Homepage',
+			'label' => __('core::module.global.back_to_homepage'),
 			'icon' => 'home'
 		];
 		if(Permission::has('admin.push-notif.create')){
