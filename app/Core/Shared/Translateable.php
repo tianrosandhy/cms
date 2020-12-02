@@ -22,7 +22,7 @@ trait Translateable
 	public function outputTranslate($field, $lang=null){
 		$fallback = $this->{$field};
 		if(empty($lang)){
-			$lang = Language::default();
+			$lang = Language::current();
 		}
 		$grab = $this->translate->where('lang', $lang)->first();
 		return $grab->{$field} ?? $fallback;

@@ -62,6 +62,9 @@ class GoogleAnalyticDashboard
 		$json_data = json_decode($e->getMessage(), true);
 		$err_code = $json_data['error']['code'] ?? 0;
 		$err_message = $json_data['error']['message'] ?? null;
+		if(empty($err_message)){
+			$err_message = $json_data['error_description'] ?? null;
+		}
 
 		if($err_message || $err_code){
 			$this->error_code = $err_code;
