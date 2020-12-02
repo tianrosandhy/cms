@@ -11,7 +11,7 @@ class SidebarGenerator extends SidebarRegistration
 		if(canSendPushNotif()){
 			$this->registerSidebars([
 				SidebarItem::setName('ADMIN.Notification')
-					->setLabel('Blast Notification')
+					->setLabel(__('notification::module.menu.notification'))
 					->setRoute('admin.notification.index')
 					->setIcon('bell')
 					->setSortNo(80)

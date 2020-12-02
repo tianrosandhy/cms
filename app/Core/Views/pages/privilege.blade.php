@@ -5,7 +5,7 @@
 		'control_buttons' => [
 			[
 				'url' => admin_url('/'),
-				'label' => __('core::module.global.back_to_homepage') }}',
+				'label' => __('core::module.global.back_to_homepage'),
 				'icon' => 'home'
 			],
 			[

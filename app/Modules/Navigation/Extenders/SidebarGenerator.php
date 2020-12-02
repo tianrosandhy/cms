@@ -10,7 +10,7 @@ class SidebarGenerator extends SidebarRegistration
 		// generate sidebar for core menus
 		$this->registerSidebars([
 			SidebarItem::setName('ADMIN.Navigation')
-				->setLabel('Navigation')
+				->setLabel(__('navigation::module.menu.navigation'))
 				->setRoute('admin.navigation.index')
 				->setIcon('menu')
 				->setSortNo(3)

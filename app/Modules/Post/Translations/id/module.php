@@ -11,4 +11,10 @@ return [
 		'edit' => 'Update Kategori Post',
 	],
 
+	'menu' => [
+		'post' => 'Postingan',
+		'post_data' => 'Data Post',
+		'post_category' => 'Kategori Post',
+	]
+
 ];

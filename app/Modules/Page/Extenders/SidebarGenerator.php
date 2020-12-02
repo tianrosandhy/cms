@@ -10,7 +10,7 @@ class SidebarGenerator extends SidebarRegistration
 		// generate sidebar for core menus
 		$this->registerSidebars([
 			SidebarItem::setName('ADMIN.PAGE')
-				->setLabel('Page')
+				->setLabel(__('page::module.menu.page'))
 				->setRoute('admin.page.index')
 				->setIcon('paperclip')
 				->setSortNo(5)
