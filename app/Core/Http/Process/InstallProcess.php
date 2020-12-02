@@ -25,7 +25,6 @@ class InstallProcess extends BaseProcess
 		Artisan::call('migrate');
 		//validation process
 		$validator = Validator::make($this->request->all(), [
-			'title' => 'required',
 			'name' => 'required',
 			'email' => 'required|email|unique:users',
 			'password' => 'required|confirmed|min:6'

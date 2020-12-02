@@ -25,16 +25,6 @@
 			<form action="" method="post">
 				{{ csrf_field() }}
 				<div class="form-group">
-					<label>Site Name *</label>
-					<input type="text" class="form-control" name="title" value="{{ old('title') }}">
-				</div>
-				<div class="form-group">
-					<label>Site Description</label>
-					<input type="text" class="form-control" name="description" value="{{ old('description') }}">
-				</div>
-				<br>
-				<br>
-				<div class="form-group">
 					<label>Default Admin Full Name  *</label>
 					<input type="text" name="name" class="form-control" value="{{ old('name') }}" placeholder="Your Name">
 				</div>
