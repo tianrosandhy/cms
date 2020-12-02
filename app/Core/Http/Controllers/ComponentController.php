@@ -4,6 +4,7 @@ namespace App\Core\Http\Controllers;
 use App\Core\Http\Controllers\BaseController;
 use App\Core\Presenters\BaseViewPresenter;
 use App\Core\Exceptions\MediaException;
+use App\Core\Components\GoogleAnalyticDashboard;
 use Media;
 use DB;
 use Validator;
@@ -154,6 +155,38 @@ class ComponentController extends BaseController
 			return abort(403);
 		}
 
+	}
+
+
+
+
+
+	public function analyticDashboardReport(){
+		$datediff = 30; //normalnya analytic dalam date range bulanan
+		$period_string = 'this week';
+		if(is_array($this->request->period)){
+			//must be an array with date values
+			if(count($this->request->period) <> 2){
+				return '<div class="alert alert-danger">Invalid date format</div>';
+			}
+			if(!strtotime($this->request->period[0]) || !strtotime($this->request->period[1])){
+				return '<div class="alert alert-danger">Invalid date format inputted</div>';
+			}
+
+			if(strtotime($this->request->period[0]) > strtotime($this->request->period[1])){
+				return '<div class="alert alert-danger">Invalid date range. Please input the right start and end date</div>';
+			}
+
+			$datediff = (strtotime($this->request->period[1]) - strtotime($this->request->period[0])) / 86400;
+			$period_string = date('d M Y', strtotime($this->request->period[0])) . ' - ' . date('d M Y', strtotime($this->request->period[1]));
+		}
+		$analytic = new GoogleAnalyticDashboard($this->request->all());
+
+		return view('core::components.analytic.dashboard-inner', compact(
+			'analytic',
+			'datediff',
+			'period_string'
+		));		
 	}
 
 }
