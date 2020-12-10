@@ -4,7 +4,7 @@
 <div id="offline-notification" class="online">
   <div class="offline-wrapper bg-danger text-white">
     <div class="container-fluid">
-      {{ __('core::global.internet_disconnect') }}
+      {{ __('core::module.global.internet_disconnect') }}
     </div>
   </div>
 </div>
