@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Core\Http\Middleware\ForceHttps::class,
             \App\Core\Http\Middleware\SetLocale::class,
+            \App\Core\Http\Middleware\SecurityHeader::class,
         ],
 
         'backend' => [
@@ -50,6 +51,7 @@ class Kernel extends HttpKernel
             \App\Core\Http\Middleware\AdminAuth::class,
             \App\Core\Http\Middleware\ForceHttps::class,
             \App\Core\Http\Middleware\SetLocale::class,
+            \App\Core\Http\Middleware\SecurityHeader::class,
         ],
 
         'backend_guest' => [
@@ -61,6 +63,7 @@ class Kernel extends HttpKernel
             \App\Core\Http\Middleware\AdminGuest::class,
             \App\Core\Http\Middleware\ForceHttps::class,
             \App\Core\Http\Middleware\SetLocale::class,
+            \App\Core\Http\Middleware\SecurityHeader::class,
         ],
 
         'api' => [
