@@ -19,6 +19,7 @@ class BaseViewPresenter
 
 	public function setDefaultProperty(){
 		$request = request();
+		$this->request = $request;
 		$this->user = $request->get('user');
 		$this->role = $request->get('role');
 		$this->is_sa = $request->get('is_sa');
