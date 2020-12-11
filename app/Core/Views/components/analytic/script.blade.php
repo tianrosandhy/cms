@@ -30,9 +30,30 @@
 			scales : {
 				yAxes : [{
 					ticks : {
-						beginAtZero : true
+						beginAtZero : true,
+						callback: function(value, index, values) {
+						if(parseInt(value) >= 1000){
+							return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+						} else {
+							return value;
+						}
+						}						
 					}
 				}]
+			},
+			tooltips : {
+				callbacks : {
+					label: function(tooltipItem, data) {
+						console.log(tooltipItem, data);
+						var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+						var label = data.datasets[tooltipItem.datasetIndex].label;
+						if(parseInt(value) >= 1000){
+							return label + ' : ' + value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+						} else {
+							return label + ' : ' + value;
+						}
+					}					
+				}
 			}
 		}
 	});
