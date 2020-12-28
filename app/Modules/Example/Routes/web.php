@@ -1,0 +1,2 @@
+<?php
+generateAdminRoute('example', 'ExampleController');
