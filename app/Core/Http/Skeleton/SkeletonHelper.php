@@ -112,7 +112,7 @@ trait SkeletonHelper
 					if($row->input_type == 'map'){
 						$value_for_saved = !empty($value_for_saved) ? json_encode($value_for_saved) : null;
 					}
-					if($row->input_type == 'image_multiple'){
+					if($row->input_type == 'image_multiple' && is_array($value_for_saved)){
 						$value_for_saved = implode('|', $value_for_saved);
 					}
 

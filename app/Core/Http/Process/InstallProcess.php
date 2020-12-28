@@ -12,15 +12,6 @@ class InstallProcess extends BaseProcess
 {
 	use InstallerTrait;
 
-	public function config(){
-		return [
-			'error_redirect_target' => route('cms.install'),
-			'success_redirect_target' => admin_url('/'),
-			'success_message' => 'Your site has been installed successfully',
-			'error_message' => null
-		];
-	}
-
 	public function validate(){
 		Artisan::call('migrate');
 		//validation process

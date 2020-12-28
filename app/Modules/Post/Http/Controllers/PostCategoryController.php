@@ -28,6 +28,7 @@ class PostCategoryController extends BaseController
 
 	public function store(){
 		return (new PostCategoryCrudProcess(new PostCategory))
+			->setSuccessRedirectTarget(route('admin.post_category.index'))
 			->type('http')
 			->handle();
 	}
@@ -40,13 +41,14 @@ class PostCategoryController extends BaseController
 	public function update($id){
 		$data = PostCategory::findOrFail($id);
 		return (new PostCategoryCrudProcess($data))
+			->setSuccessRedirectTarget(route('admin.post_category.index'))
 			->type('http')
 			->handle();
 	}
 	
 	public function delete($id=null){
 		return (new PostCategoryDeleteProcess)
-			->setModel(new PageCategory)
+			->setModel(new PostCategory)
 			->setId($id)
 			->type('ajax')
 			->handle();

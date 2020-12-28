@@ -1,22 +1,14 @@
 <?php
 namespace App\Modules\Notification\Http\Process;
 
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Http\Process\BaseDeleteProcess;
 use App\Core\Exceptions\ProcessException;
 use App\Modules\Notification\Http\Skeleton\NotificationSkeleton;
 use Validator;
 use App\Modules\Notification\Models\NotificationSent;
 
-class NotificationDeleteProcess extends BaseProcess
+class NotificationDeleteProcess extends BaseDeleteProcess
 {
-	public function config(){
-		return [
-			'error_redirect_target' => null, //ex : url('your-url-when-fail')
-			'success_redirect_target' => null, //ex : url('your-url-when-success')
-			'success_message' => 'Your data has been deleted successfully',
-			'error_message' => null
-		];
-	}
 
 	public function validate(){
 		$validate = Validator::make($this->request->all(), [

@@ -10,15 +10,6 @@ class LoginProcess extends BaseProcess
 {
 	use ThrottlesLogin;
 
-	public function config(){
-		return [
-			'error_redirect_target' => route('admin.login'), //ex : url('your-url-when-fail')
-			'success_redirect_target' => admin_url('/'), //ex : url('your-url-when-success')
-			'success_message' => 'Your have logged in successfully',
-			'error_message' => null
-		];
-	}
-
 	public function validate(){
 		$validate = Validator::make($this->request->all(), [
 			'email' => 'required|email',

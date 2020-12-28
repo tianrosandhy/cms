@@ -10,17 +10,20 @@ class InstallController extends BaseController
 	use InstallerTrait;
 
 	public function index(){
-		$p = new InstallPresenter;
-		$p->setHasInstall($this->checkHasInstall());
-		$p->setDb($this->checkDatabaseConnection());
-		$p->setEnv($this->getEnv());
-		return $p->render();
+		return (new InstallPresenter)
+			->setHasInstall($this->checkHasInstall())
+			->setDb($this->checkDatabaseConnection())
+			->setEnv($this->getEnv())
+			->render();
 	}
 
 	public function process(){
-		$process = new InstallProcess();
-		$process->type('http');
-		return $process->handle();
+		return (new InstallProcess)
+			->setErrorRedirectTarget(route('cms.install'))
+			->setSuccessRedirectTarget(admin_url('/'))
+			->setSuccessMessage('Your site has been installed successfully')
+			->type('http')
+			->handle();
 	}
 
 

@@ -28,6 +28,7 @@ class NavigationController extends BaseController
 
 	public function store(){
 		return (new NavigationCrudProcess(new Navigation))
+			->setSuccessRedirectTarget(route('admin.navigation.index'))
 			->type('http')
 			->handle();
 	}
@@ -40,6 +41,7 @@ class NavigationController extends BaseController
 	public function update($id){
 		$data = Navigation::findOrFail($id);
 		return (new NavigationCrudProcess($data))
+			->setSuccessRedirectTarget(route('admin.navigation.index'))
 			->type('http')
 			->handle();
 	}

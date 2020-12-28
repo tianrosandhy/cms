@@ -1,21 +1,13 @@
 <?php
 namespace App\Modules\Navigation\Http\Process;
 
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Http\Process\BaseDeleteProcess;
 use App\Core\Exceptions\ProcessException;
 use App\Modules\Navigation\Http\Skeleton\NavigationSkeleton;
 use Validator;
 
-class NavigationDeleteProcess extends BaseProcess
+class NavigationDeleteProcess extends BaseDeleteProcess
 {
-	public function config(){
-		return [
-			'error_redirect_target' => null, //ex : url('your-url-when-fail')
-			'success_redirect_target' => null, //ex : url('your-url-when-success')
-			'success_message' => 'Your data has been deleted successfully',
-			'error_message' => null
-		];
-	}
 
 	public function validate(){
 		$validate = Validator::make($this->request->all(), [

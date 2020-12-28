@@ -7,14 +7,6 @@ use Validator;
 
 class ProfileProcess extends BaseProcess
 {
-	public function config(){
-		return [
-			'error_redirect_target' => route('admin.my-profile'), //ex : url('your-url-when-fail')
-			'success_redirect_target' => route('admin.my-profile'), //ex : url('your-url-when-success')
-			'success_message' => 'Your profile has been updated successfully',
-			'error_message' => null
-		];
-	}
 
 	public function validate(){
 		$validate = Validator::make($this->request->all(), [

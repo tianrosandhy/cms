@@ -23,5 +23,9 @@ class Post extends BaseModel
 	protected static function newFactory(){
 		return \Database\Factories\PostFactory::new();
 	}
+
+	public function category(){
+		return $this->belongsTo('App\Modules\Post\Models\PostCategory');
+	}
 	
 }

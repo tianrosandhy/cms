@@ -18,6 +18,7 @@ class Post extends Migration
             $table->string('title')->nullable();
             $table->text('excerpt')->nullable();
             $table->text('author')->nullable();
+            $table->integer('category_id')->nullable();
             $table->text('description')->nullable();
             $table->string('tags')->nullable();
             $table->string('image')->nullable();

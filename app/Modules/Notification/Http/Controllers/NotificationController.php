@@ -44,6 +44,7 @@ class NotificationController extends BaseController
 	public function update($id){
 		$data = Notification::findOrFail($id);
 		return (new NotificationCrudProcess($data))
+			->setSuccessRedirectTarget(route('admin.notification.index'))
 			->type('http')
 			->handle();
 	}

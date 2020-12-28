@@ -5,6 +5,7 @@ use App\Core\Presenters\PrivilegePresenter;
 use App\Core\Components\RoleStructure;
 use App\Core\Models\Role;
 use Permission;
+use App\Core\Http\Process\PrivilegeCrudProcess;
 
 trait PrivilegeController
 {
@@ -24,7 +25,8 @@ trait PrivilegeController
 	}
 
 	public function privilegeStore(){
-		return (new \App\Core\Http\Process\PrivilegeCrudProcess)
+		return (new PrivilegeCrudProcess)
+			->setSuccessMessage('Your privilege has been saved successfully')
 			->handle();
 	}
 
@@ -47,7 +49,8 @@ trait PrivilegeController
 		if(empty($data)){
 			abort(404);
 		}
-		return (new \App\Core\Http\Process\PrivilegeCrudProcess($data))
+		return (new PrivilegeCrudProcess($data))
+			->setSuccessMessage('Your privilege has been saved successfully')
 			->handle();
 
 	}

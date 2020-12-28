@@ -4,6 +4,7 @@ namespace App\Modules\Post\Http\Skeleton;
 use DataStructure;
 use App\Core\Http\Skeleton\BaseSkeleton;
 use App\Modules\Post\Models\Post;
+use App\Modules\Post\Models\PostCategory;
 use Permission;
 
 class PostSkeleton extends BaseSkeleton
@@ -22,6 +23,13 @@ class PostSkeleton extends BaseSkeleton
 				->validationTranslation([
 					'title.required' => 'Judulnya isi cuk'
 				]),
+			DataStructure::field('category_id')
+				->name('Category')
+				->inputType('select')
+				->dataSource(function(){
+					$cats = PostCategory::get(['id', 'title']);
+					return $cats->pluck('title', 'id')->toArray();
+				}),
 			DataStructure::field('excerpt')
 				->name('Excerpt')
 				->inputType('textarea')
@@ -63,6 +71,7 @@ class PostSkeleton extends BaseSkeleton
 			'id' => $this->checkerFormat($row),
 			'title' => $row->title,
 			'excerpt' => descriptionMaker($row->excerpt, 15),
+			'category_id' => $row->category->title ?? '-',
 			'author' => $row->author,
 			'description' => $row->description,
 			'image' => '<img src="'.$row->getImageUrl('image', 'thumb').'">',

@@ -21,17 +21,9 @@ class UserCrudProcess extends BaseProcess
 	}
 
 
-	public function config(){
-		return [
-			'error_redirect_target' => null, //ex : url('your-url-when-fail')
-			'success_redirect_target' => route('admin.user.index'), //ex : url('your-url-when-success')
-			'success_message' => 'Your data has been saved successfully',
-			'error_message' => null
-		];
-	}
-
 	public function validate(){
-		$validator = $this->skeleton->generateValidation($this->mode);
+		$current_key = empty($this->instance) ? null : $this->instance->getKey();
+		$validator = $this->skeleton->generateValidation($this->mode, $current_key);
 		if($validator){
 			if($validator->fails()){
 				throw new ProcessException($validator);

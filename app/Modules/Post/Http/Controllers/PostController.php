@@ -28,6 +28,7 @@ class PostController extends BaseController
 
 	public function store(){
 		return (new PostCrudProcess(new Post))
+			->setSuccessRedirectTarget(route('admin.post.index'))
 			->type('http')
 			->handle();
 	}
@@ -40,6 +41,7 @@ class PostController extends BaseController
 	public function update($id){
 		$data = Post::findOrFail($id);
 		return (new PostCrudProcess($data))
+			->setSuccessRedirectTarget(route('admin.post.index'))
 			->type('http')
 			->handle();
 	}

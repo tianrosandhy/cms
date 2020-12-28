@@ -14,15 +14,6 @@ class PasswordResetProcess extends BaseProcess
 		$this->user = $user;
 	}
 
-	public function config(){
-		return [
-			'error_redirect_target' => null, //ex : url('your-url-when-fail')
-			'success_redirect_target' => route('admin.login'), //ex : url('your-url-when-success')
-			'success_message' => 'Your password has been updated successfully. You can login with your new password now',
-			'error_message' => null
-		];
-	}
-
 	public function validate(){
 		$validate = Validator::make($this->request->all(), [
 			'password' => 'required|min:6|confirmed'

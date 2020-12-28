@@ -54,6 +54,7 @@ trait PushNotifController
 
 	public function pushNotifStore(){
 		return (new PushNotifCrudProcess())
+			->setSuccessRedirectTarget(route('admin.push-notif.index'))
 			->type('http')
 			->handle();
 	}
@@ -66,6 +67,7 @@ trait PushNotifController
 	public function pushNotifUpdate($id){
 		$data = UserPushToken::findOrFail($id);
 		return (new PushNotifCrudProcess($data))
+			->setSuccessRedirectTarget(route('admin.push-notif.index'))
 			->type('http')
 			->handle();
 	}

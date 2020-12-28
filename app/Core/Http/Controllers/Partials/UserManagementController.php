@@ -7,6 +7,7 @@ use App\Core\Http\Skeleton\UserSkeleton;
 use App\Core\Models\User;
 use App\Core\Http\Process\UserCrudProcess;
 use App\Core\Http\Process\BaseDeleteProcess;
+use App\Core\Http\Process\BaseDatatableProcess;
 
 trait UserManagementController
 {
@@ -15,7 +16,7 @@ trait UserManagementController
 	}
 
 	public function userManagementDataTable(){
-		return (new \App\Core\Http\Process\BaseDatatableProcess)
+		return (new BaseDatatableProcess)
 			->setSkeleton(new UserSkeleton)
 			->type('datatable')
 			->handle();
@@ -28,6 +29,8 @@ trait UserManagementController
 
 	public function userManagementStore(){
 		return (new UserCrudProcess())
+			->setSuccessRedirectTarget(route('admin.user.index'))
+			->setSuccessMessage('User data has been saved')
 			->type('http')
 			->handle();
 	}
@@ -40,6 +43,8 @@ trait UserManagementController
 	public function userManagementUpdate($id){
 		$data = User::findOrFail($id);
 		return (new UserCrudProcess($data))
+			->setSuccessRedirectTarget(route('admin.user.index'))
+			->setSuccessMessage('User data has been updated')
 			->type('http')
 			->handle();
 	}

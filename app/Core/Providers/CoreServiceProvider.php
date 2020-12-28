@@ -52,7 +52,6 @@ class CoreServiceProvider extends BaseServiceProvider{
 			$router->group(['prefix' => admin_prefix()], function(){
 				require realpath(__DIR__."/../Routes/web.php");
 				require realpath(__DIR__."/../Routes/api.php");
-				require realpath(__DIR__."/../Routes/testing.php");
 			});
 		});
 		

@@ -7,13 +7,15 @@ use App\Core\Http\Process\ProfileProcess;
 trait ProfileController
 {
 	public function myProfile(){
-		$p = (new BaseViewPresenter)
+		return (new BaseViewPresenter)
 			->setTitle('My Profile')
-			->setView('core::pages.my-profile');
-		return $p->render();
+			->setView('core::pages.my-profile')
+			->render();
 	}
 
 	public function storeMyProfile(){
-		return (new ProfileProcess)->handle();
+		return (new ProfileProcess)
+			->setSuccessMessage('Your profile has been updated successfully')
+			->handle();
 	}	
 }

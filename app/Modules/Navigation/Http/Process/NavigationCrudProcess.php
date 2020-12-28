@@ -10,13 +10,4 @@ class NavigationCrudProcess extends BaseCrudProcess
 		return new NavigationSkeleton;
 	}
 
-	public function config(){
-		return [
-			'error_redirect_target' => null, //ex : url('your-url-when-fail')
-			'success_redirect_target' => route('admin.navigation.index'), //ex : url('your-url-when-success')
-			'success_message' => 'Your data has been saved successfully',
-			'error_message' => null
-		];
-	}
-
 }

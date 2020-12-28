@@ -13,15 +13,6 @@ class PrivilegeCrudProcess extends BaseProcess
 		$this->instance = $instance;
 	}
 
-	public function config(){
-		return [
-			'error_redirect_target' => null, //ex : url('your-url-when-fail')
-			'success_redirect_target' => null, //ex : url('your-url-when-success')
-			'success_message' => 'Your privilege has been saved successfully',
-			'error_message' => null
-		];
-	}
-
 	public function validate(){
 		$filter['name'] = 'required';
 		if($this->instance){

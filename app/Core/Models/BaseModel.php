@@ -15,7 +15,7 @@ class BaseModel extends Model
         return e($this->{$field});
     }
 
-    public function tags($field, $config=[]){
+    public function generateTags($field, $config=[]){
         $tag_container = $config['container_class'] ?? 'tag-container';
         $template = $config['template'] ?? '<span class="badge badge-primary">|LABEL|</span> ';
         $out = '<div class="'.$tag_container.'">';

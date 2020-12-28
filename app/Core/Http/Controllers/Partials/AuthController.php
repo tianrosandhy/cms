@@ -18,7 +18,11 @@ trait AuthController
 	}
 
 	public function storeLogin(){
-		return (new LoginProcess)->handle();
+		return (new LoginProcess)
+			->setSuccessRedirectTarget(admin_url('/'))
+			->setErrorRedirectTarget(route('admin.login'))
+			->setSuccessMessage('You have logged in successfully')
+			->handle();
 	}
 
 	public function logout(){
@@ -50,7 +54,10 @@ trait AuthController
 
 	public function passwordResetPost($token){
 		$user = $this->getUserByToken($token);
-		return (new PasswordResetProcess($user))->handle();
+		return (new PasswordResetProcess($user))
+			->setSuccessMessage('Your password has been updated successfully. You can login with your new password now')
+			->setSuccessRedirectTarget(route('admin.login'))
+			->handle();
 
 	}
 
