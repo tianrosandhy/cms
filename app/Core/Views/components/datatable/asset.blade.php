@@ -1,8 +1,9 @@
-<link rel="stylesheet" href="{{ admin_asset('libs/datatables/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ admin_asset('libs/datatables/responsive.bootstrap4.min.css') }}">
-<script type="text/javascript" src="{!! admin_asset('libs/datatables/jquery.dataTables.min.js') !!}"></script>
-<script type="text/javascript" src="{!! admin_asset('libs/datatables/extensions/dataTables.responsive.min.js') !!}"></script>
-
+<link rel="stylesheet" href="{{ admin_asset('libs/datatable/datatables.min.css') }}">
+<script type="text/javascript" src="{!! admin_asset('libs/datatable/DataTables/js/jquery.dataTables.min.js') !!}"></script>
+<script type="text/javascript" src="{!! admin_asset('libs/datatable/Responsive/js/dataTables.responsive.min.js') !!}"></script>
+<script type="text/javascript" src="{!! admin_asset('libs/datatable/FixedHeader/js/dataTables.fixedHeader.min.js') !!}"></script>
+<script type="text/javascript" src="{!! admin_asset('libs/datatable/FixedColumns/js/dataTables.fixedColumns.min.js') !!}"></script>
+<script type="text/javascript" src="{!! admin_asset('libs/datatable/ColReorder/js/dataTables.colReorder.min.js') !!}"></script>
 <script>
 var tb_data;
 $(function(){
@@ -15,6 +16,13 @@ $(function(){
 			'searching'	: false,
 			'filter'	: false,
 			'stateSave'	: true,
+			'scrollY' : '500px',
+			'scrollX' : true,
+			'scrollCollapse' : true,
+			'fixedColumns' : {
+				leftColumns : 1
+			},
+			'colReorder' : true,
 			'ajax'		: {
 				type : 'POST',
 				url	: '{{ $skeleton->route() }}',

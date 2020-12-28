@@ -360,6 +360,11 @@ function refreshSwitchery(){
 
 function loadSwitchery(){
   $("[yesno]").each(function(){
+    if($(this).attr('applied')){
+      return;
+    }
+
+    $(this).attr('applied', 1);
     new Switchery($(this)[0], {
       size : 'small'
     });
