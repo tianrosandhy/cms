@@ -5,12 +5,52 @@ use Media;
 
 trait ImageGrabable
 {
-	public function getImageUrl($field='image', $thumb=null){
-		return Media::getSelectedImage($this->{$field}, $thumb, 'url');
+
+    public function outputImage($field='image', $thumb=null, $config=[]){
+        $container_class = $config['container_class'] ?? 'image-container';
+        $template = $config['template'] ?? '<img src="|IMAGE_URL|" style="width:60px;">';
+
+        $out = '<div class="'.$container_class.'">';
+        $lists = $this->getImageUrl($field, $thumb, true, admin_asset('images/broken-image.jpg'));
+        foreach($lists as $img_url){
+            $img_template = $template;
+            $img_template = str_replace('|IMAGE_URL|', $img_url, $img_template);
+            $out .= $img_template;
+        }
+        $out .= '</div>';
+        return $out;
+    }
+
+
+	public function getImageUrl($field='image', $thumb=null, $as_multiple_input=false, $fallback=null){
+        $image_data = $this->{$field};
+        return $this->handleImageRequest($image_data, $thumb, $as_multiple_input, 'url', $fallback);
 	}
 
-	public function getImagePath($field='image', $thumb=null){
-		return Media::getSelectedImage($this->{$field}, $thumb, 'path');
+	public function getImagePath($field='image', $thumb=null, $as_multiple_input=false, $fallback=null){
+        $image_data = $this->{$field};
+        return $this->handleImageRequest($image_data, $thumb, $as_multiple_input, 'path', $fallback);
 	}
 
+    protected function handleImageRequest($image_data, $thumb, $as_multiple_input, $type='url', $fallback=null){
+        $split = explode("|", $image_data);
+        if(count($split) > 0){
+            $image_data = $split;
+        }
+        else if(is_string($image_data)){
+            $image_data = [$image_data];
+        }
+
+        $out = [];
+        foreach($image_data as $image_json){
+            $img = Media::getSelectedImage($image_json, $thumb, $type);
+            $out[] = $img ?? $fallback;
+        }
+
+        if(!$as_multiple_input){
+            return $out[0] ?? $fallback;
+        }
+        return $out;
+    }
+	
 }

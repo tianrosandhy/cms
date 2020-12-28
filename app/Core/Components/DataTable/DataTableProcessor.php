@@ -20,9 +20,18 @@ trait DataTableProcessor
 				}
 			}
 		}catch(\Exception $e){
-			return [
-				'error' => $e->getMessage()
+			$response = [
+				'error' => $e->getMessage(),
+				'file' => method_exists($e, 'getFile') ? $e->getFile() : null,
+				'line' => method_exists($e, 'getLine') ? $e->getLine() : null,
 			];
+
+			if(!env('APP_DEBUG')){
+				unset($response['file']);
+				unset($response['line']);
+			}
+
+			return $response;
 		}
 
 		$page = ($this->start / $this->length) + 1;

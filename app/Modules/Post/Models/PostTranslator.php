@@ -1,9 +1,9 @@
 <?php
 namespace App\Modules\Post\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Models\BaseModel;
 
-class PostTranslator extends Model
+class PostTranslator extends BaseModel
 {
 	
 }

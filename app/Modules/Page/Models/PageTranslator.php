@@ -1,9 +1,9 @@
 <?php
 namespace App\Modules\Page\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Models\BaseModel;
 
-class PageTranslator extends Model
+class PageTranslator extends BaseModel
 {
 	
 }

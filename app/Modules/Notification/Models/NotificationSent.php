@@ -1,9 +1,9 @@
 <?php
 namespace App\Modules\Notification\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Models\BaseModel;
 
-class NotificationSent extends Model
+class NotificationSent extends BaseModel
 {
     protected $fillable = [
         'notification_id',

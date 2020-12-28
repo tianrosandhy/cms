@@ -1,9 +1,9 @@
 <?php
 namespace App\Modules\Navigation\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Models\BaseModel;
 
-class Navigation extends Model
+class Navigation extends BaseModel
 {
 	public function lists(){
 		return $this->hasMany('App\Modules\Navigation\Models\NavigationItem', 'group_id');

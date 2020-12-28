@@ -1,10 +1,10 @@
 <?php
 namespace App\Modules\Notification\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Models\BaseModel;
 use App\Core\Shared\ImageGrabable;
 
-class Notification extends Model
+class Notification extends BaseModel
 {
 	use ImageGrabable;
 

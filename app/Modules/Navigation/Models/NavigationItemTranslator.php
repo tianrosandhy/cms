@@ -1,9 +1,9 @@
 <?php
 namespace App\Modules\Navigation\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Models\BaseModel;
 
-class NavigationItemTranslator extends Model
+class NavigationItemTranslator extends BaseModel
 {
 	
 }

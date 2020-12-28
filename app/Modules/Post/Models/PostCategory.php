@@ -1,12 +1,12 @@
 <?php
 namespace App\Modules\Post\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Models\BaseModel;
 use App\Core\Shared\Translateable;
 use App\Core\Shared\Sluggable;
 use App\Core\Shared\ImageGrabable;
 
-class PostCategory extends Model
+class PostCategory extends BaseModel
 {
 	use Translateable;
 	use Sluggable;

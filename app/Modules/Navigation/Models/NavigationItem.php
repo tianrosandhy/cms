@@ -1,11 +1,11 @@
 <?php
 namespace App\Modules\Navigation\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Models\BaseModel;
 use App\Core\Shared\ImageGrabable;
 use App\Core\Shared\Translateable;
 
-class NavigationItem extends Model
+class NavigationItem extends BaseModel
 {
     use ImageGrabable;
     use Translateable;
