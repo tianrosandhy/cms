@@ -25,6 +25,10 @@ if(is_array($value)){
 		$value = $value[def_lang()];
 	}
 }
+
+if(is_string($value) && !empty($value)){
+  $value = explode('|', $value);
+}
 ?>
 <div>
 {!! Media::multiple($name, $value, $config) !!}

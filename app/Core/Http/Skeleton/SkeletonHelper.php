@@ -93,8 +93,13 @@ trait SkeletonHelper
 		$post = [];
 		foreach($this->output() as $row){
 			if(!$row->getHideForm()){
-				if(in_array($row->getField(), $table_listing)){
-					$value_for_saved = $this->request->{$row->getField()} ?? null;
+				$field_name = $row->getField();
+				if(strpos($field_name, '[]') !== false){
+					$field_name = str_replace('[]', '', $field_name);
+				}
+
+				if(in_array($field_name, $table_listing)){
+					$value_for_saved = $this->request->{$field_name} ?? null;
 					if($this->multi_language){
 						$fallback = $value_for_saved[Language::default()] ?? null;
 						$value_for_saved = $value_for_saved[$lang] ?? $fallback;
@@ -107,16 +112,19 @@ trait SkeletonHelper
 					if($row->input_type == 'map'){
 						$value_for_saved = !empty($value_for_saved) ? json_encode($value_for_saved) : null;
 					}
+					if($row->input_type == 'image_multiple'){
+						$value_for_saved = implode('|', $value_for_saved);
+					}
 
-					//we cannot save the array value to database
+					//we cannot save the array value to database. by default, parse the value as json value
 					if(is_array($value_for_saved)){
-						$value_for_saved = null;
+						$value_for_saved = json_encode($value_for_saved);
 					}
 					//set fallback non existent string as null
 					if(strlen($value_for_saved) == 0){
 						$value_for_saved = null;
 					}
-					$post[$row->getField()] = $value_for_saved;
+					$post[$field_name] = $value_for_saved;
 				}
 			}
 		}

@@ -33,12 +33,12 @@ class DataStructure
 		$validation_translation,
 		$slug_target,
 		$value_source,
-		$array_source,
 		$value_data,
 		$translate,
 		$view_source,
 		$tab_group,
-		$view;
+		$view,
+		$fallback;
 
 	public function __construct(){
 		//manage default value
@@ -57,11 +57,11 @@ class DataStructure
 		$this->input_array = false;
 		$this->slug_target = false;
 		$this->value_source = false;
-		$this->array_source = null;
 		$this->translate = true;
 		$this->tab_group = 'General';
 		$this->validation_translation = [];
 		$this->view = null;
+		$this->fallback = null;
 	}
 
 
@@ -94,6 +94,11 @@ class DataStructure
 	}
 
 	protected function generateStoredValue($data, $multi_language=false){
+		$field_name = $this->field;
+		if(strpos($field_name, '[]') !== false){
+			$field_name = str_replace('[]', '', $field_name);
+		}
+
 		if($this->value_source){
 			$grab_ = \DB::table($this->value_source[0])->find($this->value_source[1]);
 			if($multi_language){
@@ -102,9 +107,6 @@ class DataStructure
 			else{
 				$value = $grab_->{$this->value_source[2]};
 			}
-		}
-		elseif($this->array_source){
-			$value = call_user_func($this->array_source, $data);
 		}
 		elseif($this->value_data){
 			if($multi_language){
@@ -119,12 +121,17 @@ class DataStructure
 		else{
 			if($multi_language){
 				foreach(Language::available() as $lang => $langname){
-					$value[$lang] = isset($data->{$this->field}) ? $data->outputTranslate($this->field, $lang, true) : null;
+					$value[$lang] = isset($data->{$field_name}) ? $data->outputTranslate($field_name, $lang, true) : null;
 				}
 			}
 			else{
-				$value = isset($data->{$this->field}) ? $data->{$this->field} : null;
+				$value = isset($data->{$field_name}) ? $data->{$field_name} : null;
 			}
+		}
+
+		//grab from fallback if empty value
+		if(empty($value)){
+			$value = $this->fallback;
 		}
 
 		return $value;
@@ -161,6 +168,7 @@ class DataStructure
 		$this->name($name);
 		$this->inputType('yesno');
 		$this->dataSource($value);
+		$this->fallback(1);
 		$this->hideExport();
 		return $this;
 	}
@@ -211,7 +219,7 @@ class DataStructure
 			'data-mask' => '0000-00-00'
 		]);
 		$this->setTranslate(false);
-		$this->arraySource($callback);
+		$this->valueData($callback);
 		return $this;
 	}
 
@@ -379,11 +387,6 @@ class DataStructure
 		return $this;
 	}
 
-	public function arraySource($fn){
-		$this->array_source = $fn;
-		return $this;
-	}
-
     public function setTranslate($bool=false){
     	$this->translate = $bool;
     	return $this;
@@ -398,6 +401,10 @@ class DataStructure
     	$this->value_data = $function;
     	return $this;
     }
+	//value data alias
+	public function valueCallback($function){
+		return $this->valueData($function);
+	}
 
     public function tabGroup($tab_name){
     	$this->tab_group = $tab_name;
@@ -427,6 +434,12 @@ class DataStructure
 	public function view($custom_view){
 		$this->view = $custom_view;
 		$this->hide_table = true;
+		return $this;
+	}
+
+	public function fallback($value){
+		//set fallback value if inputs is empty
+		$this->fallback = $value;
 		return $this;
 	}
 

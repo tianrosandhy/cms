@@ -30,11 +30,24 @@ if(is_array($value)){
 else{
   $value = old($cleaned_name, $value);
 }
+
+if(!is_array($value)){
+  $try_decode = json_decode($value, true);
+  if($try_decode){
+    $value = $try_decode;
+  }
+  else if(!empty($value)){
+    $value = [$value];
+  }
+  else{
+    $value = [];
+  }
+}
 ?>
 <div class="box">
   @foreach($data_source as $vl => $lbl)
   <label class="radio-inline mr-2">
-    <input type="{{ isset($type) ? $type : 'radio' }}" value="{{ $vl }}" name="{!! $name !!}" id="input-{{ $cleaned_name }}-{{ slugify($lbl) }}" {{ $value == $vl ? 'checked' : '' }}>
+    <input type="{{ isset($type) ? $type : 'radio' }}" value="{{ $vl }}" name="{!! $name !!}" id="input-{{ $cleaned_name }}-{{ slugify($lbl) }}" {{ in_array($vl, $value) ? 'checked' : '' }}>
     <span>{{ $lbl }}</span>
   </label>
   @endforeach

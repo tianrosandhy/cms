@@ -10,6 +10,9 @@ if(isset($class)){
 $cleaned_name = str_replace('[]', '', $name);
 $value = old($cleaned_name, isset($value) ? $value : null);
 $type = isset($type) ? $type : 'select';
+if($type == 'select_multiple' && is_string($value)){
+  $value = json_decode($value, true) ?? [];
+}
 
 $data_source = [];
 if(is_array($source)){

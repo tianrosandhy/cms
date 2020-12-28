@@ -23,6 +23,18 @@ $hash = md5(rand(1, 10000) . uniqid() . time());
 if(strpos($name, '[]') === false){
     $name = $name.'[]';
 }
+
+if(!isset($value)){
+  $value = [];
+}
+
+if(is_string($value)){
+  //convert string periode to array
+  $try_decode = json_decode($value, true) ?? [];
+  if(count($try_decode) == 2){
+    $value = array_values($try_decode);
+  }
+}
 ?>
 <div class="row" daterange-holder>
   <div class="col-sm-6">

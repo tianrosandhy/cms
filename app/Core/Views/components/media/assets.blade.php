@@ -383,10 +383,12 @@ function initImageDropzone(){
 	});		
 }
 $(function(){
-	$(document).on('click', ".trigger-upload-tab", function(){
+	$(document).on('click', ".trigger-upload-tab", function(e){
+		e.preventDefault();
 		gotoUpload();
 	});
-	$(document).on('click', ".trigger-filemanager", function(){
+	$(document).on('click', ".trigger-filemanager", function(e){
+		e.preventDefault();
 		gotoFilemanager();
 	});
 
