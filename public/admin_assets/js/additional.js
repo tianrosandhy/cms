@@ -14,6 +14,10 @@ $(function(){
     }
   });
 
+  //additional tweak : auto show second & third level of navigation
+  $("li.mm-active>ul.nav-second-level").addClass('mm-collapse mm-show').css('height', 'auto');
+  $("li.mm-active>ul.nav-third-level").addClass('mm-collapse mm-show').css('height', 'auto');
+
 
   // yesno auto switcher
   $(document).on('change', '[yesno][data-table-switch]', function(e){

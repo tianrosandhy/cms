@@ -259,7 +259,7 @@
 							<div class="input-group">
 								<input type="search" autocomplete="off" class="form-control" name="keyword" id="media-search-keyword" placeholder="Search Image">
 								<div class="input-group-append">
-									<button type="button" class="search-button btn btn-secondary" title="Search">
+									<button type="submit" class="search-button btn btn-secondary" title="Search">
 										<i class="icon" data-feather="search"></i>
 									</button>
 								</div>						
@@ -324,6 +324,7 @@ $(function(){
 		container.find('.multi-media-container').append(html);
 
 		container.find('.multi-media-container .square-image:last').attr('data-hash', makeid(30));
+		container.find('.multi-media-container .square-image:last-child .trigger-upload-image').trigger('click');
 		feather.replace();	
 	});
 
@@ -506,6 +507,7 @@ function gotoUpload(){
 	$("#media-modal .card-header").fadeOut();
 	$(".filemanager-content").slideUp();
 	$(".filemanager-upload").slideDown();
+	$(".filemanager-upload .custom-dropzone").trigger('click');
 }
 
 function gotoFilemanager(reload){
