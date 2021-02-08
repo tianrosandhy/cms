@@ -44,13 +44,18 @@ class BaseViewPresenter
 
 	public function render(){
 		if(!$this->view){
-			throw new PresenterException('You need to set the view target with "->setView(...)" before render the presenter');
+			throw new ViewPresenterException('You need to set the view target with "->setView(...)" before render the presenter');
 		}
 
 		$this->setDefaultProperty();
 		
 		$data = get_object_vars($this);
-		return view($this->view, $data);
+		try{
+			$view = view($this->view, $data)->render();
+		}catch(\Exception $e){
+			throw new ViewPresenterException('View error : ' . $e->getMessage());
+		}
+		return $view;
 	}
 
 }
