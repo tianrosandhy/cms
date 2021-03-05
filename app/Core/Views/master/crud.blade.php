@@ -9,7 +9,7 @@
 			],
 		]
 	])
-	<form action="" method="post" class="pos-rel">
+	<form action="" method="post" class="pos-rel" enctype="multipart/form-data">
 		{{ csrf_field() }}
 		@if(isset($skeleton->multi_language))
 			@if($skeleton->multi_language)

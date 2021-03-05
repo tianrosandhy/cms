@@ -100,6 +100,9 @@ class Input
 	public function imageMultiple($name, $config=[]){
 		return $this->loadView('image_multiple', $name, $config);
 	}
+	public function imageSimple($name, $config=[]){
+		return $this->loadView('image_simple', $name, $config);
+	}
 	public function slug($name, $config=[]){
 		$this->mandatoryConfig($config, ['slug_target'], 'slug');
 		return $this->loadView('slug', $name, $config);

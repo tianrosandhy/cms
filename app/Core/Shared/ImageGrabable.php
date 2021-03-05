@@ -2,6 +2,7 @@
 namespace App\Core\Shared;
 
 use Media;
+use Storage;
 
 trait ImageGrabable
 {
@@ -43,8 +44,23 @@ trait ImageGrabable
 
         $out = [];
         foreach($image_data as $image_json){
-            $img = Media::getSelectedImage($image_json, $thumb, $type);
-            $out[] = $img ?? $fallback;
+            // try decode via json. if failed, then load the string path via storage
+            $try_decode = json_decode($image_json, true);
+            if($try_decode){
+                $img = Media::getSelectedImage($image_json, $thumb, $type);
+                $out[] = $img ?? $fallback;
+            }
+            else if(Storage::exists($image_json)){
+                if($type == 'url'){
+                    $out[] = Storage::url($image_json);
+                }
+                else{
+                    $out[] = $image_json;
+                }
+            }
+            else{
+                $out[] = $fallback;
+            }
         }
 
         if(!$as_multiple_input){

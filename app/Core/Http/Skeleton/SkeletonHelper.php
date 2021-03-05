@@ -116,6 +116,19 @@ trait SkeletonHelper
 						$value_for_saved = implode('|', $value_for_saved);
 					}
 
+					// additional check for image_simple type : if there is _old data and empty input, then dont remove the initial data
+					if($row->input_type == 'image_simple'){
+						$old_check = $field_name.'_old';
+						if(strlen($this->request->{$old_check}) > 0 && empty($value_for_saved)){
+							try{
+								// if old_value cannot be decrypt, then this input will be ignored
+								$value_for_saved = decrypt($this->request->{$old_check});
+							}catch(\Exception $e){
+								$value_for_saved = null;
+							}
+						}
+					}
+
 					//we cannot save the array value to database. by default, parse the value as json value
 					if(is_array($value_for_saved)){
 						$value_for_saved = json_encode($value_for_saved);

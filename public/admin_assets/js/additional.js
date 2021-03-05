@@ -153,6 +153,7 @@ function initPlugins(){
   loadFile();
   loadMask();
   refreshIcon();
+  simpleImage();
 }
 
 function refreshPlugins(){
@@ -164,6 +165,31 @@ function refreshPlugins(){
   loadFile();
   loadMask();
   refreshIcon();
+  simpleImage();
+}
+
+function simpleImage(){
+  $(".image_simple .image-closer").on('click', function(e){
+    wrapper = $(this).closest(".image_simple");
+    wrapper.find(".image-holder").fadeOut();
+    wrapper.find("input").val('').fadeIn();
+  });
+
+  $(".image_simple input[type=file]").on('change', function(e){
+    if($(this)[0].files.length > 0){
+      //set image to dummy image
+      wrapper = $(this).closest(".image_simple");
+
+      var reader = new FileReader();
+      reader.onload = (e) => {
+        wrapper.find(".image-holder img").attr('src', e.target.result);
+      };
+      reader.readAsDataURL($(this)[0].files[0]);
+
+      wrapper.find(".image-holder").fadeIn().css('display','inline-block');
+      $(this).fadeOut();
+    }
+  });
 }
 
 function loadMask(){

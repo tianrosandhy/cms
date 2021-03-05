@@ -213,7 +213,7 @@ body.is-offline{
 	display:block;
 	display:flex;
 	display:-moz-flex;
-	text-center;
+	text-align:center;
 	justify-content:center;
 	align-items:center;
 	width:100%;
@@ -222,4 +222,32 @@ body.is-offline{
 	top:0;
 	left:0;
 	background:rgba(255,255,255,.85);
+}
+
+.image-holder{
+	overflow:hidden;
+	border-radius:4px;
+}
+.image-closer{
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 24px;
+    width: 30px;
+    padding-top: 5px;
+    background: #d00;
+    color: #fff;
+    border-radius: 0 5px 0 5px;
+    opacity: 0;
+    transition: .3s ease;
+    -moz-transition: .3s ease;
+    -o-transition: .3s ease;
+    -webkit-transition: .3s ease;
+    -ms-transition: .3s ease;
+    z-index: 2;
+	cursor:pointer;
+}
+
+.image-holder:hover .image-closer{
+	opacity:1;
 }

@@ -6,6 +6,8 @@ use App\Core\Exceptions\ProcessException;
 use Validator;
 use Language;
 use SlugMaster;
+use Storage;
+use Illuminate\Http\UploadedFile;
 
 class BaseCrudProcess extends BaseProcess
 {
@@ -59,7 +61,13 @@ class BaseCrudProcess extends BaseProcess
 			}
 
 			foreach($inputs as $field => $value){
-				$instance->{$field} = $value;
+				if($value instanceof UploadedFile){
+					//upload dulu filenya, return file path
+					$instance->{$field} = $this->handleDataImageUpload($value);
+				}
+				else{
+					$instance->{$field} = $value;
+				}
 			}
 			$instance->save();
 
@@ -101,5 +109,21 @@ class BaseCrudProcess extends BaseProcess
 		//your logic when validation or process failed to running
 	}
 
+	public function handleDataImageUpload($file){
+		$filename = $file->getClientOriginalName();
+		$extension = $file->getClientOriginalExtension();
+		$nameonly = str_replace('.'.$extension, '', $filename);
 
+		//check if file already exists
+		$check_exists = Storage::exists('upload'.'/'.$nameonly.'.'.$extension);
+		if($check_exists){
+			$stored_name = $nameonly.'-'.substr(sha1(rand(1, 10000)), 0, 10).'.'.$extension;
+		}
+		else{
+			$stored_name = $nameonly.'.'.$extension;
+		}
+
+		$file->storeAs('upload', $stored_name);
+		return 'upload/' . $stored_name;
+	}
 }

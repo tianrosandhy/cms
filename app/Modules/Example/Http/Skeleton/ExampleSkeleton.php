@@ -59,7 +59,7 @@ class ExampleSkeleton extends BaseSkeleton
 				->inputType('richtext'),
 			DataStructure::field('image')
 				->name('Image Example')
-				->inputType('image')
+				->inputType('image_simple')
 				->searchable(false)
 				->orderable(false),
 			DataStructure::field('image_multiple')

@@ -310,6 +310,7 @@ class DataStructure
 			'select_multiple',
 			'image',
 			'image_multiple',
+			'image_simple',
 			'file',
 			'file_multiple',
 			'date',
