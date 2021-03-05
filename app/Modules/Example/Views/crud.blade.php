@@ -91,3 +91,7 @@
 	</form>
 
 @stop
+
+@push ('script')
+	@include ('core::components.change-detector')
+@endpush

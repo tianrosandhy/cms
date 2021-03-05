@@ -10,7 +10,7 @@
 		@if(isset($control_buttons))
 			@foreach($control_buttons as $btn)
 				@if(isset($btn['label']))
-				<a href="{{ $btn['url'] ?? '#' }}" class="btn btn-{{ $btn['type'] ?? 'secondary' }}" {!! isset($btn['attr']) ? array_to_html_prop($btn['attr']) : '' !!}>
+				<a href="{{ $btn['url'] ?? '#' }}" class="btn btn-{{ $btn['type'] ?? 'secondary' }} page-navigate" {!! isset($btn['attr']) ? array_to_html_prop($btn['attr']) : '' !!}>
 					@if(isset($btn['icon']))
 					<i class="icon" data-feather="{{ $btn['icon'] }}"></i>
 					@endif
