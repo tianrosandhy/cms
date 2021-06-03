@@ -1,6 +1,13 @@
 <div class="media user-profile mt-2 mb-2">
-    <img src="{{ $user->getImageUrl('image', 'cropped') }}" class="avatar-sm rounded-circle mr-2" alt="User Photo" />
-    <img src="{{ $user->getImageUrl('image', 'cropped') }}" class="avatar-xs rounded-circle mr-2" alt="User Photo" />
+    <?php
+    $fallback_img = admin_asset('images/default-user.png');    
+    $user_img = $user->getImageUrl('image', 'cropped');
+    if(empty($user_img)){
+        $user_img = $fallback_img;
+    }
+    ?>
+    <img src="{{ $user_img }}" class="avatar-sm rounded-circle mr-2" alt="User Photo" />
+    <img src="{{ $user_img }}" class="avatar-xs rounded-circle mr-2" alt="User Photo" />
 
     <div class="media-body">
         <h6 class="pro-user-name mt-0 mb-0">{{ $user->name ?? null }}</h6>
