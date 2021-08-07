@@ -17,7 +17,7 @@ class GoogleAnalyticDashboard
 	public function __construct($request=[]){
 		$this->request = $request;
 		$this->log_enable = true;
-		if(env('ANALYTICS_VIEW_ID')){
+		if(config('analytics.view_id')){
 			$this->current_date = Carbon::today();
 			$this->previous_week = Carbon::today()->subDays(6)->startOfDay();
 			$this->previous_start_week = Carbon::today()->subDays(13)->startOfDay();

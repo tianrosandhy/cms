@@ -35,7 +35,7 @@ class Firebase
         $info = [
             'request_id' => $request_id,
             'method' => $method,
-            'url' => env('ALBEDO_BASE_URL').$url,
+            'url' => $url,
             'parameters' => $parameters,
         ];
 
@@ -51,7 +51,7 @@ class Firebase
             'verify' => false,
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'key=' . env('FCM_SERVER_KEY')
+                'Authorization' => 'key=' . config('cms.config.fcm_server_key')
             ],
             'json' => $parameters
         ];

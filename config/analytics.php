@@ -7,7 +7,7 @@ return [
      */
     'view_id' => env('ANALYTICS_VIEW_ID'),
 
-    'service_account_credentials_json' => base_path('analytics-service-account.json'),
+    'service_account_credentials_json' => base_path(env('ANALYTICS_SERVICE_ACCOUNT_BASE_PATH', 'analytics-service-account.json')),
 
     /*
      * The amount of minutes the Google API responses will be cached.

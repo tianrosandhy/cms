@@ -8,7 +8,7 @@ class ForceHttps {
 
     public function handle($request, Closure $next)
     {
-        if (!$request->secure() && env('FORCE_HTTPS')) {
+        if (!$request->secure() && config('cms.config.force_https')) {
             return redirect()->secure($request->getRequestUri());
         }
 

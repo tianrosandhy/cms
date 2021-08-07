@@ -26,7 +26,7 @@ trait DataTableProcessor
 				'line' => method_exists($e, 'getLine') ? $e->getLine() : null,
 			];
 
-			if(!env('APP_DEBUG')){
+			if(!config('app.debug')){
 				unset($response['file']);
 				unset($response['line']);
 			}

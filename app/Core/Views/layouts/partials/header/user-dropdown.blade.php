@@ -19,7 +19,7 @@
         </div>
     </a>
     <div class="dropdown-menu profile-dropdown-items dropdown-menu-right">
-        <a href="{{ env('APP_URL') }}" class="dropdown-item notify-item">
+        <a href="{{ config('app.url') }}" class="dropdown-item notify-item">
             <i data-feather="globe" class="icon-dual icon-xs mr-2"></i>
             <span>{{ __('core::module.global.go_to_site') }}</span>
         </a>

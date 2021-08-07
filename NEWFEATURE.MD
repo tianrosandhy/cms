@@ -1,0 +1,3 @@
+- Simple CMS Theme Selection
+- Start use new pagination mode for better performance
+- 

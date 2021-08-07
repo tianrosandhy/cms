@@ -17,7 +17,7 @@ class CheckInstallation {
 		}
 
 		if(!$installed && $request->url() <> url('install')){
-			if(env('APP_ENV') == 'local'){
+			if(config('app.env') == 'local'){
 				return redirect()->route('cms.install');		
 			}
 			else{

@@ -29,10 +29,10 @@
     }
 
     var config = {
-        messagingSenderId: "{{ env('FCM_SENDER_ID') }}",
-        apiKey: "{{ env('FCM_API_KEY') }}",
-        projectId: "{{ env('FCM_PROJECT_ID') }}",
-        appId: "{{ env('FCM_APP_ID') }}"
+        messagingSenderId: "{{ config('cms.config.fcm_sender_id') }}",
+        apiKey: "{{ config('cms.config.fcm_api_key') }}",
+        projectId: "{{ config('cms.config.fcm_project_id') }}",
+        appId: "{{ config('cms.config.fcm_app_id') }}"
     };
     firebase.initializeApp(config);
 

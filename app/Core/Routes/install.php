@@ -1,5 +1,5 @@
 <?php
-if(env('APP_ENV') == 'local'){
+if(config('app.env') == 'local'){
 	Route::get('/', 'InstallController@index')->name('cms.install');
 	Route::post('/', 'InstallController@process');
 }

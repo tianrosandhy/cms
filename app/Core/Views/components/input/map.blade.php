@@ -1,4 +1,4 @@
-@if(env('GOOGLE_MAP_API_KEY'))
+@if(config('cms.config.google_map_api_key'))
 <?php
 $cleaned_name = str_replace('[]', '', $name);
 $old_name = $cleaned_name;
@@ -33,7 +33,7 @@ $longitude = $value_array['longitude'] ?? 115.2036338;
 </div>
 
 <div id="map" style="width:100%; height:300px;"></div>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAP_API_KEY') }}&libraries=places&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config('cms.config.google_map_api_key') }}&libraries=places&callback=initMap"></script>
 <script>
 function initMap(){
 	var ctr = {

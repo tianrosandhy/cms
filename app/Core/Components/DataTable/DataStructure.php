@@ -102,7 +102,7 @@ class DataStructure
 		if($this->value_source){
 			$grab_ = \DB::table($this->value_source[0])->find($this->value_source[1]);
 			if($multi_language){
-				$value[Language::default()] = $grab_->{$this->value_source[2]};
+				$value[config('cms.language', 'en')] = $grab_->{$this->value_source[2]};
 			}
 			else{
 				$value = $grab_->{$this->value_source[2]};
@@ -110,7 +110,7 @@ class DataStructure
 		}
 		elseif($this->value_data){
 			if($multi_language){
-				foreach(Language::available() as $lang => $langname){
+				foreach([config('cms.language', 'en') => config('cms.language', 'en')] as $lang => $langname){
 					$value[$lang] = call_user_func($this->value_data, $data, $lang);
 				}
 			}
@@ -120,7 +120,7 @@ class DataStructure
 		}
 		else{
 			if($multi_language){
-				foreach(Language::available() as $lang => $langname){
+				foreach([config('cms.language', 'en') => config('cms.language', 'en')] as $lang => $langname){
 					$value[$lang] = isset($data->{$field_name}) ? $data->outputTranslate($field_name, $lang, true) : null;
 				}
 			}
@@ -131,6 +131,10 @@ class DataStructure
 
 		//grab from fallback if empty value
 		if(empty($value)){
+			if(is_string($value) && strlen($value) > 0){
+				// anjir lah.. "0" dibaca empty sama php dong -_-
+				return $value;
+			}
 			$value = $this->fallback;
 		}
 
@@ -197,7 +201,7 @@ class DataStructure
 
 		$this->valueData(function($data, $lang=null){
 			if(empty($lang)){
-				$lang = Language::default();
+				$lang = config('cms.language', 'en');
 			}
 			if(isset($data->id)){
 				return \SlugInstance::get($data, $data->id, $lang);

@@ -108,7 +108,8 @@ trait InstallerTrait
 			//check database exists
 			#will return error if database not exists
 			if(config('database.default') == 'sqlsrv'){
-				$cek_database = DB::select("SELECT name FROM master.sys.databases where name='".env('DB_DATABASE')."'");
+				$dbname = config('database.connections.sqlsrv.database');
+				$cek_database = DB::select("SELECT name FROM master.sys.databases where name='".$dbname."'");
 				if(empty($cek_database)){
 					return 'Database not exists';
 				}
