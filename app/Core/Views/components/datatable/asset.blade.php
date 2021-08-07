@@ -7,50 +7,45 @@
 <script>
 var tb_data;
 $(function(){
-	//fixing bug err 500 on first load
-	setTimeout(function(){
-		tb_data = $("table.datatable").DataTable({
-			'processing': true,
-			'serverSide': true,
-			'autoWidth' : false,
-			'searching'	: false,
-			'filter'	: false,
-			'stateSave'	: true,
-			'scrollY' : '500px',
-			'scrollX' : true,
-			'scrollCollapse' : true,
-			'fixedColumns' : {
-				leftColumns : 1
+	tb_data = $("table.datatable").DataTable({
+		'processing': true,
+		'serverSide': true,
+		'autoWidth' : false,
+		'searching'	: false,
+		'filter'	: false,
+		'stateSave'	: true,
+		'scrollY' : '500px',
+		'scrollX' : true,
+		'scrollCollapse' : true,
+		'fixedColumns' : {
+			leftColumns : 1
+		},
+		'colReorder' : true,
+		'ajax'		: {
+			type : 'POST',
+			url	: '{{ $skeleton->route() }}',
+			dataType : 'json',
+			data : function(data){
+				{!! $skeleton->generateSearchQuery() !!}
+				data._token = window.CSRF_TOKEN
 			},
-			'colReorder' : true,
-			'ajax'		: {
-				type : 'POST',
-				url	: '{{ $skeleton->route() }}',
-				dataType : 'json',
-				data : function(data){
-					{!! $skeleton->generateSearchQuery() !!}
-					data._token = window.CSRF_TOKEN
-				},
-			},
-			createdRow: function( row, data, dataIndex ) {
-		        // Set the data-status attribute, and add a class
-		        $( row ).addClass('close-target');
-		    },
+		},
+		createdRow: function( row, data, dataIndex ) {
+			// Set the data-status attribute, and add a class
+			$( row ).addClass('close-target');
+		},
 
-			"drawCallback": function(settings) {
-		        initPlugins();
-			},
-			'columns' : [
-				{!! $skeleton->datatableColumns() !!}
-			],
-			'columnDefs' : [
-				{!! $skeleton->datatableOrderable() !!}
-			],
-			"aaSorting": [{!! $skeleton->datatableDefaultOrder() !!}],
-		});
-
-	}, 500);
-
+		"drawCallback": function(settings) {
+			initPlugins();
+		},
+		'columns' : [
+			{!! $skeleton->datatableColumns() !!}
+		],
+		'columnDefs' : [
+			{!! $skeleton->datatableOrderable() !!}
+		],
+		"aaSorting": [{!! $skeleton->datatableDefaultOrder() !!}],
+	});
 
 	$(".search-box input, .search-box select").on('change', function(){
 		$(".reset-filter").fadeIn();

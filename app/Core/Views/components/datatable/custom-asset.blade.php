@@ -3,9 +3,7 @@ var tb_data;
 var in_progress = false;
 var has_pending_progress = false;
 $(function(){
-    setTimeout(function(){
-        loadCustomDatatable();
-    }, 500);
+    loadCustomDatatable();
 
     $(".custom-datatable-filter, .search-box input, .search-box select").on('change', function(){
         setTimeout(function(){
