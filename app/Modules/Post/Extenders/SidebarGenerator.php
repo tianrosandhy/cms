@@ -11,7 +11,7 @@ class SidebarGenerator extends SidebarRegistration
 		$this->registerSidebars([
 			SidebarItem::setName('ADMIN.POST')
 				->setLabel(__('post::module.menu.post'))
-				->setIcon('paperclip')
+				->setIcon('uim:web-grid-alt')
 				->setSortNo(5)
 				->setActiveKey(['post', 'post_category']),
 

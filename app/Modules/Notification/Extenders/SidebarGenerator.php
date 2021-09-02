@@ -13,7 +13,7 @@ class SidebarGenerator extends SidebarRegistration
 				SidebarItem::setName('ADMIN.Notification')
 					->setLabel(__('notification::module.menu.notification'))
 					->setRoute('admin.notification.index')
-					->setIcon('bell')
+					->setIcon('uim:paperclip')
 					->setSortNo(80)
 					->setActiveKey('notification'),
 			]);

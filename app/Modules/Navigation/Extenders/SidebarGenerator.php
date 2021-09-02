@@ -12,7 +12,7 @@ class SidebarGenerator extends SidebarRegistration
 			SidebarItem::setName('ADMIN.Navigation')
 				->setLabel(__('navigation::module.menu.navigation'))
 				->setRoute('admin.navigation.index')
-				->setIcon('menu')
+				->setIcon('uim:list-ul')
 				->setSortNo(3)
 				->setActiveKey('navigation'),
 		]);

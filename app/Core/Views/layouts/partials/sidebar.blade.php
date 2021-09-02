@@ -1,14 +1,11 @@
 <!-- ========== Left Sidebar Start ========== -->
-<div class="left-side-menu">
-    @include ('core::layouts.partials.sidebar.top-section')
-    <div class="sidebar-content">
+<div class="vertical-menu">
+    <div data-simplebar class="h-100">
         <!--- Sidemenu -->
-        <div id="sidebar-menu" class="slimscroll-menu">
+        <div id="sidebar-menu">
             @include ('core::layouts.partials.sidebar.navigation-generation')
         </div>
-        <!-- End Sidebar -->
-        <div class="clearfix"></div>
+        <!-- Sidebar -->
     </div>
-    <!-- Sidebar -left -->
 </div>
 <!-- Left Sidebar End -->

@@ -12,7 +12,7 @@ class SidebarGenerator extends SidebarRegistration
 			SidebarItem::setName('ADMIN.PAGE')
 				->setLabel(__('page::module.menu.page'))
 				->setRoute('admin.page.index')
-				->setIcon('paperclip')
+				->setIcon('uim:bookmark')
 				->setSortNo(5)
 				->setActiveKey('page'),
 		]);

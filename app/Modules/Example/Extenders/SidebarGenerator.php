@@ -12,7 +12,7 @@ class SidebarGenerator extends SidebarRegistration
 			SidebarItem::setName('ADMIN.Example')
 				->setLabel(__('example::module.menu.example'))
 				->setRoute('admin.example.index')
-				->setIcon('paperclip')
+				->setIcon('uim:paperclip')
 				->setSortNo(5)
 				->setActiveKey('example'),
 		]);

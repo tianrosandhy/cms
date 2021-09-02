@@ -12,14 +12,14 @@ class SidebarGenerator extends SidebarRegistration
 			SidebarItem::setName('ADMIN.DASHBOARD')
 				->setLabel(__('core::module.menu.dashboard'))
 				->setUrl(admin_url('/'))
-				->setIcon('home')
+				->setIcon('uim:house-user')
 				->setSortNo(0)
 				->setActiveKey('homepage'),
 
 			SidebarItem::setName('ADMIN.MANAGEMENT')
 				->setLabel(__('core::module.menu.management'))
 				->setPrivilege(['admin.user.index', 'admin.privilege.index', 'admin.language.index'])
-				->setIcon('settings')
+				->setIcon('uim:user-md')
 				->setSortNo(100)
 				->setActiveKey(['user', 'privilege']),
 
@@ -55,17 +55,6 @@ class SidebarGenerator extends SidebarRegistration
 				
 		]);
 
-		//only show push notif menu if can
-		if(canSendPushNotif()){
-			$this->registerSidebars([
-				SidebarItem::setName('ADMIN.PUSHTOKEN')
-					->setLabel(__('core::module.menu.push_token'))
-					->setPrivilege('admin.push-notif.index')
-					->setRoute('admin.push-notif.index')
-					->setParent('ADMIN.MANAGEMENT')
-					->setActiveKey('push-notif'),
-			]);
-		}
 	}
 
 }

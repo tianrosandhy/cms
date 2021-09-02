@@ -325,7 +325,7 @@ $(function(){
 
 		container.find('.multi-media-container .square-image:last').attr('data-hash', makeid(30));
 		container.find('.multi-media-container .square-image:last-child .trigger-upload-image').trigger('click');
-		feather.replace();	
+		// feather.replace();	
 	});
 
 	$(document).on('click', '.multi-closer', function(e){
@@ -519,7 +519,7 @@ function gotoFilemanager(reload){
 	if(reload){
 		loadFileManager();
 	}
-	feather.replace();
+	// feather.replace();
 }
 
 function afterFinishUpload(){
@@ -547,7 +547,7 @@ function loadFileManager(page, ignore_loading){
 		},
 		success : function(resp){
 			$(".filemanager-content").html(resp);
-			feather.replace();
+			// feather.replace();
 			hideLoading();
 		},
 		error : function(resp){
@@ -572,7 +572,7 @@ function loadImageDetail(click_instance){
 	$(".filemanager-detail .filemanager-thumb-selection").attr('data-id', media_id);
 	$(".filemanager-detail .filemanager-thumb-selection").attr('data-path', path);
 	$(".filemanager-content, .media-image-container, .filemanager-detail").addClass('opened');
-	feather.replace();	
+	// feather.replace();	
 }
 
 function hideImageDetail(){
