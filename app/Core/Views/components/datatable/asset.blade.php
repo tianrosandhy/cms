@@ -47,17 +47,29 @@ $(function(){
 		"aaSorting": [{!! $skeleton->datatableDefaultOrder() !!}],
 	});
 
-	$(".search-box input, .search-box select").on('change', function(){
-		$(".reset-filter").fadeIn();
+	$(".search-box input, .search-box select").on('keyup', function(e){
+		if(e.which == 14){
+			refreshDataTable();
+			$(".modal-searchbox").closest('.modal.show').modal('hide');
+		}
+	});
+
+	$(".modal-searchbox .btn-apply-filter").on('click', function(e){
+		e.preventDefault();
 		refreshDataTable();
+		$(".modal-searchbox").closest('.modal.show').modal('hide');
 	});
 
 	$(".reset-filter").on('click', function(e){
 		e.preventDefault();
-		$(this).closest('.search-box').find('input, select').val('').trigger('change');
-		$(this).fadeOut();
+		$(this).closest('.modal-searchbox').find('input, select').val('').trigger('change');
+		$(".modal-searchbox").closest('.modal.show').modal('hide');
+		refreshDataTable();
 	});
 
+	$(".modal-pagefilter").on('shown.bs.modal', function(){
+		refreshPlugins();
+	});
 
 
 	$(document).on('change', '#checker_all_datatable', function(){

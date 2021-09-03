@@ -7,7 +7,7 @@
                 <h4 class="page-title mb-1">{{ $title ?? '' }}</h4>
 				@include ('core::components.breadcrumb')
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 text-right">
 				<!-- Control buttons here -->
 
 				<div class="btn-group btn-rounded">
@@ -24,13 +24,6 @@
 						@endforeach
 					@endif
 				</div>
-				@if(isset($batch_delete_url))
-				<div style="display:inline-block;">
-					<a href="{{ $batch_delete_url }}" class="btn btn-danger btn-rounded multi-delete batchbox" style="display:none;">
-						<i data-feather="x"></i> {{ __('core::module.form.delete_selected') }}
-					</a>
-				</div>
-				@endif						
 			
             </div>
         </div>

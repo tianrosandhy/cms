@@ -104,6 +104,10 @@ class ExampleSkeleton extends BaseSkeleton
 		return route('admin.example.datatable');
 	}
 
+	public function batchDeleteRoute(){
+		return route('admin.example.delete');
+	}
+
 	//public function customFilter($context){
 	//	$searched_field = $this->getSearchField('field_name');
 	//	return $context;

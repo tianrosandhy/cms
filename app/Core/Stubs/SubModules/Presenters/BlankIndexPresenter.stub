@@ -18,32 +18,13 @@ class [MODULE_NAME]IndexPresenter extends BaseViewPresenter
 		$this->skeleton = new [MODULE_NAME]Skeleton;
 		$this->datatable = DataTable::setSkeleton($this->skeleton);
 		$this->control_buttons = [];
-		if(!config('module-setting.[LOWERCASE_MODULE_NAME].hide_back_to_homepage_button')){
+
+		if(Permission::has('admin.[LOWERCASE_MODULE_NAME].create')){
 			$this->control_buttons[] = [
-				'url' => admin_url('/'),
-				'label' => '{{ __('core::module.global.back_to_homepage') }}',
-				'icon' => 'home'
-			];
-		}
-		if(!config('module-setting.[LOWERCASE_MODULE_NAME].hide_add_button')){
-			if(Permission::has('admin.[LOWERCASE_MODULE_NAME].create')){
-				$this->control_buttons[] = [
-					'url' => route('admin.[LOWERCASE_MODULE_NAME].create'),
-					'label' => __('core::module.form.add_data'),
-					'type' => 'success',
-					'icon' => 'plus'
-				];
-			}
-		}
-		if(!config('module-setting.[LOWERCASE_MODULE_NAME].hide_filter')){
-			$this->control_buttons[] = [
-				'label' => 'Filter',
-				'icon' => 'filter',
-				'type' => 'primary',
-				'attr' => [
-					'data-toggle' => 'collapse',
-					'data-target' => '#searchBox-' . $this->skeleton->name()
-				]
+				'url' => route('admin.[LOWERCASE_MODULE_NAME].create'),
+				'label' => __('core::module.form.add_data'),
+				'type' => 'success',
+				'icon' => 'plus'
 			];
 		}
 	}

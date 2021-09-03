@@ -21,6 +21,7 @@
     <!-- END layout-wrapper -->
 
     @include ('core::layouts.partials.sidebar.global-setting')
+    @stack ('modal')
 	@include ('core::layouts.partials.script')
 </body>
 </html>

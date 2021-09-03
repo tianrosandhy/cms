@@ -15,11 +15,6 @@ class UserPresenter extends BaseViewPresenter
 		$this->skeleton = new UserSkeleton;
 		$this->datatable = DataTable::setSkeleton($this->skeleton);
 
-		$this->control_buttons[] = [
-			'url' => admin_url('/'),
-			'label' => __('core::module.global.back_to_homepage'),
-			'icon' => 'home'
-		];
 		if(Permission::has('admin.user.create')){
 			$this->control_buttons[] = [
 				'url' => route('admin.user.create'),
@@ -28,15 +23,6 @@ class UserPresenter extends BaseViewPresenter
 				'icon' => 'plus'
 			];
 		}
-		$this->control_buttons[] = [
-			'label' => 'Filter',
-			'icon' => 'filter',
-			'type' => 'primary',
-			'attr' => [
-				'data-toggle' => 'collapse',
-				'data-target' => '#searchBox-' . $this->skeleton->name()
-			]
-		];
 	}
 
 	public function setSelectedMenuName(){

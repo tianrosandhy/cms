@@ -1,3 +1,5 @@
+@include ('core::components.datatable.table-control-button')
+
 <div class="custom-datatable-wrapper">
     @include ('core::components.datatable.filter-box')
     <div class="card card-body">

@@ -4,14 +4,9 @@
 	@include ('core::components.header-box', [
 		'control_buttons' => [
 			[
-				'url' => admin_url('/'),
-				'label' => __('core::module.global.back_to_homepage'),
-				'icon' => 'home'
-			],
-			[
 				'url' => '#',
 				'label' => 'Create New Privilege',
-				'type' => 'primary',
+				'type' => 'light',
 				'icon' => "user",
 				'attr' => [
 					'data-action' => 'add',
@@ -21,41 +16,48 @@
 		]
 	])
 
-	<div class="card card-body">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Privilege Name</th>
-					<th></th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach($role_structure->role_list as $row)
-				<tr class="close-target">
-					<td>{{ str_repeat('-', $row['level']) }} {{ $row['label'] }}</td>
-					<td>
-						@if($row['is_sa'])
-						<div>
-							<small>This privilege has <strong>all</strong> permission</small>
-						</div>
-						@else
-							<a href="#" data-target="{{ route('admin.privilege.manage', ['id' => $row['id']]) }}" data-action="add" class="btn btn-sm btn-primary">Manage Privileges ({{ count($row['priviledge_list']) }})</a>
-						@endif
-					</td>
-					<td>
-						<div class="btn-group">
-							@if(!$row['is_sa'])
-							<a href="#" data-target="{{ route('admin.privilege.edit', ['id' => $row['id']]) }}" data-action="add" class="btn btn-sm btn-info">Edit</a>
-							<a href="{{ route('admin.privilege.delete', ['id' => $row['id']]) }}" class="btn btn-sm btn-danger delete-button">Delete</a>
-							@endif
-						</div>
-					</td>
-				</tr>
-				@endforeach
-			</tbody>
-		</table>
+	<div class="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="card">
+				<div class="card-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Privilege Name</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($role_structure->role_list as $row)
+							<tr class="close-target">
+								<td>{{ str_repeat('-', $row['level']) }} {{ $row['label'] }}</td>
+								<td>
+									@if($row['is_sa'])
+									<div>
+										<small>This privilege has <strong>all</strong> permission</small>
+									</div>
+									@else
+										<a href="#" data-target="{{ route('admin.privilege.manage', ['id' => $row['id']]) }}" data-action="add" class="btn btn-sm btn-primary">Manage Privileges ({{ count($row['priviledge_list']) }})</a>
+									@endif
+								</td>
+								<td>
+									<div class="btn-group">
+										@if(!$row['is_sa'])
+										<a href="#" data-target="{{ route('admin.privilege.edit', ['id' => $row['id']]) }}" data-action="add" class="btn btn-sm btn-info">Edit</a>
+										<a href="{{ route('admin.privilege.delete', ['id' => $row['id']]) }}" class="btn btn-sm btn-danger delete-button">Delete</a>
+										@endif
+									</div>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
+
 @stop
 
 @push ('modal')
@@ -83,8 +85,6 @@ $(function(){
 		e.preventDefault();
 		loadPrivilegeCrud($(this).attr('data-target'));
 	});
-
-
 
 	$(document).on('change', '.priviledge-check input[type=checkbox]', function(){
 		inputCheckEvent($(this));

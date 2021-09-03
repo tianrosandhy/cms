@@ -4,8 +4,8 @@
 
 	<div class="page-content-wrapper">
 		<div class="container-fluid">
-			<form action="" method="post">
-				{{ csrf_field() }}
+			<div class="card">
+				<div class="card-body">
 				@if(isset($datatable))
 					@if($datatable->mode  <> 'datatable')
 						{!! $datatable->customTableView() !!}
@@ -13,7 +13,8 @@
 						{!! $datatable->tableView() !!}
 					@endif
 				@endif
-			</form>
+				</div>
+			</div>
 		</div>
 	</div>
 
