@@ -6,7 +6,7 @@
 <!-- Bootstrap Css -->
 <link href="{{ admin_asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 <!-- Icons Css -->
-<link href="{{ admin_asset('css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ admin_asset('css/icon-mdi.css') }}" rel="stylesheet" type="text/css" />
 <!-- App Css-->
 <link href="{{ admin_asset('css/app.min.css') }}" rel="stylesheet" type="text/css" />
 

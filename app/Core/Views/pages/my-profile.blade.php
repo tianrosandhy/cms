@@ -1,93 +1,93 @@
 @extends ('core::layouts.master')
 @section ('content')
 
-@include ('core::components.header-box', [
-	'control_buttons' => [
-		[
-			'url' => admin_url('/'),
-			'label' => __('core::module.global.back_to_homepage'),
-			'icon' => 'home'
-		]
-	]
-])
+@include ('core::components.header-box')
 
-<div class="card card-body">
-	<form action="" method="post">
-		{{ csrf_field() }}
-		<div class="row">
-			<div class="col-md-8">
-				<div class="form-group">
-					<label>Name</label>
-					{!! Input::text('name', [
-						'attr' => [
-							'required' => 'required',
-							'placeholder' => 'Type Your Name',
-							'maxlength' => 50
-						],
-						'value' => $user->name,
-					]) !!}
-				</div>
-				<div class="form-group">
-					<label>Email</label>
-					{!! Input::email('email', [
-						'value' => $user->email,
-						'attr' => [
-							'maxlength' => 75,
-							'required' => 'required'
-						]
-					]) !!}
-				</div>
+<div class="page-content-wrapper">
+	<div class="container-fluid">
+		<div class="card">
+			<div class="card-body">
 
-				<div class="change-pass">
-					<button type="button" class="btn btn-sm btn-danger btn-change-pass">Change Password</button>
-				</div>
-				<div class="pass-toggle" style="display:none; padding:1em 0;">
+				<form action="" method="post">
+					{{ csrf_field() }}
 					<div class="row">
-						<div class="col-6">
-							<div class="form-group custom-form-group searchable">
-								<label>Password</label>
-								{!! Input::text('password', [
+						<div class="col-md-8">
+							<div class="form-group">
+								<label>Name</label>
+								{!! Input::text('name', [
 									'attr' => [
-										'data-password' => 'true',
-										'placeholder' => 'Keep blank if you dont want to change',
-										'autocomplete' => 'off'
+										'required' => 'required',
+										'placeholder' => 'Type Your Name',
+										'maxlength' => 50
+									],
+									'value' => $user->name,
+								]) !!}
+							</div>
+							<div class="form-group">
+								<label>Email</label>
+								{!! Input::email('email', [
+									'value' => $user->email,
+									'attr' => [
+										'maxlength' => 75,
+										'required' => 'required'
 									]
 								]) !!}
 							</div>
+
+							<div class="change-pass">
+								<button type="button" class="btn btn-sm btn-danger btn-change-pass">Change Password</button>
+							</div>
+							<div class="pass-toggle" style="display:none; padding:1em 0;">
+								<div class="row">
+									<div class="col-6">
+										<div class="form-group custom-form-group searchable">
+											<label>Password</label>
+											{!! Input::text('password', [
+												'attr' => [
+													'data-password' => 'true',
+													'placeholder' => 'Keep blank if you dont want to change',
+													'autocomplete' => 'off'
+												]
+											]) !!}
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="form-group custom-form-group searchable">
+											<label>Repeat Password</label>
+											{!! Input::text('password_confirmation', [
+												'attr' => [
+													'data-password' => 'true',
+													'autocomplete' => 'off'
+												]
+											]) !!}
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="my-3">
+								<button type="submit" class="btn btn-primary">
+									<i class="icon" data-feather="save"></i> Save Profile
+								</button>
+							</div>
+
+
 						</div>
-						<div class="col-6">
-							<div class="form-group custom-form-group searchable">
-								<label>Repeat Password</label>
-								{!! Input::text('password_confirmation', [
-									'attr' => [
-										'data-password' => 'true',
-										'autocomplete' => 'off'
-									]
-								]) !!}
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Profile Photo</label>
+								{!! Input::image('image', [
+									'value' => $user->image,
+								]) !!}					
 							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 
-				<div class="my-3">
-					<button type="submit" class="btn btn-primary">
-						<i class="icon" data-feather="save"></i> Save Profile
-					</button>
-				</div>
-
-
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>Profile Photo</label>
-					{!! Input::image('image', [
-						'value' => $user->image,
-					]) !!}					
-				</div>
 			</div>
 		</div>
-	</form>
-</div>
+	</div>
+<div>
 @stop
 
 @push ('script')

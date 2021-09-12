@@ -13,7 +13,7 @@
                         <div class="card">
                             <div class="card-body p-0">
                                 <div class="row">
-                                    <div class="col-md-6 p-5">
+                                    <div class="col-lg-6 p-5">
                                         <div class="mx-auto mb-5">
                                             @include ('core::layouts.include.logo', ['height' => 50])
                                         </div>
@@ -28,7 +28,7 @@
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">
-                                                            <i class="icon-dual" data-feather="mail"></i>
+                                                            <span class="iconify" data-icon="uim:user-md"></span>
                                                         </span>
                                                     </div>
                                                     <input type="email" class="form-control" id="email" placeholder="your@email.com" name="email">
@@ -40,7 +40,7 @@
                                                 <div class="input-group input-group-merge">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">
-                                                            <i class="icon-dual" data-feather="lock"></i>
+                                                            <span class="iconify" data-icon="uim:key-skeleton"></span>
                                                         </span>
                                                     </div>
                                                     <input type="password" class="form-control" id="password"
@@ -64,7 +64,7 @@
                                         </form>
                                     </div>
                                     <div class="col-lg-6 d-none d-md-inline-block">
-                                        <div class="auth-page-sidebar">
+                                        <div class="auth-page-sidebar" style="width:100%; height:100%;">
                                             <img src="{{ admin_asset('images/login-bg.jpg') }}" alt="Login Background">
                                         </div>
                                     </div>
