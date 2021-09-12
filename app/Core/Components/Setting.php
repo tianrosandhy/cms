@@ -43,6 +43,12 @@ class Setting
 		return Model::insert($param);
 	}
 
+	public function deleteWhere($id, $field='id'){
+		return Model::where($field, $id)->delete();
+	}
+
+	
+
 	public function loadSettingRegistrations(){
 		$reg_suffix = 'Extenders\\SettingGenerator';
 		$lists = config('modules.load');
