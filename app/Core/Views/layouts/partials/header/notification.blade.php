@@ -2,7 +2,7 @@
 <li class="dropdown notification-list" title="8 new unread notifications">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
         aria-expanded="false">
-        <i data-feather="bell"></i>
+        <span class="iconify" data-icon="ant-design:bell-outlined"></span>
         <!-- <span class="noti-icon-badge"></span> -->
     </a>
     <div class="dropdown-menu dropdown-menu-right dropdown-lg">

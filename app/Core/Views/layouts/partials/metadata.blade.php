@@ -9,18 +9,10 @@
 <link href="{{ admin_asset('css/icon-mdi.css') }}" rel="stylesheet" type="text/css" />
 <!-- App Css-->
 <link href="{{ admin_asset('css/app.min.css') }}" rel="stylesheet" type="text/css" />
-
-<!-- Plugins -->
-<link href="{{ admin_asset('libs/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet" />
-<link href="{{ admin_asset('libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" rel="stylesheet" />
-<link href="{{ admin_asset('libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ admin_asset('libs/dropzone/dropzone.css') }}" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="{{ admin_asset('libs/toastr/toastr.min.css') }}">
-<link rel="stylesheet" href="{{ admin_asset('libs/select2/select2.min.css') }}">
-<link href="{{ admin_asset('libs/switchery/css/switchery.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- Plugin CSS -->
+<link href="{{ admin_asset('css/app-plugins-compiled.css') }}" rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" href="{{ admin_asset('css/additional.css') }}">
-
 
 @if(isset($custom_css))
 <link rel="stylesheet" href="{{ $custom_css }}">

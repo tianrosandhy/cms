@@ -257,3 +257,22 @@ body.is-offline{
 	height:3rem;
 	width:3rem;
 }
+
+.select2-container, .select2-container--default .select2-selection--single{
+	width:100%!important;
+	height:calc(1.5em + .94rem + 2px);
+	border-color:#ccc;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+	height:36px;
+}
+.dropzone{
+	border:2px dashed #ccc;
+}
+.dropzone:hover{
+	border:2px dashed #5369f8;
+	color:#5369f8;
+}
+.modal-backdrop{
+	background-color:#777;
+}

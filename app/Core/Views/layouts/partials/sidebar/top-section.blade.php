@@ -16,18 +16,18 @@
     <div class="dropdown align-self-center profile-dropdown-menu">
         <a class="dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
             aria-expanded="false">
-            <span data-feather="chevron-down"></span>
+            <span class="iconify" data-icon="akar-icons:chevron-down"></span>
         </a>
         <div class="dropdown-menu profile-dropdown">
             <a href="{{ route('admin.my-profile') }}" class="dropdown-item notify-item">
-                <i data-feather="user" class="icon-dual icon-xs mr-2"></i>
+                <span class="iconify icon-dual icon-xs mr-2" data-icon="uim:user-md"></span>
                 <span>{{ __('core::module.global.my_profile') }}</span>
             </a>
 
             <div class="dropdown-divider"></div>
 
             <a href="{{ route('admin.logout') }}" class="dropdown-item notify-item">
-                <i data-feather="log-out" class="icon-dual icon-xs mr-2"></i>
+                <span class="iconify icon-dual icon-xs mr-2" data-icon="uim:exit"></span>
                 <span>{{ __('core::module.global.logout') }}</span>
             </a>
         </div>

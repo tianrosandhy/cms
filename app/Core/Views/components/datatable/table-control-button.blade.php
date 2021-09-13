@@ -1,5 +1,5 @@
 <div class="btn-control pb-3">
-	<a href="#" class="btn btn-light btn-rounded" data-toggle="modal" data-target="#searchBox-{{ $skeleton->name() }}"><i class="iconify" data-icon="ic:baseline-manage-search"></i> Filter Data</a>
+	<a href="#" class="btn btn-light btn-rounded" data-toggle="modal" data-target="#searchBox-{{ $skeleton->name() }}"><i class="iconify" data-icon="ic:baseline-manage-search"></i> Advance Search</a>
 	@if(method_exists($skeleton, 'batchDeleteRoute'))
 		<?php
 		$batch_delete_url = $skeleton->batchDeleteRoute();

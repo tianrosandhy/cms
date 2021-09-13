@@ -16,7 +16,7 @@
 							@if(isset($btn['label']))
 							<a href="{{ $btn['url'] ?? '#' }}" class="btn btn-rounded btn-{{ $btn['type'] ?? 'light' }} page-navigate" {!! isset($btn['attr']) ? array_to_html_prop($btn['attr']) : '' !!}>
 								@if(isset($btn['icon']))
-								<i class="icon" data-feather="{{ $btn['icon'] }}"></i>
+								<span class="iconify" data-icon="{{ $btn['icon'] }}"></span>
 								@endif
 								<span>{{ $btn['label'] ?? '-' }}</span>
 							</a>

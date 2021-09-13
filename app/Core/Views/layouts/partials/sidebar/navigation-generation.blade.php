@@ -26,7 +26,7 @@
                     <li class="{{ in_array($selected_menu, $subdata->getActiveKey()) ? 'mm-active' : '' }}">
                         <a href="{{ $subdata->getChildren() ? '#' : $subdata->url() }}" class="{{ $subdata->getChildren() ? 'has-arrow' : '' }} waves-effect">
                             @if($subdata->getIcon())
-                            <i data-feather="{{ $subdata->getIcon() }}"></i>
+                            <i class="iconify" data-icon="{{ $subdata->getIcon() }}"></i>
                             @endif
                             <span>{{ $subdata->getLabel() }}</span>
                         </a>
@@ -42,7 +42,7 @@
                                 <li class="{{ in_array($selected_menu, $thirddata->getActiveKey()) ? 'mm-active' : '' }}">
                                     <a href="{{ $thirddata->url() }}" class="waves-effect">
                                         @if($thirddata->getIcon())
-                                        <i data-feather="{{ $thirddata->getIcon() }}"></i>
+                                        <i class="iconify" data-icon="{{ $thirddata->getIcon() }}"></i>
                                         @endif
                                         <span>{{ $thirddata->getLabel() }}</span>
                                     </a>

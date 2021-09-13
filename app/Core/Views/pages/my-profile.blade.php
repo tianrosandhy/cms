@@ -67,7 +67,7 @@
 
 							<div class="my-3">
 								<button type="submit" class="btn btn-primary">
-									<i class="icon" data-feather="save"></i> Save Profile
+									<span class="iconify" data-icon="carbon:save"></span> Save Profile
 								</button>
 							</div>
 

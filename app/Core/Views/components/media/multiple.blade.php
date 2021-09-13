@@ -17,14 +17,14 @@ if(!is_array($value)){
 			<img data-fallback="{{ admin_asset('images/broken-image.jpg') }}" src="{{ isset($media->id) ? $media->url('thumb') : $media->fallback() }}" class="media-item">
 			<a href="#" class="trigger-upload-image"></a>
 			<div class="multi-closer">
-				<i class="icon" data-feather="x"></i>
+				<span class="iconify" data-icon="uim:multiply"></span>
 			</div>
 		</div>
 		@endforeach
 	</div>
 	<div class="square-image add">
 		<div>
-			<i class="icon" data-feather="plus"></i>
+			<span class="iconify" data-icon="uim:plus-square"></span>
 			<div>
 				<small>Add Images</small>
 			</div>
@@ -38,7 +38,7 @@ if(!is_array($value)){
 		<img data-fallback="{{ admin_asset('images/broken-image.jpg') }}" src="{{ admin_asset('images/broken-image.jpg') }}" class="media-item">
 		<a href="#" class="trigger-upload-image"></a>
 		<div class="multi-closer remove-image">
-			<i class="icon" data-feather="x"></i>
+			<span class="iconify" data-icon="uim:multiply"></span>
 		</div>
 	</div>
 </template>

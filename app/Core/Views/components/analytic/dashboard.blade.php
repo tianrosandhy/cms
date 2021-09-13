@@ -62,7 +62,7 @@
 
     <div class="dashboard-container" style="position:relative; min-height:200px;">
         <div class="box-loader">
-            <i class="icon" data-feather="refresh-cw"></i>
+            <span class="iconify" data-icon="uim:refresh"></span>
         </div>
         <div class="dashboard-holder"></div>
     </div>

@@ -115,7 +115,7 @@
 
 
 						<div class="save-buttons">
-							<button type="submit" class="btn btn-lg btn-primary"><i data-feather="save"></i> {{ __('core::module.form.save_and_exit') }}</button>
+							<button type="submit" class="btn btn-lg btn-primary"><span class="iconify" data-icon="carbon:save"></span> {{ __('core::module.form.save_and_exit') }}</button>
 						</div>
 
 					</form>

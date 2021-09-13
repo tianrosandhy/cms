@@ -25,7 +25,7 @@
 		</div>
 
 		<button type="submit" class="btn btn-primary">
-			<i data-feather="save"></i> Save New Password
+			<span class="iconify" data-icon="carbon:save"></span> Save New Password
 		</button>
 	</form>
 @stop

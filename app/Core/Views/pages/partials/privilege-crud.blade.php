@@ -24,10 +24,10 @@
 	@endif
 
 	<button class="btn btn-primary">
-		<i data-feather="save"></i> Save
+		<span class="iconify" data-icon="carbon:save"></span> Save
 	</button>
 
 	<button type="button" class="btn btn-danger" data-dismiss="modal">
-		<i data-feather="x"></i> Cancel
+		<span class="iconify" data-icon="uim:multiply"></span> Cancel
 	</button>
 </form>

@@ -78,7 +78,7 @@
 										</div>
 										<div class="my-3">
 											<button type="submit" class="btn btn-primary">
-												<i data-feather="save"></i> Add Languages
+												<span class="iconify" data-icon="carbon:save"></span> Add Languages
 											</button>
 										</div>
 

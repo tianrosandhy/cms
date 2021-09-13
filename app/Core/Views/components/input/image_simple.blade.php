@@ -11,7 +11,7 @@ $cleaned_name = str_replace('[]', '', $name);
 ?>
 <div class="image_simple">
   <div class="image-holder" style="position:relative; {!! empty($value) ? 'display:none' : 'display:inline-block' !!}">
-    <div class="image-closer remove-image text-center"><i data-feather="x"></i></div>
+    <div class="image-closer remove-image text-center"><span class="iconify" data-icon="uim:multiply"></span></div>
     <img src="{{ $value ? storage_url($value) : null }}" alt="Image Preview" class="img-preview" style="max-height:120px;">
   </div>
   @if($value)

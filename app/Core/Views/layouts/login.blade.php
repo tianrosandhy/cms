@@ -4,71 +4,62 @@
         @include ('core::layouts.partials.metadata')
     </head>
 
-    <body class="authentication-bg">
+    <body class="authentication-bg bg-primary bg-pattern">
         
         <div class="account-pages my-5">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-xl-10">
+                    <div class="col-xl-6 col-md-8">
                         <div class="card">
-                            <div class="card-body p-0">
-                                <div class="row">
-                                    <div class="col-lg-6 p-5">
-                                        <div class="mx-auto mb-5">
-                                            @include ('core::layouts.include.logo', ['height' => 50])
-                                        </div>
-
-                                        <h6 class="h5 mb-0 mt-4">{{ __('core::module.login.h1') }}</h6>
-                                        <p class="text-muted mt-1 mb-4">{{ __('core::module.login.h2') }}</p>
-
-                                        <form action="#" class="authentication-form" method="post">
-                                            {{ csrf_field() }}
-                                            <div class="form-group">
-                                                <label class="form-control-label">Email</label>
-                                                <div class="input-group input-group-merge">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <span class="iconify" data-icon="uim:user-md"></span>
-                                                        </span>
-                                                    </div>
-                                                    <input type="email" class="form-control" id="email" placeholder="your@email.com" name="email">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group mt-4">
-                                                <label class="form-control-label">Password</label>
-                                                <div class="input-group input-group-merge">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">
-                                                            <span class="iconify" data-icon="uim:key-skeleton"></span>
-                                                        </span>
-                                                    </div>
-                                                    <input type="password" class="form-control" id="password"
-                                                        placeholder="Enter your password" name="password">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group mb-4">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="checkbox-signin" checked name="remember" value="1">
-                                                    <label class="custom-control-label" for="checkbox-signin">{{ __('core::module.login.remember_me') }}</label>
-                                                    <a href="#" class="float-right text-muted text-unline-dashed ml-1" data-toggle="modal" data-target="#forgot-password-modal">{{ __('core::module.login.forgot_password') }}</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group mb-0 text-center">
-                                                <button class="btn btn-primary btn-block" type="submit">LOG IN
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-lg-6 d-none d-md-inline-block">
-                                        <div class="auth-page-sidebar" style="width:100%; height:100%;">
-                                            <img src="{{ admin_asset('images/login-bg.jpg') }}" alt="Login Background">
-                                        </div>
-                                    </div>
+                            <div class="card-body p-5">
+                                <div class="mx-auto mb-5">
+                                    @include ('core::layouts.include.logo', ['height' => 50])
                                 </div>
+
+                                <h6 class="h5 mb-0 mt-4">{{ __('core::module.login.h1') }}</h6>
+                                <p class="text-muted mt-1 mb-4">{{ __('core::module.login.h2') }}</p>
+
+                                <form action="#" class="authentication-form" method="post">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <label class="form-control-label">Email</label>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-white">
+                                                    <span class="iconify" data-icon="uim:user-md"></span>
+                                                </span>
+                                            </div>
+                                            <input type="email" class="form-control" id="email" placeholder="your@email.com" name="email">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mt-4">
+                                        <label class="form-control-label">Password</label>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-white">
+                                                    <span class="iconify" data-icon="uim:key-skeleton"></span>
+                                                </span>
+                                            </div>
+                                            <input type="password" class="form-control" id="password"
+                                                placeholder="Enter your password" name="password">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="checkbox-signin" checked name="remember" value="1">
+                                            <label class="custom-control-label" for="checkbox-signin">{{ __('core::module.login.remember_me') }}</label>
+                                            <a href="#" class="float-right text-muted text-unline-dashed ml-1" data-toggle="modal" data-target="#forgot-password-modal">{{ __('core::module.login.forgot_password') }}</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-0 text-center">
+                                        <button class="btn btn-primary btn-block" type="submit">LOG IN
+                                        </button>
+                                    </div>
+                                </form>                                
                                 
                             </div> <!-- end card-body -->
                         </div>

@@ -25,7 +25,7 @@
 
             <div class="p-3">
                 <button type="submit" class="btn btn-primary btn-block">
-                    <i class="icon" data-feather="save"></i> {{ __('core::module.form.save_setting') }}
+                    <span class="iconify" data-icon="carbon:save"></span> {{ __('core::module.form.save_setting') }}
                 </button>
             </div>
         </form>

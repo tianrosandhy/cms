@@ -15,7 +15,7 @@
 </div>
 <div class="card-body filemanager-detail text-center">
 	<div class="closer">
-		<i class="icon" data-feather="x"></i>
+		<span class="iconify" data-icon="uim:multiply"></span>
 	</div>
 	<img class="holder-image" src="{{ Storage::url('2020/06/login-bg-thumb.jpg') }}" alt="Image Thumbnail" style="max-height:125px;">
 	<h6 class="holder-title">Filename Example.jpg</h6>
@@ -33,7 +33,7 @@
 			<a href="#" class="btn btn-primary btn-sm filemanager-select-final">Select This Image</a>
 		</div>
 		<div class="mt-3 text-center">
-			<a href="#" class="text-danger delete-permanently"><i class="icon" data-feather="trash"></i> Delete Permanently</a>
+			<a href="#" class="text-danger delete-permanently"><span class="iconify" data-icon="bi:trash-fill"></span> Delete Permanently</a>
 		</div>
 	</div>
 </div>
