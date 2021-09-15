@@ -4,6 +4,7 @@ namespace App\Core\Http\Structure;
 use DataStructure;
 use App\Core\Base\Structure\BaseStructure;
 use App\Core\Models\User;
+use App\Core\Transformers\UserTransformer;
 use Media;
 use Permission;
 
@@ -53,6 +54,10 @@ class UserStructure extends BaseStructure
 		]);
 	}
 
+	public function transformer(){
+		return new UserTransformer;
+	}
+
 	public function customFilter($context){
 		$roles = new \App\Core\Components\RoleStructure;
 		return $context->whereIn('role_id', $roles->array_only);
@@ -66,35 +71,4 @@ class UserStructure extends BaseStructure
 		return new User;
 	}
 
-	public function rowFormat($row){
-		return [
-			'id' => $this->checkerFormat($row),
-			'name' => $row->name,
-			'email' => $row->email,
-			'role_id' => $row->role->name ?? '<small class="text-danger">Unassigned</small>',
-			'image' => '<img src="'.Media::getSelectedImage($row->image, 'thumb').'" style="height:50px;">',
-			'is_active' => $this->switcherFormat($row, 'is_active', (Permission::has('admin.user.switch') ? 'toggle' : 'label')),
-			'action' => $this->actionButton($row)
-		];
-	}
-
-	protected function actionButton($row){
-		$out = '
-		<div class="btn-group">
-		';
-		if(Permission::has('admin.user.edit'))
-		$out .= '<a href="'.route('admin.user.edit', ['id' => $row->id]).'" class="btn btn-info">Edit</a>';
-
-		$is_sa = $row->role->is_sa ?? false;
-		if(!$is_sa){
-			if(Permission::has('admin.user.delete')){
-				$out .= '
-				<a href="'. route('admin.user.delete', ['id' => $row->id]) .'" class="btn btn-danger delete-button">'. __('core::module.form.delete') .'</a>
-				';
-			}
-		}
-		$out .= '</div>';
-
-		return $out;
-	}
 }

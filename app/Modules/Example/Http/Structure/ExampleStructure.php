@@ -4,6 +4,7 @@ namespace App\Modules\Example\Http\Structure;
 use DataStructure;
 use App\Core\Base\Structure\BaseStructure;
 use App\Modules\Example\Models\Example;
+use App\Modules\Example\Transformers\ExampleTransformer;
 use Permission;
 
 class ExampleStructure extends BaseStructure
@@ -117,37 +118,7 @@ class ExampleStructure extends BaseStructure
 		return new Example;
 	}
 
-	public function rowFormat($row){
-		return [
-			'id' => $this->checkerFormat($row),
-			'text' => $row->e('text'),
-			'number' => $row->number,
-			'dates' => $row->dates,
-			'daterange' => $row->generateTags('daterange'),
-			'select' => $row->select,
-			'select_multiple' => $row->generateTags('select_multiple'),
-			'textarea' => $row->textarea,
-			'richtext' => $row->richtext,
-			'image' => $row->outputImage('image'),
-			'image_multiple' => $row->outputImage('image_multiple'),
-			'file' => $row->outputFile('file'),
-			'file_multiple' => $row->outputFile('file_multiple'),
-			'radio' => $row->radio,
-			'checkbox' => $row->generateTags('checkbox'),
-			'yesno' => $this->switcherFormat($row, 'yesno', (Permission::has('admin.example.switch') ? 'toggle' : 'label')),
-			'map' => $row->generateTags('map'),
-			'action' => $this->actionButton($row)
-		];
-	}
-
-	protected function actionButton($row){
-		$out = '';
-		if(Permission::has('admin.example.edit')){
-			$out .= '<a href="'.route('admin.example.edit', ['id' => $row->id]).'" class="btn btn-info">Edit</a>';
-		}
-		if(Permission::has('admin.example.delete')){
-			$out .= '<a href="'.route('admin.example.delete', ['id' => $row->id]).'" class="btn btn-danger delete-button">Delete</a>';
-		}
-		return $out;
+	public function transformer(){
+		return new ExampleTransformer;
 	}
 }

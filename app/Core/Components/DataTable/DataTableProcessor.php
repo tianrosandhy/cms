@@ -71,11 +71,21 @@ trait DataTableProcessor
 		$this->getDataByRequest();
 
 		$output = [];
-		foreach($this->raw_data as $row){
-			$rf = $this->structure->rowFormat($row);
-			if(!empty($rf)){
-				$output[] = $rf;
+		if(method_exists($this->structure, 'transformer')){
+			$trans = $this->structure->transformer();
+			$output = $trans->reform($this->raw_data, 'datatable');
+		}
+		else if(method_exists($this->structure, 'rowFormat')){
+			foreach($this->raw_data as $row){
+				$rf = $this->structure->rowFormat($row);
+				if(!empty($rf)){
+					$output[] = $rf;
+				}
 			}
+		}
+		else{
+			// no data format handler
+			throw new DataTableException('No data format handler method found. Please choose between rowFormat() or transformer()');
 		}
 
 		$this->data = $output;

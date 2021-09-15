@@ -4,6 +4,7 @@ namespace [NAMESPACE]\Http\Structure;
 use DataStructure;
 use App\Core\Base\Structure\BaseStructure;
 use [NAMESPACE]\Models\[MODULE_NAME];
+use [NAMESPACE]\Transformers\[MODULE_NAME]Transformer;
 use Permission;
 
 class [MODULE_NAME]Structure extends BaseStructure
@@ -50,24 +51,7 @@ class [MODULE_NAME]Structure extends BaseStructure
 		return new [MODULE_NAME];
 	}
 
-	public function rowFormat($row){
-		return [
-			'id' => $this->checkerFormat($row),
-			'title' => $row->title,
-			'description' => $row->description,
-			'is_active' => $this->switcherFormat($row, 'is_active', (Permission::has('admin.[LOWERCASE_MODULE_NAME].switch') ? 'toggle' : 'label')),
-			'action' => $this->actionButton($row)
-		];
-	}
-
-	protected function actionButton($row){
-		$out = '';
-		if(Permission::has('admin.[LOWERCASE_MODULE_NAME].edit')){
-			$out .= '<a href="'.route('admin.[LOWERCASE_MODULE_NAME].edit', ['id' => $row->id]).'" class="btn btn-info">Edit</a>';
-		}
-		if(Permission::has('admin.[LOWERCASE_MODULE_NAME].delete')){
-			$out .= '<a href="'.route('admin.[LOWERCASE_MODULE_NAME].delete', ['id' => $row->id]).'" class="btn btn-danger delete-button">Delete</a>';
-		}
-		return $out;
+	public function transformer(){
+		return new [MODULE_NAME]Transformer;
 	}
 }

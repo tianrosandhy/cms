@@ -60,6 +60,7 @@ class AutocrudModule extends Command
             	'Presenters/BlankIndexPresenter.php',
             	'Providers/BlankServiceProvider.php',
             	'Services/BlankInstance.php',
+                'Transformers/BlankTransformer.php',
             ]);
 
             $this->changeContents([
@@ -84,6 +85,7 @@ class AutocrudModule extends Command
             	'Providers/'.$this->module_name.'ServiceProvider.php',
             	'Routes/web.php',
             	'Services/'.$this->module_name.'Instance.php',
+                'Transformers/'.$this->module_name.'Transformer.php',
             	'Translations/en/module.php',
             	'Translations/id/module.php',
                 'Views/crud.blade.php',
