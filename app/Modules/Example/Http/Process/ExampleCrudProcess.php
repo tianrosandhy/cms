@@ -2,12 +2,12 @@
 namespace App\Modules\Example\Http\Process;
 
 use App\Core\Base\Process\BaseCrudProcess;
-use App\Modules\Example\Http\Skeleton\ExampleSkeleton;
+use App\Modules\Example\Http\Structure\ExampleStructure;
 
 class ExampleCrudProcess extends BaseCrudProcess
 {
-	public function setSkeleton(){
-		return new ExampleSkeleton;
+	public function setStructure(){
+		return new ExampleStructure;
 	}
 
 }

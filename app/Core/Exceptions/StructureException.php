@@ -3,7 +3,7 @@ namespace App\Core\Exceptions;
 
 use Exception;
 
-class SkeletonException extends Exception
+class StructureException extends Exception
 {
 	
 }

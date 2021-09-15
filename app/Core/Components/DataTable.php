@@ -1,7 +1,7 @@
 <?php
 namespace App\Core\Components;
 
-use App\Core\Base\Skeleton\BaseSkeleton;
+use App\Core\Base\Structure\BaseStructure;
 use App\Core\Components\DataTable\DataTableProcessor;
 
 class DataTable
@@ -9,7 +9,7 @@ class DataTable
 	use DataTableProcessor;
 
 	public 
-		$skeleton,
+		$structure,
 		$request,
 		$mode = 'datatable'; //mode : datatable & custom
 
@@ -22,33 +22,33 @@ class DataTable
 		return $this;
 	}
 
-	public function setSkeleton(BaseSkeleton $skeleton){
-		$this->skeleton = $skeleton;
-		$this->mode = $this->skeleton->mode ?? 'datatable';
+	public function setStructure(BaseStructure $structure){
+		$this->structure = $structure;
+		$this->mode = $this->structure->mode ?? 'datatable';
 		return $this;
 	}
 
 	public function assets(){
 		return view('core::components.datatable.asset', [
-			'skeleton' => $this->skeleton
+			'structure' => $this->structure
 		]);
 	}
 
 	public function customAssets(){
 		return view('core::components.datatable.custom-asset', [
-			'skeleton' => $this->skeleton
+			'structure' => $this->structure
 		]);
 	}
 
 	public function tableView(){
 		return view('core::components.datatable.table-view', [
-			'skeleton' => $this->skeleton
+			'structure' => $this->structure
 		]);
 	}
 
 	public function customTableView(){
 		return view('core::components.datatable.custom-table-view', [
-			'skeleton' => $this->skeleton
+			'structure' => $this->structure
 		]);
 	}
 

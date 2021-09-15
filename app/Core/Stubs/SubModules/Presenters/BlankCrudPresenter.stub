@@ -3,7 +3,7 @@ namespace [NAMESPACE]\Presenters;
 
 use App\Core\Base\Presenters\BaseViewPresenter;
 use DataTable;
-use [NAMESPACE]\Http\Skeleton\[MODULE_NAME]Skeleton;
+use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
 
 class [MODULE_NAME]CrudPresenter extends BaseViewPresenter
 {
@@ -20,7 +20,7 @@ class [MODULE_NAME]CrudPresenter extends BaseViewPresenter
 		#if you want to override this crud view, you can use below view instead
 		// $this->view = '[LOWECASE_MODULE_NAME]::crud';
 
-		$this->skeleton = new [MODULE_NAME]Skeleton;
+		$this->structure = new [MODULE_NAME]Structure;
 		$this->config = config('module-setting.[LOWERCASE_MODULE_NAME]');
 	}
 

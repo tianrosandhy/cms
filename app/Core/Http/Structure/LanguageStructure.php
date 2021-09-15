@@ -1,11 +1,11 @@
 <?php
-namespace App\Core\Http\Skeleton;
+namespace App\Core\Http\Structure;
 
 use DataStructure;
-use App\Core\Base\Skeleton\BaseSkeleton;
+use App\Core\Base\Structure\BaseStructure;
 use App\Core\Models\Language;
 
-class LanguageSkeleton extends BaseSkeleton
+class LanguageStructure extends BaseStructure
 {
 	public function handle(){
 		$this->registers([

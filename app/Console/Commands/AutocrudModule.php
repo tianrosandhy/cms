@@ -51,7 +51,7 @@ class AutocrudModule extends Command
             	'Http/Process/BlankCrudProcess.php',
             	'Http/Process/BlankDatatableProcess.php',
             	'Http/Process/BlankDeleteProcess.php',
-            	'Http/Skeleton/BlankSkeleton.php',
+            	'Http/Structure/BlankStructure.php',
                 'Migrations/2020_06_20_000000_blank.php',
                 'Migrations/2020_06_20_000000_blank_translator.php',
                 'Models/Blank.php',
@@ -74,7 +74,7 @@ class AutocrudModule extends Command
             	'Http/Process/'.$this->module_name.'CrudProcess.php',
             	'Http/Process/'.$this->module_name.'DatatableProcess.php',
             	'Http/Process/'.$this->module_name.'DeleteProcess.php',
-            	'Http/Skeleton/'.$this->module_name.'Skeleton.php',
+            	'Http/Structure/'.$this->module_name.'Structure.php',
                 'Migrations/2020_06_20_000000_'.$this->lowercase_name.'.php',
                 'Migrations/2020_06_20_000000_'.$this->lowercase_name.'_translator.php',
                 'Models/'.$this->module_name.'.php',
@@ -89,7 +89,7 @@ class AutocrudModule extends Command
                 'Views/crud.blade.php',
             ]);
 
-            $this->info('New module has been created for you. Now you just need to register the service provider (in config/modules.php or in config/app.php) , manage migration, manage the model and skeleton.');
+            $this->info('New module has been created for you. Now you just need to register the service provider (in config/modules.php or in config/app.php) , manage migration, manage the model and structure.');
 
         }
 

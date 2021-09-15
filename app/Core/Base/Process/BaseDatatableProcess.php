@@ -22,7 +22,7 @@ class BaseDatatableProcess extends BaseProcess
 	}
 
 	public function currentDataTable(){
-		return DataTable::setSkeleton($this->skeleton);
+		return DataTable::setStructure($this->structure);
 	}
 
 	public function validate(){

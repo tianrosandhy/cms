@@ -1,6 +1,6 @@
 @if(isset($data->id))
 <div class="py-2 text-right">
-	<a href="#" class="btn btn-info btn-change-password"><span class="iconify" data-icon="uim:key-skeleton"></span> Change Password</a>
+	<a href="#" class="btn btn-info btn-change-password"><span class="iconify" data-icon="uim:key-structure"></span> Change Password</a>
 </div>
 <script>
 $(function(){

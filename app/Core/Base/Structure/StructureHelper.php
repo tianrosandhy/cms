@@ -1,14 +1,14 @@
 <?php
-namespace App\Core\Base\Skeleton;
+namespace App\Core\Base\Structure;
 
-use App\Core\Exceptions\SkeletonException;
+use App\Core\Exceptions\StructureException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Language;
 
-trait SkeletonHelper
+trait StructureHelper
 {
-	public function getSkeletonName(){
+	public function getStructureName(){
 		$class_name = (string)get_class($this);
 		$split = explode("\\", $class_name);
 		return $split[count($split)-1];
@@ -67,7 +67,7 @@ trait SkeletonHelper
 			}
 			return $model->getConnection()->getSchemaBuilder()->getColumnListing($model->getTable());
 		}
-		throw new SkeletonException('You need to define the model skeleton first');
+		throw new StructureException('You need to define the model structure first');
 	}
 
 	public function getTableName(){
@@ -78,10 +78,10 @@ trait SkeletonHelper
 			}
 			return $model->getTable();
 		}
-		throw new SkeletonException('You need to define the model skeleton first');
+		throw new StructureException('You need to define the model structure first');
 	}
 
-	// generate auto CRUD prepared data by skeleton's data
+	// generate auto CRUD prepared data by structure's data
 	public function autoCrud($lang=null){
 		$table_listing = $this->modelTableListing();
 		$table_name = $this->getTableName();

@@ -13,7 +13,7 @@
 	<form action="" method="post">
 		{{ csrf_field() }}
 		<?php
-		$forms = $skeleton->output();
+		$forms = $structure->output();
 		$tabs = array_unique(Arr::pluck($forms, 'tab_group'));
 		?>
 		@if(count($tabs) > 0)

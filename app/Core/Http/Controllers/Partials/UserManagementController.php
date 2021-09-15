@@ -3,7 +3,7 @@ namespace App\Core\Http\Controllers\Partials;
 
 use App\Core\Presenters\UserPresenter;
 use App\Core\Presenters\UserCrudPresenter;
-use App\Core\Http\Skeleton\UserSkeleton;
+use App\Core\Http\Structure\UserStructure;
 use App\Core\Models\User;
 use App\Core\Http\Process\UserCrudProcess;
 use App\Core\Base\Process\BaseDeleteProcess;
@@ -17,7 +17,7 @@ trait UserManagementController
 
 	public function userManagementDataTable(){
 		return (new BaseDatatableProcess)
-			->setSkeleton(new UserSkeleton)
+			->setStructure(new UserStructure)
 			->type('datatable')
 			->handle();
 	}

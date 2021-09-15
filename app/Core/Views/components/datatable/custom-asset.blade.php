@@ -7,13 +7,13 @@ $(function(){
 
     $(".custom-datatable-filter, .search-box input, .search-box select").on('change', function(){
         setTimeout(function(){
-            $("#{{ $skeleton->getSkeletonName() }}-page").val(1);
+            $("#{{ $structure->getStructureName() }}-page").val(1);
             loadCustomDatatable();
         }, 100);
     });
 
     $(document).on('click', '.custom-pagination a.page-link', function(){
-        $("#{{ $skeleton->getSkeletonName() }}-page").val($(this).attr('data-page'));
+        $("#{{ $structure->getStructureName() }}-page").val($(this).attr('data-page'));
         loadCustomDatatable();
     });
 
@@ -27,7 +27,7 @@ $(function(){
 		$(this).fadeOut();
 	});
 
-    $('#{{ $skeleton->getSkeletonName() }}-perpage').on('change', function(e){
+    $('#{{ $structure->getStructureName() }}-perpage').on('change', function(e){
         current_perpage = parseInt($(this).val());
         if(isNaN(current_perpage)){
             $(this).val($(this).attr('min')).trigger('change');
@@ -40,7 +40,7 @@ $(function(){
             e.preventDefault();
             $(this).val($(this).attr('min')).trigger('change');
         }
-        $("#{{ $skeleton->getSkeletonName() }}-page").val(1);
+        $("#{{ $structure->getStructureName() }}-page").val(1);
     });
 });
 
@@ -51,22 +51,22 @@ function loadCustomDatatable(){
     }
 
     window.in_progress = true;
-    objTarget = $("#{{ $skeleton->getSkeletonName() }}");
+    objTarget = $("#{{ $structure->getStructureName() }}");
     objTarget.addClass('in-progress');
-    send_data = {!! $skeleton->generateJsonSearchQuery() !!};
-    dlength = parseInt($("#{{ $skeleton->getSkeletonName() }}-perpage").val());
-    page = parseInt($("#{{ $skeleton->getSkeletonName() }}-page").val());
+    send_data = {!! $structure->generateJsonSearchQuery() !!};
+    dlength = parseInt($("#{{ $structure->getStructureName() }}-perpage").val());
+    page = parseInt($("#{{ $structure->getStructureName() }}-page").val());
     send_data.page = page;
     send_data.start = (page - 1) * dlength;
     send_data.length = dlength;
     send_data.order = [{
-        column : $("#{{ $skeleton->getSkeletonName() }}-sortby").val(),
-        dir : $("#{{ $skeleton->getSkeletonName() }}-sortdir").val()
+        column : $("#{{ $structure->getStructureName() }}-sortby").val(),
+        dir : $("#{{ $structure->getStructureName() }}-sortdir").val()
     }];
     send_data._token = window.CSRF_TOKEN;
 
     $.ajax({
-        url : '{{ $skeleton->route() }}',
+        url : '{{ $structure->route() }}',
         type : 'POST',
         dataType : 'json',
         data : send_data,

@@ -1,12 +1,12 @@
 <?php
-namespace [NAMESPACE]\Http\Skeleton;
+namespace [NAMESPACE]\Http\Structure;
 
 use DataStructure;
-use App\Core\Base\Skeleton\BaseSkeleton;
+use App\Core\Base\Structure\BaseStructure;
 use [NAMESPACE]\Models\[MODULE_NAME];
 use Permission;
 
-class [MODULE_NAME]Skeleton extends BaseSkeleton
+class [MODULE_NAME]Structure extends BaseStructure
 {
 	#ENABLE THIS PROPERTY IF YOU WANT TO USE MULTI LANGUAGE FEATURE
 	//public $multi_language = true;

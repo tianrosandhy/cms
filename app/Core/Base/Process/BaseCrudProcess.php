@@ -20,16 +20,16 @@ class BaseCrudProcess extends BaseProcess
 			$this->mode = 'create';
 		}
 		$this->instance = $instance;
-		if(method_exists($this, 'setSkeleton')){
-			$this->skeleton = $this->setSkeleton();
+		if(method_exists($this, 'setStructure')){
+			$this->structure = $this->setStructure();
 		}
 		else{
-			throw new ProcessException('Skeleton must be set in class that extend to BaseCrudProcess with "->setSkeleton()"');
+			throw new ProcessException('Structure must be set in class that extend to BaseCrudProcess with "->setStructure()"');
 		}
 	}
 
 	public function validate(){
-		$validator = $this->skeleton->generateValidation($this->mode, $this->instance->getKey());
+		$validator = $this->structure->generateValidation($this->mode, $this->instance->getKey());
 		if($validator){
 			if($validator->fails()){
 				throw new ProcessException($validator);
@@ -39,23 +39,23 @@ class BaseCrudProcess extends BaseProcess
 
 	public function process(){
 		//your logic after validation success
-		if($this->skeleton->multi_language){
-			$skeleton_inputs = $this->skeleton->autoCrudMultiLanguage();
+		if($this->structure->multi_language){
+			$structure_inputs = $this->structure->autoCrudMultiLanguage();
 		}
 		else{
-			$skeleton_inputs = $this->skeleton->autoCrud();
+			$structure_inputs = $this->structure->autoCrud();
 		}
 
-		if(!empty($skeleton_inputs)){
-			$inputs = $skeleton_inputs;
-			if($this->skeleton->multi_language){
-				$inputs = $skeleton_inputs[Language::default()] ?? $skeleton_inputs;
+		if(!empty($structure_inputs)){
+			$inputs = $structure_inputs;
+			if($this->structure->multi_language){
+				$inputs = $structure_inputs[Language::default()] ?? $structure_inputs;
 			}
 
 
 			#DYNAMIC SINGLE MODE
 			//create new instance if not exists, but use selected instance if exists
-			$instance = $this->instance ?? $this->skeleton->model();
+			$instance = $this->instance ?? $this->structure->model();
 			if($instance instanceof \Illuminate\Database\Eloquent\Builder || $instance instanceof \Illuminate\Database\Query\Builder){
 				$instance = $instance->getModel();
 			}
@@ -78,7 +78,7 @@ class BaseCrudProcess extends BaseProcess
 				foreach(Language::available() as $lang => $langname){
 					$trans = $instance->translatorInstance();
 					$trans->lang = $lang;
-					$inputs = $skeleton_inputs[$lang] ?? [];
+					$inputs = $structure_inputs[$lang] ?? [];
 					$added = 0;
 					foreach($inputs as $field => $value){
 						$trans->{$field} = $value;
@@ -102,7 +102,7 @@ class BaseCrudProcess extends BaseProcess
 
 		}
 
-		// if you have another logic for storing data that doesnt cover by Skeleton, you can define them here.
+		// if you have another logic for storing data that doesnt cover by Structure, you can define them here.
 	}
 
 	public function revert(){

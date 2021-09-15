@@ -8,14 +8,14 @@
 				<div class="card-body">
 					<form action="" method="post" class="pos-rel" enctype="multipart/form-data">
 						{{ csrf_field() }}
-						@if(isset($skeleton->multi_language))
-							@if($skeleton->multi_language)
+						@if(isset($structure->multi_language))
+							@if($structure->multi_language)
 								@include ('core::components.language-toggle')
 							@endif
 						@endif
 
 						<?php
-						$forms = $skeleton->output();
+						$forms = $structure->output();
 						$tabs = array_unique(Arr::pluck($forms, 'tab_group'));
 						?>
 
@@ -91,7 +91,7 @@
 														{{ $row->name }}
 														<span class="label-language-holder text-uppercase"></span>
 													</label>
-													{!! $row->createInput($data, ($skeleton->multi_language ?? false)) !!}
+													{!! $row->createInput($data, ($structure->multi_language ?? false)) !!}
 												</div>
 											@endif
 										</div>

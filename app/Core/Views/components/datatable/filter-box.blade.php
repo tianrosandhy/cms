@@ -1,4 +1,4 @@
-<div class="modal fade modal-pagefilter" id="searchBox-{{ $skeleton->name() }}">
+<div class="modal fade modal-pagefilter" id="searchBox-{{ $structure->name() }}">
 	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -10,7 +10,7 @@
 				<!-- for datatable components -->
 				<div class="search-box my-2">
 					<div class="row">
-						@foreach($skeleton->output() as $row)
+						@foreach($structure->output() as $row)
 							@if($row->getSearchable() && !$row->getHideTable())
 							<div class="col-lg-4 col-md-6">
 								<div class="form-group">

@@ -23,10 +23,10 @@ $(function(){
 		'colReorder' : true,
 		'ajax'		: {
 			type : 'POST',
-			url	: '{{ $skeleton->route() }}',
+			url	: '{{ $structure->route() }}',
 			dataType : 'json',
 			data : function(data){
-				{!! $skeleton->generateSearchQuery() !!}
+				{!! $structure->generateSearchQuery() !!}
 				data._token = window.CSRF_TOKEN
 			},
 		},
@@ -39,12 +39,12 @@ $(function(){
 			initPlugins();
 		},
 		'columns' : [
-			{!! $skeleton->datatableColumns() !!}
+			{!! $structure->datatableColumns() !!}
 		],
 		'columnDefs' : [
-			{!! $skeleton->datatableOrderable() !!}
+			{!! $structure->datatableOrderable() !!}
 		],
-		"aaSorting": [{!! $skeleton->datatableDefaultOrder() !!}],
+		"aaSorting": [{!! $structure->datatableDefaultOrder() !!}],
 	});
 
 	$(".search-box input, .search-box select").on('keyup', function(e){

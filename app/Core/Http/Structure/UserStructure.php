@@ -1,13 +1,13 @@
 <?php
-namespace App\Core\Http\Skeleton;
+namespace App\Core\Http\Structure;
 
 use DataStructure;
-use App\Core\Base\Skeleton\BaseSkeleton;
+use App\Core\Base\Structure\BaseStructure;
 use App\Core\Models\User;
 use Media;
 use Permission;
 
-class UserSkeleton extends BaseSkeleton
+class UserStructure extends BaseStructure
 {
 	public function handle(){
 		$this->registers([

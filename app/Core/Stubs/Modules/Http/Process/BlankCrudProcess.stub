@@ -2,12 +2,12 @@
 namespace [NAMESPACE]\Http\Process;
 
 use App\Core\Base\Process\BaseCrudProcess;
-use [NAMESPACE]\Http\Skeleton\[MODULE_NAME]Skeleton;
+use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
 
 class [MODULE_NAME]CrudProcess extends BaseCrudProcess
 {
-	public function setSkeleton(){
-		return new [MODULE_NAME]Skeleton;
+	public function setStructure(){
+		return new [MODULE_NAME]Structure;
 	}
 
 

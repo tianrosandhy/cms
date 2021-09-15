@@ -5,13 +5,13 @@ use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
 use Validator;
 use DataTable;
-use [NAMESPACE]\Http\Skeleton\[MODULE_NAME]Skeleton;
+use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
 
 class [MODULE_NAME]DatatableProcess extends BaseProcess
 {
 	public function __construct(){
 		parent::__construct();
-		$this->skeleton = new [MODULE_NAME]Skeleton;
+		$this->structure = new [MODULE_NAME]Structure;
 	}
 
 	public function config(){
@@ -24,7 +24,7 @@ class [MODULE_NAME]DatatableProcess extends BaseProcess
 	}
 
 	public function currentDataTable(){
-		return DataTable::setSkeleton($this->skeleton);
+		return DataTable::setStructure($this->structure);
 	}
 
 	public function validate(){

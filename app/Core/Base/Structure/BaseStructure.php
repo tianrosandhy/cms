@@ -1,13 +1,13 @@
 <?php
-namespace App\Core\Base\Skeleton;
+namespace App\Core\Base\Structure;
 
 use App\Core\Components\DataTable\DataStructure;
 use Validator;
 use Language;
 
-class BaseSkeleton
+class BaseStructure
 {
-	use SkeletonHelper;
+	use StructureHelper;
 
 	public $structure = [];
 	public $multi_language = false;

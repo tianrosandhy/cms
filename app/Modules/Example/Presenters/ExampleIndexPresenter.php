@@ -3,7 +3,7 @@ namespace App\Modules\Example\Presenters;
 
 use App\Core\Base\Presenters\BaseViewPresenter;
 use DataTable;
-use App\Modules\Example\Http\Skeleton\ExampleSkeleton;
+use App\Modules\Example\Http\Structure\ExampleStructure;
 use Permission;
 
 class ExampleIndexPresenter extends BaseViewPresenter
@@ -15,8 +15,8 @@ class ExampleIndexPresenter extends BaseViewPresenter
 		//$this->view = 'example::index';
 
 		$this->batch_delete_url = route('admin.example.delete');
-		$this->skeleton = new ExampleSkeleton;
-		$this->datatable = DataTable::setSkeleton($this->skeleton);
+		$this->structure = new ExampleStructure;
+		$this->datatable = DataTable::setStructure($this->structure);
 		$this->control_buttons = [];
 		if(Permission::has('admin.example.create')){
 			$this->control_buttons[] = [

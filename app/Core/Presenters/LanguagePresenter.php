@@ -2,7 +2,7 @@
 namespace App\Core\Presenters;
 
 use App\Core\Base\Presenters\BaseViewPresenter;
-use App\Core\Http\Skeleton\LanguageSkeleton;
+use App\Core\Http\Structure\LanguageStructure;
 use Language;
 
 class LanguagePresenter extends BaseViewPresenter

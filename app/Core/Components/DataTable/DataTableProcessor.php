@@ -13,8 +13,8 @@ trait DataTableProcessor
 			$this->validateRequest();
 			$this->handleProcess();
 			if($this->mode == 'custom'){
-				if(view()->exists($this->skeleton->custom_html)){
-					$html = view($this->skeleton->custom_html, [
+				if(view()->exists($this->structure->custom_html)){
+					$html = view($this->structure->custom_html, [
 						'data' => $this->data
 					])->render();
 				}
@@ -72,7 +72,7 @@ trait DataTableProcessor
 
 		$output = [];
 		foreach($this->raw_data as $row){
-			$rf = $this->skeleton->rowFormat($row);
+			$rf = $this->structure->rowFormat($row);
 			if(!empty($rf)){
 				$output[] = $rf;
 			}
@@ -108,7 +108,7 @@ trait DataTableProcessor
 
 	public function getDataByRequest(){
 		try{
-			$data = $this->skeleton->model();
+			$data = $this->structure->model();
 		}catch(\Exception $e){
 			throw new DataTableException('Failed to get data from table. Make sure you have already migrate the module');
 		}
@@ -127,8 +127,8 @@ trait DataTableProcessor
 			}
 		}
 
-		if(method_exists($this->skeleton, 'customFilter')){
-			$data = $this->skeleton->customFilter($data);
+		if(method_exists($this->structure, 'customFilter')){
+			$data = $this->structure->customFilter($data);
 		}
 		$without_filter = clone $data;
 

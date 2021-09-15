@@ -148,7 +148,7 @@ class DataStructure
 		return $this;
 	}
 
-	//quick skeleton
+	//quick structure
 	public function checker($name='id'){
 		$this->field($name);
 		$this->orderable(false);

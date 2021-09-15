@@ -3,7 +3,7 @@ namespace [NAMESPACE]\Http\Process;
 
 use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
-use [NAMESPACE]\Http\Skeleton\[MODULE_NAME]Skeleton;
+use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
 use Validator;
 
 class [MODULE_NAME]DeleteProcess extends BaseProcess
