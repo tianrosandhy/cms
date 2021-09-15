@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\Example\Http\Process;
 
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
 use Validator;
 use DataTable;

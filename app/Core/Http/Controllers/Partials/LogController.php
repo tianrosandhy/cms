@@ -2,7 +2,7 @@
 namespace App\Core\Http\Controllers\Partials;
 
 use App\Core\Models\LogMaster;
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Presenters\BaseViewPresenter;
 
 trait LogController
 {

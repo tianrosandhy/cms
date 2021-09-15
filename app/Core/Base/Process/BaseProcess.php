@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Http\Process;
+namespace App\Core\Base\Process;
 
 use App\Core\Exceptions\ProcessException;
 use App\Core\Exceptions\DataTableException;

@@ -2,7 +2,7 @@
 namespace App\Core\Http\Process;
 
 use App\Core\Http\Traits\ThrottlesLogin;
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
 use Validator;
 

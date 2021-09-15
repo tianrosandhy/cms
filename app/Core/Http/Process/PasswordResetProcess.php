@@ -1,7 +1,7 @@
 <?php
 namespace App\Core\Http\Process;
 
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
 use Validator;
 use App\Core\Models\User;

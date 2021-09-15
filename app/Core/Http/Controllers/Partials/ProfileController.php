@@ -1,7 +1,7 @@
 <?php
 namespace App\Core\Http\Controllers\Partials;
 
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Presenters\BaseViewPresenter;
 use App\Core\Http\Process\ProfileProcess;
 
 trait ProfileController

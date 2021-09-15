@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\Example\Http\Process;
 
-use App\Core\Http\Process\BaseDeleteProcess;
+use App\Core\Base\Process\BaseDeleteProcess;
 use App\Core\Exceptions\ProcessException;
 use App\Modules\Example\Http\Skeleton\ExampleSkeleton;
 use Validator;

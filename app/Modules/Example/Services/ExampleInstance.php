@@ -2,7 +2,7 @@
 namespace App\Modules\Example\Services;
 
 use App\Core\Exceptions\InstanceException;
-use App\Core\Services\BaseInstance;
+use App\Core\Base\Services\BaseInstance;
 use App\Modules\Example\Models\Example;
 
 class ExampleInstance extends BaseInstance

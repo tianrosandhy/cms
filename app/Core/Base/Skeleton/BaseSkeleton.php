@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Http\Skeleton;
+namespace App\Core\Base\Skeleton;
 
 use App\Core\Components\DataTable\DataStructure;
 use Validator;

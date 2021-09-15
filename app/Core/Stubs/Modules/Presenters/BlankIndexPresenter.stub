@@ -1,7 +1,7 @@
 <?php
 namespace [NAMESPACE]\Presenters;
 
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Presenters\BaseViewPresenter;
 use DataTable;
 use [NAMESPACE]\Http\Skeleton\[MODULE_NAME]Skeleton;
 use Permission;

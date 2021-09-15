@@ -1,8 +1,8 @@
 <?php
 namespace App\Core\Http\Controllers;
 
-use App\Core\Http\Controllers\BaseController;
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Controllers\BaseController;
+use App\Core\Base\Presenters\BaseViewPresenter;
 use App\Core\Http\Process\SettingProcess;
 
 class CoreController extends BaseController

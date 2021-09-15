@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Http\Skeleton;
+namespace App\Core\Base\Skeleton;
 
 use App\Core\Exceptions\SkeletonException;
 use Illuminate\Database\Eloquent\Model;

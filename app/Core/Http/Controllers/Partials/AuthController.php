@@ -1,7 +1,7 @@
 <?php
 namespace App\Core\Http\Controllers\Partials;
 
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Presenters\BaseViewPresenter;
 use App\Core\Http\Process\LoginProcess;
 use App\Core\Models\User;
 use App\Core\Jobs\ResetPasswordJob;

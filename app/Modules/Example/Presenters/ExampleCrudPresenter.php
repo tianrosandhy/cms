@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\Example\Presenters;
 
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Presenters\BaseViewPresenter;
 use DataTable;
 use App\Modules\Example\Http\Skeleton\ExampleSkeleton;
 

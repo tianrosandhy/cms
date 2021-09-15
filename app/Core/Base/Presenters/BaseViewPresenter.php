@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Presenters;
+namespace App\Core\Base\Presenters;
 
 use App\Core\Exceptions\ViewPresenterException;
 use Setting;

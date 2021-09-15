@@ -3,6 +3,7 @@ namespace App\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
+use App\Core\Base\Providers\BaseServiceProvider;
 use Validator;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Database\Schema\Builder;

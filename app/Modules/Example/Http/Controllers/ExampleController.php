@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\Example\Http\Controllers;
 
-use App\Core\Http\Controllers\BaseController;
+use App\Core\Base\Controllers\BaseController;
 use App\Modules\Example\Models\Example;
 use App\Modules\Example\Presenters\ExampleIndexPresenter;
 use App\Modules\Example\Presenters\ExampleCrudPresenter;

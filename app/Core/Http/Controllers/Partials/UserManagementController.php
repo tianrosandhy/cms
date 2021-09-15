@@ -6,8 +6,8 @@ use App\Core\Presenters\UserCrudPresenter;
 use App\Core\Http\Skeleton\UserSkeleton;
 use App\Core\Models\User;
 use App\Core\Http\Process\UserCrudProcess;
-use App\Core\Http\Process\BaseDeleteProcess;
-use App\Core\Http\Process\BaseDatatableProcess;
+use App\Core\Base\Process\BaseDeleteProcess;
+use App\Core\Base\Process\BaseDatatableProcess;
 
 trait UserManagementController
 {

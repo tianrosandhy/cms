@@ -3,7 +3,7 @@ namespace App\Core\Http\Skeleton;
 
 use DataStructure;
 use DataSource;
-use App\Core\Http\Skeleton\BaseSkeleton;
+use App\Core\Base\Skeleton\BaseSkeleton;
 use App\Core\Models\UserPushToken;
 use App\Core\Models\User;
 use Media;

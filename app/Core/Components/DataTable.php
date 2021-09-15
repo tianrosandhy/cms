@@ -1,7 +1,7 @@
 <?php
 namespace App\Core\Components;
 
-use App\Core\Http\Skeleton\BaseSkeleton;
+use App\Core\Base\Skeleton\BaseSkeleton;
 use App\Core\Components\DataTable\DataTableProcessor;
 
 class DataTable
