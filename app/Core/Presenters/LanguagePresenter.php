@@ -11,7 +11,7 @@ class LanguagePresenter extends BaseViewPresenter
 		$this->title = 'Language Setting';
 		$this->default_language = Language::default();
 		$this->secondary_language = Language::secondary();
-		$this->view = 'core::pages.language';
+		$this->view = 'core::pages.language.index';
 	}
 
 	public function setSelectedMenuName(){

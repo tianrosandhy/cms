@@ -10,7 +10,7 @@ class PrivilegePresenter extends BaseViewPresenter
 	public function __construct(){
 		$this->title = 'Privilege Management';
 		$this->role_structure = new RoleStructure();
-		$this->view = 'core::pages.privilege';
+		$this->view = 'core::pages.privilege.index';
 		$this->permission = Permission::lists();
 	}
 

@@ -17,7 +17,7 @@ class CoreController extends BaseController
 	public function index(){
 		$p = (new BaseViewPresenter)
 			->setTitle('Dashboard')
-			->setView('core::dashboard');
+			->setView('core::pages.dashboard.index');
 		return $p->render();
 	}
 

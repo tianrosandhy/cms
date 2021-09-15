@@ -17,7 +17,7 @@ trait PrivilegeController
 		$data = new Role;
 		$structure = new RoleStructure;
 		$target = route('admin.privilege.store');
-		return view('core::pages.partials.privilege-crud', compact(
+		return view('core::pages.privilege.partials.privilege-crud', compact(
 			'data',
 			'structure',
 			'target'
@@ -37,7 +37,7 @@ trait PrivilegeController
 		}
 		$structure = new RoleStructure;
 		$target = route('admin.privilege.update', ['id' => $id]);
-		return view('core::pages.partials.privilege-crud', compact(
+		return view('core::pages.privilege.partials.privilege-crud', compact(
 			'data',
 			'structure',
 			'target'
@@ -108,7 +108,7 @@ trait PrivilegeController
 		if(!$checked){
 			$checked = [];
 		}
-		return view('core::pages.partials.privilege-management', compact(
+		return view('core::pages.privilege.partials.privilege-management', compact(
 			'data',
 			'target',
 			'all',

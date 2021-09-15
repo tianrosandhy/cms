@@ -9,7 +9,7 @@ trait ProfileController
 	public function myProfile(){
 		return (new BaseViewPresenter)
 			->setTitle('My Profile')
-			->setView('core::pages.my-profile')
+			->setView('core::pages.my-profile.index')
 			->render();
 	}
 
