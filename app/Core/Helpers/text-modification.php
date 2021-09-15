@@ -65,3 +65,10 @@ function array_to_html_prop($arr=[], $ignore_key=[]){
 
   return $out;
 }
+
+function csvCell($input){
+  $input = str_replace("\"", "\\\"", $input);
+  // $input = str_replace(",", "\\,", $input);
+  // $input = str_replace(";", "\\;", $input);
+  return '"'.$input.'"';
+}

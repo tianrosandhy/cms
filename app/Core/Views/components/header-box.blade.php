@@ -23,6 +23,14 @@
 							@endif
 						@endforeach
 					@endif
+
+					@if(isset($structure))
+						@if(method_exists($structure, 'exportRoute'))
+							<a href="{{ $structure->exportRoute() }}" class="btn btn-rounded btn-light" data-toggle="modal" data-target=".modal-exporter">
+								<span class="iconify" data-icon="carbon:document-export"></span> Export to Excel
+							</a>
+						@endif
+					@endif
 				</div>
 			
             </div>
@@ -30,3 +38,9 @@
     </div>
 </div>
 <!-- end page title end breadcrumb -->
+
+@if(isset($structure))
+	@if(method_exists($structure, 'exportRoute'))
+		@include ('core::components.exporter.modal-exporter')	
+	@endif
+@endif

@@ -57,7 +57,7 @@ class AutocrudProcess extends Command
             die();
         }
 
-        $namespace = 'App\\' . str_replace('/', '\\', $this->mpath) .'\\Presenters';
+        $namespace = 'App\\' . str_replace('/', '\\', $this->mpath) .'\\Http\\Process';
         $stub_path = base_path(config('module-setting.stubs.process'));
         $stub_file = fopen($stub_path, 'r');
         $stub_content = fread($stub_file, filesize($stub_path));

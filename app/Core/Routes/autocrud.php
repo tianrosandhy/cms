@@ -13,4 +13,7 @@ Route::group([
 
 	// ajax route
 	Route::match(['get', 'post'], 'datatable/post', $bs_controller.'@dataTable')->name('admin.'.$bs_route.'.datatable');
+
+	// import/export route
+	Route::get('export', $bs_controller.'@export')->name('admin.'.$bs_route.'.export');
 });

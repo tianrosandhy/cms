@@ -43,7 +43,8 @@ class ExampleStructure extends BaseStructure
 				->inputType('date'),
 			DataStructure::field('daterange')
 				->name('Date Range Example')
-				->inputType('daterange'),
+				->inputType('daterange')
+				->exportable(false),
 			DataStructure::field('select')
 				->name('Select Example')
 				->inputType('select')
@@ -54,30 +55,36 @@ class ExampleStructure extends BaseStructure
 				->dataSource($source_example),
 			DataStructure::field('textarea')
 				->name('Textarea Example')
-				->inputType('textarea'),
+				->inputType('textarea')
+				->exportable(false),
 			DataStructure::field('richtext')
 				->name('Rich Text Example')
-				->inputType('richtext'),
+				->inputType('richtext')
+				->exportable(false),
 			DataStructure::field('image')
 				->name('Image Example')
 				->inputType('image_simple')
 				->searchable(false)
-				->orderable(false),
+				->orderable(false)
+				->exportable(false),
 			DataStructure::field('image_multiple')
 				->name('Image Multiple Example')
 				->inputType('image_multiple')
 				->searchable(false)
-				->orderable(false),
+				->orderable(false)
+				->exportable(false),
 			DataStructure::field('file')
 				->name('File Example')
 				->inputType('file')
 				->searchable(false)
-				->orderable(false),
+				->orderable(false)
+				->exportable(false),
 			DataStructure::field('file_multiple')
 				->name('File Multiple Example')
 				->inputType('file_multiple')
 				->searchable(false)
-				->orderable(false),
+				->orderable(false)
+				->exportable(false),
 			DataStructure::field('radio')
 				->name('Radio Example')
 				->inputType('radio')
@@ -96,7 +103,8 @@ class ExampleStructure extends BaseStructure
 			DataStructure::switcher('yesno', 'Yes/No Example'),
 			DataStructure::field('map')
 				->name('Map Example')
-				->inputType('map'),
+				->inputType('map')
+				->exportable(false),
 
 		]);
 	}
@@ -108,6 +116,10 @@ class ExampleStructure extends BaseStructure
 	public function batchDeleteRoute(){
 		return route('admin.example.delete');
 	}
+
+	public function exportRoute(){
+		return route('admin.example.export');
+	}	
 
 	//public function customFilter($context){
 	//	$searched_field = $this->getSearchField('field_name');

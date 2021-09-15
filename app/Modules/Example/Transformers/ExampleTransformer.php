@@ -9,6 +9,37 @@ use Permission;
 class ExampleTransformer extends BaseTransformer implements CanTransform
 {
     public function transform($row, $mode='datatable'){
+		if($mode == 'export'){
+			$daterange = json_decode($row->daterange, true);
+			$sdaterange = '';
+			if($daterange){
+				$sdaterange = implode(', ', $daterange);
+			}
+			$select_multiple = json_decode($row->select_multiple, true);
+			$sselect_multiple = '';
+			if($select_multiple){
+				$sselect_multiple = implode(', ', $select_multiple);
+			}
+			$checkbox = json_decode($row->checkbox, true);
+			$scheckbox = '';
+			if($checkbox){
+				$scheckbox = implode(', ', $checkbox);
+			}
+			
+			return [
+				'text' => $row->e('text'),
+				'number' => $row->number,
+				'dates' => $row->dates,
+				'daterange' => $sdaterange,
+				'select' => $row->select,
+				'select_multiple' => $sselect_multiple,
+				'radio' => $row->radio,
+				'checkbox' => $scheckbox,
+				'yesno' => $row->yesno ? 'YES' : 'NO',
+			];    
+		}
+
+		// default return
 		return [
 			'id' => $this->checkerFormat($row),
 			'text' => $row->e('text'),

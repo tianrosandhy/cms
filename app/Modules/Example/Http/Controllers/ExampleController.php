@@ -8,11 +8,18 @@ use App\Modules\Example\Presenters\ExampleCrudPresenter;
 use App\Modules\Example\Http\Process\ExampleDatatableProcess;
 use App\Modules\Example\Http\Process\ExampleCrudProcess;
 use App\Modules\Example\Http\Process\ExampleDeleteProcess;
+use App\Modules\Example\Http\Process\ExampleExportProcess;
 
 class ExampleController extends BaseController
 {
 	public function index(){
 		return (new ExampleIndexPresenter)->render();
+	}
+
+	public function export(){
+		return (new ExampleExportProcess)
+			->type('http')
+			->handle();
 	}
 
 	public function datatable(){
