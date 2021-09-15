@@ -37,6 +37,10 @@ class [MODULE_NAME]Skeleton extends BaseSkeleton
 		return route('admin.[LOWERCASE_MODULE_NAME].datatable');
 	}
 
+	public function batchDeleteRoute(){
+		return route('admin.[LOWERCASE_MODULE_NAME].delete');
+	}
+
 	//public function customFilter($context){
 	//	$searched_field = $this->getSearchField('field_name');
 	//	return $context;

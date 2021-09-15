@@ -25,6 +25,9 @@ class UserSkeleton extends BaseSkeleton
 				->name('Password')
 				->formColumn(6)
 				->inputType('text')
+				->valueData(function(){
+					return '';
+				})
 				->createValidation('required|min:6|confirmed')
 				->hideTable(),
 			DataStructure::field('password_confirmation')

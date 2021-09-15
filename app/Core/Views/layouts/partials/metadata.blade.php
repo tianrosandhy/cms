@@ -18,4 +18,6 @@
 <link rel="stylesheet" href="{{ $custom_css }}">
 @endif
 
+<script src="{{ admin_asset('libs/jquery/jquery.min.js') }}"></script>
+
 @stack ('style')
