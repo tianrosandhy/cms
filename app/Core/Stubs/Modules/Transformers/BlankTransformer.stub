@@ -13,8 +13,8 @@ class [MODULE_NAME]Transformer extends BaseTransformer implements CanTransform
 			'id' => $this->checkerFormat($row),
 			'title' => $row->title,
 			'description' => $row->description,
-			'is_active' => $this->switcherFormat($row, 'is_active', (Permission::has('admin.[LOWERCASE_MODULE_NAME].switch') ? 'toggle' : 'label')),
-			'action' => $this->actionButton($row)
+			'is_active' => $mode == 'datatable' ? $this->switcherFormat($row, 'is_active', (Permission::has('admin.[LOWERCASE_MODULE_NAME].switch') ? 'toggle' : 'label')) : ($row->is_active ? 'ACTIVE' : 'NOT ACTIVE'),
+			'action' => $mode == 'datatable' ? $this->actionButton($row) : '',
 		];    
     }
 

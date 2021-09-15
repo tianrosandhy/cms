@@ -29,6 +29,7 @@ class [MODULE_NAME]Structure extends BaseStructure
 			DataStructure::field('description')
 				->name('Description')
 				->hideTable()
+				->exportable(false)
 				->inputType('richtext'),
 			DataStructure::switcher('is_active', 'Is Active')
 		]);
@@ -41,6 +42,11 @@ class [MODULE_NAME]Structure extends BaseStructure
 	public function batchDeleteRoute(){
 		return route('admin.[LOWERCASE_MODULE_NAME].delete');
 	}
+
+	public function exportRoute(){
+		return route('admin.[LOWERCASE_MODULE_NAME].export');
+	}	
+
 
 	//public function customFilter($context){
 	//	$searched_field = $this->getSearchField('field_name');

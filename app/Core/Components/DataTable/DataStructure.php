@@ -292,6 +292,7 @@ class DataStructure
 	
 	public function hideTable(){
 		$this->hide_table = true;
+		$this->hide_export = true;
 		return $this;
 	}
 

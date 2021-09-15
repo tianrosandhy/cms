@@ -1,0 +1,18 @@
+<?php
+namespace [NAMESPACE]\Http\Process;
+
+use App\Core\Base\Process\BaseExportProcess;
+use [NAMESPACE]\Models\[MODULE_NAME];
+use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
+
+class [MODULE_NAME]ExportProcess extends BaseExportProcess
+{
+	public function exportModel(){
+		return new [MODULE_NAME];
+	}
+
+	public function exportStructure(){
+		return new [MODULE_NAME]Structure;
+	}
+
+}
