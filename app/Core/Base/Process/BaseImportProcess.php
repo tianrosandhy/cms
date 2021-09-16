@@ -28,6 +28,14 @@ class BaseImportProcess extends BaseProcess implements CanProcess
     }
 
     public function process(){
+        foreach($this->storedData as $idx => $row){
+            if(empty($row)){
+                unset($this->storedData[$idx]);
+            }
+        }
+        if(empty($this->storedData)){
+            throw new ProcessException("No data to be imported");
+        }
         $this->handleImport($this->storedData);
     }
 }

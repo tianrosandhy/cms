@@ -68,6 +68,7 @@ class BasePreimportProcess extends BaseProcess implements CanProcess
 
         return [
             'rawHeader' => $this->rawHeader,
+            'rawHeaderFlipped' => $this->rawHeaderFlipped,
             'rawData' => $this->rawData,
             'headerMap' => $headerMap,
             'collections' => $collections,
@@ -93,6 +94,10 @@ class BasePreimportProcess extends BaseProcess implements CanProcess
         $sheets = Excel::toArray(new ArrayImporter, Storage::path($path));
         $rows = $sheets[0] ?? [];
         $header = $rows[0] ?? [];
+        $headerFlipped = [];
+        foreach($header as $idx => $hname){
+            $headerFlipped[strtolower($hname)] = $idx;
+        }
 
         // unset header
         unset($rows[0]);
@@ -105,6 +110,7 @@ class BasePreimportProcess extends BaseProcess implements CanProcess
         }
 
         $this->rawHeader = $header;
+        $this->rawHeaderFlipped = $headerFlipped;
         $this->rawData = $rawData;
         return $this;
     }    

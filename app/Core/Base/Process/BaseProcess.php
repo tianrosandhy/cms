@@ -25,7 +25,7 @@ class BaseProcess
 		return [
 			'error_redirect_target' => null, //ex : url('your-url-when-fail')
 			'success_redirect_target' => null, //ex : url('your-url-when-success')
-			'success_message' => 'Your data has been saved successfully',
+			'success_message' => 'Success',
 			'error_message' => null
 		];
 	}

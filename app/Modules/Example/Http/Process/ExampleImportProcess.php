@@ -4,6 +4,7 @@ namespace App\Modules\Example\Http\Process;
 use App\Core\Base\Process\BaseImportProcess;
 use App\Modules\Example\Models\Example;
 use App\Modules\Example\Http\Structure\ExampleStructure;
+use App\Core\Exceptions\ProcessException;
 use App\Core\Contracts\CanProcessImport;
 
 class ExampleImportProcess extends BaseImportProcess implements CanProcessImport
@@ -13,7 +14,6 @@ class ExampleImportProcess extends BaseImportProcess implements CanProcessImport
     }
 
     public function handleImport($rows=[]){
-        // write all import logic here
         $result = Example::insertOrIgnore($rows);
         if($result > 0){
             $this->setSuccessMessage("Import success. Added ".$result." new data imported");

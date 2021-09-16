@@ -16,6 +16,7 @@ class BaseExportProcess extends BaseProcess implements CanProcess
 		$response = (new DataTableExporter)
 			->setHeaderMap($this->headerMap)
 			->setRowData($this->rowData)
+			->setFilename($this->exportName())
 			->export();
 		$this->setSuccessMessage('');
 		$this->setSuccessRedirectTarget(storage_url($response));

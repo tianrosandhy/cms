@@ -24,16 +24,23 @@
         <table class="table bg-white table-hover table-sm p-3">
             <thead>
                 <tr>
-                    @foreach($data['rawHeader'] as $headerLabel)
-                    <th>{{ $headerLabel }}</th>
+                    @foreach($data['headerMap'] as $headerLabel => $headerName)
+                    <th>{{ ucwords($headerLabel) }}</th>
                     @endforeach
                 </tr>
             </thead>
             <tbody>
                 @foreach($data['rawData'] as $row)
                     <tr>
-                        @foreach($row as $cell)
-                        <td>{{ $cell }}</td>
+                        @foreach($data['headerMap'] as $headerLabel => $headerName)
+                            <?php
+                            $index = $data['rawHeaderFlipped'][$headerLabel] ?? -1;
+                            ?>
+                            @if($index > -1)
+                            <td>{{ $row[$index] }}</td>
+                            @else
+                            <td>-</td>
+                            @endif
                         @endforeach
                     </tr>
                     @if($loop->iteration >= $maxShown)
