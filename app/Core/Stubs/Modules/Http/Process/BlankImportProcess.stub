@@ -1,0 +1,26 @@
+<?php
+namespace [NAMESPACE]\Http\Process;
+
+use App\Core\Base\Process\BaseImportProcess;
+use [NAMESPACE]\Models\[MODULE_NAME];
+use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
+use App\Core\Contracts\CanProcessImport;
+
+class [MODULE_NAME]ImportProcess extends BaseImportProcess implements CanProcessImport
+{
+    public function __construct($importID){
+        $this->importID = $importID;
+    }
+
+    public function handleImport($rows=[]){
+        // write all import logic here
+        $result = [MODULE_NAME]::insertOrIgnore($rows);
+        if($result > 0){
+            $this->setSuccessMessage("Import success. Added ".$result." new data imported");
+        }
+        else{
+            $this->setSuccessMessage("Import success. No new data to be imported");
+        }
+        return $result;
+    }
+}

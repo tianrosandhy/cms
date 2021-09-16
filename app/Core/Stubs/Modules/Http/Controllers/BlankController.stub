@@ -5,10 +5,13 @@ use App\Core\Base\Controllers\BaseController;
 use [NAMESPACE]\Models\[MODULE_NAME];
 use [NAMESPACE]\Presenters\[MODULE_NAME]IndexPresenter;
 use [NAMESPACE]\Presenters\[MODULE_NAME]CrudPresenter;
+use [NAMESPACE]\Presenters\[MODULE_NAME]PreimportPresenter;
 use [NAMESPACE]\Http\Process\[MODULE_NAME]DatatableProcess;
 use [NAMESPACE]\Http\Process\[MODULE_NAME]ExportProcess;
 use [NAMESPACE]\Http\Process\[MODULE_NAME]CrudProcess;
 use [NAMESPACE]\Http\Process\[MODULE_NAME]DeleteProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]PreimportProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]ImportProcess;
 
 class [MODULE_NAME]Controller extends BaseController
 {
@@ -20,6 +23,29 @@ class [MODULE_NAME]Controller extends BaseController
 		return (new [MODULE_NAME]ExportProcess)
 			->type('http')
 			->handle();
+	}
+
+	public function import(){
+		if($this->request->import_id){
+			// real import : handled via process
+			return (new [MODULE_NAME]ImportProcess($this->request->import_id))
+				->setType('http')
+				->setSuccessRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
+				->setErrorRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
+				->handle();
+		}
+		else if($this->request->pre_import_id){
+			// preimport : handled via preview
+			$preimport = (new [MODULE_NAME]PreimportProcess)
+				->setType('raw')
+				->handle();
+
+			return (new [MODULE_NAME]PreimportPresenter($preimport))
+				->render();			
+		}
+		else{
+			abort(400);
+		}
 	}
 
 	public function datatable(){

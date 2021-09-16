@@ -11,7 +11,7 @@ class ExamplePreimportPresenter extends BaseViewPresenter
         $this->data = $data;
         $this->title = __('example::module.preimport');
 		$this->back_url = route('admin.example.index');
-		$this->view = 'example::preimport';
+		$this->view = 'core::master.preimport';
 	}
 
 	public function setSelectedMenuName(){

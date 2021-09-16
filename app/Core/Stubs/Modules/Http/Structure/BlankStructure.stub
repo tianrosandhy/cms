@@ -48,6 +48,9 @@ class [MODULE_NAME]Structure extends BaseStructure implements CanStructured
 		return route('admin.[LOWERCASE_MODULE_NAME].export');
 	}	
 
+	public function importRoute(){
+		return route('admin.[LOWERCASE_MODULE_NAME].import');
+	}
 
 	//public function customFilter($context){
 	//	$searched_field = $this->getSearchField('field_name');
