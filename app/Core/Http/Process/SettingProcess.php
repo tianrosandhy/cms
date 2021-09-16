@@ -3,10 +3,11 @@ namespace App\Core\Http\Process;
 
 use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
+use App\Core\Contracts\CanProcess;
 use Validator;
 use Setting;
 
-class SettingProcess extends BaseProcess
+class SettingProcess extends BaseProcess implements CanProcess
 {
 	public function config(){
 		return [

@@ -1,13 +1,14 @@
 <?php
 namespace App\Modules\Example\Http\Structure;
 
-use DataStructure;
 use App\Core\Base\Structure\BaseStructure;
 use App\Modules\Example\Models\Example;
 use App\Modules\Example\Transformers\ExampleTransformer;
+use App\Core\Contracts\CanStructured;
+use DataStructure;
 use Permission;
 
-class ExampleStructure extends BaseStructure
+class ExampleStructure extends BaseStructure implements CanStructured
 {
 	#ENABLE THIS PROPERTY IF YOU WANT TO USE MULTI LANGUAGE FEATURE
 	//public $multi_language = true;

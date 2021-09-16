@@ -1,14 +1,15 @@
 <?php
 namespace App\Core\Http\Structure;
 
-use DataStructure;
 use App\Core\Base\Structure\BaseStructure;
 use App\Core\Models\User;
 use App\Core\Transformers\UserTransformer;
+use App\Core\Contracts\CanStructured;
+use DataStructure;
 use Media;
 use Permission;
 
-class UserStructure extends BaseStructure
+class UserStructure extends BaseStructure implements CanStructured
 {
 	public function handle(){
 		$this->registers([

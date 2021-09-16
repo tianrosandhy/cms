@@ -3,10 +3,11 @@ namespace App\Core\Base\Process;
 
 use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
+use App\Core\Contracts\CanProcess;
 use Validator;
 use DataTable;
 
-class BaseDatatableProcess extends BaseProcess
+class BaseDatatableProcess extends BaseProcess implements CanProcess
 {
 	public function __construct(){
 		parent::__construct();

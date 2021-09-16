@@ -3,9 +3,10 @@ namespace App\Core\Base\Process;
 
 use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
+use App\Core\Contracts\CanProcess;
 use Validator;
 
-class BaseDeleteProcess extends BaseProcess
+class BaseDeleteProcess extends BaseProcess implements CanProcess
 {
 	public function config(){
 		return [

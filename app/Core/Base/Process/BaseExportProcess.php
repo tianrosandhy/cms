@@ -3,9 +3,14 @@ namespace App\Core\Base\Process;
 
 use App\Core\Base\Process\BaseProcess;
 use App\Core\Components\DataTable\DataTableExporter;
+use App\Core\Contracts\CanProcess;
 
-class BaseExportProcess extends BaseProcess
+class BaseExportProcess extends BaseProcess implements CanProcess
 {
+	public function validate(){
+		
+	}
+
 	public function process(){
 		$this->prepare();
 		$response = (new DataTableExporter)

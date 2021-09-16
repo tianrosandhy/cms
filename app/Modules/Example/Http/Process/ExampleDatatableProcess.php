@@ -3,11 +3,12 @@ namespace App\Modules\Example\Http\Process;
 
 use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
+use App\Modules\Example\Http\Structure\ExampleStructure;
+use App\Core\Contracts\CanProcess;
 use Validator;
 use DataTable;
-use App\Modules\Example\Http\Structure\ExampleStructure;
 
-class ExampleDatatableProcess extends BaseProcess
+class ExampleDatatableProcess extends BaseProcess implements CanProcess
 {
 	public function __construct(){
 		parent::__construct();

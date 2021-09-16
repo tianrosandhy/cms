@@ -8,8 +8,9 @@ use Language;
 use SlugMaster;
 use Storage;
 use Illuminate\Http\UploadedFile;
+use App\Core\Contracts\CanProcess;
 
-class BaseCrudProcess extends BaseProcess
+class BaseCrudProcess extends BaseProcess implements CanProcess
 {
 	public function __construct($instance=null){
 		parent::__construct();
