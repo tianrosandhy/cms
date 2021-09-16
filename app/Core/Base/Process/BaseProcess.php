@@ -52,6 +52,11 @@ class BaseProcess
 			if(method_exists($this, 'revert')){
 				$this->revert();
 			}
+
+			if($this->type == 'raw'){
+				// langsung throw aja exceptionnya
+				throw $e;
+			}
 			return $this->generateResponse();
 		}
 
@@ -83,6 +88,9 @@ class BaseProcess
 		}
 		if($this->type == 'datatable'){
 			return $this->generateDatatableResponse();
+		}
+		if($this->type == 'raw'){
+			return $this->data;
 		}
 	}
 

@@ -16,4 +16,5 @@ Route::group([
 
 	// import/export route
 	Route::get('export', $bs_controller.'@export')->name('admin.'.$bs_route.'.export');
+	Route::post('import', $bs_controller.'@import')->name('admin.'.$bs_route.'.import');
 });

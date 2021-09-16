@@ -24,6 +24,7 @@ class BaseExportProcess extends BaseProcess implements CanProcess
 	public function prepare(){
 		$headerMap = [];
 		$printedColumn = [];
+		
 		$data = $this->exportModel();
 		foreach($this->exportStructure()->structure as $struct){
 			if($struct->exportable){
@@ -56,7 +57,12 @@ class BaseExportProcess extends BaseProcess implements CanProcess
 		}
 
 		// transform data
-		$data = $data->get();
+		if($this->request->dummy){
+			$data = $data->limit(3)->get();
+		}
+		else{
+			$data = $data->get();
+		}
 
 		$rowData = [];
 		if(method_exists($this->exportStructure(), 'transformer')){

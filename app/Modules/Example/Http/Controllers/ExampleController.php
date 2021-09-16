@@ -5,10 +5,13 @@ use App\Core\Base\Controllers\BaseController;
 use App\Modules\Example\Models\Example;
 use App\Modules\Example\Presenters\ExampleIndexPresenter;
 use App\Modules\Example\Presenters\ExampleCrudPresenter;
+use App\Modules\Example\Presenters\ExamplePreimportPresenter;
 use App\Modules\Example\Http\Process\ExampleDatatableProcess;
 use App\Modules\Example\Http\Process\ExampleCrudProcess;
 use App\Modules\Example\Http\Process\ExampleDeleteProcess;
 use App\Modules\Example\Http\Process\ExampleExportProcess;
+use App\Modules\Example\Http\Process\ExamplePreimportProcess;
+use App\Modules\Example\Http\Process\ExampleImportProcess;
 
 class ExampleController extends BaseController
 {
@@ -20,6 +23,29 @@ class ExampleController extends BaseController
 		return (new ExampleExportProcess)
 			->type('http')
 			->handle();
+	}
+
+	public function import(){
+		if($this->request->import_id){
+			// real import : handled via process
+			return (new ExampleImportProcess($this->request->import_id))
+				->setType('http')
+				->setSuccessRedirectTarget(route('admin.example.index'))
+				->setErrorRedirectTarget(route('admin.example.index'))
+				->handle();
+		}
+		else if($this->request->pre_import_id){
+			// preimport : handled via preview
+			$preimport = (new ExamplePreimportProcess)
+				->setType('raw')
+				->handle();
+
+			return (new ExamplePreimportPresenter($preimport))
+				->render();			
+		}
+		else{
+			abort(400);
+		}
 	}
 
 	public function datatable(){

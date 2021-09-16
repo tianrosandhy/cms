@@ -10,7 +10,7 @@
             <div class="col-md-6 text-right">
 				<!-- Control buttons here -->
 
-				<div class="btn-group btn-rounded">
+				<div class="btn-groups btn-rounded">
 					@if(isset($control_buttons))
 						@foreach($control_buttons as $btn)
 							@if(isset($btn['label']))
@@ -26,10 +26,16 @@
 
 					@if(isset($structure))
 						@if(method_exists($structure, 'exportRoute'))
-							<a href="{{ $structure->exportRoute() }}" class="btn btn-rounded btn-light" data-toggle="modal" data-target=".modal-exporter">
+							<a href="{{ $structure->exportRoute() }}" class="btn btn-rounded btn-info" data-toggle="modal" data-target=".modal-exporter">
 								<span class="iconify" data-icon="carbon:document-export"></span> Export to Excel
 							</a>
 						@endif
+						@if(method_exists($structure, 'importRoute'))
+							<a href="{{ $structure->importRoute() }}" class="btn btn-rounded btn-light" data-toggle="modal" data-target=".modal-importer">
+								<span class="iconify" data-icon="carbon:document-import"></span> Import from Excel
+							</a>
+						@endif
+						
 					@endif
 				</div>
 			
@@ -41,6 +47,9 @@
 
 @if(isset($structure))
 	@if(method_exists($structure, 'exportRoute'))
-		@include ('core::components.exporter.modal-exporter')	
+		@include ('core::components.export-import.modal-exporter')	
+	@endif
+	@if(method_exists($structure, 'importRoute'))
+		@include ('core::components.export-import.modal-importer')	
 	@endif
 @endif

@@ -122,6 +122,10 @@ class ExampleStructure extends BaseStructure implements CanStructured
 		return route('admin.example.export');
 	}	
 
+	public function importRoute(){
+		return route('admin.example.import');
+	}
+
 	//public function customFilter($context){
 	//	$searched_field = $this->getSearchField('field_name');
 	//	return $context;
