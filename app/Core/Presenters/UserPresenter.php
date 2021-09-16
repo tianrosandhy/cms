@@ -9,7 +9,7 @@ use Permission;
 class UserPresenter extends BaseViewPresenter
 {
 	public function __construct(){
-		$this->title = 'User Management';
+		$this->title = __('core::module.menu.user_list');
 		$this->view = 'core::master.index';
 		$this->batch_delete_url = route('admin.user.delete');
 		$this->structure = new UserStructure;

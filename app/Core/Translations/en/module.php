@@ -1,6 +1,7 @@
 <?php
 return [
     'menu' => [
+        'home' => 'Home',
         'dashboard' => 'Dashboard',
         'management' => 'Management',
         'language_management' => 'Language Setting',
@@ -36,5 +37,11 @@ return [
         'delete_selected' => 'Hapus Data Terpilih',
         'add_data' => 'Tambah Data',
         'back' => 'Back',
+
+        'export_to_excel' => 'Export to Excel',
+        'import_from_excel' => 'Import from Excel',
+        'advance_search' => 'Advance Search',
+        'apply_filter' => 'Apply Filter',
+        'reset_filter' => 'Reset Filter',
     ],
 ];

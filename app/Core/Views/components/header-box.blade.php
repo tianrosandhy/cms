@@ -27,12 +27,12 @@
 					@if(isset($structure))
 						@if(method_exists($structure, 'exportRoute'))
 							<a href="{{ $structure->exportRoute() }}" class="btn btn-rounded btn-info" data-toggle="modal" data-target=".modal-exporter">
-								<span class="iconify" data-icon="carbon:document-export"></span> Export to Excel
+								<span class="iconify" data-icon="carbon:document-export"></span> {{ __('core::module.form.export_to_excel') }}
 							</a>
 						@endif
 						@if(method_exists($structure, 'importRoute'))
 							<a href="{{ $structure->importRoute() }}" class="btn btn-rounded btn-light" data-toggle="modal" data-target=".modal-importer">
-								<span class="iconify" data-icon="carbon:document-import"></span> Import from Excel
+								<span class="iconify" data-icon="carbon:document-import"></span> {{ __('core::module.form.import_from_excel') }}
 							</a>
 						@endif
 						

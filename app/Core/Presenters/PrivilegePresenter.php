@@ -8,7 +8,7 @@ use Permission;
 class PrivilegePresenter extends BaseViewPresenter
 {
 	public function __construct(){
-		$this->title = 'Privilege Management';
+		$this->title = __('core::module.menu.privilege_management');
 		$this->role_structure = new RoleStructure();
 		$this->view = 'core::pages.privilege.index';
 		$this->permission = Permission::lists();

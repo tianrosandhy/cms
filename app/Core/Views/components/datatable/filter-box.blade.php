@@ -23,11 +23,11 @@
 					</div>
 				</div>
 
-				<button type="button" class="btn btn-rounded btn-secondary btn-apply-filter"><i class="iconify" data-icon="ic:outline-filter-alt"></i> Apply Filter</button>
+				<button type="button" class="btn btn-rounded btn-secondary btn-apply-filter"><i class="iconify" data-icon="ic:outline-filter-alt"></i> {{ __('core::module.form.apply_filter') }}</button>
 
 				<a href="#" class="btn btn-rounded btn-danger reset-filter">
 					<i class="iconify" data-icon="ic:outline-filter-alt"></i>
-					Reset Filter
+					{{ __('core::module.form.reset_filter') }}
 				</a>
 
 			</div>

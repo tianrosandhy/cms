@@ -6,7 +6,7 @@
     <div class="dropdown-menu dropdown-menu-right">
         @foreach(Language::available() as $lang_code => $lang_title)
         <!-- item-->
-        <a href="javascript:void(0);" class="dropdown-item notify-item">
+        <a href="{{ route('admin.lang.switch', ['lang' => $lang_code]) }}" class="dropdown-item notify-item">
             <img src="{{ admin_asset('images/flag/'.strtoupper($lang_code).'.png') }}" alt="user-image" class="mr-2" height="12"><span class="align-middle">{{ $lang_title }}</span>
         </a>
         @endforeach

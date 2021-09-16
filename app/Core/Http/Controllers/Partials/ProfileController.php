@@ -8,7 +8,7 @@ trait ProfileController
 {
 	public function myProfile(){
 		return (new BaseViewPresenter)
-			->setTitle('My Profile')
+			->setTitle(__('core::module.global.my_profile'))
 			->setView('core::pages.my-profile.index')
 			->render();
 	}
