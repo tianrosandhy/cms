@@ -12,6 +12,18 @@ class PrivilegePresenter extends BaseViewPresenter
 		$this->role_structure = new RoleStructure();
 		$this->view = 'core::pages.privilege.index';
 		$this->permission = Permission::lists();
+		$this->control_buttons = [
+			[
+				'url' => '#',
+				'label' => 'Create New Privilege',
+				'type' => 'light',
+				'icon' => "user",
+				'attr' => [
+					'data-action' => 'add',
+					'data-target' => route('admin.privilege.create')
+				]
+			]
+		];
 	}
 
 	public function setSelectedMenuName(){

@@ -11,7 +11,12 @@
 
         <div class="main-content">
             <div class="page-content">
-                @yield ('content')
+            	@include ('core::components.header-box')
+                <div class="page-content-wrapper">
+                    <div class="container-fluid">
+                    @yield ('content')
+                    </div>
+                </div>
             </div>
             <!-- End Page-content -->
             @include ('core::layouts.partials.footer')
