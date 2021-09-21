@@ -25,13 +25,13 @@ class UserTransformer extends BaseTransformer implements CanTransform
 		<div class="btn-group">
 		';
 		if(Permission::has('admin.user.edit'))
-		$out .= '<a href="'.route('admin.user.edit', ['id' => $row->id]).'" class="btn btn-info">Edit</a>';
+		$out .= '<a href="'.route('admin.user.edit', ['id' => $row->id]).'" class="btn btn-light text-primary"><span class="iconify" data-icon="dashicons:edit"></span></a>';
 
 		$is_sa = $row->role->is_sa ?? false;
 		if(!$is_sa){
 			if(Permission::has('admin.user.delete')){
 				$out .= '
-				<a href="'. route('admin.user.delete', ['id' => $row->id]) .'" class="btn btn-danger delete-button">'. __('core::module.form.delete') .'</a>
+				<a href="'. route('admin.user.delete', ['id' => $row->id]) .'" class="btn btn-light text-danger delete-button"><span class="iconify" data-icon="fluent:delete-16-filled"></span></a>
 				';
 			}
 		}

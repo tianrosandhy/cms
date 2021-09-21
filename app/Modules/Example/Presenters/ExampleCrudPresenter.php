@@ -20,6 +20,13 @@ class ExampleCrudPresenter extends BaseViewPresenter
 		#if you want to override this crud view, you can use below view instead
 		// $this->view = 'example::crud';
 
+		$this->breadcrumb = [
+			[
+				'label' => __('example::module.index'),
+				'url' => route('admin.example.index')
+			]
+		];
+
 		$this->structure = new ExampleStructure;
 		$this->config = config('module-setting.example');
 	}

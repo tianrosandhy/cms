@@ -26,8 +26,8 @@
 						<td>
 							<div class="btn-group">
 								@if(!$row['is_sa'])
-								<a href="#" data-target="{{ route('admin.privilege.edit', ['id' => $row['id']]) }}" data-action="add" class="btn btn-sm btn-info">Edit</a>
-								<a href="{{ route('admin.privilege.delete', ['id' => $row['id']]) }}" class="btn btn-sm btn-danger delete-button">Delete</a>
+								<a href="#" data-target="{{ route('admin.privilege.edit', ['id' => $row['id']]) }}" data-action="add" class="btn btn-light text-primary" title="Edit"><span class="iconify" data-icon="dashicons:edit"></span></a>
+								<a href="{{ route('admin.privilege.delete', ['id' => $row['id']]) }}" class="btn btn-light text-danger delete-button" title="Delete"><span class="iconify" data-icon="fluent:delete-16-filled"></span></a>
 								@endif
 							</div>
 						</td>
