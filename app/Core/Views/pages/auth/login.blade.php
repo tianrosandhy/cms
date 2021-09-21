@@ -38,7 +38,7 @@
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text bg-white">
-                                                    <span class="iconify" data-icon="uim:key-structure"></span>
+                                                    <span class="iconify" data-icon="bi:key-fill"></span>
                                                 </span>
                                             </div>
                                             <input type="password" class="form-control" id="password"

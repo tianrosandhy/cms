@@ -28,7 +28,7 @@ trait UserManagementController
 	}
 
 	public function userManagementStore(){
-		return (new UserCrudProcess())
+		return (new UserCrudProcess(new User))
 			->setSuccessRedirectTarget(route('admin.user.index'))
 			->setSuccessMessage('User data has been saved')
 			->type('http')

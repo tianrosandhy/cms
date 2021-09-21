@@ -3,20 +3,14 @@ $(function(){
   initPlugins();
 
   //remove blank sidebar
-  $(".nav-third-level").each(function(){
-    if($(this).find('li').length == 0){
-      $(this).closest('li').remove();
-    }
-  });
-  $(".nav-second-level").each(function(){
+  $(".sub-menu").each(function(){
     if($(this).find('li').length == 0){
       $(this).closest('li').remove();
     }
   });
 
   //additional tweak : auto show second & third level of navigation
-  $("li.mm-active>ul.nav-second-level").addClass('mm-collapse mm-show').css('height', 'auto');
-  $("li.mm-active>ul.nav-third-level").addClass('mm-collapse mm-show').css('height', 'auto');
+  $("li.mm-active>ul.sub-menu").addClass('mm-collapse mm-show').css('height', 'auto');
 
 
   // yesno auto switcher
