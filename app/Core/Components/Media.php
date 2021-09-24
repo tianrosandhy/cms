@@ -3,6 +3,7 @@ namespace App\Core\Components;
 
 use App\Core\Models\Media as Model;
 use App\Core\Components\Media\MediaCacheManager;
+use Storage;
 
 class Media
 {
@@ -62,6 +63,36 @@ class Media
 			'value' => $value,
 			'config' => $config
 		]);
+	}
+
+	// will translate input type file to json filedata
+	public function fileTranslate($file_string){
+		$parse = json_decode($file_string, true);
+		$fileurl = null;
+		$filepath = null;
+		$filename = null;
+		if(!$parse && strlen($file_string) > 0){
+			$split = explode('/', $file_string);
+			if(count($split) == 1){
+				// try spliting with backslash
+				$split = explode('\\', $file_string);
+			}
+
+			$filename = $split[count($split)-1];
+			$fileurl = Storage::url($file_string);
+			$filepath = $file_string;
+		}
+		else{
+			$filepath = $parse['path'] ?? null;
+			$filename = $parse['filename'] ?? null;
+			$fileurl = $filepath ? Storage::url($filepath) : null;
+		}
+
+		return [
+			'url' => $fileurl,
+			'filename' => $filename,
+			'path' => $filepath,
+		];
 	}
 
 }

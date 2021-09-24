@@ -271,6 +271,7 @@ class DataStructure
 
 	public function searchable($searchable=true){
 		$this->searchable = (bool)$searchable;
+		$this->export_searchable = (bool)$searchable;
 		return $this;
 	}
 

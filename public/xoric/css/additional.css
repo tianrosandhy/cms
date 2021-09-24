@@ -67,6 +67,7 @@ label.required::after{
 }
 .uploaded-holder .uploaded{
 	display:inline-block;
+	position:relative;
 	margin-right:.75em;
 	margin-bottom:.5em;
 }
@@ -74,13 +75,17 @@ label.required::after{
 	line-height:30px;
 	height:30px;
 	display:inline-block;
+	overflow:hidden;
 	background:#333;
 	color:#fff;
 	padding:0 .5em;
-	border-radius:5px 0 0 5px;
-	-moz-border-radius:5px 0 0 5px;
+	padding-right:35px;
+	border-radius:5px;
+	-moz-border-radius:5px;
 }
 .uploaded-holder .uploaded .remove-asset-file, .uploaded-holder .uploaded .remove-asset-file-multiple{
+	position:absolute;
+	right:0;
 	line-height:30px;
 	height:30px;
 	display:inline-block;
@@ -157,6 +162,10 @@ input:read-only{
 	padding:0 .5em;
 	cursor:pointer;
 }
+.dataTables_paginate a.current{
+	font-weight:bold;
+}
+
 a.disabled{
 	cursor:no-drop;
 }

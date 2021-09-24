@@ -22,10 +22,26 @@ if(!isset($name)){
 			@if(isset($value))
 				<?php
 				$parse = json_decode($value, true);
+				$filepath = null;
+				$filename = null;
+				if(!$parse && strlen($value) > 0){
+					$split = explode('/', $value);
+					if(count($split) == 1){
+						// try spliting with backslash
+						$split = explode('\\', $value);
+					}
+
+					$filename = $split[count($split)-1];
+					$filepath = Storage::url($value);
+				}
+				else{
+					$filepath = $parse['path'] ?? null;
+					$filename = $parse['filename'] ?? null;
+				}
 				?>
-				@if(isset($parse['filename']))
+				@if(isset($filename))
 					<div class="uploaded">
-						<a href="{{ $parse['path'] ?? '#' }}" download class="file-alias">{{ $parse['filename'] }}</a><span class="remove-asset-file" data-hash="{{ $hash }}">&times;</span>
+						<a href="{{ $filepath ?? '#' }}" download class="file-alias">{{ $filename }}</a><span class="remove-asset-file" data-hash="{{ $hash }}">&times;</span>
 					</div>
 				@endif
 			@endif

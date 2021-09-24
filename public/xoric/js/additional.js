@@ -30,7 +30,7 @@ $(function(){
       },
       success : function(resp){
         if(typeof tb_data != 'undefined'){
-          tb_data.ajax.reload();
+          tb_data.ajax.reload(null, false);
         }
       },
       error : function(resp){
