@@ -48,7 +48,7 @@ $(function(){
 	});
 
 	$(".search-box input, .search-box select").on('keyup', function(e){
-		if(e.which == 14){
+		if(e.which == 13){
 			refreshDataTable();
 			$(".modal-searchbox").closest('.modal.show').modal('hide');
 		}
