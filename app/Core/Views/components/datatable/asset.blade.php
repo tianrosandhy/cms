@@ -17,9 +17,6 @@ $(function(){
 		'scrollY' : '500px',
 		'scrollX' : true,
 		'scrollCollapse' : true,
-		'fixedColumns' : {
-			leftColumns : 1
-		},
 		'colReorder' : true,
 		'ajax'		: {
 			type : 'POST',

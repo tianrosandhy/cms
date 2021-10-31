@@ -4,6 +4,7 @@ namespace App\Core\Http\Controllers;
 use App\Core\Presenters\InstallPresenter;
 use App\Core\Http\Process\InstallProcess;
 use App\Core\Http\Traits\InstallerTrait;
+use App\Core\Base\Controllers\BaseController;
 
 class InstallController extends BaseController
 {

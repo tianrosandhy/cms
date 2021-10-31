@@ -133,7 +133,12 @@ trait DataTableProcessor
 					continue;
 				}
 				//custom filtering diset lagi nanti
-				$data = $data->where($column, 'like', '%'.trim($value).'%');
+				if(is_numeric($value) && strlen($value) < 6){
+					$data = $data->where($column, trim($value));
+				}
+				else{
+					$data = $data->where($column, 'like', '%'.trim($value).'%');
+				}
 			}
 		}
 
