@@ -24,7 +24,7 @@
 						@endforeach
 					@endif
 
-					@if(isset($structure))
+					@if(isset($structure) && !isset($hide_export_import))
 						@if(method_exists($structure, 'exportRoute'))
 							<a href="{{ $structure->exportRoute() }}" class="btn btn-rounded btn-info" data-toggle="modal" data-target=".modal-exporter">
 								<span class="iconify" data-icon="carbon:document-export"></span> {{ __('core::module.form.export_to_excel') }}

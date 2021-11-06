@@ -4,6 +4,9 @@
 	@include ('core::layouts.partials.metadata')
 </head>
 <body data-topbar="colored">
+    <div id="page-loader">
+        <span class="iconify" data-icon="eos-icons:bubble-loading"></span>
+    </div>
     <!-- Begin page -->
     <div id="layout-wrapper">
         @include ('core::layouts.partials.header')

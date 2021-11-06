@@ -17,6 +17,7 @@ class [MODULE_NAME]CrudPresenter extends BaseViewPresenter
 		$this->data = $instance;
 		$this->back_url = route('admin.[LOWERCASE_MODULE_NAME].index');
 		$this->view = 'core::master.crud';
+		$this->hide_export_import = true;
 		#if you want to override this crud view, you can use below view instead
 		// $this->view = '[LOWERCASE_MODULE_NAME]::crud';
 
