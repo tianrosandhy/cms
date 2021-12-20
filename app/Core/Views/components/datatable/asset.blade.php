@@ -34,6 +34,9 @@ $(function(){
 
 		"drawCallback": function(settings) {
 			initPlugins();
+			setTimeout(function(){
+				$("table.datatable").resize();
+			}, 250);
 		},
 		'columns' : [
 			{!! $structure->datatableColumns() !!}

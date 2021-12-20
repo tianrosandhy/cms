@@ -6,6 +6,16 @@ use App\Core\Models\SlugMaster as Model;
 
 class SlugMaster
 {
+	public function get($slug_name=null, $table=null, $lang=null){
+		$grab = Model::where('table', $table)
+			->where('slug', $slug_name);
+		if($lang){
+			$grab = $grab->where('language', $lang);
+		}
+
+		$instance = $grab->first();
+		return $instance->primary_key ?? null;
+	}
 
 	public function insert($model, $slug_string=null){
 		$table = $model->getTable();
@@ -27,7 +37,7 @@ class SlugMaster
 		return $instance;
 	}
 
-	protected function slugForSaved($slug, $except_instance=null){
+	public function slugForSaved($slug, $except_instance=null){
 		$slug = slugify($slug);
 		$language = empty($language) ? def_lang() : $language;
 		if($except_instance){
@@ -40,6 +50,7 @@ class SlugMaster
 			//create slug iteration
 			$grabs = Model::where('slug', 'like', $slug.'%')->orderBy('slug')->get(['slug']);
 			$iteration = 1;
+			$max_iteration = 0;
 			foreach($grabs as $item){
 				if($item->slug == $slug){
 					continue;
@@ -48,10 +59,13 @@ class SlugMaster
 				$last_part = $split[count($split)-1];
 				if(is_numeric($last_part)){
 					$iteration = $last_part + 1;
+					if($iteration > $max_iteration){
+						$max_iteration = $iteration;
+					}
 				}
 			}
 
-			return $slug.'-'.$iteration;
+			return $slug.'-'.$max_iteration;
 		}
 		return $slug;
 	}
