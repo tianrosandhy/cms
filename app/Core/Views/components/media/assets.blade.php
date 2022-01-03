@@ -298,6 +298,12 @@
 var FILEMANAGER_PAGE = 1;
 var ACTIVE_EDITOR;
 $(function(){
+	$(document).on('hidden.bs.modal', '#media-modal', function(){
+		if($(".modal.show").length > 0){
+			$("body").addClass('modal-open');
+		}
+	});
+
 	$(document).on('click', ".trigger-upload-image", function(e){
 		e.preventDefault();
 		//set data-hash to filemanager modal
