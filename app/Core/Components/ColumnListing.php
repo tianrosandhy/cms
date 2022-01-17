@@ -11,6 +11,9 @@ class ColumnListing
             $model_instance = $model_instance->getModel();
         }
         $table_name = $model_instance->getTable();
-        return Schema::getColumnListing($table_name);
+
+        // update : fix model to another database schema
+        $conn_name = $model_instance->getConnectionName();
+        return Schema::connection($conn_name)->getColumnListing($table_name);
     }
 }

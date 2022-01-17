@@ -5,21 +5,33 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Closure;
+use Log;
 
 class DatabaseStructureModifier
 {
 	public 
         $command_run_count,
-        $info;
+        $info,
+        $connection;
 
     public function __construct(){
         $this->info = [];
+        $this->connection = 'mysql';
+    }
+
+    public function setConnection($connection_name){
+        if(config('database.connections.' . $connection_name)){
+            $this->connection = $connection_name;
+        }
+        else{
+            Log::warning("Connection string $connection_name is not exists in current autocrud migration modifier file.");
+        }
     }
 
     // method called for update/add/drop schema fields
     public function handleTable($tb_name, Closure $table_function){
         try {
-            Schema::table($tb_name, $table_function);
+            Schema::connection($this->connection)->table($tb_name, $table_function);
             $this->addInfo($tb_name.' field has been updated');
             $this->command_run_count++;
         } catch (Exception $e) {}

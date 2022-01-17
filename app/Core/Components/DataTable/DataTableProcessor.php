@@ -128,12 +128,23 @@ trait DataTableProcessor
 		//data-data yang diluar column listing boleh diabaikan dari filter
 		$model_fields = ColumnListing::model($data);
 		if(!empty($this->filter)){
+
+			// additional logic to check input type
+			$map_input_type = [];
+			foreach($this->structure->structure as $struct){
+				$map_input_type[$struct->field] = $struct->input_type;
+			}
+
+
 			foreach($this->filter as $column => $value){
 				if(!in_array($column, $model_fields)){
 					continue;
 				}
-				//custom filtering diset lagi nanti
-				if(is_numeric($value) && strlen($value) < 6){
+
+				$input_type = $map_input_type[$column] ?? 'text';
+
+				//jika tipe input adalah dropdown / angka, query tidak perlu menggunakan where LIKE.
+				if((is_numeric($value) && strlen($value) < 6) || in_array($input_type, ['select', 'radio', 'checkbox', 'number'])){
 					$data = $data->where($column, trim($value));
 				}
 				else{
@@ -146,12 +157,13 @@ trait DataTableProcessor
 			$data = $this->structure->customFilter($data);
 		}
 		$without_filter = clone $data;
+		$datacount = $without_filter->count();
 
 		$data = $data->orderBy($this->order_by, $this->order_dir);
 		$data = $data->skip($this->start);
 		$data = $data->take($this->length);
-		$this->recordsFiltered = $without_filter->count();
-		$this->recordsTotal = $without_filter->count();
+		$this->recordsFiltered = $datacount;
+		$this->recordsTotal = $datacount;
 		$this->raw_data = $data->get();
 	}
 
