@@ -58,7 +58,7 @@ class AutocrudPresenter extends Command
             die();
         }
 
-        $namespace = 'App\\' . $this->mpath.'\\Presenters';
+        $namespace = 'App\\' . str_replace('/', '\\', $this->mpath) .'\\Presenters';
         $stub_path = base_path(config('module-setting.stubs.presenter'));
         $stub_file = fopen($stub_path, 'r');
         $stub_content = fread($stub_file, filesize($stub_path));

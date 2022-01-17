@@ -2,7 +2,7 @@
 namespace App\Core\Http\Controllers\Partials;
 
 use App\Core\Models\LogMaster;
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Presenters\BaseViewPresenter;
 
 trait LogController
 {
@@ -30,7 +30,7 @@ trait LogController
             'stored_log_count',
             'reported_stored_log_count',
             'selected_menu'
-        ))->setView('core::pages.log');
+        ))->setView('core::pages.log.index');
         return $presenter->render();
     }
 
@@ -41,7 +41,7 @@ trait LogController
         }
 
         $title = 'Log Detail';
-        return view('core::pages.log-detail', compact(
+        return view('core::pages.log.detail', compact(
             'data',
             'title'
         ));

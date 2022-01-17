@@ -4,7 +4,7 @@
         @include ('core::layouts.partials.metadata')
     </head>
 
-    <body class="authentication-bg">
+    <body class="authentication-bg bg-primary bg-pattern">
         
         <div class="account-pages my-5">
             <div class="container">

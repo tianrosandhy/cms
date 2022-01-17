@@ -1,12 +1,13 @@
 <?php
 namespace App\Core\Http\Process;
 
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
+use App\Core\Contracts\CanProcess;
 use Validator;
 use Setting;
 
-class SettingProcess extends BaseProcess
+class SettingProcess extends BaseProcess implements CanProcess
 {
 	public function config(){
 		return [
@@ -32,7 +33,7 @@ class SettingProcess extends BaseProcess
 			}
 
 			$from_input = $post[$split[0]][$split[1]] ?? null;
-			if(strlen($from_input) > 0 && $from_input <> $old_value){
+			if($from_input <> $old_value){
 				$savedata[] = [
 					'param' => $split[1],
 					'group' => $split[0],
@@ -46,8 +47,15 @@ class SettingProcess extends BaseProcess
 			foreach($savedata as $saveindex => $row){
 				$instance = app('setting')->where('param', $row['param'])->where('group', $row['group'])->first();
 				if(!empty($instance)){
-					$instance->default_value = $row['default_value'];
-					$instance->save();
+					if(!empty($row['default_value'])){
+						// update instance
+						$instance->default_value = $row['default_value'];
+						$instance->save();
+					}
+					else{
+						// delete instance if the value updated is null
+						Setting::deleteWhere($instance->id, 'id');
+					}
 					unset($savedata[$saveindex]);
 				}
 			}

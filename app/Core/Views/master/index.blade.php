@@ -1,9 +1,7 @@
 @extends ('core::layouts.master')
 @section ('content')
-	@include ('core::components.header-box')
-
-	<form action="" method="post">
-		{{ csrf_field() }}
+	<div class="card">
+		<div class="card-body">
 		@if(isset($datatable))
 			@if($datatable->mode  <> 'datatable')
 				{!! $datatable->customTableView() !!}
@@ -11,7 +9,8 @@
 				{!! $datatable->tableView() !!}
 			@endif
 		@endif
-	</form>
+		</div>
+	</div>
 @stop
 
 @section ('datatable_script')

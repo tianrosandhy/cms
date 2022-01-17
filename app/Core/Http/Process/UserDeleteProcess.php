@@ -1,11 +1,12 @@
 <?php
 namespace App\Core\Http\Process;
 
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
+use App\Core\Contracts\CanProcess;
 use Validator;
 
-class UserDeleteProcess extends BaseProcess
+class UserDeleteProcess extends BaseProcess implements CanProcess
 {
 
 	public function validate(){

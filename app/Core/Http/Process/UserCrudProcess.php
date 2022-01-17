@@ -1,12 +1,13 @@
 <?php
 namespace App\Core\Http\Process;
 
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
-use App\Core\Http\Skeleton\UserSkeleton;
+use App\Core\Http\Structure\UserStructure;
+use App\Core\Contracts\CanProcess;
 use Validator;
 
-class UserCrudProcess extends BaseProcess
+class UserCrudProcess extends BaseProcess implements CanProcess
 {
 	public function __construct($instance=null){
 		parent::__construct();
@@ -17,13 +18,13 @@ class UserCrudProcess extends BaseProcess
 			$this->mode = 'create';
 		}
 		$this->instance = $instance;
-		$this->skeleton = new UserSkeleton;
+		$this->structure = new UserStructure;
 	}
 
 
 	public function validate(){
 		$current_key = empty($this->instance) ? null : $this->instance->getKey();
-		$validator = $this->skeleton->generateValidation($this->mode, $current_key);
+		$validator = $this->structure->generateValidation($this->mode, $current_key);
 		if($validator){
 			if($validator->fails()){
 				throw new ProcessException($validator);
@@ -44,11 +45,11 @@ class UserCrudProcess extends BaseProcess
 
 	public function process(){
 		//your logic after validation success
-		$skeleton_inputs = $this->skeleton->autoCrud();
-		if(!empty($skeleton_inputs)){
+		$structure_inputs = $this->structure->autoCrud();
+		if(!empty($structure_inputs)){
 			//create new instance if not exists, but use selected instance if exists
-			$instance = $this->instance ?? $this->skeleton->model();
-			foreach($skeleton_inputs as $field => $value){
+			$instance = $this->instance ?? $this->structure->model();
+			foreach($structure_inputs as $field => $value){
 				//gausah ubah password dalam mode update jika tidak diperlukan
 				if($this->mode == 'update' && $field == 'password' && empty($value)){
 					continue;
@@ -65,7 +66,7 @@ class UserCrudProcess extends BaseProcess
 			$this->setSuccessRedirectTarget(route('admin.user.edit', ['id' => $instance->id]));
 		}
 
-		// if you have another logic for storing data that doesnt cover by Skeleton, you can define them here.
+		// if you have another logic for storing data that doesnt cover by Structure, you can define them here.
 	}
 
 	public function revert(){

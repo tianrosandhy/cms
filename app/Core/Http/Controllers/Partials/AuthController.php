@@ -1,7 +1,7 @@
 <?php
 namespace App\Core\Http\Controllers\Partials;
 
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Presenters\BaseViewPresenter;
 use App\Core\Http\Process\LoginProcess;
 use App\Core\Models\User;
 use App\Core\Jobs\ResetPasswordJob;
@@ -13,7 +13,7 @@ trait AuthController
 	public function login(){
 		$p = (new BaseViewPresenter)
 			->setTitle('Login')
-			->setView('core::pages.login');
+			->setView('core::pages.auth.login');
 		return $p->render();
 	}
 
@@ -46,7 +46,7 @@ trait AuthController
 	public function passwordReset($token){
 		$user = $this->getUserByToken($token);
 		$title = 'Password Reset';
-		return view('core::pages.password-reset', compact(
+		return view('core::pages.auth.password-reset', compact(
 			'title',
 			'user'
 		));

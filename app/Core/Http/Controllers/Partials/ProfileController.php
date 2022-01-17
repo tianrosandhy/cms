@@ -1,15 +1,15 @@
 <?php
 namespace App\Core\Http\Controllers\Partials;
 
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Presenters\BaseViewPresenter;
 use App\Core\Http\Process\ProfileProcess;
 
 trait ProfileController
 {
 	public function myProfile(){
 		return (new BaseViewPresenter)
-			->setTitle('My Profile')
-			->setView('core::pages.my-profile')
+			->setTitle(__('core::module.global.my_profile'))
+			->setView('core::pages.my-profile.index')
 			->render();
 	}
 

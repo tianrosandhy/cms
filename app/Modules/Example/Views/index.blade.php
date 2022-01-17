@@ -2,16 +2,21 @@
 @section ('content')
 	@include ('core::components.header-box')
 
-	<form action="" method="post">
-		{{ csrf_field() }}
-		@if(isset($datatable))
-			@if($datatable->mode  <> 'datatable')
-				{!! $datatable->customTableView() !!}
-			@else
-				{!! $datatable->tableView() !!}
-			@endif
-		@endif
-	</form>
+	<div class="page-content-wrapper">
+		<div class="container-fluid">
+			<form action="" method="post">
+				{{ csrf_field() }}
+				@if(isset($datatable))
+					@if($datatable->mode  <> 'datatable')
+						{!! $datatable->customTableView() !!}
+					@else
+						{!! $datatable->tableView() !!}
+					@endif
+				@endif
+			</form>
+		</div>
+	</div>	
+
 @stop
 
 @section ('datatable_script')

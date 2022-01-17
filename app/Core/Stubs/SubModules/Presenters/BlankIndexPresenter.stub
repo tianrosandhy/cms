@@ -1,9 +1,9 @@
 <?php
 namespace [NAMESPACE]\Presenters;
 
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Presenters\BaseViewPresenter;
 use DataTable;
-use [NAMESPACE]\Http\Skeleton\[MODULE_NAME]Skeleton;
+use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
 use Permission;
 
 class [MODULE_NAME]IndexPresenter extends BaseViewPresenter
@@ -15,35 +15,16 @@ class [MODULE_NAME]IndexPresenter extends BaseViewPresenter
 		//$this->view = '[LOWERCASE_MODULE_NAME]::index';
 
 		$this->batch_delete_url = route('admin.[LOWERCASE_MODULE_NAME].delete');
-		$this->skeleton = new [MODULE_NAME]Skeleton;
-		$this->datatable = DataTable::setSkeleton($this->skeleton);
+		$this->structure = new [MODULE_NAME]Structure;
+		$this->datatable = DataTable::setStructure($this->structure);
 		$this->control_buttons = [];
-		if(!config('module-setting.[LOWERCASE_MODULE_NAME].hide_back_to_homepage_button')){
+
+		if(Permission::has('admin.[LOWERCASE_MODULE_NAME].create')){
 			$this->control_buttons[] = [
-				'url' => admin_url('/'),
-				'label' => '{{ __('core::module.global.back_to_homepage') }}',
-				'icon' => 'home'
-			];
-		}
-		if(!config('module-setting.[LOWERCASE_MODULE_NAME].hide_add_button')){
-			if(Permission::has('admin.[LOWERCASE_MODULE_NAME].create')){
-				$this->control_buttons[] = [
-					'url' => route('admin.[LOWERCASE_MODULE_NAME].create'),
-					'label' => __('core::module.form.add_data'),
-					'type' => 'success',
-					'icon' => 'plus'
-				];
-			}
-		}
-		if(!config('module-setting.[LOWERCASE_MODULE_NAME].hide_filter')){
-			$this->control_buttons[] = [
-				'label' => 'Filter',
-				'icon' => 'filter',
-				'type' => 'primary',
-				'attr' => [
-					'data-toggle' => 'collapse',
-					'data-target' => '#searchBox-' . $this->skeleton->name()
-				]
+				'url' => route('admin.[LOWERCASE_MODULE_NAME].create'),
+				'label' => __('core::module.form.add_data'),
+				'type' => 'success',
+				'icon' => 'plus'
 			];
 		}
 	}

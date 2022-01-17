@@ -13,8 +13,8 @@ trait DataTableProcessor
 			$this->validateRequest();
 			$this->handleProcess();
 			if($this->mode == 'custom'){
-				if(view()->exists($this->skeleton->custom_html)){
-					$html = view($this->skeleton->custom_html, [
+				if(view()->exists($this->structure->custom_html)){
+					$html = view($this->structure->custom_html, [
 						'data' => $this->data
 					])->render();
 				}
@@ -71,11 +71,21 @@ trait DataTableProcessor
 		$this->getDataByRequest();
 
 		$output = [];
-		foreach($this->raw_data as $row){
-			$rf = $this->skeleton->rowFormat($row);
-			if(!empty($rf)){
-				$output[] = $rf;
+		if(method_exists($this->structure, 'transformer')){
+			$trans = $this->structure->transformer();
+			$output = $trans->reform($this->raw_data, 'datatable');
+		}
+		else if(method_exists($this->structure, 'rowFormat')){
+			foreach($this->raw_data as $row){
+				$rf = $this->structure->rowFormat($row);
+				if(!empty($rf)){
+					$output[] = $rf;
+				}
 			}
+		}
+		else{
+			// no data format handler
+			throw new DataTableException('No data format handler method found. Please choose between rowFormat() or transformer()');
 		}
 
 		$this->data = $output;
@@ -108,7 +118,7 @@ trait DataTableProcessor
 
 	public function getDataByRequest(){
 		try{
-			$data = $this->skeleton->model();
+			$data = $this->structure->model();
 		}catch(\Exception $e){
 			throw new DataTableException('Failed to get data from table. Make sure you have already migrate the module');
 		}
@@ -123,12 +133,17 @@ trait DataTableProcessor
 					continue;
 				}
 				//custom filtering diset lagi nanti
-				$data = $data->where($column, 'like', '%'.trim($value).'%');
+				if(is_numeric($value) && strlen($value) < 6){
+					$data = $data->where($column, trim($value));
+				}
+				else{
+					$data = $data->where($column, 'like', '%'.trim($value).'%');
+				}
 			}
 		}
 
-		if(method_exists($this->skeleton, 'customFilter')){
-			$data = $this->skeleton->customFilter($data);
+		if(method_exists($this->structure, 'customFilter')){
+			$data = $this->structure->customFilter($data);
 		}
 		$without_filter = clone $data;
 

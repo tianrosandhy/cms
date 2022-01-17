@@ -3,11 +3,11 @@ namespace App\Core\Http\Controllers\Partials;
 
 use App\Core\Presenters\UserPresenter;
 use App\Core\Presenters\UserCrudPresenter;
-use App\Core\Http\Skeleton\UserSkeleton;
+use App\Core\Http\Structure\UserStructure;
 use App\Core\Models\User;
 use App\Core\Http\Process\UserCrudProcess;
-use App\Core\Http\Process\BaseDeleteProcess;
-use App\Core\Http\Process\BaseDatatableProcess;
+use App\Core\Base\Process\BaseDeleteProcess;
+use App\Core\Base\Process\BaseDatatableProcess;
 
 trait UserManagementController
 {
@@ -17,7 +17,7 @@ trait UserManagementController
 
 	public function userManagementDataTable(){
 		return (new BaseDatatableProcess)
-			->setSkeleton(new UserSkeleton)
+			->setStructure(new UserStructure)
 			->type('datatable')
 			->handle();
 	}
@@ -28,7 +28,7 @@ trait UserManagementController
 	}
 
 	public function userManagementStore(){
-		return (new UserCrudProcess())
+		return (new UserCrudProcess(new User))
 			->setSuccessRedirectTarget(route('admin.user.index'))
 			->setSuccessMessage('User data has been saved')
 			->type('http')

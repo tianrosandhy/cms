@@ -17,16 +17,13 @@ $(function(){
 		'scrollY' : '500px',
 		'scrollX' : true,
 		'scrollCollapse' : true,
-		'fixedColumns' : {
-			leftColumns : 1
-		},
 		'colReorder' : true,
 		'ajax'		: {
 			type : 'POST',
-			url	: '{{ $skeleton->route() }}',
+			url	: '{{ $structure->route() }}',
 			dataType : 'json',
 			data : function(data){
-				{!! $skeleton->generateSearchQuery() !!}
+				{!! $structure->generateSearchQuery() !!}
 				data._token = window.CSRF_TOKEN
 			},
 		},
@@ -37,27 +34,42 @@ $(function(){
 
 		"drawCallback": function(settings) {
 			initPlugins();
+			setTimeout(function(){
+				$("table.datatable").resize();
+			}, 250);
 		},
 		'columns' : [
-			{!! $skeleton->datatableColumns() !!}
+			{!! $structure->datatableColumns() !!}
 		],
 		'columnDefs' : [
-			{!! $skeleton->datatableOrderable() !!}
+			{!! $structure->datatableOrderable() !!}
 		],
-		"aaSorting": [{!! $skeleton->datatableDefaultOrder() !!}],
+		"aaSorting": [{!! $structure->datatableDefaultOrder() !!}],
 	});
 
-	$(".search-box input, .search-box select").on('change', function(){
-		$(".reset-filter").fadeIn();
+	$(".search-box input, .search-box select").on('keyup', function(e){
+		if(e.which == 13){
+			refreshDataTable();
+			$(".modal-searchbox").closest('.modal.show').modal('hide');
+		}
+	});
+
+	$(".modal-searchbox .btn-apply-filter").on('click', function(e){
+		e.preventDefault();
 		refreshDataTable();
+		$(".modal-searchbox").closest('.modal.show').modal('hide');
 	});
 
 	$(".reset-filter").on('click', function(e){
 		e.preventDefault();
-		$(this).closest('.search-box').find('input, select').val('').trigger('change');
-		$(this).fadeOut();
+		$(this).closest('.modal-searchbox').find('input, select').val('').trigger('change');
+		$(".modal-searchbox").closest('.modal.show').modal('hide');
+		refreshDataTable();
 	});
 
+	$(".modal-pagefilter").on('shown.bs.modal', function(){
+		refreshPlugins();
+	});
 
 
 	$(document).on('change', '#checker_all_datatable', function(){

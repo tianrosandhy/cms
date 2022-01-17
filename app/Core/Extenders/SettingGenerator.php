@@ -16,6 +16,9 @@ class SettingGenerator extends SettingRegistration
 			new SettingItem('favicon', 'Site Favicon', 'image', [
 				'accept' => 'image/*'
 			]),
+			new SettingItem('logo_wide', 'Site Wide Logo', 'image', [
+				'accept' => 'image/*'
+			]),
 			new SettingItem('logo', 'Site Logo', 'image', [
 				'accept' => 'image/*'
 			]),

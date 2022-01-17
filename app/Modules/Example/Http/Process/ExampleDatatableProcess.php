@@ -1,21 +1,22 @@
 <?php
 namespace App\Modules\Example\Http\Process;
 
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
+use App\Modules\Example\Http\Structure\ExampleStructure;
+use App\Core\Contracts\CanProcess;
 use Validator;
 use DataTable;
-use App\Modules\Example\Http\Skeleton\ExampleSkeleton;
 
-class ExampleDatatableProcess extends BaseProcess
+class ExampleDatatableProcess extends BaseProcess implements CanProcess
 {
 	public function __construct(){
 		parent::__construct();
-		$this->skeleton = new ExampleSkeleton;
+		$this->structure = new ExampleStructure;
 	}
 	
 	public function currentDataTable(){
-		return DataTable::setSkeleton($this->skeleton);
+		return DataTable::setStructure($this->structure);
 	}
 
 	public function validate(){

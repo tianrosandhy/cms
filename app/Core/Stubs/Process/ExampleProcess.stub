@@ -1,11 +1,12 @@
 <?php
 namespace [CURRENT_NAMESPACE];
 
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
+use App\Core\Contracts\CanProcess;
 use Validator;
 
-class [CLASSNAME] extends BaseProcess
+class [CLASSNAME] extends BaseProcess implements CanProcess
 {
 	public function validate(){
 		$validate = Validator::make($this->request->all(), [

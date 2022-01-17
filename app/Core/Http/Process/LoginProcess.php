@@ -2,11 +2,12 @@
 namespace App\Core\Http\Process;
 
 use App\Core\Http\Traits\ThrottlesLogin;
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
+use App\Core\Contracts\CanProcess;
 use Validator;
 
-class LoginProcess extends BaseProcess
+class LoginProcess extends BaseProcess implements CanProcess
 {
 	use ThrottlesLogin;
 

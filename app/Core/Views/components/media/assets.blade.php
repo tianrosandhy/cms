@@ -237,20 +237,20 @@
 				<div class="row">
 					<div class="col-xl-3 col-6 mb-2">
 						<a href="#" class="btn btn-white bg-white trigger-upload-tab">
-							<i class="icon" data-feather="upload"></i> <span class="d-none d-sm-inline-block">Upload Image</span>
+							<span class="iconify" data-icon="uim:upload-alt"></span> <span class="d-none d-sm-inline-block">Upload Image</span>
 						</a>
 					</div>
 					<div class="col-xl-3 d-none d-lg-block d-xl-block"></div>
 					<div class="col-xl-3 col-6 text-right">
 						<div class="btn-group">
 							<button type="button" class="refresh-button btn btn-info" title="Refresh">
-								<i class="icon" data-feather="refresh-cw"></i>
+								<span class="iconify" data-icon="uim:refresh"></span>
 							</button>
 							<button type="button" class="sort-asc btn btn-white" title="Older First">
-								<i class="icon" data-feather="arrow-down"></i>
+								<span class="iconify" data-icon="bi:sort-numeric-down"></span>
 							</button>
 							<button type="button" class="sort-desc btn btn-white desc" title="Older Last">
-								<i class="icon" data-feather="arrow-up"></i>
+								<span class="iconify" data-icon="bi:sort-numeric-down-alt"></span>
 							</button>
 						</div>
 					</div>
@@ -260,7 +260,7 @@
 								<input type="search" autocomplete="off" class="form-control" name="keyword" id="media-search-keyword" placeholder="Search Image">
 								<div class="input-group-append">
 									<button type="submit" class="search-button btn btn-secondary" title="Search">
-										<i class="icon" data-feather="search"></i>
+										<span class="iconify" data-icon="bx:bx-search-alt"></span>
 									</button>
 								</div>						
 							</div>
@@ -298,6 +298,12 @@
 var FILEMANAGER_PAGE = 1;
 var ACTIVE_EDITOR;
 $(function(){
+	$(document).on('hidden.bs.modal', '#media-modal', function(){
+		if($(".modal.show").length > 0){
+			$("body").addClass('modal-open');
+		}
+	});
+
 	$(document).on('click', ".trigger-upload-image", function(e){
 		e.preventDefault();
 		//set data-hash to filemanager modal
@@ -325,7 +331,7 @@ $(function(){
 
 		container.find('.multi-media-container .square-image:last').attr('data-hash', makeid(30));
 		container.find('.multi-media-container .square-image:last-child .trigger-upload-image').trigger('click');
-		feather.replace();	
+		// feather.replace();	
 	});
 
 	$(document).on('click', '.multi-closer', function(e){
@@ -519,7 +525,7 @@ function gotoFilemanager(reload){
 	if(reload){
 		loadFileManager();
 	}
-	feather.replace();
+	// feather.replace();
 }
 
 function afterFinishUpload(){
@@ -547,7 +553,7 @@ function loadFileManager(page, ignore_loading){
 		},
 		success : function(resp){
 			$(".filemanager-content").html(resp);
-			feather.replace();
+			// feather.replace();
 			hideLoading();
 		},
 		error : function(resp){
@@ -572,7 +578,7 @@ function loadImageDetail(click_instance){
 	$(".filemanager-detail .filemanager-thumb-selection").attr('data-id', media_id);
 	$(".filemanager-detail .filemanager-thumb-selection").attr('data-path', path);
 	$(".filemanager-content, .media-image-container, .filemanager-detail").addClass('opened');
-	feather.replace();	
+	// feather.replace();	
 }
 
 function hideImageDetail(){

@@ -3,24 +3,33 @@
 <head>
 	@include ('core::layouts.partials.metadata')
 </head>
-<body class="left-side-menu-dark">
-    <div id="wrapper">
-		@include ('core::layouts.partials.header')
-		@include ('core::layouts.partials.sidebar')
+<body data-topbar="colored">
+    <div id="page-loader">
+        <span class="iconify" data-icon="eos-icons:bubble-loading"></span>
+    </div>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        @include ('core::layouts.partials.header')
+        @include ('core::layouts.partials.sidebar')        
 
-        <div class="content-page">
-            <div class="content">
-                <div class="container-fluid mt-3">
-                	@yield ('content')
-                </div> <!-- container-fluid -->
-            </div> <!-- content -->
+        <div class="main-content">
+            <div class="page-content">
+            	@include ('core::components.header-box')
+                <div class="page-content-wrapper">
+                    <div class="container-fluid">
+                    @yield ('content')
+                    </div>
+                </div>
+            </div>
+            <!-- End Page-content -->
             @include ('core::layouts.partials.footer')
         </div>
+        <!-- end main content-->
     </div>
-    @include ('core::layouts.partials.modal')
-    <div id="page-loader">
-        <i class="icon" data-feather="refresh-cw"></i>
-    </div>
+    <!-- END layout-wrapper -->
+
+    @include ('core::layouts.partials.sidebar.global-setting')
+    @stack ('modal')
 	@include ('core::layouts.partials.script')
 </body>
 </html>

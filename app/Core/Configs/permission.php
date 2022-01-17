@@ -29,12 +29,6 @@ return [
 			'admin.log.export',
 			'admin.log.detail'
 		],
-		'Push Token Device' => [
-			'admin.push-notif.index',
-			'admin.push-notif.create',
-			'admin.push-notif.edit',
-			'admin.push-notif.delete',
-			'admin.push-notif.switch',
-		],
+
 	]
 ];

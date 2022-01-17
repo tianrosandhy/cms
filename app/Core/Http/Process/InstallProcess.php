@@ -1,14 +1,15 @@
 <?php
 namespace App\Core\Http\Process;
 
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
 use App\Core\Http\Traits\InstallerTrait;
+use App\Core\Contracts\CanProcess;
 use Validator;
 use Artisan;
 use DB;
 
-class InstallProcess extends BaseProcess
+class InstallProcess extends BaseProcess implements CanProcess
 {
 	use InstallerTrait;
 

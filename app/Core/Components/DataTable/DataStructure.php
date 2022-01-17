@@ -11,27 +11,40 @@ class DataStructure
 	use DynamicProperty;
 
 	public 
+		// basic
 		$field,
 		$name,
 		$default_order,
+
+		// datatable
 		$orderable,
 		$searchable,
-		$data_source,
+		$hide_table,
 		$hide_form,
+
+		// exporter
+		$exportable,
+		$export_searchable,
+		$hide_export,
+
 		$show_on_create,
 		$show_on_update,
 		$crud_show_condition,
 		$table_show_condition,
-		$hide_table,
-		$hide_export,
+
+		// form & input
 		$form_column,
 		$input_type,
 		$input_attribute,
 		$input_array,
+
+		// validation
 		$create_validation,
 		$update_validation,
 		$validation_translation,
+
 		$slug_target,
+		$data_source,
 		$value_source,
 		$value_data,
 		$translate,
@@ -44,6 +57,8 @@ class DataStructure
 		//manage default value
 		$this->orderable = true;
 		$this->searchable = true;
+		$this->exportable = true;
+		$this->export_searchable = true;
 		$this->hide_form = false;
 		$this->hide_table = false;
 		$this->show_on_create = true;
@@ -148,11 +163,12 @@ class DataStructure
 		return $this;
 	}
 
-	//quick skeleton
+	//quick structure
 	public function checker($name='id'){
 		$this->field($name);
 		$this->orderable(false);
 		$this->searchable(false);
+		$this->exportable(false);
 		$this->hideExport(true);
 		$this->name('<input type="checkbox" name="checker_all" id="checker_all_datatable">');
 		$this->hideForm();
@@ -255,6 +271,7 @@ class DataStructure
 
 	public function searchable($searchable=true){
 		$this->searchable = (bool)$searchable;
+		$this->export_searchable = (bool)$searchable;
 		return $this;
 	}
 
@@ -276,6 +293,7 @@ class DataStructure
 	
 	public function hideTable(){
 		$this->hide_table = true;
+		$this->hide_export = true;
 		return $this;
 	}
 
@@ -284,7 +302,15 @@ class DataStructure
 		return $this;
 	}
 	
-
+	public function exportable($bool=true){
+		$this->exportable = $bool;
+		return $this;
+	}
+	
+	public function exportSearchable($bool=true){
+		$this->export_searchable = $bool;
+		return $this;
+	}
 
 
 

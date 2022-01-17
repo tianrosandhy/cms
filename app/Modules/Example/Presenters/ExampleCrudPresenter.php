@@ -1,9 +1,9 @@
 <?php
 namespace App\Modules\Example\Presenters;
 
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Presenters\BaseViewPresenter;
 use DataTable;
-use App\Modules\Example\Http\Skeleton\ExampleSkeleton;
+use App\Modules\Example\Http\Structure\ExampleStructure;
 
 class ExampleCrudPresenter extends BaseViewPresenter
 {
@@ -16,11 +16,19 @@ class ExampleCrudPresenter extends BaseViewPresenter
 		}
 		$this->data = $instance;
 		$this->back_url = route('admin.example.index');
+		$this->hide_export_import = true;
 		$this->view = 'core::master.crud';
 		#if you want to override this crud view, you can use below view instead
 		// $this->view = 'example::crud';
 
-		$this->skeleton = new ExampleSkeleton;
+		$this->breadcrumb = [
+			[
+				'label' => __('example::module.index'),
+				'url' => route('admin.example.index')
+			]
+		];
+
+		$this->structure = new ExampleStructure;
 		$this->config = config('module-setting.example');
 	}
 

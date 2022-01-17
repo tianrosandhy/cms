@@ -4,7 +4,7 @@ namespace App\Modules\Example\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\AliasLoader;
-use App\Core\Providers\BaseServiceProvider;
+use App\Core\Base\Providers\BaseServiceProvider;
 
 class ExampleServiceProvider extends BaseServiceProvider{
 	protected $namespace = 'App\Modules\Example\Http\Controllers';

@@ -1,6 +1,7 @@
 <?php
 return [
     'menu' => [
+        'home' => 'Beranda',
         'dashboard' => 'Beranda',
         'management' => 'Manajemen',
         'language_management' => 'Pengaturan Bahasa',
@@ -36,5 +37,11 @@ return [
         'delete_selected' => 'Hapus Data Terpilih',
         'add_data' => 'Tambah Data',
         'back' => 'Kembali',
+
+        'export_to_excel' => 'Export ke Excel',
+        'import_from_excel' => 'Import dari Excel',
+        'advance_search' => 'Pencarian Data',
+        'apply_filter' => 'Terapkan Filter',
+        'reset_filter' => 'Hapus Filter',
     ],
 ];

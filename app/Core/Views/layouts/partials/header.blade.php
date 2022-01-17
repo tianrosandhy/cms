@@ -1,45 +1,25 @@
-<!-- Topbar Start -->
-<div class="navbar navbar-expand flex-column flex-md-row navbar-custom">
-    <div class="container-fluid">
-        <!-- LOGO -->
-        <a href="{{ admin_url('/') }}" class="navbar-brand mr-0 mr-md-2 logo">
-            <span class="logo-lg">
-                @if(setting('general.logo'))
-                <img src="{{ setting('general.logo') }}" alt="" height="24" />
-                @else
-                <img src="{{ admin_asset('images/logo.png') }}" alt="" height="24" />
-                @endif
-                <span class="d-inline h5 ml-1 text-logo">{{ setting('general.title') }}</span>
-            </span>
-            <span class="logo-sm">
-                <img src="{{ setting('general.logo') }}" alt="" height="24">
-            </span>
-        </a>
+<header id="page-topbar">
+    <div class="navbar-header">
+        <div class="d-flex">
+            @include ('core::layouts.partials.header.header-logo')
+            <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
+                <i class="mdi mdi-backburger"></i>
+            </button>
+            @include ('core::layouts.partials.header.search-inline')
+        </div>
 
-        <ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
-            <li class="">
-                <button class="button-menu-mobile open-left disable-btn">
-                    <i data-feather="menu" class="menu-icon"></i>
-                    <i data-feather="x" class="close-icon"></i>
-                </button>
-            </li>
-        </ul>
-
-        <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
+        <div class="d-flex">
+            @include ('core::layouts.partials.header.search-mobile')
             @include ('core::layouts.partials.header.language-toggle')
-            @include ('core::layouts.partials.header.notification')
-
             @if(Permission::has('admin.setting.store'))
-            <li class="dropdown notification-list" title="Settings">
-                <a href="javascript:void(0);" class="nav-link right-bar-toggle">
-                    <i data-feather="settings"></i>
-                </a>
-            </li>
+            <div class="dropdown d-inline-block">
+                <!-- setting trigger button -->
+                <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
+                    <i class="mdi mdi-tune"></i>
+                </button>
+            </div>
             @endif
-
             @include ('core::layouts.partials.header.user-dropdown')
-        </ul>
+        </div>
     </div>
-
-</div>
-<!-- end Topbar -->
+</header>

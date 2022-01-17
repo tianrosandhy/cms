@@ -1,9 +1,9 @@
 <?php
 namespace App\Modules\Example\Presenters;
 
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Presenters\BaseViewPresenter;
 use DataTable;
-use App\Modules\Example\Http\Skeleton\ExampleSkeleton;
+use App\Modules\Example\Http\Structure\ExampleStructure;
 use Permission;
 
 class ExampleIndexPresenter extends BaseViewPresenter
@@ -15,35 +15,15 @@ class ExampleIndexPresenter extends BaseViewPresenter
 		//$this->view = 'example::index';
 
 		$this->batch_delete_url = route('admin.example.delete');
-		$this->skeleton = new ExampleSkeleton;
-		$this->datatable = DataTable::setSkeleton($this->skeleton);
+		$this->structure = new ExampleStructure;
+		$this->datatable = DataTable::setStructure($this->structure);
 		$this->control_buttons = [];
-		if(!config('module-setting.example.hide_back_to_homepage_button')){
+		if(Permission::has('admin.example.create')){
 			$this->control_buttons[] = [
-				'url' => admin_url('/'),
-				'label' => __('core::module.global.back_to_homepage'),
-				'icon' => 'home'
-			];
-		}
-		if(!config('module-setting.example.hide_add_button')){
-			if(Permission::has('admin.example.create')){
-				$this->control_buttons[] = [
-					'url' => route('admin.example.create'),
-					'label' => __('core::module.form.add_data'),
-					'type' => 'success',
-					'icon' => 'plus'
-				];
-			}
-		}
-		if(!config('module-setting.example.hide_filter')){
-			$this->control_buttons[] = [
-				'label' => 'Filter',
-				'icon' => 'filter',
-				'type' => 'primary',
-				'attr' => [
-					'data-toggle' => 'collapse',
-					'data-target' => '#searchBox-' . $this->skeleton->name()
-				]
+				'url' => route('admin.example.create'),
+				'label' => __('core::module.form.add_data'),
+				'type' => 'success',
+				'icon' => 'plus'
 			];
 		}
 	}

@@ -1,7 +1,7 @@
 <?php
 namespace [CURRENT_NAMESPACE];
 
-use App\Core\Presenters\BaseViewPresenter;
+use App\Core\Base\Presenters\BaseViewPresenter;
 
 class [CLASSNAME] extends BaseViewPresenter
 {

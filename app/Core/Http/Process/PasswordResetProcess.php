@@ -1,13 +1,14 @@
 <?php
 namespace App\Core\Http\Process;
 
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
-use Validator;
+use App\Core\Contracts\CanProcess;
 use App\Core\Models\User;
+use Validator;
 use DB;
 
-class PasswordResetProcess extends BaseProcess
+class PasswordResetProcess extends BaseProcess implements CanProcess
 {
 	public function __construct(User $user){
 		parent::__construct();

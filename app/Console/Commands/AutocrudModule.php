@@ -51,15 +51,20 @@ class AutocrudModule extends Command
             	'Http/Process/BlankCrudProcess.php',
             	'Http/Process/BlankDatatableProcess.php',
             	'Http/Process/BlankDeleteProcess.php',
-            	'Http/Skeleton/BlankSkeleton.php',
+            	'Http/Process/BlankExportProcess.php',
+                'Http/Process/BlankImportProcess.php',
+                'Http/Process/BlankPreimportProcess.php',
+            	'Http/Structure/BlankStructure.php',
                 'Migrations/2020_06_20_000000_blank.php',
                 'Migrations/2020_06_20_000000_blank_translator.php',
                 'Models/Blank.php',
                 'Models/BlankTranslator.php',
             	'Presenters/BlankCrudPresenter.php',
             	'Presenters/BlankIndexPresenter.php',
+            	'Presenters/BlankPreimportPresenter.php',
             	'Providers/BlankServiceProvider.php',
             	'Services/BlankInstance.php',
+                'Transformers/BlankTransformer.php',
             ]);
 
             $this->changeContents([
@@ -72,24 +77,29 @@ class AutocrudModule extends Command
             	'Facades/'.$this->module_name.'Facade.php',
             	'Http/Controllers/'.$this->module_name.'Controller.php',
             	'Http/Process/'.$this->module_name.'CrudProcess.php',
+            	'Http/Process/'.$this->module_name.'ExportProcess.php',
             	'Http/Process/'.$this->module_name.'DatatableProcess.php',
             	'Http/Process/'.$this->module_name.'DeleteProcess.php',
-            	'Http/Skeleton/'.$this->module_name.'Skeleton.php',
+            	'Http/Process/'.$this->module_name.'ImportProcess.php',
+            	'Http/Process/'.$this->module_name.'PreimportProcess.php',
+            	'Http/Structure/'.$this->module_name.'Structure.php',
                 'Migrations/2020_06_20_000000_'.$this->lowercase_name.'.php',
                 'Migrations/2020_06_20_000000_'.$this->lowercase_name.'_translator.php',
                 'Models/'.$this->module_name.'.php',
                 'Models/'.$this->module_name.'Translator.php',
             	'Presenters/'.$this->module_name.'CrudPresenter.php',
             	'Presenters/'.$this->module_name.'IndexPresenter.php',
+            	'Presenters/'.$this->module_name.'PreimportPresenter.php',
             	'Providers/'.$this->module_name.'ServiceProvider.php',
             	'Routes/web.php',
             	'Services/'.$this->module_name.'Instance.php',
+                'Transformers/'.$this->module_name.'Transformer.php',
             	'Translations/en/module.php',
             	'Translations/id/module.php',
                 'Views/crud.blade.php',
             ]);
 
-            $this->info('New module has been created for you. Now you just need to register the service provider (in config/modules.php or in config/app.php) , manage migration, manage the model and skeleton.');
+            $this->info('New module has been created for you. Now you just need to register the service provider (in config/modules.php or in config/app.php) , manage migration, manage the model and structure.');
 
         }
 

@@ -2,7 +2,7 @@
 <div class="right-bar">
     <div class="rightbar-title">
         <a href="javascript:void(0);" class="right-bar-toggle float-right">
-            <i data-feather="x-circle"></i>
+            <span class="iconify" data-icon="bi:x-circle-fill"></span>
         </a>
         <h5 class="m-0">{{ __('core::module.global.setting') }}</h5>
     </div>

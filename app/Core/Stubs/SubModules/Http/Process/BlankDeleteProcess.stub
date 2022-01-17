@@ -1,12 +1,13 @@
 <?php
 namespace [NAMESPACE]\Http\Process;
 
-use App\Core\Http\Process\BaseProcess;
+use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
-use [NAMESPACE]\Http\Skeleton\[MODULE_NAME]Skeleton;
+use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
+use App\Core\Contracts\CanProcess;
 use Validator;
 
-class [MODULE_NAME]DeleteProcess extends BaseProcess
+class [MODULE_NAME]DeleteProcess extends BaseProcess implements CanProcess
 {
 	public function config(){
 		return [

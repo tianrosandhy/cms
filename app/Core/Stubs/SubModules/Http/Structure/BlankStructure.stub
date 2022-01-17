@@ -1,0 +1,54 @@
+<?php
+namespace [NAMESPACE]\Http\Structure;
+
+use App\Core\Base\Structure\BaseStructure;
+use [NAMESPACE]\Models\[MODULE_NAME];
+use [NAMESPACE]\Transformers\[MODULE_NAME]Transformer;
+use App\Core\Contracts\CanStructured;
+use Permission;
+use DataStructure;
+
+class [MODULE_NAME]Structure extends BaseStructure implements CanStructured
+{
+	public $multi_language = true;
+
+	public function handle(){
+		$this->registers([
+			DataStructure::checker(),
+			DataStructure::field('title')
+				->name('Title')
+				->inputType('text')
+				->createValidation('required', true)
+				->validationTranslation([
+					'title.required' => 'Please fill the title'
+				]),
+			DataStructure::field('description')
+				->name('Description')
+				->hideTable()
+				->inputType('richtext'),
+			DataStructure::field('image')
+				->name('Image')
+				->inputType('image')
+				->searchable(false)
+				->orderable(false)
+				->tabGroup('Details'),
+			DataStructure::switcher('is_active', 'Is Active')
+		]);
+	}
+
+	public function dataTableRoute(){
+		return route('admin.[LOWERCASE_MODULE_NAME].datatable');
+	}
+
+	//public function customFilter($context){
+	//	return $context;
+	//}
+
+	public function model(){
+		return new [MODULE_NAME];
+	}
+
+	public function transformer(){
+		return new [MODULE_NAME]Transformer;
+	}
+}
