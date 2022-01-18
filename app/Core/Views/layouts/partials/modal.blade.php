@@ -1,16 +1,15 @@
-@if(Permission::has('admin.setting.store'))
-<div class="right-bar">
-    <div class="rightbar-title">
-        <a href="javascript:void(0);" class="right-bar-toggle float-right">
-            <span class="iconify" data-icon="bi:x-circle-fill"></span>
-        </a>
-        <h5 class="m-0">{{ __('core::module.global.setting') }}</h5>
-    </div>
-
-    <div class="slimscroll-menu">
-        @include ('core::layouts.partials.sidebar.global-setting')
+<div class="modal fade" id="global-popup">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="title"></span>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            
+            </div>
+        </div>
     </div>
 </div>
-<div class="rightbar-overlay"></div>
-@endif
+
 @stack ('modal')

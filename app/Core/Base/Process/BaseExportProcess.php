@@ -32,6 +32,7 @@ class BaseExportProcess extends BaseProcess implements CanProcess
 				$sf = str_replace('[]', '', $struct->field);
 				$printedColumn[] = $sf;
 				$headerMap[$sf] = $struct->name;
+				$input_type = $struct->input_type ?? 'text';
 
 				if(isset($this->request->datatable_filter[$sf])){
 					$filterValue = $this->request->datatable_filter[$sf];
@@ -51,7 +52,12 @@ class BaseExportProcess extends BaseProcess implements CanProcess
 						}
 					}
 					else{
-						$data = $data->where($struct->field, $filterValue);						
+						if((is_numeric($filterValue) && strlen($filterValue) < 6) || in_array($input_type, ['select', 'radio', 'checkbox', 'number'])){
+							$data = $data->where($struct->field, $filterValue);						
+						}
+						else{
+							$data = $data->where($struct->field, 'like', '%'.trim($filterValue).'%');						
+						}
 					}
 				}
 			}
