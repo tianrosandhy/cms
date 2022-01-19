@@ -45,6 +45,7 @@ $(function(){
         _token : window.CSRF_TOKEN,
         id : $(this).attr('data-id'),
         pk : $(this).attr('data-pk'),
+        conn : $(this).attr('data-conn'),
         table : $(this).attr('table'),
         field : $(this).attr('field'),
         value : $(this).prop('checked') ? 1 : 0

@@ -145,8 +145,8 @@ class ComponentController extends BaseController
 			$table = decrypt($this->request->table);
 			$pk = decrypt($this->request->pk);
 			$id = decrypt($this->request->id);
-			$field = decrypt($this->request->field);
-			$tb = DB::table($table)->where($pk, $id)->update([
+			$conn = decrypt($this->request->conn);
+			$tb = DB::connection($conn)->table($table)->where($pk, $id)->update([
 				$field => intval($this->request->value) 
 			]);
 			return response()->json([

@@ -28,6 +28,7 @@ trait StructureHelper
 				'attr' => [
 					'data-id' => encrypt($row->getKey()),
 					'data-pk' => encrypt($row->getKeyName()),
+					'data-conn' => encrypt($row->getConnectionName()),
 					'table' => encrypt($table),
 					'field' => encrypt($field),
 					'data-table-switch' => 1
