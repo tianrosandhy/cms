@@ -8,6 +8,20 @@ if(isset($class)){
 }
 
 $cleaned_name = str_replace('[]', '', $name);
+
+if(!isset($multi_language)){
+  $multi_language = false;
+}
+if($multi_language){
+  $name = $name.'['.def_lang().']';
+}
+
+//mencegah value multiple language. this input doesnt expect array value
+if(is_array($value)){
+	if(array_key_exists(def_lang(), $value)){
+		$value = $value[def_lang()];
+	}
+}
 ?>
 <div class="image_simple">
   <div class="image-holder" style="position:relative; {!! empty($value) ? 'display:none' : 'display:inline-block' !!}">

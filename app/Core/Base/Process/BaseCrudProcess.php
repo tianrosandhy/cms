@@ -82,7 +82,13 @@ class BaseCrudProcess extends BaseProcess implements CanProcess
 					$inputs = $structure_inputs[$lang] ?? [];
 					$added = 0;
 					foreach($inputs as $field => $value){
-						$trans->{$field} = $value;
+						if($value instanceof UploadedFile){
+							//jika berupa file upload, ambil value dari hasil upload di awal saja
+							$trans->{$field} = $instance->{$field};
+						}
+						else{
+							$trans->{$field} = $value;
+						}
 						$added++;
 					}
 					//kalau gaada field yg ditambah, gausa save data translate

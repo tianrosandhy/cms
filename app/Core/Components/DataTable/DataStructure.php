@@ -113,7 +113,6 @@ class DataStructure
 		if(strpos($field_name, '[]') !== false){
 			$field_name = str_replace('[]', '', $field_name);
 		}
-
 		if($this->value_source){
 			$grab_ = \DB::table($this->value_source[0])->find($this->value_source[1]);
 			if($multi_language){
@@ -125,7 +124,7 @@ class DataStructure
 		}
 		elseif($this->value_data){
 			if($multi_language){
-				foreach([config('cms.language', 'en') => config('cms.language', 'en')] as $lang => $langname){
+				foreach(config('cms.lang.available') as $lang){
 					$value[$lang] = call_user_func($this->value_data, $data, $lang);
 				}
 			}
@@ -135,7 +134,7 @@ class DataStructure
 		}
 		else{
 			if($multi_language){
-				foreach([config('cms.language', 'en') => config('cms.language', 'en')] as $lang => $langname){
+				foreach(config('cms.lang.available') as $lang){
 					$value[$lang] = isset($data->{$field_name}) ? $data->outputTranslate($field_name, $lang, true) : null;
 				}
 			}
@@ -242,6 +241,19 @@ class DataStructure
 		$this->valueData($callback);
 		return $this;
 	}
+
+	public function image($field, $label){
+		$this->field($field);
+		$this->name($label);
+		$this->inputType('image');
+		$this->exportable(false);
+		$this->searchable(false);
+		$this->orderable(false);
+		$this->setTranslate(false);
+		return $this;
+	}
+
+	// end quick structure
 
 	public function name($name=''){
 		$this->name = $name;

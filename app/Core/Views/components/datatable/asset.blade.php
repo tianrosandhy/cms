@@ -10,14 +10,11 @@ $(function(){
 	tb_data = $("table.datatable").DataTable({
 		'processing': true,
 		'serverSide': true,
-		'autoWidth' : false,
 		'searching'	: false,
 		'filter'	: false,
 		'stateSave'	: true,
 		'scrollY' : '500px',
 		'scrollX' : true,
-		'scrollCollapse' : true,
-		'colReorder' : true,
 		'ajax'		: {
 			type : 'POST',
 			url	: '{{ $structure->route() }}',

@@ -7,6 +7,11 @@ if(isset($class)){
   $base_class = array_merge($base_class, $class);
 }
 
+// tweak untuk mencegah limit angka hanya sampai 100
+if(!isset($attr['max'])){
+  $attr['max'] = 9999999999;
+}
+
 $cleaned_name = str_replace('[]', '', $name);
 
 if(!isset($type)){

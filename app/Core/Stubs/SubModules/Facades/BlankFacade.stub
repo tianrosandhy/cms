@@ -1,5 +1,5 @@
 <?php
-namespace App\Modules\[BASE_MODULE_NAME]\Facades;
+namespace [NAMESPACE]\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
