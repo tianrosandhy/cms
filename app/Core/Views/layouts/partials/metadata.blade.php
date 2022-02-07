@@ -12,7 +12,7 @@
 <!-- Plugin CSS -->
 <link href="{{ admin_asset('css/app-plugins-compiled.css') }}" rel="stylesheet" type="text/css">
 
-<link rel="stylesheet" href="{{ admin_asset('css/additional.css') }}">
+<link rel="stylesheet" href="{{ admin_asset('css/additional.css') }}?v={{ time() }}">
 
 @if(isset($custom_css))
 <link rel="stylesheet" href="{{ $custom_css }}">

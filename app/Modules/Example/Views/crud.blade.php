@@ -1,16 +1,7 @@
 @extends ('core::layouts.master')
 @section ('content')
-	@include ('core::components.header-box', [
-		'control_buttons' => [
-			[
-				'url' => route('admin.example.index'),
-				'label' => 'Back',
-				'icon' => 'arrow-left'
-			],
-		]
-	])
-
-	<form action="" method="post">
+	{{-- remove the "ajax-form" class if you want to load this form in normal HTTP sync --}}
+	<form action="" method="post" class="ajax-form">
 		{{ csrf_field() }}
 		<?php
 		$forms = $structure->output();

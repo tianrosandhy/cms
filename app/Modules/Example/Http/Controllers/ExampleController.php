@@ -62,7 +62,7 @@ class ExampleController extends BaseController
 	public function store(){
 		return (new ExampleCrudProcess(new Example))
 			->setSuccessRedirectTarget(route('admin.example.index'))
-			->type('http')
+			->type($this->request->ajax() ? 'ajax' : 'http')
 			->handle();
 	}
 
@@ -75,7 +75,7 @@ class ExampleController extends BaseController
 		$data = Example::findOrFail($id);
 		return (new ExampleCrudProcess($data))
 			->setSuccessRedirectTarget(route('admin.example.index'))
-			->type('http')
+			->type($this->request->ajax() ? 'ajax' : 'http')
 			->handle();
 	}
 	

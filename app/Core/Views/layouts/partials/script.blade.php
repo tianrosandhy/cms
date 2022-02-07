@@ -21,7 +21,7 @@
 <script src="{{ admin_asset('libs/jquery-mask/jquery.mask.min.js') }}"></script>
 <script src="{{ admin_asset('libs/dropzone/dropzone.js') }}"></script>
 <script src="{{ admin_asset('js/dropzone-input.js') }}"></script>
-<script src="{{ admin_asset('js/additional.js') }}"></script>
+<script src="{{ admin_asset('js/additional.js') }}?v={{ time() }}"></script>
 <script>
 var BASE_URL = '{{ admin_url('/') }}';
 var SITE_URL = '{{ url('/') }}';

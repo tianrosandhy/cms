@@ -28,7 +28,7 @@ class [MODULE_NAME]Controller extends BaseController
 
 	public function store(){
 		return (new [MODULE_NAME]CrudProcess(new [MODULE_NAME]))
-			->type('http')
+			->type($this->request->ajax() ? 'ajax' : 'http')
 			->handle();
 	}
 
@@ -40,7 +40,7 @@ class [MODULE_NAME]Controller extends BaseController
 	public function update($id){
 		$data = [MODULE_NAME]::findOrFail($id);
 		return (new [MODULE_NAME]CrudProcess($data))
-			->type('http')
+			->type($this->request->ajax() ? 'ajax' : 'http')
 			->handle();
 	}
 	

@@ -119,6 +119,47 @@ $(function(){
     $(this).removeClass('btn-success btn-save-slug').addClass('btn-change-slug btn-secondary');
   });
 
+  // global form.ajax-form handle
+  $(document).on('submit', 'form.ajax-form', function(e){
+    e.preventDefault();
+    showLoading();
+
+    fd = new FormData($(this)[0]);
+    inputFiles = $(this).find('input[type=file]');
+    if(inputFiles.length > 0){
+      inputFiles.each(function(){
+        name = $(this).attr('name');
+        if(typeof $(this)[0].files[0] != 'undefined'){
+          fd.append(name, $(this)[0].files[0]);
+        }
+      });
+    }
+
+    $.ajax({
+      url : $(this).attr('action'),
+      type : $(this).attr('method'),
+      data : fd,
+      processData : false,
+      contentType : false,
+    }).done(resp => {
+      hideLoading();
+      if(resp.message){
+        if(resp.type == 'success'){
+          toastr.success(resp.message);
+        }
+        else{
+          toastr.error(resp.message);
+        }
+      }
+      if(resp.redirect){
+        showLoading();
+        window.location = resp.redirect;
+      }
+    }).fail(err => {
+      hideLoading();
+      error_handling(err);
+    });
+  });
 });
 
 function showLoading(){
@@ -578,6 +619,16 @@ function error_handling(resp){
     $.each(resp.errors, function(k, v){
       toastr.error(v[0]);
     });
+  }
+  else if(resp.error){
+    if(typeof resp.error == 'string'){
+      toastr.error(resp.error);
+    }
+    else{
+      $.each(resp.error, function(k, v){
+        toastr.error(v[0]);
+      });
+    }
   }
   else if(resp.type && resp.message){
     toastr.error(resp.message);

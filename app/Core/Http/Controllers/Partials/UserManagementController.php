@@ -31,7 +31,7 @@ trait UserManagementController
 		return (new UserCrudProcess(new User))
 			->setSuccessRedirectTarget(route('admin.user.index'))
 			->setSuccessMessage('User data has been saved')
-			->type('http')
+			->type($this->request->ajax() ? 'ajax' : 'http')
 			->handle();
 	}
 
@@ -45,7 +45,7 @@ trait UserManagementController
 		return (new UserCrudProcess($data))
 			->setSuccessRedirectTarget(route('admin.user.index'))
 			->setSuccessMessage('User data has been updated')
-			->type('http')
+			->type($this->request->ajax() ? 'ajax' : 'http')
 			->handle();
 	}
 
