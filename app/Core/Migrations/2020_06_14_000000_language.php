@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Language extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -21,6 +21,8 @@ class Language extends Migration
             $table->tinyInteger('is_default_language')->nullable();
             $table->integer('sort_no')->nullable();
             $table->timestamps();
+
+            $table->index('code');
         });
     }
 
@@ -33,4 +35,4 @@ class Language extends Migration
     {
         Schema::dropIfExists('languages');
     }
-}
+};

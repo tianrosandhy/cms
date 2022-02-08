@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class [MODULE_NAME] extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class [MODULE_NAME] extends Migration
     public function up()
     {
         $this->down();
-        Schema::create('[LOWERCASE_MODULE_NAME]s', function (Blueprint $table) {
+        // must be an exact copy from the table target, but add "main_id" & "lang_code" field
+        Schema::create('[LOWERCASE_MODULE_NAME]_translators', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('main_id')->nullable();
+            $table->string('lang', 50)->nullable();
             $table->string('title')->nullable();
             $table->text('excerpt')->nullable();
             $table->text('description')->nullable();
@@ -22,6 +25,9 @@ class [MODULE_NAME] extends Migration
             $table->tinyInteger('is_active')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('lang');
+            $table->index('main_id');
         });
     }
 
@@ -32,6 +38,6 @@ class [MODULE_NAME] extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('[LOWERCASE_MODULE_NAME]s');
+        Schema::dropIfExists('[LOWERCASE_MODULE_NAME]_translators');
     }
-}
+};

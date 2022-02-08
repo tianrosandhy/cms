@@ -43,27 +43,27 @@ class InstallProcess extends BaseProcess implements CanProcess
 
 		$this->installAction();
 
-        $this->setSuccessMessage('CMS Installation has been finished. Now you can use this CMS');
-        return true;
+		$this->setSuccessMessage('CMS Installation has been finished. Now you can use this CMS');
+		return true;
 	}
 
 	public function installAction(){
-        $this->createUser($this->request->email, $this->request->name, $this->request->password);
-        Artisan::call('autocrud:role');
-        $this->createInstallHint();
+		Artisan::call('autocrud:role');
+		$this->createUser($this->request->email, $this->request->name, $this->request->password);
+		$this->createInstallHint();
 	}
 
-    protected function createUser($email, $username, $password){
-        DB::table('users')->insert([
-            'name' => $username,
-            'email' => $email,
-            'password' => bcrypt($password),
-            'role_id' => 1, //default
-            'image' => '',
-            'activation_key' => null,
-            'is_active' => 1,
-            'created_at' => date('Y-m-d H:i:s')
-        ]);
-    }
+	protected function createUser($email, $username, $password){
+		DB::table('users')->insert([
+			'name' => $username,
+			'email' => $email,
+			'password' => bcrypt($password),
+			'role_id' => 1, //default
+			'image' => '',
+			'activation_key' => null,
+			'is_active' => 1,
+			'created_at' => date('Y-m-d H:i:s')
+		]);
+	}
 
 }

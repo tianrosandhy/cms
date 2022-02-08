@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ExampleTranslator extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -16,8 +16,8 @@ class ExampleTranslator extends Migration
         // must be an exact copy from the table target, but add "main_id" & "lang_code" field
         Schema::create('example_translators', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('main_id')->nullable();
-            $table->string('lang')->nullable();
+            $table->unsignedInteger('main_id')->nullable();
+            $table->string('lang', 50)->nullable();
             $table->string('text')->nullable();
             $table->integer('number')->nullable();
             $table->date('dates')->nullable();
@@ -36,6 +36,9 @@ class ExampleTranslator extends Migration
             $table->text('map')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('main_id');
+            $table->index('lang');
         });
     }
 
@@ -48,4 +51,4 @@ class ExampleTranslator extends Migration
     {
         Schema::dropIfExists('example_translators');
     }
-}
+};

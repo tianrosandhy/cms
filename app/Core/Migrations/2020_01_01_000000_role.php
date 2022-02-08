@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Role extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -16,10 +16,12 @@ class Role extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('role_owner')->nullable();
+            $table->unsignedInteger('role_owner')->nullable();
             $table->text('priviledge_list')->nullable();
-            $table->tinyInteger('is_sa')->nullable();
+            $table->unsignedTinyInteger('is_sa')->nullable();
             $table->timestamps();
+
+            $table->index('is_sa');
         });
     }
 
@@ -32,4 +34,4 @@ class Role extends Migration
     {
         Schema::dropIfExists('roles');
     }
-}
+};

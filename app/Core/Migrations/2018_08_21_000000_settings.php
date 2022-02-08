@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Settings extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -20,6 +20,8 @@ class Settings extends Migration
             $table->string('group')->nullable();
             $table->text('default_value')->nullable();
             $table->timestamps();
+
+            $table->index(['param', 'group']);
         });
     }
 
@@ -32,4 +34,4 @@ class Settings extends Migration
     {
         Schema::dropIfExists('settings');
     }
-}
+};
