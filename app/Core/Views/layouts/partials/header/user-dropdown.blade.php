@@ -15,6 +15,10 @@
             <i class="mdi mdi-logout font-size-16 align-middle mr-1"></i>
             <span>{{ __('core::module.global.go_to_site') }}</span>
         </a>
+        <a href="{{ route('admin.clear-cache') }}" class="dropdown-item notify-item">
+            <i class="mdi mdi-face-profile font-size-16 align-middle mr-1"></i>
+            <span>{{ __('core::module.global.clear_cache') }}</span>
+        </a>
         <div class="dropdown-divider"></div>
         <a href="{{ route('admin.my-profile') }}" class="dropdown-item notify-item">
             <i class="mdi mdi-face-profile font-size-16 align-middle mr-1"></i>

@@ -36,3 +36,9 @@ Route::get('log/mark-as-reported', 'CoreController@logMarkAsReported')->name('ad
 
 
 Route::match(['get', 'post'], 'logout', 'CoreController@logout')->name('admin.logout');
+Route::get('clear-cache', function(){
+  \Artisan::call('cache:clear');
+  return redirect()->back()->with([
+    'success' => 'Cache has been cleared'
+  ]);
+})->name('admin.clear-cache');

@@ -20,6 +20,7 @@ return [
         'no_notification' => 'No Notification',
         'internet_disconnect' => 'Oops, your internet is disconnected. Please check your signal',
         'back_to_homepage' => 'Back to Homepage',
+        'clear_cache' => 'Clear Cache',
     ],
     'login' => [
         'h1' => 'Welcome back!',

@@ -20,6 +20,7 @@ return [
         'no_notification' => 'Tidak ada Notifikasi',
         'internet_disconnect' => 'Ups, internet Anda saat ini terputus. Mohon periksa sinyal dan jaringan Anda',
         'back_to_homepage' => 'Kembali Ke Halaman Utama',
+        'clear_cache' => 'Hapus Cache',
     ],
     'login' => [
         'h1' => 'Selamat Datang!',
