@@ -17,16 +17,19 @@ trait LanguageController
 				Helper::setAsSecondary($lang);
 			}
 		}
+		removeCache('language');
 		return redirect()->route('admin.language.index')->with('success', 'Secondary languages has been updated');
 	}
 
 	public function setAsDefaultLanguage($code){
 		Helper::setAsDefault($code);
+		removeCache('language');
 		return redirect()->route('admin.language.index')->with('success', 'Default language has been changed');
 	}
 
 	public function removeLanguage($code){
 		Helper::remove($code);
+		removeCache('language');
 		return redirect()->route('admin.language.index')->with('success', 'Default language has been deleted');
 	}
 
