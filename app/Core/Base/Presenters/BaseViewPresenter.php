@@ -2,9 +2,10 @@
 namespace App\Core\Base\Presenters;
 
 use App\Core\Exceptions\ViewPresenterException;
+use App\Core\Shared\DynamicProperty;
 use Setting;
 use Sidebar;
-use App\Core\Shared\DynamicProperty;
+use Log;
 
 class BaseViewPresenter
 {
@@ -53,6 +54,10 @@ class BaseViewPresenter
 		try{
 			$view = view($this->view, $data)->render();
 		}catch(\Exception $e){
+			Log::error("THROWN VIEW PRESENTER EXCEPTION IN " . get_class($this) . " : ", [
+				'message' => $e->getMessage(),
+				'exception' => $e
+			]);
 			throw new ViewPresenterException('View error : ' . $e->getMessage());
 		}
 		return $view;

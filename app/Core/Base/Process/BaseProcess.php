@@ -4,6 +4,7 @@ namespace App\Core\Base\Process;
 use App\Core\Exceptions\ProcessException;
 use App\Core\Exceptions\DataTableException;
 use App\Core\Shared\DynamicProperty;
+use Log;
 
 class BaseProcess
 {
@@ -45,6 +46,11 @@ class BaseProcess
 			}
 			$this->data = $this->process();
 		}catch(ProcessException | DataTableException $e){
+			Log::error("THROWN PROCESS EXCEPTION IN " . get_class($this) . " : ", [
+				'message' => $e->getMessage(),
+				'exception' => $e
+			]);
+
 			if(method_exists($e, 'getCode')){
 				$this->setHttpCode($e->getCode());
 			}
