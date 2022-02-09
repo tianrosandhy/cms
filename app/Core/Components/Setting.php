@@ -2,6 +2,7 @@
 namespace App\Core\Components;
 
 use App\Core\Models\Setting as Model;
+use Cache;
 use Media;
 
 class Setting
@@ -11,7 +12,7 @@ class Setting
 		$formatted = [];
 
 	public function __construct(){
-		$this->db_setting = app('setting');
+		$this->cache_name = config('cms.cache_key.setting', 'APP-CMS-ALLSETTING');
 		$this->loadSettingRegistrations();
 		$this->setSettingValueFromDb();
 		$this->formattedOutput();
@@ -82,6 +83,15 @@ class Setting
 	}
 
 	public function setSettingValueFromDb(){
+		// load setting data from cache first
+		if(Cache::has($this->cache_name)){
+			$this->db_setting = Cache::get($this->cache_name);
+		}
+		else{
+			$this->db_setting = app('setting');
+			Cache::set($this->cache_name, $this->db_setting, 86400);
+		}
+
 		foreach($this->data as $group_name => $lists){
 			foreach($lists['items'] as $item){
 				$grab = $this->db_setting->where('group', $group_name)->where('param', $item->getName())->first();

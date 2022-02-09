@@ -89,7 +89,8 @@ trait PrivilegeController
 			$anak->save();
 		}
 		
-		$role_will_be_deleted->delete();		
+		$role_will_be_deleted->delete();
+		removeCache('role');
 
 		return [
 			'type' => 'success',
@@ -128,6 +129,7 @@ trait PrivilegeController
 		}
 		$data->priviledge_list = $permission_string;
 		$data->save();
+		removeCache('role');
 		return redirect()->route('admin.privilege.index')->with('success', 'The privilege data has been saved for role "'.$data->name.'"');
 	}
 

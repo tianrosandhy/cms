@@ -16,5 +16,10 @@ return [
 		'fcm_api_key' => env('FCM_API_KEY'),
 		'fcm_project_id' => env('FCM_PROJECT_ID'),
 		'fcm_app_id' => env('FCM_APP_ID'),
-	]
+	],
+	'cache_key' => [
+		'setting' => 'APP-CMS-ALLSETTING',
+		'language' => 'APP-CMS-ALLLANGUAGE',
+		'role' => 'APP-CMS-ALLROLE',
+	],
 ];

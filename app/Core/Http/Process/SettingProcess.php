@@ -64,6 +64,7 @@ class SettingProcess extends BaseProcess implements CanProcess
 				Setting::insert($savedata);
 			}
 		}
+		removeCache('setting');
 	}
 
 	public function revert(){

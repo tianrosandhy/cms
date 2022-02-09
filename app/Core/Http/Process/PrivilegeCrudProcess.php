@@ -53,6 +53,7 @@ class PrivilegeCrudProcess extends BaseProcess implements CanProcess
 			$this->instance->role_owner = $role_owner;
 		}
 		$this->instance->save();
+		removeCache('role');
 	}
 
 	public function revert(){

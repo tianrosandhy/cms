@@ -10,9 +10,20 @@ class ColumnListing
         if($model_instance instanceof Builder){
             $model_instance = $model_instance->getModel();
         }
-        $table_name = $model_instance->getTable();
 
-        // update : fix model to another database schema
+        // check $fillable property first
+        $fillable = [];
+        if(method_exists($model_instance, 'getFillable')){
+            $fillable = $model_instance->getFillable();
+        }
+
+        // now we will return a model $fillable lists if defined. 
+        if(!empty($fillable)){
+            return $fillable;
+        }
+        
+        // if the fillable in model not exists, the fallback is we still call database to get the more valid column listing 
+        $table_name = $model_instance->getTable();
         $conn_name = $model_instance->getConnectionName();
         return Schema::connection($conn_name)->getColumnListing($table_name);
     }

@@ -71,6 +71,22 @@ function def_lang(){
 
 function canSendPushNotif(){
   //push notif can be sent if all .env below is filled
-  
   return config('cms.config.fcm_server_key') && config('cms.config.fcm_sender_id') && config('cms.config.fcm_api_key') && config('cms.config.fcm_project_id') && config('cms.config.fcm_app_id');
+}
+
+// will remove stored cached for key defined in cms setting
+function removeCache($key){
+  if(strlen($key) == 0){
+    // clear all cache
+    \Artisan::call('cache:clear');
+    return true;
+  }
+  $cache_key = config('cms.cache_key.' . $key);
+  if($cache_key){
+    \Cache::forget($cache_key);
+    return true;
+  }
+
+  // cache key not found
+  return false;
 }

@@ -84,10 +84,10 @@ class CoreServiceProvider extends BaseServiceProvider{
 			return Setting::get();
 		});
 		$this->app->singleton('language', function($app){
-			return Language::get();
+			return (new Language)->allCached();
 		});
 		$this->app->singleton('role', function($app){
-			return Role::with('owner', 'children')->get();
+			return (new Role)->allCached();
 		});
 	}
 

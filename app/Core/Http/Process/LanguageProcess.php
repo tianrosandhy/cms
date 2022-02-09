@@ -29,6 +29,7 @@ class LanguageProcess extends BaseProcess implements CanProcess
 
 	public function process(){
 		//your logic after validation success
+		removeCache('language');
 	}
 
 	public function revert(){
