@@ -1,7 +1,7 @@
 <div class="dropdown d-inline-block d-lg-none ml-2">
     <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="mdi mdi-magnify"></i>
+        <span class="iconify" data-icon="mdi:magnify"></span>
     </button>
     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
         aria-labelledby="page-header-search-dropdown">
@@ -11,7 +11,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                        <button class="btn btn-primary" type="submit"><span class="iconify" data-icon="mdi:magnify"></span></button>
                     </div>
                 </div>
             </div>

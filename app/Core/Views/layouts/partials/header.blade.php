@@ -3,7 +3,7 @@
         <div class="d-flex">
             @include ('core::layouts.partials.header.header-logo')
             <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
-                <i class="mdi mdi-backburger"></i>
+                <span class="iconify" data-icon="mdi:backburger"></span>
             </button>
             @include ('core::layouts.partials.header.search-inline')
         </div>
@@ -15,7 +15,7 @@
             <div class="dropdown d-inline-block">
                 <!-- setting trigger button -->
                 <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                    <i class="mdi mdi-tune"></i>
+                    <span class="iconify" data-icon="ant-design:setting-outlined"></span>
                 </button>
             </div>
             @endif

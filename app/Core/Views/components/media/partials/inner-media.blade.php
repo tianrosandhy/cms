@@ -11,7 +11,10 @@
 	@endforeach
 </div>
 <div class="padd">
+{{--
+	PAGINATION DI LARAVEL 9 SEPERTINYA SEDANG BUG. MENUNGGU FIXING
 	{!! $data->links('core::components.media.partials.pagination') !!}
+--}}
 </div>
 <div class="card-body filemanager-detail text-center">
 	<div class="closer">

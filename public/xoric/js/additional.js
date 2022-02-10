@@ -2,6 +2,17 @@ $(function(){
   hideLoading();
   initPlugins();
 
+  // init all site component handler
+  InitCmsMenuAfterLoading();
+  RegisterGlobalPopupHandler();
+  RegisterGlobalYesNoToggle();
+  RegisterGlobalDeleteConfirmButton();
+  RegisterSlugMasterComponent();
+  RegisterAjaxForm();
+});
+
+// This function is called on first load, so the menu will be updated to its right structure
+function InitCmsMenuAfterLoading(){
   //remove blank sidebar
   $(".sub-menu").each(function(){
     if($(this).find('li').length == 0){
@@ -11,7 +22,10 @@ $(function(){
 
   //additional tweak : auto show second & third level of navigation
   $("li.mm-active>ul.sub-menu").addClass('mm-collapse mm-show').css('height', 'auto');
+}
 
+// Register [data-popup] handler so we can call ajax to popup via this helper
+function RegisterGlobalPopupHandler(){
   $(document).on('click', "[data-popup]", function(e){
     e.preventDefault();
     showLoading();
@@ -54,8 +68,11 @@ $(function(){
         hideLoading();
       }
     });
-  });
+  });  
+}
 
+// Switchery data toggle plugin handle
+function RegisterGlobalYesNoToggle(){
   // yesno auto switcher
   $(document).on('change', '[yesno][data-table-switch]', function(e){
     instance = $(this);
@@ -81,8 +98,17 @@ $(function(){
         instance.prop('checked', !instance.prop('checked'));
       }
     });
-  });
+  });  
+}
 
+var deletePrompt;
+function RegisterGlobalDeleteConfirmButton(){
+  deletePrompt = (url, callback) => {
+    dtcl = callback || '';
+
+    output = '<p>Are you sure? Once deleted, you will not be able to recover the data</p><button class="btn btn-primary" data-dismiss="modal">Cancel</button> <button class="btn btn-danger" onclick="ajaxUrlProcess(\''+url+'\' '+ (dtcl ? ',\''+dtcl+'\'' : '') +')">Yes, Delete</button>';
+    toastr.info(output);
+  }
   // prompt on delete button click
   $(document).on("click", ".delete-button", function(e){
     e.preventDefault();
@@ -95,9 +121,55 @@ $(function(){
     else{
       deletePrompt(delete_url);
     }
+  });  
+}
+
+function ajaxUrlProcess(url, callback, ajax_type){
+  ajax_type = ajax_type || 'POST';
+  cll = function(){};
+  if(callback){
+    cll = callback;
+  }
+
+  $.ajax({
+    url : url,
+    type : ajax_type,
+    dataType : 'json',
+    data : {
+      _token : window.CSRF_TOKEN
+    },
+    success : function(resp){
+      if(resp.type == 'success'){
+        toastr.success(resp.message);
+
+        var fn = window[cll];
+        if(typeof fn == 'function'){
+          fn();
+        }
+
+        if(removedDiv != 'undefined'){
+          removedDiv.fadeOut(300);
+          setTimeout(function(){
+            removedDiv.remove();
+          }, 300);
+        }
+
+        if(typeof tb_data != 'undefined'){
+          tb_data.ajax.reload();
+        }
+      }
+      else if(resp.type == 'error'){
+        toastr.error(resp.message);
+      }
+    },
+    error : function(resp){
+      error_handling(resp);
+    }
   });
+}
 
 
+function RegisterSlugMasterComponent(){
   // slug master if exists
   if($("[slug-master]:not([saved-slug])").length){
     slug_target = $("[slug-master]").attr('data-target');
@@ -139,8 +211,10 @@ $(function(){
     $("[slug-master]").attr('readonly', 'readonly').removeClass('manual');
     $(this).html('Change Manually');
     $(this).removeClass('btn-success btn-save-slug').addClass('btn-change-slug btn-secondary');
-  });
+  });  
+}
 
+function RegisterAjaxForm(){
   // global form.ajax-form handle
   $(document).on('submit', 'form.ajax-form', function(e){
     e.preventDefault();
@@ -181,48 +255,12 @@ $(function(){
       hideLoading();
       error_handling(err);
     });
-  });
-});
-
-function showLoading(){
-  $("#page-loader").fadeIn(250);
-}
-
-function hideLoading(){
-  $("#page-loader").fadeOut(250);
-}
-
-function enableAllButtons(){
-  $("a.js-disabled, button.js-disabled").each(function(){
-    $(this).removeClass('js-disabled disabled').removeAttr('disabled');
-  });
-}
-
-function disableAllButtons(){
-  $("a:not([disabled]), button:not([disabled])").each(function(){
-    $(this).addClass('js-disabled disabled').attr('disabled', 'disabled');
-  });
-}
-
-function makeid(length) {
-   var result           = '';
-   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-   var charactersLength = characters.length;
-   for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-   }
-   return result;
+  });  
 }
 
 
 
-
-
-
-
-
-
-
+// you need to only call this method once
 function initPlugins(){
   loadSwitchery();
   loadTouchspin();
@@ -231,10 +269,11 @@ function initPlugins(){
   loadSelect2();
   loadFile();
   loadMask();
-  refreshIcon();
   simpleImage();
+  // refreshDropzone();
 }
 
+// you can call this method everytime to reload the plugin dom
 function refreshPlugins(){
   refreshSwitchery();
   loadTouchspin();
@@ -243,8 +282,8 @@ function refreshPlugins(){
   loadSelect2();
   loadFile();
   loadMask();
-  refreshIcon();
   simpleImage();
+  refreshDropzone();
 }
 
 function simpleImage(){
@@ -436,12 +475,6 @@ function loadDatepicker(){
   });
 }
 
-function refreshIcon(){
-  // init featherjs
-  if(typeof feather != 'undefined'){
-    feather.replace();
-  }
-}
 
 function refreshSwitchery(){
   $("[yesno]").each(function(){
@@ -522,10 +555,6 @@ function loadTouchspin(){
 }
 
 
-
-
-
-
 function loadTinyMce(){
   tinymce.init({
     selector : 'textarea[data-tinymce]',
@@ -581,92 +610,5 @@ function loadTinyMce(){
   });
 }
 
-function deletePrompt(url, callback){
-  dtcl = callback || '';
-
-  output = '<p>Are you sure? Once deleted, you will not be able to recover the data</p><button class="btn btn-primary" data-dismiss="modal">Cancel</button> <button class="btn btn-danger" onclick="ajaxUrlProcess(\''+url+'\' '+ (dtcl ? ',\''+dtcl+'\'' : '') +')">Yes, Delete</button>';
-  toastr.info(output);
-}
-
-function ajaxUrlProcess(url, callback, ajax_type){
-  ajax_type = ajax_type || 'POST';
-  cll = function(){};
-  if(callback){
-    cll = callback;
-  }
-
-  $.ajax({
-    url : url,
-    type : ajax_type,
-    dataType : 'json',
-    data : {
-      _token : window.CSRF_TOKEN
-    },
-    success : function(resp){
-      if(resp.type == 'success'){
-        toastr.success(resp.message);
-
-        var fn = window[cll];
-        if(typeof fn == 'function'){
-          fn();
-        }
-
-        if(removedDiv != 'undefined'){
-          removedDiv.fadeOut(300);
-          setTimeout(function(){
-            removedDiv.remove();
-          }, 300);
-        }
-
-        if(typeof tb_data != 'undefined'){
-          tb_data.ajax.reload();
-        }
-      }
-      else if(resp.type == 'error'){
-        toastr.error(resp.message);
-      }
-    },
-    error : function(resp){
-      error_handling(resp);
-    }
-  });
-}
-
-function error_handling(resp){
-  if(resp.responseJSON){ //kalo berbentuk xhr object, translate ke json dulu
-    resp = resp.responseJSON;
-  }
-
-  if(resp.errors){
-    $.each(resp.errors, function(k, v){
-      toastr.error(v[0]);
-    });
-  }
-  else if(resp.error){
-    if(typeof resp.error == 'string'){
-      toastr.error(resp.error);
-    }
-    else{
-      $.each(resp.error, function(k, v){
-        toastr.error(v[0]);
-      });
-    }
-  }
-  else if(resp.type && resp.message){
-    toastr.error(resp.message);
-  }
-  else{
-    toastr.error('Sorry, we cannot process your last request');
-  }
-  hideLoading();
-}
 
 
-function convertToSlug(Text)
-{
-  return Text
-    .toLowerCase()
-    .replace(/[^\w ]+/g,'')
-    .replace(/ +/g,'-')
-    ;
-}
