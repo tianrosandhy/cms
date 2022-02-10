@@ -10,9 +10,11 @@ class ExampleCrudPresenter extends BaseViewPresenter
 	public function __construct($instance=null){
 		if(isset($instance->id)){
 			$this->title = __('example::module.edit');
+			$this->form_route = route('admin.example.update', ['id' => $instance->id]);
 		}
 		else{
 			$this->title = __('example::module.add');
+			$this->form_route = route('admin.example.store');
 		}
 		$this->data = $instance;
 		$this->back_url = route('admin.example.index');

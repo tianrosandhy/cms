@@ -24,7 +24,10 @@ class [MODULE_NAME]IndexPresenter extends BaseViewPresenter
 				'url' => route('admin.[LOWERCASE_MODULE_NAME].create'),
 				'label' => __('core::module.form.add_data'),
 				'type' => 'success',
-				'icon' => 'plus'
+				'icon' => 'plus',
+				'attr' => [
+					'data-popup-lg' => 1
+				]
 			];
 		}
 

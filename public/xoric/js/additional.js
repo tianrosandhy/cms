@@ -34,6 +34,28 @@ $(function(){
     });
   });
 
+  $(document).on('click', "[data-popup-lg]", function(e){
+    e.preventDefault();
+    showLoading();
+    $.ajax({
+      url : $(this).attr('href'),
+      dataType : 'html',
+      success : function(resp){
+        hideLoading();
+        $("#global-popup-lg .modal-body").html(resp);
+        $("#global-popup-lg").modal('show');
+        // dijeda 500ms agar plugin benar2 diload (fix karena ada jeda fadein modal)
+        setTimeout(function(){
+          refreshPlugins();
+        }, 500);
+      },
+      error : function(resp){
+        error_handling(resp);
+        hideLoading();
+      }
+    });
+  });
+
   // yesno auto switcher
   $(document).on('change', '[yesno][data-table-switch]', function(e){
     instance = $(this);

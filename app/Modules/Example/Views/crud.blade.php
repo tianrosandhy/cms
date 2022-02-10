@@ -1,7 +1,7 @@
-@extends ('core::layouts.master')
+@extends ($base_layout ?? 'core::layouts.master')
 @section ('content')
 	{{-- remove the "ajax-form" class if you want to load this form in normal HTTP sync --}}
-	<form action="" method="post" class="ajax-form">
+	<form action="{{ $form_route ?? null }}" method="post" class="ajax-form">
 		{{ csrf_field() }}
 		<?php
 		$forms = $structure->output();

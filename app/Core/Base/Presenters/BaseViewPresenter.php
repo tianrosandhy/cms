@@ -16,7 +16,9 @@ class BaseViewPresenter
 		$user,
 		$selected_menu,
 		$custom_css,
-		$custom_js;
+		$custom_js,
+		$base_layout = null,
+		$default_base_layout = 'core::layouts.master'; // default view layout main extends
 
 	public function setDefaultProperty(){
 		$request = request();
@@ -40,6 +42,14 @@ class BaseViewPresenter
 
 		if(!property_exists($this, 'breadcrumb')){
 			$this->breadcrumb = [];
+		}
+
+		if(empty($this->base_layout)){
+			$this->base_layout = $this->default_base_layout;
+			if($this->request->ajax()){
+				// return a blank base layout instead if the base_layout not defined 
+				$this->base_layout = 'core::layouts.master-ajax';
+			}
 		}
 	}
 

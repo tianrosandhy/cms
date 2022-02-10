@@ -23,7 +23,10 @@ class ExampleIndexPresenter extends BaseViewPresenter
 				'url' => route('admin.example.create'),
 				'label' => __('core::module.form.add_data'),
 				'type' => 'success',
-				'icon' => 'plus'
+				'icon' => 'plus',
+				'attr' => [
+					'data-popup-lg' => '1'
+				]
 			];
 		}
 	}
