@@ -35,6 +35,11 @@ function RegisterGlobalPopupHandler(){
       success : function(resp){
         hideLoading();
         $("#global-popup .modal-body").html(resp);
+        popupTitle = '';
+        if($("#global-popup .modal-body .ajax-holder[data-title]").length > 0){
+          popupTitle = $("#global-popup .modal-body .ajax-holder[data-title]").attr('data-title');
+        }
+        $("#global-popup .modal-header .title").html(popupTitle);
         $("#global-popup").modal('show');
         // dijeda 500ms agar plugin benar2 diload (fix karena ada jeda fadein modal)
         setTimeout(function(){
@@ -57,6 +62,11 @@ function RegisterGlobalPopupHandler(){
       success : function(resp){
         hideLoading();
         $("#global-popup-lg .modal-body").html(resp);
+        popupTitle = '';
+        if($("#global-popup-lg .modal-body .ajax-holder[data-title]").length > 0){
+          popupTitle = $("#global-popup-lg .modal-body .ajax-holder[data-title]").attr('data-title');
+        }
+        $("#global-popup-lg .modal-header .title").html(popupTitle);
         $("#global-popup-lg").modal('show');
         // dijeda 500ms agar plugin benar2 diload (fix karena ada jeda fadein modal)
         setTimeout(function(){

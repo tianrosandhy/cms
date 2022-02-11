@@ -1,3 +1,5 @@
 @stack ('style')
-@yield ('content')
+<div class="ajax-holder" data-title="{{ isset($title) ? $title : '' }}">
+  @yield ('content')
+</div>
 @stack ('script')
