@@ -157,13 +157,13 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Illuminate\Pagination\PaginationServiceProvider::class,
         // // -- Feel free to activate the providers below. 
         // // -- By Default we dont use this providers
         // Illuminate\Redis\RedisServiceProvider::class,
         // Illuminate\Broadcasting\BroadcastServiceProvider::class,
         // Illuminate\Bus\BusServiceProvider::class,
         // Illuminate\Notifications\NotificationServiceProvider::class,
-        // Illuminate\Pagination\PaginationServiceProvider::class,
         // Illuminate\Pipeline\PipelineServiceProvider::class,
 
         /*

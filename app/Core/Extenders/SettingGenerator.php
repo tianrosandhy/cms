@@ -36,11 +36,6 @@ class SettingGenerator extends SettingRegistration
 			]),
 		], 2);
 
-		$this->addSettingGroup('log', [
-			new SettingItem('active', 'Log Service', 'yesno'),
-			// new SettingItem('email_receiver', 'Log Email Receiver', 'text')
-		], 3);
-
 	}
 
 }
