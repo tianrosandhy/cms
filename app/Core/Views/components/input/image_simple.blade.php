@@ -29,7 +29,7 @@ if(is_array($value)){
     <img src="{{ $value ? storage_url($value) : null }}" alt="Image Preview" class="img-preview" style="max-height:120px;">
   </div>
   @if($value)
-  <input type="hidden" name="{{ $cleaned_name }}_old" value="{{ encrypt($value) }}">
+  <input type="hidden" name="_old{{ $name }}[_old]" value="{{ encrypt($value) }}">
   @endif
   <input style="{!! empty($value) ? '' : 'display:none' !!}" accept="image/*" type="file" name="{{ $name }}" class="{!! implode(' ', $base_class) !!}" {!! isset($attr) ? array_to_html_prop($attr, ['class', 'type', 'name', 'id']) : null !!} id="input-{{ $cleaned_name }}">
 </div>

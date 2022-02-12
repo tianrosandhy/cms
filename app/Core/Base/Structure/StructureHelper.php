@@ -119,11 +119,11 @@ trait StructureHelper
 
 					// additional check for image_simple type : if there is _old data and empty input, then dont remove the initial data
 					if($row->input_type == 'image_simple'){
-						$old_check = $field_name.'_old';
-						if(strlen($this->request->{$old_check}) > 0 && empty($value_for_saved)){
+						$old_image = $this->request->{'_old'.$field_name}['_old'] ?? ($this->request->{'_old'.$field_name}[def_lang()]['_old'] ?? null);
+						if(strlen($old_image) > 0 && empty($value_for_saved)){
 							try{
 								// if old_value cannot be decrypt, then this input will be ignored
-								$value_for_saved = decrypt($this->request->{$old_check});
+								$value_for_saved = decrypt($old_image);
 							}catch(\Exception $e){
 								$value_for_saved = null;
 							}
