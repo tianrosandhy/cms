@@ -9,10 +9,10 @@ if(isset($class)){
 
 $cleaned_name = str_replace('[]', '', $name);
 
-if(!isset($multi_language)){
-  $multi_language = false;
+if(!isset($multiLanguage)){
+  $multiLanguage = false;
 }
-if($multi_language){
+if($multiLanguage){
   $name = $name.'['.def_lang().']';
 }
 

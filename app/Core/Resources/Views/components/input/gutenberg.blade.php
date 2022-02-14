@@ -16,11 +16,11 @@ if(!isset($attr['data-gutenberg'])){
 
 $cleaned_name = str_replace('[]', '', $name);
 
-if(!isset($multi_language)){
-  $multi_language = false;
+if(!isset($multiLanguage)){
+  $multiLanguage = false;
 }
 ?>
-@if($multi_language)
+@if($multiLanguage)
   @foreach(Language::available() as $lang => $langname)
     <?php
     if(strpos($name, '[]') !== false){

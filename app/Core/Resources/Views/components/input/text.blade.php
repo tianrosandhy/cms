@@ -17,11 +17,11 @@ if($type == 'tags'){
   $attr['data-role'] = 'tagsinput';
 }
 
-if(!isset($multi_language)){
-  $multi_language = false;
+if(!isset($multiLanguage)){
+  $multiLanguage = false;
 }
 ?>
-@if($multi_language)
+@if($multiLanguage)
   @foreach(Language::available() as $lang => $langdata)
     <?php
     if(strpos($name, '[]') !== false){

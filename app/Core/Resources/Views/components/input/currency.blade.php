@@ -9,14 +9,14 @@ if(isset($class)){
 
 $cleaned_name = str_replace('[]', '', $name);
 
-if(!isset($multi_language)){
-  $multi_language = false;
+if(!isset($multiLanguage)){
+  $multiLanguage = false;
 }
 	
 $decimal = $attr['decimal'] ?? 0;
 $prefix = $attr['prefix'] ?? 'IDR';
 ?>
-@if($multi_language)
+@if($multiLanguage)
   @foreach(Language::available() as $lang => $langdata)
     <?php
     if(strpos($name, '[]') !== false){

@@ -2,11 +2,11 @@
 <?php
 $cleaned_name = str_replace('[]', '', $name);
 $old_name = $cleaned_name;
-if(!isset($multi_language)){
-  $multi_language = false;
+if(!isset($multiLanguage)){
+  $multiLanguage = false;
 }
 
-if($multi_language){
+if($multiLanguage){
   $name = $cleaned_name.'['.def_lang().']';
   $old_name = $cleaned_name.'.'.def_lang();
 }

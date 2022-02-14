@@ -26,10 +26,10 @@ if($type == 'select_multiple' && strpos($name, '[]') === false){
   $name = $name.'[]';
 }
 
-if(!isset($multi_language)){
-  $multi_language = false;
+if(!isset($multiLanguage)){
+  $multiLanguage = false;
 }
-if($multi_language){
+if($multiLanguage){
   if(strpos($name, '[]') !== false){
     $name = str_replace('[]', '['.def_lang().'][]', $name);
   }

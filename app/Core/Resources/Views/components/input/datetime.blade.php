@@ -9,11 +9,11 @@ if(isset($class)){
 
 $cleaned_name = str_replace('[]', '', $name);
 $old_name = $cleaned_name;
-if(!isset($multi_language)){
-  $multi_language = false;
+if(!isset($multiLanguage)){
+  $multiLanguage = false;
 }
 
-if($multi_language){
+if($multiLanguage){
   $name = $name.'['.def_lang().']';
   $old_name = $cleaned_name.'.'.def_lang();
 }
@@ -38,5 +38,7 @@ if(is_array($value)){
     $value = $value[def_lang()];
   }
 }
+
+$monthly = $monthly ?? false
 ?>
 <input name="{!! $name !!}" type="text" data-mask="{{ $mask }}" class="{!! implode(' ', $base_class) !!}" {!! isset($attr) ? array_to_html_prop($attr, ['class', 'type', 'name', 'id']) : null !!} id="input-{{ $cleaned_name }}" value="{{ old($old_name, (isset($value) ? $value : null)) }}">

@@ -2,13 +2,20 @@
 namespace App\Core\Components;
 
 use App\Core\Exceptions\InputException;
+
 use Str;
 
 class Input
 {
 	public 
-		$base_view = 'core::components.input.',
-		$multi_language = false;
+		$baseView = 'core::components.input.',
+		$multiLanguage = false;
+
+	public function __construct(){
+		$this->typeMap = [
+			'text' => ''
+		];
+	}
 
 	public function type($type, $name, $config=[]){
 		$camelize = Str::camel($type);
@@ -21,7 +28,7 @@ class Input
 	}
 
 	public function multiLanguage(){
-		$this->multi_language = true;
+		$this->multiLanguage = true;
 		return $this;
 	}
 
@@ -36,14 +43,14 @@ class Input
 	}
 
 	public function loadView($view_name, $input_name, $config=[], $fallback=true){
-		if(view()->exists($this->base_view.$view_name)){
+		if(view()->exists($this->baseView.$view_name)){
 			if(!isset($config['name'])){
 				$config['name'] = $input_name;
 			}
-			if($this->multi_language){
-				$config['multi_language'] = true;
+			if($this->multiLanguage){
+				$config['multiLanguage'] = true;
 			}
-			return view($this->base_view.$view_name, $config)->render();
+			return view($this->baseView.$view_name, $config)->render();
 		}
 
 		$msg = 'Input '.$view_name.' view is still not defined';
@@ -104,7 +111,7 @@ class Input
 		return $this->loadView('image_simple', $name, $config);
 	}
 	public function slug($name, $config=[]){
-		$this->mandatoryConfig($config, ['slug_target'], 'slug');
+		$this->mandatoryConfig($config, ['slugTarget'], 'slug');
 		return $this->loadView('slug', $name, $config);
 	}
 	public function date($name, $config=[]){

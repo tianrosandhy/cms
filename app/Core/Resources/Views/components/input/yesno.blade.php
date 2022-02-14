@@ -1,10 +1,10 @@
 <?php
 $hash = sha1(rand(1, 10000) . time());
 
-if(!isset($multi_language)){
-  $multi_language = false;
+if(!isset($multiLanguage)){
+  $multiLanguage = false;
 }
-if($multi_language){
+if($multiLanguage){
   $name = $name.'['.def_lang().']';
   $value = isset($value[def_lang()]) ? $value[def_lang()] : $value;
 }
