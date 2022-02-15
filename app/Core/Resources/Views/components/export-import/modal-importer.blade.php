@@ -17,11 +17,9 @@
                 <form method="post" enctype="multiple/form-data" action="{{ $structure->importRoute() }}" class="import-form">
                     {{ csrf_field() }}
                     <input type="hidden" name="pre_import_id" value="{{ date('YmdHis') }}">
-                    {!! Input::file('import', [
-                        'attr' => [
-                            'accept' => '.xlsx, .xls, .csv'
-                        ]
-                    ]) !!}
+                    <x-core::input.file name="import" :attr="[
+                        'accept' => '.xlsx, .xls, .csv'
+                    ]" />
                 </form>
 
             </div>

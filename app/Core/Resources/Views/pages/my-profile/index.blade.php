@@ -10,24 +10,18 @@
 				<div class="col-md-8">
 					<div class="form-group">
 						<label>Name</label>
-						{!! Input::text('name', [
-							'attr' => [
+						<x-core::input.text name="name" :attr="[
 								'required' => 'required',
 								'placeholder' => 'Type Your Name',
 								'maxlength' => 50
-							],
-							'value' => $user->name,
-						]) !!}
+						]" :value="$user->name" />
 					</div>
 					<div class="form-group">
 						<label>Email</label>
-						{!! Input::email('email', [
-							'value' => $user->email,
-							'attr' => [
+						<x-core::input.email name="email" :value="$user->email" :attr="[
 								'maxlength' => 75,
 								'required' => 'required'
-							]
-						]) !!}
+						]" />
 					</div>
 
 					<div class="change-pass">
@@ -38,24 +32,20 @@
 							<div class="col-6">
 								<div class="form-group custom-form-group searchable">
 									<label>Password</label>
-									{!! Input::text('password', [
-										'attr' => [
-											'data-password' => 'true',
-											'placeholder' => 'Keep blank if you dont want to change',
-											'autocomplete' => 'off'
-										]
-									]) !!}
+									<x-core::input.password name="password" :attr="[
+										'data-password' => 'true',
+										'placeholder' => 'Keep blank if you dont want to change',
+										'autocomplete' => 'off'
+									]" />
 								</div>
 							</div>
 							<div class="col-6">
 								<div class="form-group custom-form-group searchable">
 									<label>Repeat Password</label>
-									{!! Input::text('password_confirmation', [
-										'attr' => [
-											'data-password' => 'true',
-											'autocomplete' => 'off'
-										]
-									]) !!}
+									<x-core::input.password name="password_confirmation" :attr="[
+										'data-password' => 'true',
+										'autocomplete' => 'off'
+									]" />
 								</div>
 							</div>
 						</div>
@@ -72,9 +62,7 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>Profile Photo</label>
-						{!! Input::image('image', [
-							'value' => $user->image,
-						]) !!}					
+						<x-core::input.image name="image" :value="$user->image" />
 					</div>
 				</div>
 			</div>

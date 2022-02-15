@@ -3,17 +3,13 @@ $rfield = str_replace('[]', '', $row->getField());
 ?>
 @if($row->getDataSource() == 'text')
     @if(in_array($row->getInputType(), ['date', 'daterange', 'datetime']))
-        {!! Input::dateRange('datatable_filter['.$rfield.'][]', [
-            'attr' => [
-                'data-id' => 'datatable-filter-' . $rfield
-            ]
-        ]) !!}
+        <x-core::input.daterange :name="'datatable_filter['.$rfield.'][]'" :attr="[
+            'data-id' => 'datatable-filter-' . $rfield
+        ]" />
     @else
-        {!! Input::text('datatable_filter['.$rfield.']', [
-            'attr' => [
-                'data-id' => 'datatable-filter-' . $rfield
-            ]
-        ]) !!}
+        <x-core::input.text :name="'datatable_filter['.$rfield.']'" :attr="[
+            'data-id' => 'datatable-filter-' . $rfield
+        ]" />
     @endif
 @else
     <?php
@@ -26,11 +22,8 @@ $rfield = str_replace('[]', '', $row->getField());
     }
     ?>
     @if(is_array($source))
-    {!! Input::select('datatable_filter['.$rfield.']', [
-        'source' => $source,
-        'attr' => [
-            'data-id' => 'datatable-filter-' . $rfield
-        ]
-    ]) !!}
+    <x-core::input.select name="'datatable_filter['.$rfield.']'" :source="$source" :attr="[
+        'data-id' => 'datatable-filter-' . $rfield
+    ]" />
     @endif
 @endif
