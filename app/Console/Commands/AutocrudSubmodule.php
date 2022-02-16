@@ -85,6 +85,10 @@ class AutocrudSubmodule extends Command
             	'Transformers/'.$this->module_name.'Transformer.php',
             ]);
 
+            // last step : add new Route appender
+            $route_string = PHP_EOL . "generateAdminRoute('/".$this->lowercase_name."', '\\".$this->namespace."\Http\Controllers\\".$this->module_name."Controller', '".$this->lowercase_name."');" . PHP_EOL;
+            $this->appendContent("Routes/web.php", $route_string);
+
             $this->info('New submodule scaffold has been created for you. Now you just need to define : SidebarGenerator, Routes, Translations, ');
 
         }
@@ -147,6 +151,16 @@ class AutocrudSubmodule extends Command
         foreach($list_of_path as $path){
             $this->changeContent($path);
         }
+    }
+
+    protected function appendContent($path, $string){
+        $first_char = substr($path, 0, 1);
+        if(!in_array($first_char, ['/', '\\', DIRECTORY_SEPARATOR])){
+            $path = DIRECTORY_SEPARATOR . $path;
+        }
+        $content = file_get_contents($this->module_dir . $path);
+        $content .= $string;
+        file_put_contents($this->module_dir . $path, $content);
     }
 
     protected function changeContent($path){
