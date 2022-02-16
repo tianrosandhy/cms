@@ -9,7 +9,7 @@ use Permission;
 class ExampleIndexPresenter extends BaseViewPresenter
 {
 	public function __construct(){
-		$this->title = __('example::module.index');
+		$this->title = __('example::module.example.index');
 		$this->view = 'core::master.index';
 		#if you want to override this index view, you can use below view instead
 		//$this->view = 'example::index';

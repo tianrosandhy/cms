@@ -25,10 +25,10 @@ class AutocrudSubmodule extends Command
     	$this->old_module_name = ucwords($old_module);
     	$this->old_module_name = str_replace(' ', '', $this->old_module_name);
         $this->namespace = 'App\\Modules\\' . $this->old_module_name;
+        $this->lowercase_old_name = strtolower($this->old_module_name);
         if(!$this->isOldModuleExists()){
         	return $this->error('Old Module name ' . $this->old_module_name . ' is not exists');
         }
-
 
         $name = $this->ask('Please insert your new submodule name');
         $this->proper_name = ucwords($name);
@@ -157,6 +157,7 @@ class AutocrudSubmodule extends Command
 
         $content = file_get_contents($this->module_dir . $path);
         $content = str_replace('[MODULE_NAME]', $this->module_name, $content);
+        $content = str_replace('[LOWERCASE_OLD_NAME]', $this->lowercase_old_name, $content);
         $content = str_replace('[LOWERCASE_MODULE_NAME]', $this->lowercase_name, $content);
         $content = str_replace('[PROPER_MODULE_NAME]', $this->proper_name, $content);
         $content = str_replace('[NAMESPACE]', $this->namespace, $content);
