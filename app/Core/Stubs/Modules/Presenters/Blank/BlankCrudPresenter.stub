@@ -1,24 +1,34 @@
 <?php
-namespace [NAMESPACE]\Presenters;
+namespace [NAMESPACE]\Presenters\[MODULE_NAME];
 
 use App\Core\Base\Presenters\BaseViewPresenter;
-use DataTable;
 use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
+use DataTable;
 
 class [MODULE_NAME]CrudPresenter extends BaseViewPresenter
 {
 	public function __construct($instance=null){
 		if(isset($instance->id)){
-			$this->title = __('post::module.[LOWERCASE_MODULE_NAME].edit');
+			$this->title = __('[LOWERCASE_MODULE_NAME]::module.edit');
+			$this->form_route = route('admin.[LOWERCASE_MODULE_NAME].update', ['id' => $instance->id]);
 		}
 		else{
-			$this->title = __('post::module.[LOWERCASE_MODULE_NAME].add');
+			$this->title = __('[LOWERCASE_MODULE_NAME]::module.add');
+			$this->form_route = route('admin.[LOWERCASE_MODULE_NAME].store');
 		}
 		$this->data = $instance;
 		$this->back_url = route('admin.[LOWERCASE_MODULE_NAME].index');
 		$this->view = 'core::master.crud';
+		$this->hide_export_import = true;
 		#if you want to override this crud view, you can use below view instead
-		// $this->view = '[LOWECASE_MODULE_NAME]::crud';
+		// $this->view = '[LOWERCASE_MODULE_NAME]::crud';
+
+		$this->breadcrumb = [
+			[
+				'label' => __('[LOWERCASE_MODULE_NAME]::module.index'),
+				'url' => route('admin.[LOWERCASE_MODULE_NAME].index')
+			]
+		];
 
 		$this->structure = new [MODULE_NAME]Structure;
 		$this->config = config('module-setting.[LOWERCASE_MODULE_NAME]');

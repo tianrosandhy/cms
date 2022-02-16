@@ -116,7 +116,7 @@ class DataStructure
 		if($this->value_source){
 			$grab_ = \DB::table($this->value_source[0])->find($this->value_source[1]);
 			if($multi_language){
-				$value[config('cms.language', 'en')] = $grab_->{$this->value_source[2]};
+				$value[Language::default()] = $grab_->{$this->value_source[2]};
 			}
 			else{
 				$value = $grab_->{$this->value_source[2]};
@@ -124,7 +124,7 @@ class DataStructure
 		}
 		elseif($this->value_data){
 			if($multi_language){
-				foreach(config('cms.lang.available') as $lang){
+				foreach(Language::available() as $lang => $langlabel){
 					$value[$lang] = call_user_func($this->value_data, $data, $lang);
 				}
 			}
@@ -134,7 +134,7 @@ class DataStructure
 		}
 		else{
 			if($multi_language){
-				foreach(config('cms.lang.available') as $lang){
+				foreach(Language::available() as $lang => $langlabel){
 					$value[$lang] = isset($data->{$field_name}) ? $data->outputTranslate($field_name, $lang, true) : null;
 				}
 			}
@@ -216,7 +216,7 @@ class DataStructure
 
 		$this->valueData(function($data, $lang=null){
 			if(empty($lang)){
-				$lang = config('cms.language', 'en');
+				$lang = Language::default();
 			}
 			if(isset($data->id)){
 				return \SlugInstance::get($data, $data->id, $lang);

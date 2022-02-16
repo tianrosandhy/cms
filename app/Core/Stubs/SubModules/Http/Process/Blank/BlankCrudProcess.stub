@@ -1,5 +1,5 @@
 <?php
-namespace [NAMESPACE]\Http\Process;
+namespace [NAMESPACE]\Http\Process\[MODULE_NAME];
 
 use App\Core\Base\Process\BaseCrudProcess;
 use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;

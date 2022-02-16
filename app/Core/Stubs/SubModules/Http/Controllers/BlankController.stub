@@ -3,16 +3,49 @@ namespace [NAMESPACE]\Http\Controllers;
 
 use App\Core\Base\Controllers\BaseController;
 use [NAMESPACE]\Models\[MODULE_NAME];
-use [NAMESPACE]\Presenters\[MODULE_NAME]IndexPresenter;
-use [NAMESPACE]\Presenters\[MODULE_NAME]CrudPresenter;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]DatatableProcess;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]CrudProcess;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]DeleteProcess;
+use [NAMESPACE]\Presenters\[MODULE_NAME]\[MODULE_NAME]IndexPresenter;
+use [NAMESPACE]\Presenters\[MODULE_NAME]\[MODULE_NAME]CrudPresenter;
+use [NAMESPACE]\Presenters\[MODULE_NAME]\[MODULE_NAME]PreimportPresenter;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]DatatableProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]ExportProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]CrudProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]DeleteProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]PreimportProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]ImportProcess;
 
 class [MODULE_NAME]Controller extends BaseController
 {
 	public function index(){
 		return (new [MODULE_NAME]IndexPresenter)->render();
+	}
+
+	public function export(){
+		return (new [MODULE_NAME]ExportProcess)
+			->type('http')
+			->handle();
+	}
+
+	public function import(){
+		if($this->request->import_id){
+			// real import : handled via process
+			return (new [MODULE_NAME]ImportProcess($this->request->import_id))
+				->setType('http')
+				->setSuccessRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
+				->setErrorRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
+				->handle();
+		}
+		else if($this->request->pre_import_id){
+			// preimport : handled via preview
+			$preimport = (new [MODULE_NAME]PreimportProcess)
+				->setType('raw')
+				->handle();
+
+			return (new [MODULE_NAME]PreimportPresenter($preimport))
+				->render();			
+		}
+		else{
+			abort(400);
+		}
 	}
 
 	public function datatable(){
@@ -28,6 +61,7 @@ class [MODULE_NAME]Controller extends BaseController
 
 	public function store(){
 		return (new [MODULE_NAME]CrudProcess(new [MODULE_NAME]))
+			->setSuccessRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
 			->type($this->request->ajax() ? 'ajax' : 'http')
 			->handle();
 	}
@@ -40,6 +74,7 @@ class [MODULE_NAME]Controller extends BaseController
 	public function update($id){
 		$data = [MODULE_NAME]::findOrFail($id);
 		return (new [MODULE_NAME]CrudProcess($data))
+			->setSuccessRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
 			->type($this->request->ajax() ? 'ajax' : 'http')
 			->handle();
 	}

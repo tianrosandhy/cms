@@ -1,9 +1,9 @@
 <?php
-namespace [NAMESPACE]\Presenters;
+namespace [NAMESPACE]\Presenters\[MODULE_NAME];
 
 use App\Core\Base\Presenters\BaseViewPresenter;
-use DataTable;
 use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
+use DataTable;
 
 class [MODULE_NAME]PreimportPresenter extends BaseViewPresenter
 {

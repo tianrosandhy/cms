@@ -48,20 +48,20 @@ class AutocrudModule extends Command
             	'Exceptions/BlankException.php',
             	'Facades/BlankFacade.php',
             	'Http/Controllers/BlankController.php',
-            	'Http/Process/BlankCrudProcess.php',
-            	'Http/Process/BlankDatatableProcess.php',
-            	'Http/Process/BlankDeleteProcess.php',
-            	'Http/Process/BlankExportProcess.php',
-                'Http/Process/BlankImportProcess.php',
-                'Http/Process/BlankPreimportProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankCrudProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankDatatableProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankDeleteProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankExportProcess.php',
+                'Http/Process/'.$this->module_name.'/BlankImportProcess.php',
+                'Http/Process/'.$this->module_name.'/BlankPreimportProcess.php',
             	'Http/Structure/BlankStructure.php',
                 'Migrations/2022_02_01_000000_blank.php',
                 'Migrations/2022_02_01_000001_blank_translator.php',
                 'Models/Blank.php',
                 'Models/BlankTranslator.php',
-            	'Presenters/BlankCrudPresenter.php',
-            	'Presenters/BlankIndexPresenter.php',
-            	'Presenters/BlankPreimportPresenter.php',
+            	'Presenters/'.$this->module_name.'/BlankCrudPresenter.php',
+            	'Presenters/'.$this->module_name.'/BlankIndexPresenter.php',
+            	'Presenters/'.$this->module_name.'/BlankPreimportPresenter.php',
             	'Providers/BlankServiceProvider.php',
             	'Services/BlankInstance.php',
                 'Transformers/BlankTransformer.php',
@@ -76,20 +76,20 @@ class AutocrudModule extends Command
             	'Extenders/SidebarGenerator.php',
             	'Facades/'.$this->module_name.'Facade.php',
             	'Http/Controllers/'.$this->module_name.'Controller.php',
-            	'Http/Process/'.$this->module_name.'CrudProcess.php',
-            	'Http/Process/'.$this->module_name.'ExportProcess.php',
-            	'Http/Process/'.$this->module_name.'DatatableProcess.php',
-            	'Http/Process/'.$this->module_name.'DeleteProcess.php',
-            	'Http/Process/'.$this->module_name.'ImportProcess.php',
-            	'Http/Process/'.$this->module_name.'PreimportProcess.php',
+            	'Http/Process/'.$this->module_name.'/'.$this->module_name.'CrudProcess.php',
+            	'Http/Process/'.$this->module_name.'/'.$this->module_name.'ExportProcess.php',
+            	'Http/Process/'.$this->module_name.'/'.$this->module_name.'DatatableProcess.php',
+            	'Http/Process/'.$this->module_name.'/'.$this->module_name.'DeleteProcess.php',
+            	'Http/Process/'.$this->module_name.'/'.$this->module_name.'ImportProcess.php',
+            	'Http/Process/'.$this->module_name.'/'.$this->module_name.'PreimportProcess.php',
             	'Http/Structure/'.$this->module_name.'Structure.php',
                 'Migrations/2022_02_01_000000_'.$this->lowercase_name.'.php',
                 'Migrations/2022_02_01_000001_'.$this->lowercase_name.'_translator.php',
                 'Models/'.$this->module_name.'.php',
                 'Models/'.$this->module_name.'Translator.php',
-            	'Presenters/'.$this->module_name.'CrudPresenter.php',
-            	'Presenters/'.$this->module_name.'IndexPresenter.php',
-            	'Presenters/'.$this->module_name.'PreimportPresenter.php',
+            	'Presenters/'.$this->module_name.'/'.$this->module_name.'CrudPresenter.php',
+            	'Presenters/'.$this->module_name.'/'.$this->module_name.'IndexPresenter.php',
+            	'Presenters/'.$this->module_name.'/'.$this->module_name.'PreimportPresenter.php',
             	'Providers/'.$this->module_name.'ServiceProvider.php',
             	'Routes/web.php',
             	'Services/'.$this->module_name.'Instance.php',
@@ -108,6 +108,17 @@ class AutocrudModule extends Command
 
     protected function renameAllStubToPhp(){
         $path = $this->module_dir;
+
+        // manually rename "Blank" directory to its current module name in Process & Presenter
+        rename(
+            $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Process' . DIRECTORY_SEPARATOR . 'Blank',
+            $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Process' . DIRECTORY_SEPARATOR . $this->module_name
+        );
+        rename(
+            $path . DIRECTORY_SEPARATOR . 'Presenters' . DIRECTORY_SEPARATOR . 'Blank',
+            $path . DIRECTORY_SEPARATOR . 'Presenters' . DIRECTORY_SEPARATOR . $this->module_name
+        );
+
         $di = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
             RecursiveIteratorIterator::LEAVES_ONLY

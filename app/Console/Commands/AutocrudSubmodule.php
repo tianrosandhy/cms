@@ -50,33 +50,39 @@ class AutocrudSubmodule extends Command
             $this->renameModules([
             	'Facades/BlankFacade.php',
             	'Http/Controllers/BlankController.php',
-            	'Http/Process/BlankCrudProcess.php',
-            	'Http/Process/BlankDatatableProcess.php',
-            	'Http/Process/BlankDeleteProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankCrudProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankDatatableProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankDeleteProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankExportProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankImportProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankPreimportProcess.php',
             	'Http/Structure/BlankStructure.php',
                 'Migrations/2020_06_20_000000_blank.php',
                 'Migrations/2020_06_20_000000_blank_translator.php',
                 'Models/Blank.php',
                 'Models/BlankTranslator.php',
-            	'Presenters/BlankCrudPresenter.php',
-            	'Presenters/BlankIndexPresenter.php',
+            	'Presenters/'.$this->module_name.'/BlankCrudPresenter.php',
+            	'Presenters/'.$this->module_name.'/BlankIndexPresenter.php',
+            	'Presenters/'.$this->module_name.'/BlankPreimportPresenter.php',
             	'Services/BlankInstance.php',
+            	'Transformers/BlankTransformer.php',
             ]);
 
             $this->changeContents([
             	'Facades/'.$this->module_name.'Facade.php',
             	'Http/Controllers/'.$this->module_name.'Controller.php',
-            	'Http/Process/'.$this->module_name.'CrudProcess.php',
-            	'Http/Process/'.$this->module_name.'DatatableProcess.php',
-            	'Http/Process/'.$this->module_name.'DeleteProcess.php',
+            	'Http/Process/'.$this->module_name.'/'.$this->module_name.'CrudProcess.php',
+            	'Http/Process/'.$this->module_name.'/'.$this->module_name.'DatatableProcess.php',
+            	'Http/Process/'.$this->module_name.'/'.$this->module_name.'DeleteProcess.php',
             	'Http/Structure/'.$this->module_name.'Structure.php',
                 'Migrations/2020_06_20_000000_'.$this->lowercase_name.'.php',
                 'Migrations/2020_06_20_000000_'.$this->lowercase_name.'_translator.php',
                 'Models/'.$this->module_name.'.php',
                 'Models/'.$this->module_name.'Translator.php',
-            	'Presenters/'.$this->module_name.'CrudPresenter.php',
-            	'Presenters/'.$this->module_name.'IndexPresenter.php',
+            	'Presenters/'.$this->module_name.'/'.$this->module_name.'CrudPresenter.php',
+            	'Presenters/'.$this->module_name.'/'.$this->module_name.'IndexPresenter.php',
             	'Services/'.$this->module_name.'Instance.php',
+            	'Transformers/'.$this->module_name.'Transformer.php',
             ]);
 
             $this->info('New submodule scaffold has been created for you. Now you just need to define : SidebarGenerator, Routes, Translations, ');
@@ -92,6 +98,17 @@ class AutocrudSubmodule extends Command
 
     protected function renameAllStubToPhp(){
         $path = $this->module_dir;
+
+        // manually rename "Blank" directory to its current module name in Process & Presenter
+        rename(
+            $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Process' . DIRECTORY_SEPARATOR . 'Blank',
+            $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Process' . DIRECTORY_SEPARATOR . $this->module_name
+        );
+        rename(
+            $path . DIRECTORY_SEPARATOR . 'Presenters' . DIRECTORY_SEPARATOR . 'Blank',
+            $path . DIRECTORY_SEPARATOR . 'Presenters' . DIRECTORY_SEPARATOR . $this->module_name
+        );
+
         $di = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
             RecursiveIteratorIterator::LEAVES_ONLY

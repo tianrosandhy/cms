@@ -1,2 +1,20 @@
 <?php
-generateAdminRoute('[LOWERCASE_MODULE_NAME]', '[MODULE_NAME]Controller');
+Route::group([
+	'prefix' => '[LOWERCASE_MODULE_NAME]',
+  'controller' => [MODULE_NAME]Controller::class,
+], function(){
+	Route::get('/', 'index')->name('admin.[LOWERCASE_MODULE_NAME].index');
+	Route::get('/create', 'create')->name('admin.[LOWERCASE_MODULE_NAME].create');
+	Route::get('/edit/{id}', 'edit')->name('admin.[LOWERCASE_MODULE_NAME].edit');
+	Route::post('/create', 'store')->name('admin.[LOWERCASE_MODULE_NAME].store');
+	Route::post('/edit/{id}', 'update')->name('admin.[LOWERCASE_MODULE_NAME].update');
+	Route::post('/delete/{id?}', 'delete')->name('admin.[LOWERCASE_MODULE_NAME].delete');
+
+	// ajax route
+	Route::match(['get', 'post'], '/datatable/post', 'dataTable')->name('admin.[LOWERCASE_MODULE_NAME].datatable');
+	Route::post('/switch/{id}', 'switch')->name('admin.[LOWERCASE_MODULE_NAME].switch');
+
+	// import/export route
+	Route::get('/export', 'export')->name('admin.[LOWERCASE_MODULE_NAME].export');
+	Route::post('/import', 'import')->name('admin.[LOWERCASE_MODULE_NAME].import');
+});
