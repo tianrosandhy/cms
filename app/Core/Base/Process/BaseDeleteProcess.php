@@ -17,6 +17,9 @@ class BaseDeleteProcess extends BaseProcess implements CanProcess
 		];
 	}
 
+	/*
+	* These methods below can be overriden in your custom delete process class
+	*/
 	public function validate(){
 		$validate = Validator::make($this->request->all(), [
 			//your validation rules
@@ -27,28 +30,50 @@ class BaseDeleteProcess extends BaseProcess implements CanProcess
 		}
 	}
 
+	public function afterBatchDelete(array $deleted_id=[]){
+		// 
+	}
+
+	public function afterSingleDelete($deleted_id=null){
+		// 
+	}
+
+	//--------------
+
+	protected function currentModel(){
+		$model = $this->model ?? null;
+		if(empty($model) && method_exists($this, 'model')){
+			$model = $this->model();
+		}
+		if(empty($model)){
+			throw new ProcessException("You need to define the model that will be deleted first.");
+		}
+		return $model;
+	}
+
 	public function process(){
 		if(empty($this->id) && $this->request->list_id && is_array($this->request->list_id)){
 			$this->runBatchDelete($this->request->list_id);
+			$this->afterBatchDelete($this->request->list_id);
 		}
 		else{
 			$this->runSingleDelete($this->id);
+			$this->afterSingleDelete($this->id);
 		}
 	}
 
 	protected function runBatchDelete($ids=[]){
-		foreach($ids as $id){
-			$this->runSingleDelete($id);
-		}
+		$model = $this->currentModel();
+		$pk = $model->getKeyName();
+		return $model->whereIn([$pk => $ids])->delete();
 	}
 
 	protected function runSingleDelete($id){
-		//in case ada tambahan hapus yg lain2 juga bisa ditambahkan disini
-		$pk = $this->model->getKeyName();
-		$this->model->where([
+		$model = $this->currentModel();
+		$pk = $model->getKeyName();
+		return $model->where([
 			$pk => $id
 		])->delete();
-		return true;
 	}
 
 }
