@@ -15,9 +15,10 @@ class DateRange extends BaseViewComponent
 
   public function __construct(
     public string $name,
-    public array $value = [], // value must be in ["start_date", "end_date"] format.
+    public $value = null, // value must be in ["start_date", "end_date"] format.
     public array $attr = [],
     public bool $monthly = false,
     public bool $multiLanguage = false,
+    public $data = null,
   ){}
 }

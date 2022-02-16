@@ -20,6 +20,7 @@ class Select extends BaseViewComponent
     public $value = null,
     public array $attr = [],
     public bool $multiLanguage = false,
+    public $data = null,
   ){}
 
 }

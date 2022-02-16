@@ -20,6 +20,7 @@ class Slug extends BaseViewComponent
     public string $type = 'text',
     public array $attr = [],
     public bool $multiLanguage = false,
+    public $data = null,
   ){}
 
 }

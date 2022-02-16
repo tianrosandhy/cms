@@ -294,6 +294,8 @@ function refreshPlugins(){
   loadMask();
   simpleImage();
   refreshDropzone();
+
+  RegisterSlugMasterComponent();
 }
 
 function simpleImage(){

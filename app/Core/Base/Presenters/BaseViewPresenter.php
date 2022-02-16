@@ -68,7 +68,7 @@ class BaseViewPresenter
 				'message' => $e->getMessage(),
 				'exception' => $e
 			]);
-			throw new ViewPresenterException('View error : ' . $e->getMessage());
+			throw $e;
 		}
 		return $view;
 	}

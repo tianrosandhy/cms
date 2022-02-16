@@ -21,6 +21,7 @@ class DateTime extends BaseViewComponent
     public array $attr = [],
     public bool $monthly = false,
     public bool $multiLanguage = false,
+    public $data = null,
   ){}
 
 }

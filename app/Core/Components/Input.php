@@ -46,6 +46,9 @@ class Input
 
 	// all input type will call this 
 	protected function generateInputArgs($name, $config=[]){
+		if(isset($config['type'])){
+			unset($config['type']); //type parameter will not be needed again now
+		}
 		return array_merge([
 			'name' => $name,
 			'multiLanguage' => $this->multiLanguage
