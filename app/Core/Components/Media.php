@@ -44,11 +44,6 @@ class Media
 	}
 
 
-
-	public function assets(){
-		return view('core::components.media.assets');
-	}
-
 	public function single($name, $value=null, $config=[]){
 		return view('core::components.media.single', [
 			'name' => $name,

@@ -3,50 +3,39 @@ namespace App\Modules\Example\Http\Process;
 
 use App\Core\Base\Process\BaseDeleteProcess;
 use App\Core\Exceptions\ProcessException;
-use App\Modules\Example\Http\Structure\ExampleStructure;
+use App\Modules\Example\Models\Example;
 use Validator;
 
 class ExampleDeleteProcess extends BaseDeleteProcess
 {
-	public function validate(){
-		$validate = Validator::make($this->request->all(), [
-			//your validation rules
-		]);
-
-		if($validate->fails()){
-			throw new ProcessException($validate);
-		}
+	/**
+	* The model target that will be deleted
+	*/
+	public function model(){
+		return new Example;
 	}
 
-	public function process(){
-		if(empty($this->id) && $this->request->list_id && is_array($this->request->list_id)){
-			$this->runBatchDelete($this->request->list_id);
-		}
-		else{
-			$this->runSingleDelete($this->id);
-		}
+	/**
+	* This method will be called after the batch data deleted successfully
+	* @param array $deleted_ids : The lists of deleted id in defined model
+	*/
+	public function afterBatchDelete(array $deleted_ids=[]){
+		// your logic when batch deleted is triggered
 	}
 
-	protected function runBatchDelete($ids=[]){
-		foreach($ids as $id){
-			$this->runSingleDelete($id);
-		}
+	/**
+	* This method will be called after the single data deleted successfully
+	* @param array $deleted_id : The single ID of deleted data in defined model
+	*/
+	public function afterSingleDelete($deleted_id=null){
+		// 
 	}
 
-	protected function runSingleDelete($id){
-		//in case ada tambahan hapus yg lain2 juga bisa ditambahkan disini
-		$pk = $this->model->getKeyName();
-		$this->model->where([
-			$pk => $id
-		])->delete();
-		return true;
-	}
-
-
-
+	/**
+	* This method will always be called when the error occured in process() method. 
+	*/
 	public function revert(){
-		//your logic when validation or process failed to running
-	}
 
+	}
 
 }

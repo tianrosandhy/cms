@@ -1,4 +1,4 @@
-@extends ('core::layouts.master')
+@extends ($base_layout ?? 'core::layouts.master')
 @section ('content')
 	@include ('core::components.header-box')
 

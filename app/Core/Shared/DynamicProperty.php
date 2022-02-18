@@ -8,7 +8,7 @@ trait DynamicProperty
 	// dynamic property setter & getter
 	public function __call($name, $arguments){
 		$method = substr($name, 0, 3);
-		if(in_array($method, ['get', 'set'])){
+		if(in_array($method, ['get', 'set', 'has'])){
 			$prop = substr($name, 3);
 			$prop = Str::snake($prop);
 

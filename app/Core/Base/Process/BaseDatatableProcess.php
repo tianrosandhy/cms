@@ -13,17 +13,15 @@ class BaseDatatableProcess extends BaseProcess implements CanProcess
 		parent::__construct();
 	}
 
-	public function config(){
-		return [
-			'error_redirect_target' => null, //ex : url('your-url-when-fail')
-			'success_redirect_target' => null, //ex : url('your-url-when-success')
-			'success_message' => 'Your data has been saved successfully',
-			'error_message' => null
-		];
-	}
-
 	public function currentDataTable(){
-		return DataTable::setStructure($this->structure);
+		$structure = $this->structure ?? null;
+		if(empty($structure) && method_exists($this, 'structure')){
+			$structure = $this->structure();
+		}
+		if(empty($structure)){
+			throw new ProcessException("You need to define the structure parameter for the DatatableProcess class");
+		}
+		return DataTable::setStructure($structure);
 	}
 
 	public function validate(){

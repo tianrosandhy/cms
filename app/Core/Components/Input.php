@@ -2,15 +2,66 @@
 namespace App\Core\Components;
 
 use App\Core\Exceptions\InputException;
+
 use Str;
 
 class Input
 {
 	public 
-		$base_view = 'core::components.input.',
-		$multi_language = false;
+		$baseView = 'core::components.input.',
+		$multiLanguage = false;
+
+	public function __construct(){
+		// all input component will be aliased like below
+		$this->mapInput = [
+			'Text' => \App\Core\ViewComponents\Input\Text::class,
+			'Number' => \App\Core\ViewComponents\Input\Number::class,
+			'Email' => \App\Core\ViewComponents\Input\Email::class,
+			'Tags' => \App\Core\ViewComponents\Input\Tags::class,
+			'Tel' => \App\Core\ViewComponents\Input\Tel::class,
+			'Date' => \App\Core\ViewComponents\Input\Date::class,
+			'DateRange' => \App\Core\ViewComponents\Input\DateRange::class,
+			'DateTime' => \App\Core\ViewComponents\Input\DateTime::class,
+			'Color' => \App\Core\ViewComponents\Input\Color::class,
+			'Checkbox' => \App\Core\ViewComponents\Input\Checkbox::class,
+			'Radio' => \App\Core\ViewComponents\Input\Radio::class,
+			'Currency' => \App\Core\ViewComponents\Input\Currency::class,
+			'File' => \App\Core\ViewComponents\Input\File::class,
+			'FileMultiple' => \App\Core\ViewComponents\Input\FileMultiple::class,
+			'Image' => \App\Core\ViewComponents\Input\Image::class,
+			'ImageMultiple' => \App\Core\ViewComponents\Input\ImageMultiple::class,
+			'ImageSimple' => \App\Core\ViewComponents\Input\ImageSimple::class,
+			'Map' => \App\Core\ViewComponents\Input\Map::class,
+			'Password' => \App\Core\ViewComponents\Input\Password::class,
+			'Richtext' => \App\Core\ViewComponents\Input\Richtext::class,
+			'Select' => \App\Core\ViewComponents\Input\Select::class,
+			'SelectMultiple' => \App\Core\ViewComponents\Input\SelectMultiple::class,
+			'Slug' => \App\Core\ViewComponents\Input\Slug::class,
+			'Textarea' => \App\Core\ViewComponents\Input\Textarea::class,
+			'Time' => \App\Core\ViewComponents\Input\Time::class,
+			'Yesno' => \App\Core\ViewComponents\Input\Yesno::class,
+		];
+	}
+
+
+	// all input type will call this 
+	protected function generateInputArgs($name, $config=[]){
+		if(isset($config['type'])){
+			unset($config['type']); //type parameter will not be needed again now
+		}
+		return array_merge([
+			'name' => $name,
+			'multiLanguage' => $this->multiLanguage
+		], $config);
+	}
 
 	public function type($type, $name, $config=[]){
+		$studlycase = Str::studly($type);
+		if(isset($this->mapInput[$studlycase])){
+			$args = $this->generateInputArgs($name, $config);
+			return (new $this->mapInput[$studlycase](...$args))->htmlRender();
+		}
+
 		$camelize = Str::camel($type);
 		if(method_exists($this, $camelize)){
 			return $this->{$camelize}($name, $config);
@@ -21,7 +72,7 @@ class Input
 	}
 
 	public function multiLanguage(){
-		$this->multi_language = true;
+		$this->multiLanguage = true;
 		return $this;
 	}
 
@@ -36,14 +87,14 @@ class Input
 	}
 
 	public function loadView($view_name, $input_name, $config=[], $fallback=true){
-		if(view()->exists($this->base_view.$view_name)){
+		if(view()->exists($this->baseView.$view_name)){
 			if(!isset($config['name'])){
 				$config['name'] = $input_name;
 			}
-			if($this->multi_language){
-				$config['multi_language'] = true;
+			if($this->multiLanguage){
+				$config['multiLanguage'] = true;
 			}
-			return view($this->base_view.$view_name, $config)->render();
+			return view($this->baseView.$view_name, $config)->render();
 		}
 
 		$msg = 'Input '.$view_name.' view is still not defined';
@@ -55,109 +106,88 @@ class Input
 
 
 	public function text($name, $config=[]){
-		return $this->loadView('text', $name, $config);
+		return $this->type('Text', $name, $config);
 	}
 	public function number($name, $config=[]){
-		$config['type'] = 'number';
-		return $this->loadView('number', $name, $config);
+		return $this->type('Number', $name, $config);
 	}
 	public function currency($name, $config=[]){
-		$config['type'] = 'text';
-		return $this->loadView('currency', $name, $config);
+		return $this->type('Currency', $name, $config);
 	}
 	public function email($name, $config=[]){
-		$config['type'] = 'email';
-		return $this->loadView('text', $name, $config);
+		return $this->type('Email', $name, $config);
 	}
 	public function password($name, $config=[]){
-		$config['type'] = 'password';
-		return $this->loadView('text', $name, $config);
+		return $this->type('Password', $name, $config);
 	}
 	public function color($name, $config=[]){
-		$config['type'] = 'color';
-		return $this->loadView('text', $name, $config);
+		return $this->type('Color', $name, $config);
 	}
 	public function richtext($name, $config=[]){
-		return $this->loadView('richtext', $name, $config);
+		return $this->type('RichText', $name, $config);
 	}
 	public function textarea($name, $config=[]){
-		return $this->loadView('textarea', $name, $config);
-	}
-	public function gutenberg($name, $config=[]){
-		return $this->loadView('gutenberg', $name, $config);
+		return $this->type('Textarea', $name, $config);
 	}
 	public function tel($name, $config=[]){
-		$config['type'] = 'tel';
-		return $this->loadView('text', $name, $config);
+		return $this->type('Tel', $name, $config);
 	}
 	public function tags($name, $config=[]){
-		$config['type'] = 'tags';
-		return $this->loadView('text', $name, $config);
+		return $this->type('Tags', $name, $config);
 	}
 	public function image($name, $config=[]){
-		return $this->loadView('image', $name, $config);
+		return $this->type('Image', $name, $config);
 	}
 	public function imageMultiple($name, $config=[]){
-		return $this->loadView('image_multiple', $name, $config);
+		return $this->type('ImageMultiple', $name, $config);
 	}
 	public function imageSimple($name, $config=[]){
-		return $this->loadView('image_simple', $name, $config);
+		return $this->type('ImageSimple', $name, $config);
 	}
 	public function slug($name, $config=[]){
-		$this->mandatoryConfig($config, ['slug_target'], 'slug');
-		return $this->loadView('slug', $name, $config);
+		return $this->type('Slug', $name, $config);
 	}
 	public function date($name, $config=[]){
-		$config['type'] = 'date';
-		return $this->loadView('datetime', $name, $config);
+		return $this->type('Date', $name, $config);
 	}
 	public function time($name, $config=[]){
-		$config['type'] = 'time';
-		return $this->loadView('datetime', $name, $config);
+		return $this->type('Time', $name, $config);
 	}
 	public function dateTime($name, $config=[]){
-		$config['type'] = 'datetime';
-		return $this->loadView('datetime', $name, $config);
+		return $this->type('DateTime', $name, $config);
 	}
 	public function dateRange($name, $config=[]){
-		$config['type'] = 'daterange';
-		return $this->loadView('daterange', $name, $config);
+		return $this->type('DateRange', $name, $config);
 	}
 	public function file($name, $config=[]){
-		$config['type'] = 'single';
-		return $this->loadView('file', $name, $config);
+		return $this->type('File', $name, $config);
 	}
 	public function fileMultiple($name, $config=[]){
-		$config['type'] = 'multiple';
-		return $this->loadView('file', $name, $config);
+		return $this->type('FileMultiple', $name, $config);
 	}
 	public function select($name, $config=[]){
-		$this->mandatoryConfig($config, ['source'], 'select');
-		return $this->loadView('select', $name, $config);
+		return $this->type('Select', $name, $config);
 	}
 	public function selectMultiple($name, $config=[]){
-		$this->mandatoryConfig($config, ['source'], 'selectMultiple');
-		$config['type'] = 'select_multiple';
-		return $this->loadView('select', $name, $config);
+		return $this->type('SelectMultiple', $name, $config);
 	}
 	public function radio($name, $config=[]){
-		$this->mandatoryConfig($config, ['source'], 'radio');
-		return $this->loadView('radio', $name, $config);
+		return $this->type('Radio', $name, $config);
 	}
 	public function checkbox($name, $config=[]){
-		$this->mandatoryConfig($config, ['source'], 'checkbox');
-		$config['type'] = 'checkbox';
-		return $this->loadView('radio', $name, $config);
+		return $this->type('Checkbox', $name, $config);
 	}
+	public function yesno($name, $config=[]){
+		return $this->type('Yesno', $name, $config);
+	}
+	public function map($name, $config=[]){
+		return $this->type('Map', $name, $config);
+	}
+
+	// will generate a custom view input type
 	public function view($name, $config=[]){
 		$this->mandatoryConfig($config, ['view_source', 'data'], 'view');
 		return $this->loadView('view', $name, $config);
-	}
-	public function yesno($name, $config=[]){
-		return $this->loadView('yesno', $name, $config);
-	}
-	public function map($name, $config=[]){
-		return $this->loadView('map', $name, $config);
 	}
 
 

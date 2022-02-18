@@ -1,0 +1,20 @@
+<?php
+namespace [NAMESPACE]\Presenters\[MODULE_NAME];
+
+use App\Core\Base\Presenters\BaseViewPresenter;
+use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
+use DataTable;
+
+class [MODULE_NAME]PreimportPresenter extends BaseViewPresenter
+{
+	public function __construct($data=[]){
+		$this->data = $data;
+		$this->title = __('[LOWERCASE_OLD_NAME]::module.[LOWERCASE_MODULE_NAME].preimport');
+		$this->back_url = route('admin.[LOWERCASE_MODULE_NAME].index');
+		$this->view = 'core::master.preimport';
+	}
+
+	public function setSelectedMenuName(){
+		return '[LOWERCASE_MODULE_NAME]';
+	}
+}

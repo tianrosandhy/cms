@@ -8,8 +8,8 @@ use App\Modules\Example\Http\Structure\ExampleStructure;
 class ExamplePreimportPresenter extends BaseViewPresenter
 {
 	public function __construct($data=[]){
-        $this->data = $data;
-        $this->title = __('example::module.preimport');
+		$this->data = $data;
+		$this->title = __('example::module.example.preimport');
 		$this->back_url = route('admin.example.index');
 		$this->view = 'core::master.preimport';
 	}

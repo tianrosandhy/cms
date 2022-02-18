@@ -1,0 +1,21 @@
+<?php
+namespace [NAMESPACE]\Http\Process\[MODULE_NAME];
+
+use App\Core\Base\Process\BaseCrudProcess;
+use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
+
+class [MODULE_NAME]CrudProcess extends BaseCrudProcess
+{
+	public function setStructure(){
+		return new [MODULE_NAME]Structure;
+	}
+
+	/**
+	* This method will be called after the default Create / Update process running successfully.
+	* You can add additional logic after the basic data stored/updated.
+	* @param any $instance : the model of the inserted/updated data 
+	*/
+	public function afterCrud($instance=null){
+
+	}
+}

@@ -65,7 +65,7 @@ class ExampleTransformer extends BaseTransformer implements CanTransform
 	protected function actionButton($row){
 		$out = '<div class="btn-group">';
 		if(Permission::has('admin.example.edit')){
-			$out .= '<a href="'.route('admin.example.edit', ['id' => $row->id]).'" class="btn btn-light text-primary" title="Edit"><span class="iconify" data-icon="dashicons:edit"></span></a>';
+			$out .= '<a href="'.route('admin.example.edit', ['id' => $row->id]).'" class="btn btn-light text-primary" data-popup-lg title="Edit"><span class="iconify" data-icon="dashicons:edit"></span></a>';
 		}
 		if(Permission::has('admin.example.delete')){
 			$out .= '<a href="'.route('admin.example.delete', ['id' => $row->id]).'" class="btn btn-light text-danger delete-button" title="Delete"><span class="iconify" data-icon="fluent:delete-16-filled"></span></a>';

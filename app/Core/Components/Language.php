@@ -236,14 +236,7 @@ class Language
 	public function default($field='code'){
 		$grab = app('language')->where('is_default_language', 1)->first();
 		if(empty($grab)){
-			//create new default language instance in database
-			$instance = new Model;
-			$instance->code = $this->default;
-			$instance->name = $this->lists[$this->default] ?? null;
-			$instance->is_default_language = 1;
-			$instance->sort_no = 0;
-			$instance->save();
-			$grab = $instance;
+			return $this->default;
 		}
 		return strtolower($grab->{$field});
 	}
@@ -263,6 +256,7 @@ class Language
 		if(!$grab->is_default_language){
 			$grab->delete();
 		}
+		removeCache('language');
 	}
 
 	public function setAsDefault($code){
@@ -273,6 +267,7 @@ class Language
 				$old = app('language')->where('is_default_language', 1)->first();
 				$old->is_default_language = 0;
 				$old->save();
+				removeCache('language');
 
 				$this->insertNewLanguage($code, 1);
 			}
@@ -305,6 +300,12 @@ class Language
 
 		$check->sort_no = $check->id;
 		$check->save();
+		removeCache('language');
+	}
+
+	// this method will be called in installation  
+	public function insertDefaultLanguage(){
+		$this->insertNewLanguage($this->default, 1);
 	}
 
 }

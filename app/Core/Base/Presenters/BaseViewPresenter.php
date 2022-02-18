@@ -2,9 +2,10 @@
 namespace App\Core\Base\Presenters;
 
 use App\Core\Exceptions\ViewPresenterException;
+use App\Core\Shared\DynamicProperty;
 use Setting;
 use Sidebar;
-use App\Core\Shared\DynamicProperty;
+use Log;
 
 class BaseViewPresenter
 {
@@ -15,7 +16,9 @@ class BaseViewPresenter
 		$user,
 		$selected_menu,
 		$custom_css,
-		$custom_js;
+		$custom_js,
+		$base_layout = null,
+		$default_base_layout = 'core::layouts.master'; // default view layout main extends
 
 	public function setDefaultProperty(){
 		$request = request();
@@ -40,6 +43,14 @@ class BaseViewPresenter
 		if(!property_exists($this, 'breadcrumb')){
 			$this->breadcrumb = [];
 		}
+
+		if(empty($this->base_layout)){
+			$this->base_layout = $this->default_base_layout;
+			if($this->request->ajax()){
+				// return a blank base layout instead if the base_layout not defined 
+				$this->base_layout = 'core::layouts.master-ajax';
+			}
+		}
 	}
 
 	public function render(){
@@ -53,7 +64,11 @@ class BaseViewPresenter
 		try{
 			$view = view($this->view, $data)->render();
 		}catch(\Exception $e){
-			throw new ViewPresenterException('View error : ' . $e->getMessage());
+			Log::error("THROWN VIEW PRESENTER EXCEPTION IN " . get_class($this) . " : ", [
+				'message' => $e->getMessage(),
+				'exception' => $e
+			]);
+			throw $e;
 		}
 		return $view;
 	}

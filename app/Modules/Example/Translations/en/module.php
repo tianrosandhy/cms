@@ -1,10 +1,12 @@
 <?php
 return [
-	'index' => 'Example Data',
-	'add' => 'Create New Example',
-	'edit' => 'Edit Example',
-	'preimport' => 'Import Example Validation',
-	'menu' => [
-		'example' => 'Example'
-	]
+	'example' => [
+		'menu' => 'Example',
+		'index' => 'Example Data',
+		'add' => 'New Example Data',
+		'edit' => 'Update Example Data',
+		'preimport' => 'Import Example Data'
+	],
+
+	// you can add more translation here for another submodule if exists
 ];

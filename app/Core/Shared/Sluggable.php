@@ -1,12 +1,10 @@
 <?php
 namespace App\Core\Shared;
 
-use Language;
-
 trait Sluggable
 {
 
-	public function slug(){
+	public function slugmaster(){
 		return $this->hasMany('App\Core\Models\SlugMaster', 'primary_key')->where('table', $this->getTable());
 	}
 
@@ -19,7 +17,7 @@ trait Sluggable
 		if(!$this->slug){
 			return null;
 		}
-		$slugs = $this->slug->first();
+		$slugs = $this->slugmaster->first();
 		return $slugs->slug ?? null;
 	}
 

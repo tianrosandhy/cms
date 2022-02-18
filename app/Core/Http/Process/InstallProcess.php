@@ -5,6 +5,7 @@ use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
 use App\Core\Http\Traits\InstallerTrait;
 use App\Core\Contracts\CanProcess;
+use Language;
 use Validator;
 use Artisan;
 use DB;
@@ -49,6 +50,7 @@ class InstallProcess extends BaseProcess implements CanProcess
 
 	public function installAction(){
 		Artisan::call('autocrud:role');
+		Language::insertDefaultLanguage();
 		$this->createUser($this->request->email, $this->request->name, $this->request->password);
 		$this->createInstallHint();
 	}

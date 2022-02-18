@@ -10,6 +10,7 @@ use Illuminate\Database\Schema\Builder;
 use App\Core\Models\Setting;
 use App\Core\Models\Role;
 use App\Core\Models\Language;
+use Illuminate\Support\Facades\Blade;
 
 class CoreServiceProvider extends BaseServiceProvider{
 	protected $namespace = 'App\Core\Http\Controllers';
@@ -17,13 +18,16 @@ class CoreServiceProvider extends BaseServiceProvider{
 	public function boot(){
 		Builder::defaultStringLength(191);
 		$this->loadMigrationsFrom(realpath(__DIR__."/../Migrations"));
-		$this->loadTranslationsFrom(__DIR__ . '/../Translations', 'core');
+		$this->loadTranslationsFrom(__DIR__ . '/../Resources/Translations', 'core');
+
+		// blade view component registration
+		Blade::componentNamespace('App\Core\ViewComponents', 'core');
 	}
 
 	public function register(){
 		$this->loadHelpers(__DIR__.'/..');
 		$this->mapping($this->app->router);
-		$this->loadViewsFrom(realpath(__DIR__."/../Views"), 'core');
+		$this->loadViewsFrom(realpath(__DIR__."/../Resources/Views"), 'core');
 		$this->loadModules();
 		$this->mergeMainConfig();
 		$this->registerAlias();

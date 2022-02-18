@@ -50,7 +50,7 @@ trait ImageGrabable
                 $img = Media::getSelectedImage($image_json, $thumb, $type);
                 $out[] = $img ?? $fallback;
             }
-            else if(Storage::exists($image_json)){
+            else if(Storage::exists($image_json) && strlen($image_json) > 0){
                 if($type == 'url'){
                     $out[] = Storage::url($image_json);
                 }

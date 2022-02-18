@@ -4,6 +4,7 @@ namespace App\Core\Base\Process;
 use App\Core\Exceptions\ProcessException;
 use App\Core\Exceptions\DataTableException;
 use App\Core\Shared\DynamicProperty;
+use Log;
 
 class BaseProcess
 {
@@ -39,12 +40,36 @@ class BaseProcess
 	}
 
 	public function handle(){
-		try{
-			if(method_exists($this, 'validate')){
+		if(method_exists($this, 'validate')){
+			try{
 				$this->validate();
+			}catch(ProcessException | DataTableException $e){
+				Log::error("THROWN VALIDATION EXCEPTION IN " . get_class($this) . " : ", [
+					'message' => $e->getMessage(),
+					'exception' => $e
+				]);
+
+				if(method_exists($e, 'getCode')){
+					$this->setHttpCode($e->getCode());
+				}
+				$this->setErrorMessage($e->getMessage());
+
+				if($this->type == 'raw'){
+					// langsung throw aja exceptionnya
+					throw $e;
+				}
+				return $this->generateResponse();								
 			}
+		}
+
+		try{
 			$this->data = $this->process();
 		}catch(ProcessException | DataTableException $e){
+			Log::error("THROWN PROCESS EXCEPTION IN " . get_class($this) . " : ", [
+				'message' => $e->getMessage(),
+				'exception' => $e
+			]);
+
 			if(method_exists($e, 'getCode')){
 				$this->setHttpCode($e->getCode());
 			}

@@ -25,10 +25,10 @@ class AutocrudSubmodule extends Command
     	$this->old_module_name = ucwords($old_module);
     	$this->old_module_name = str_replace(' ', '', $this->old_module_name);
         $this->namespace = 'App\\Modules\\' . $this->old_module_name;
+        $this->lowercase_old_name = strtolower($this->old_module_name);
         if(!$this->isOldModuleExists()){
         	return $this->error('Old Module name ' . $this->old_module_name . ' is not exists');
         }
-
 
         $name = $this->ask('Please insert your new submodule name');
         $this->proper_name = ucwords($name);
@@ -50,34 +50,44 @@ class AutocrudSubmodule extends Command
             $this->renameModules([
             	'Facades/BlankFacade.php',
             	'Http/Controllers/BlankController.php',
-            	'Http/Process/BlankCrudProcess.php',
-            	'Http/Process/BlankDatatableProcess.php',
-            	'Http/Process/BlankDeleteProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankCrudProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankDatatableProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankDeleteProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankExportProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankImportProcess.php',
+            	'Http/Process/'.$this->module_name.'/BlankPreimportProcess.php',
             	'Http/Structure/BlankStructure.php',
                 'Migrations/2020_06_20_000000_blank.php',
                 'Migrations/2020_06_20_000000_blank_translator.php',
                 'Models/Blank.php',
                 'Models/BlankTranslator.php',
-            	'Presenters/BlankCrudPresenter.php',
-            	'Presenters/BlankIndexPresenter.php',
+            	'Presenters/'.$this->module_name.'/BlankCrudPresenter.php',
+            	'Presenters/'.$this->module_name.'/BlankIndexPresenter.php',
+            	'Presenters/'.$this->module_name.'/BlankPreimportPresenter.php',
             	'Services/BlankInstance.php',
+            	'Transformers/BlankTransformer.php',
             ]);
 
             $this->changeContents([
             	'Facades/'.$this->module_name.'Facade.php',
             	'Http/Controllers/'.$this->module_name.'Controller.php',
-            	'Http/Process/'.$this->module_name.'CrudProcess.php',
-            	'Http/Process/'.$this->module_name.'DatatableProcess.php',
-            	'Http/Process/'.$this->module_name.'DeleteProcess.php',
+            	'Http/Process/'.$this->module_name.'/'.$this->module_name.'CrudProcess.php',
+            	'Http/Process/'.$this->module_name.'/'.$this->module_name.'DatatableProcess.php',
+            	'Http/Process/'.$this->module_name.'/'.$this->module_name.'DeleteProcess.php',
             	'Http/Structure/'.$this->module_name.'Structure.php',
                 'Migrations/2020_06_20_000000_'.$this->lowercase_name.'.php',
                 'Migrations/2020_06_20_000000_'.$this->lowercase_name.'_translator.php',
                 'Models/'.$this->module_name.'.php',
                 'Models/'.$this->module_name.'Translator.php',
-            	'Presenters/'.$this->module_name.'CrudPresenter.php',
-            	'Presenters/'.$this->module_name.'IndexPresenter.php',
+            	'Presenters/'.$this->module_name.'/'.$this->module_name.'CrudPresenter.php',
+            	'Presenters/'.$this->module_name.'/'.$this->module_name.'IndexPresenter.php',
             	'Services/'.$this->module_name.'Instance.php',
+            	'Transformers/'.$this->module_name.'Transformer.php',
             ]);
+
+            // last step : add new Route appender
+            $route_string = PHP_EOL . "generateAdminRoute('/".$this->lowercase_name."', '\\".$this->namespace."\Http\Controllers\\".$this->module_name."Controller', '".$this->lowercase_name."');" . PHP_EOL;
+            $this->appendContent("Routes/web.php", $route_string);
 
             $this->info('New submodule scaffold has been created for you. Now you just need to define : SidebarGenerator, Routes, Translations, ');
 
@@ -92,6 +102,17 @@ class AutocrudSubmodule extends Command
 
     protected function renameAllStubToPhp(){
         $path = $this->module_dir;
+
+        // manually rename "Blank" directory to its current module name in Process & Presenter
+        rename(
+            $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Process' . DIRECTORY_SEPARATOR . 'Blank',
+            $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Process' . DIRECTORY_SEPARATOR . $this->module_name
+        );
+        rename(
+            $path . DIRECTORY_SEPARATOR . 'Presenters' . DIRECTORY_SEPARATOR . 'Blank',
+            $path . DIRECTORY_SEPARATOR . 'Presenters' . DIRECTORY_SEPARATOR . $this->module_name
+        );
+
         $di = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
             RecursiveIteratorIterator::LEAVES_ONLY
@@ -132,6 +153,16 @@ class AutocrudSubmodule extends Command
         }
     }
 
+    protected function appendContent($path, $string){
+        $first_char = substr($path, 0, 1);
+        if(!in_array($first_char, ['/', '\\', DIRECTORY_SEPARATOR])){
+            $path = DIRECTORY_SEPARATOR . $path;
+        }
+        $content = file_get_contents($this->module_dir . $path);
+        $content .= $string;
+        file_put_contents($this->module_dir . $path, $content);
+    }
+
     protected function changeContent($path){
         $first_char = substr($path, 0, 1);
         if(!in_array($first_char, ['/', '\\', DIRECTORY_SEPARATOR])){
@@ -140,6 +171,7 @@ class AutocrudSubmodule extends Command
 
         $content = file_get_contents($this->module_dir . $path);
         $content = str_replace('[MODULE_NAME]', $this->module_name, $content);
+        $content = str_replace('[LOWERCASE_OLD_NAME]', $this->lowercase_old_name, $content);
         $content = str_replace('[LOWERCASE_MODULE_NAME]', $this->lowercase_name, $content);
         $content = str_replace('[PROPER_MODULE_NAME]', $this->proper_name, $content);
         $content = str_replace('[NAMESPACE]', $this->namespace, $content);

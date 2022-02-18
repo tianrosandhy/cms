@@ -3,15 +3,15 @@ namespace [NAMESPACE]\Http\Controllers;
 
 use App\Core\Base\Controllers\BaseController;
 use [NAMESPACE]\Models\[MODULE_NAME];
-use [NAMESPACE]\Presenters\[MODULE_NAME]IndexPresenter;
-use [NAMESPACE]\Presenters\[MODULE_NAME]CrudPresenter;
-use [NAMESPACE]\Presenters\[MODULE_NAME]PreimportPresenter;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]DatatableProcess;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]ExportProcess;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]CrudProcess;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]DeleteProcess;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]PreimportProcess;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]ImportProcess;
+use [NAMESPACE]\Presenters\[MODULE_NAME]\[MODULE_NAME]IndexPresenter;
+use [NAMESPACE]\Presenters\[MODULE_NAME]\[MODULE_NAME]CrudPresenter;
+use [NAMESPACE]\Presenters\[MODULE_NAME]\[MODULE_NAME]PreimportPresenter;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]DatatableProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]ExportProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]CrudProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]DeleteProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]PreimportProcess;
+use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]ImportProcess;
 
 class [MODULE_NAME]Controller extends BaseController
 {
