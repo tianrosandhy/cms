@@ -12,4 +12,4 @@ npm-debug.log
 yarn-error.log
 analytics-service-account.json
 composer.lock
-package.lock
+package-lock.json
