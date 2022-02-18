@@ -29,7 +29,9 @@ $(function(){
 	$(document).on('click', '.square-image.add', function(e){
 		e.preventDefault();
 		container = $(this).closest('.media-multiple-holder');
-		html = $("#media-multiple-single-item").html();
+
+		mainhash = container.attr('container-hash');
+		html = $("#media-multiple-single-item-" + mainhash).html();
 		container.find('.multi-media-container').append(html);
 
 		container.find('.multi-media-container .square-image:last').attr('data-hash', makeid(30));

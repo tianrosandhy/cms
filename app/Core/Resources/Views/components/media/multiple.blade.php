@@ -1,11 +1,12 @@
 <?php
 $hash = md5(sha1(rand(1, 100000) . uniqid() . time()));
+$container_hash = $hash;
 $value = $value ?? [];
 if(!is_array($value)){
 	$value = [$value];
 }
 ?>
-<div class="media-multiple-holder" container-hash="{{ $hash }}">
+<div class="media-multiple-holder" container-hash="{{ $container_hash }}">
 	<div class="multi-media-container">
 		@foreach($value as $img)
 		<?php
@@ -32,7 +33,7 @@ if(!is_array($value)){
 	</div>
 	<div class="clearfix"></div>
 </div>
-<template id="media-multiple-single-item">
+<template id="media-multiple-single-item-{{ $container_hash }}">
 	<div class="square-image input-image-holder text-center" data-hash="CUSTOM_HASH">
 		<input type="hidden" name="{{ $name }}" class="listen-image-upload">
 		<img data-fallback="{{ admin_asset('images/broken-image.jpg') }}" src="{{ admin_asset('images/broken-image.jpg') }}" class="media-item">
