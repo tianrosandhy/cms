@@ -5,8 +5,9 @@ use App\Core\Base\Presenters\BaseViewPresenter;
 
 class InstallPresenter extends BaseViewPresenter
 {
-	public function __construct(){
-		$this->title = 'Install';
-		$this->view = 'core::install';
-	}
+    public function __construct()
+    {
+        $this->title = 'Install';
+        $this->view = 'core::install';
+    }
 }

@@ -5,5 +5,5 @@ use Exception;
 
 class MediaException extends Exception
 {
-	
+
 }

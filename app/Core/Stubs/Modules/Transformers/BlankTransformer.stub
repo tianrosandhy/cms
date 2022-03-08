@@ -8,25 +8,25 @@ use Permission;
 
 class [MODULE_NAME]Transformer extends BaseTransformer implements CanTransform
 {
-	public function transform($row, $mode='datatable'){
-		return [
-			'id' => $this->checkerFormat($row),
-			'title' => $row->title,
-			'description' => $row->description,
-			'is_active' => $mode == 'datatable' ? $this->switcherFormat($row, 'is_active', (Permission::has('admin.[LOWERCASE_MODULE_NAME].switch') ? 'toggle' : 'label')) : ($row->is_active ? 'ACTIVE' : 'NOT ACTIVE'),
-			'action' => $mode == 'datatable' ? $this->actionButton($row) : '',
-		];    
-	}
+    public function transform($row, $mode='datatable'){
+        return [
+            'id' => $this->checkerFormat($row),
+            'title' => $row->title,
+            'description' => $row->description,
+            'is_active' => $mode == 'datatable' ? $this->switcherFormat($row, 'is_active', (Permission::has('admin.[LOWERCASE_MODULE_NAME].switch') ? 'toggle' : 'label')) : ($row->is_active ? 'ACTIVE' : 'NOT ACTIVE'),
+            'action' => $mode == 'datatable' ? $this->actionButton($row) : '',
+        ];    
+    }
 
-	protected function actionButton($row){
-		$out = '<div class="btn-group">';
-		if(Permission::has('admin.[LOWERCASE_MODULE_NAME].edit')){
-			$out .= '<a href="'.route('admin.[LOWERCASE_MODULE_NAME].edit', ['id' => $row->id]).'" class="btn btn-light text-primary" data-popup-lg title="Edit"><span class="iconify" data-icon="dashicons:edit"></span></a>';
-		}
-		if(Permission::has('admin.[LOWERCASE_MODULE_NAME].delete')){
-			$out .= '<a href="'.route('admin.[LOWERCASE_MODULE_NAME].delete', ['id' => $row->id]).'" class="btn btn-light text-danger delete-button"><span class="iconify" data-icon="fluent:delete-16-filled"></span></a>';
-		}
-		$out .= '</div>';
-		return $out;
-	}
+    protected function actionButton($row){
+        $out = '<div class="btn-group">';
+        if(Permission::has('admin.[LOWERCASE_MODULE_NAME].edit')){
+            $out .= '<a href="'.route('admin.[LOWERCASE_MODULE_NAME].edit', ['id' => $row->id]).'" class="btn btn-light text-primary" data-popup-lg title="Edit"><span class="iconify" data-icon="dashicons:edit"></span></a>';
+        }
+        if(Permission::has('admin.[LOWERCASE_MODULE_NAME].delete')){
+            $out .= '<a href="'.route('admin.[LOWERCASE_MODULE_NAME].delete', ['id' => $row->id]).'" class="btn btn-light text-danger delete-button"><span class="iconify" data-icon="fluent:delete-16-filled"></span></a>';
+        }
+        $out .= '</div>';
+        return $out;
+    }
 }

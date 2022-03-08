@@ -15,76 +15,84 @@ use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]ImportProcess;
 
 class [MODULE_NAME]Controller extends BaseController
 {
-	public function index(){
-		return (new [MODULE_NAME]IndexPresenter)->render();
-	}
+    public function index()
+    {
+        return (new [MODULE_NAME]IndexPresenter)->render();
+    }
 
-	public function export(){
-		return (new [MODULE_NAME]ExportProcess)
-			->type('http')
-			->handle();
-	}
+    public function export()
+    {
+        return (new [MODULE_NAME]ExportProcess)
+            ->type('http')
+            ->handle();
+    }
 
-	public function import(){
-		if($this->request->import_id){
-			// real import : handled via process
-			return (new [MODULE_NAME]ImportProcess($this->request->import_id))
-				->setType('http')
-				->setSuccessRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
-				->setErrorRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
-				->handle();
-		}
-		else if($this->request->pre_import_id){
-			// preimport : handled via preview
-			$preimport = (new [MODULE_NAME]PreimportProcess)
-				->setType('raw')
-				->handle();
+    public function import()
+    {
+        if($this->request->import_id){
+            // real import : handled via process
+            return (new [MODULE_NAME]ImportProcess($this->request->import_id))
+                ->setType('http')
+                ->setSuccessRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
+                ->setErrorRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
+                ->handle();
+        }
+        else if($this->request->pre_import_id){
+            // preimport : handled via preview
+            $preimport = (new [MODULE_NAME]PreimportProcess)
+                ->setType('raw')
+                ->handle();
 
-			return (new [MODULE_NAME]PreimportPresenter($preimport))
-				->render();			
-		}
-		else{
-			abort(400);
-		}
-	}
+            return (new [MODULE_NAME]PreimportPresenter($preimport))
+                ->render();			
+        }
+        else{
+            abort(400);
+        }
+    }
 
-	public function datatable(){
-		return (new [MODULE_NAME]DatatableProcess)
-			->type('datatable')
-			->handle();
-	}
+    public function datatable()
+    {
+        return (new [MODULE_NAME]DatatableProcess)
+            ->type('datatable')
+            ->handle();
+    }
 
-	public function create(){
-		$data = new [MODULE_NAME];
-		return (new [MODULE_NAME]CrudPresenter($data))->render();
-	}
+    public function create()
+    {
+        $data = new [MODULE_NAME];
+        return (new [MODULE_NAME]CrudPresenter($data))->render();
+    }
 
-	public function store(){
-		return (new [MODULE_NAME]CrudProcess(new [MODULE_NAME]))
-			->setSuccessRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
-			->type($this->request->ajax() ? 'ajax' : 'http')
-			->handle();
-	}
+    public function store()
+    {
+        return (new [MODULE_NAME]CrudProcess(new [MODULE_NAME]))
+            ->setSuccessRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
+            ->type($this->request->ajax() ? 'ajax' : 'http')
+            ->handle();
+    }
 
-	public function edit($id){
-		$data = [MODULE_NAME]::findOrFail($id);
-		return (new [MODULE_NAME]CrudPresenter($data))->render();
-	}
+    public function edit($id)
+    {
+        $data = [MODULE_NAME]::findOrFail($id);
+        return (new [MODULE_NAME]CrudPresenter($data))->render();
+    }
 
-	public function update($id){
-		$data = [MODULE_NAME]::findOrFail($id);
-		return (new [MODULE_NAME]CrudProcess($data))
-			->setSuccessRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
-			->type($this->request->ajax() ? 'ajax' : 'http')
-			->handle();
-	}
-	
-	public function delete($id=null){
-		return (new [MODULE_NAME]DeleteProcess)
-			->setModel(new [MODULE_NAME])
-			->setId($id)
-			->type('ajax')
-			->handle();
-	}
+    public function update($id)
+    {
+        $data = [MODULE_NAME]::findOrFail($id);
+        return (new [MODULE_NAME]CrudProcess($data))
+            ->setSuccessRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
+            ->type($this->request->ajax() ? 'ajax' : 'http')
+            ->handle();
+    }
 
+    public function delete($id=null)
+    {
+        return (new [MODULE_NAME]DeleteProcess)
+            ->setModel(new [MODULE_NAME])
+            ->setId($id)
+            ->type('ajax')
+            ->handle();
+    }
 }

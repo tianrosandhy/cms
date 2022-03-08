@@ -7,113 +7,117 @@ use Media;
 
 class Setting
 {
-	public 
-		$data = [],
-		$formatted = [];
+    public $data = [];
+    public $formatted = [];
 
-	public function __construct(){
-		$this->cache_name = config('cms.cache_key.setting', 'APP-CMS-ALLSETTING');
-		$this->loadSettingRegistrations();
-		$this->setSettingValueFromDb();
-		$this->formattedOutput();
-	}
+    public function __construct()
+    {
+        $this->cache_name = config('cms.cache_key.setting', 'APP-CMS-ALLSETTING');
+        $this->loadSettingRegistrations();
+        $this->setSettingValueFromDb();
+        $this->formattedOutput();
+    }
 
-	public function all(){
-		return $this->formatted;
-	}
+    public function all()
+    {
+        return $this->formatted;
+    }
 
-	public function get($key, $fallback=null){
-		$key = strtolower($key);
-		$value = $this->formatted[$key] ?? null;
+    public function get($key, $fallback = null)
+    {
+        $key = strtolower($key);
+        $value = $this->formatted[$key] ?? null;
 
-		//try decode, to check that the value is image
-		$decode = json_decode($value, true);
-		if($decode){
-			if(isset($decode['id']) && isset($decode['thumb'])){
-				return Media::getSelectedImage($value);
-			}
-		}
-		return $value ?? $fallback;
-	}
+        //try decode, to check that the value is image
+        $decode = json_decode($value, true);
+        if ($decode) {
+            if (isset($decode['id']) && isset($decode['thumb'])) {
+                return Media::getSelectedImage($value);
+            }
+        }
+        return $value ?? $fallback;
+    }
 
-	public function data(){
-		return collect($this->data)->sortBy('order');
-	}
+    public function data()
+    {
+        return collect($this->data)->sortBy('order');
+    }
 
-	public function insert($param){
-		return Model::insert($param);
-	}
+    public function insert($param)
+    {
+        return Model::insert($param);
+    }
 
-	public function deleteWhere($id, $field='id'){
-		return Model::where($field, $id)->delete();
-	}
+    public function deleteWhere($id, $field = 'id')
+    {
+        return Model::where($field, $id)->delete();
+    }
 
-	
+    public function loadSettingRegistrations()
+    {
+        $reg_suffix = 'Extenders\\SettingGenerator';
+        $lists = config('modules.load');
+        if (empty($lists)) {
+            $lists = [];
+        }
 
-	public function loadSettingRegistrations(){
-		$reg_suffix = 'Extenders\\SettingGenerator';
-		$lists = config('modules.load');
-		if(empty($lists)){
-			$lists = [];
-		}
+        $lists = array_map(function ($item) use ($reg_suffix) {
+            $split = explode('Providers\\', $item);
+            return $split[0] . $reg_suffix;
+        }, $lists);
+        $lists = array_merge(['\\App\\Core\\' . $reg_suffix], $lists);
 
-		$lists = array_map(function($item) use($reg_suffix){
-			$split = explode('Providers\\', $item);
-			return $split[0] . $reg_suffix;
-		}, $lists);
-		$lists = array_merge(['\\App\\Core\\' . $reg_suffix], $lists);
+        //load class lists
+        foreach ($lists as $class_name) {
+            if (!class_exists($class_name)) {
+                continue;
+            }
+            $generator = app($class_name);
+            foreach ($generator->output() as $group_key => $setting_lists) {
+                $this->data[$group_key]['order'] = $setting_lists->getOrder();
+                $this->data[$group_key]['title'] = ucwords($group_key);
+                if (isset($this->data[$group_key]['items'])) {
+                    $this->data[$group_key]['items'] = array_merge($this->data[$group_key]['items'], $setting_lists->getItems());
+                } else {
+                    $this->data[$group_key]['items'] = $setting_lists->getItems();
+                }
+            }
+        }
+    }
 
-		//load class lists
-		foreach($lists as $class_name){
-			if(!class_exists($class_name)){
-				continue;
-			}
-			$generator = app($class_name);
-			foreach($generator->output() as $group_key => $setting_lists){
-				$this->data[$group_key]['order'] = $setting_lists->getOrder();
-				$this->data[$group_key]['title'] = ucwords($group_key);
-				if(isset($this->data[$group_key]['items'])){
-					$this->data[$group_key]['items'] = array_merge($this->data[$group_key]['items'], $setting_lists->getItems());
-				}
-				else{
-					$this->data[$group_key]['items'] = $setting_lists->getItems();
-				}
-			}
-		}
-	}
+    public function setSettingValueFromDb()
+    {
+        // load setting data from cache first
+        if (Cache::has($this->cache_name)) {
+            $this->db_setting = Cache::get($this->cache_name);
+        } else {
+            $this->db_setting = app('setting');
+            Cache::set($this->cache_name, $this->db_setting, 86400);
+        }
 
-	public function setSettingValueFromDb(){
-		// load setting data from cache first
-		if(Cache::has($this->cache_name)){
-			$this->db_setting = Cache::get($this->cache_name);
-		}
-		else{
-			$this->db_setting = app('setting');
-			Cache::set($this->cache_name, $this->db_setting, 86400);
-		}
+        foreach ($this->data as $group_name => $lists) {
+            foreach ($lists['items'] as $item) {
+                $grab = $this->db_setting->where('group', $group_name)->where('param', $item->getName())->first();
+                if (!empty($grab)) {
+                    $item->setValue($grab->default_value);
+                }
+            }
+        }
+    }
 
-		foreach($this->data as $group_name => $lists){
-			foreach($lists['items'] as $item){
-				$grab = $this->db_setting->where('group', $group_name)->where('param', $item->getName())->first();
-				if(!empty($grab)){
-					$item->setValue($grab->default_value);
-				}
-			}
-		}
-	}
-
-	public function formattedOutput(){
-		foreach($this->data as $group_name => $lists){
-			foreach($lists['items'] as $item){
-				$setting_key = strtolower($group_name.'.'.$item->getName());
-				$setting_value = $item->getValue();
-				if($item->getType() == 'image'){
-					//harus diformat dulu sebelum output setting dapat diformat ke readable data
-				}
-				$this->formatted[$setting_key] = $setting_value;
-			}
-		}
-		return $this->formatted;
-	}
+    public function formattedOutput()
+    {
+        foreach ($this->data as $group_name => $lists) {
+            foreach ($lists['items'] as $item) {
+                $setting_key = strtolower($group_name . '.' . $item->getName());
+                $setting_value = $item->getValue();
+                if ($item->getType() == 'image') {
+                    //harus diformat dulu sebelum output setting dapat diformat ke readable data
+                }
+                $this->formatted[$setting_key] = $setting_value;
+            }
+        }
+        return $this->formatted;
+    }
 
 }

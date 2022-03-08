@@ -8,16 +8,18 @@ use App\Core\Contracts\CanProcessExport;
 
 class [MODULE_NAME]ExportProcess extends BaseExportProcess implements CanProcessExport
 {
-	public function exportName() : string{
-		return '[MODULE_NAME] Export';
-	}
+    public function exportName() : string
+    {
+        return '[MODULE_NAME] Export';
+    }
 
-	public function exportModel(){
-		return new [MODULE_NAME];
-	}
+    public function exportModel()
+    {
+        return new [MODULE_NAME];
+    }
 
-	public function exportStructure(){
-		return new [MODULE_NAME]Structure;
-	}
-
+    public function exportStructure()
+    {
+        return new [MODULE_NAME]Structure;
+    }
 }

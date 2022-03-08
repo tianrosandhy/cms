@@ -6,7 +6,8 @@ use App\Modules\Example\Http\Structure\ExampleStructure;
 
 class ExampleDatatableProcess extends BaseDatatableProcess
 {
-	public function structure(){
-		return new ExampleStructure;
-	}
+    public function structure()
+    {
+        return new ExampleStructure;
+    }
 }

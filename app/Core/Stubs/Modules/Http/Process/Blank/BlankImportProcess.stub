@@ -9,26 +9,26 @@ use App\Core\Exceptions\ProcessException;
 
 class [MODULE_NAME]ImportProcess extends BaseImportProcess implements CanProcessImport
 {
-    public function __construct($importID){
+    public function __construct($importID)
+    {
         $this->importID = $importID;
     }
 
-    public function handleImport($rows=[]){
+    public function handleImport($rows=[])
+    {
         // write all import logic here
         foreach($rows as $idx => $row){
             if(strtolower($row['is_active']) == 'active'){
                 $row['is_active'] = 1;
-            }
-            else{
+            } else {
                 $row['is_active'] = 0;
             }
             $rows[$idx] = $row;
         }
         $result = [MODULE_NAME]::insertOrIgnore($rows);
-        if($result > 0){
+        if ($result > 0) {
             $this->setSuccessMessage("Import success. Added ".$result." new data imported");
-        }
-        else{
+        } else {
             $this->setSuccessMessage("Import success. No new data to be imported");
         }
         return $result;

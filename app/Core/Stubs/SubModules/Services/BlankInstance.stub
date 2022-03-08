@@ -7,7 +7,8 @@ use [NAMESPACE]\Models\[MODULE_NAME];
 
 class [MODULE_NAME]Instance extends BaseInstance
 {
-	public function __construct(){
-		parent::__construct(new [MODULE_NAME]);
-	}
+    public function __construct()
+    {
+        parent::__construct(new [MODULE_NAME]);
+    }
 }

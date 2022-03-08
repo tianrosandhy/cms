@@ -1,15 +1,16 @@
 <?php
 namespace App\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Cache;
+use Illuminate\Database\Eloquent\Model;
 
 class Language extends Model
 {
     // will return all roles data in cached format
-    public function allCached(){
+    public function allCached()
+    {
         $cache_name = config('cms.cache_key.language', 'APP-CMS-ALLLANGUAGE');
-        if(Cache::has($cache_name)){
+        if (Cache::has($cache_name)) {
             return Cache::get($cache_name);
         }
 

@@ -1,7 +1,6 @@
 @extends ($base_layout ?? 'core::layouts.master')
 
 @section ('content')
-
     @include ('core::components.export-import.importer-show-errors', ['printLimit' => 5])
 
     <?php

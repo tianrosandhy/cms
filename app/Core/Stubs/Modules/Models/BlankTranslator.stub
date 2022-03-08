@@ -5,5 +5,5 @@ use App\Core\Models\BaseModel;
 
 class [MODULE_NAME]Translator extends BaseModel
 {
-	
+    
 }

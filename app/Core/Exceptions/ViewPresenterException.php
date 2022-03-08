@@ -5,5 +5,5 @@ use Exception;
 
 class ViewPresenterException extends Exception
 {
-	
+
 }

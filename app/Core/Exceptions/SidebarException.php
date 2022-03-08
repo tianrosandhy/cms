@@ -5,5 +5,5 @@ use Exception;
 
 class SidebarException extends Exception
 {
-	
+
 }

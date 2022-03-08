@@ -8,29 +8,32 @@ use App\Core\Contracts\CanProcessPreimport;
 
 class [MODULE_NAME]PreimportProcess extends BasePreimportProcess implements CanProcessPreimport
 {
-    public function importName() : string{
+    public function importName() : string
+    {
         return '[MODULE_NAME]ImportData';
     }
 
-	public function importStructure(){
-		return new [MODULE_NAME]Structure;
-	}
+    public function importStructure()
+    {
+        return new [MODULE_NAME]Structure;
+    }
 
-	public function rowValidator($rows=[]){
-		// $this->addError('add new fatal error in export');
-		// $this->addWarning('add new warning in export');
+    public function rowValidator($rows=[])
+    {
+        // $this->addError('add new fatal error in export');
+        // $this->addWarning('add new warning in export');
 
-		// $i = 0;
-		// foreach($rows as $row){
-		// 	$i++;
-		// 	if(!isset($row['text']) || !isset($row['number'])){
-		// 		$this->addError("Column text and number is required to be filled.");
-		// 	}
-			
-		// 	$radio = $row['radio'] ?? null;
-		// 	if(empty($radio)){
-		// 		$this->addWarning("Column radio in row ".$i." is empty");
-		// 	}
-		// }
-	}
+        // $i = 0;
+        // foreach($rows as $row){
+        //     $i++;
+        //     if(!isset($row['text']) || !isset($row['number'])){
+        //         $this->addError("Column text and number is required to be filled.");
+        //     }
+        //     
+        //     $radio = $row['radio'] ?? null;
+        //     if(empty($radio)){
+        //         $this->addWarning("Column radio in row ".$i." is empty");
+        //     }
+        // }
+    }
 }

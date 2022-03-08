@@ -8,23 +8,24 @@ use Validator;
 
 class [CLASSNAME] extends BaseProcess implements CanProcess
 {
-	public function validate(){
-		$validate = Validator::make($this->request->all(), [
-			//your validation rules
-		]);
+    public function validate()
+    {
+        $validate = Validator::make($this->request->all(), [
+            //your validation rules
+        ]);
 
-		if($validate->fails()){
-			throw new ProcessException($validate);
-		}
-	}
+        if($validate->fails()){
+            throw new ProcessException($validate);
+        }
+    }
 
-	public function process(){
-		//your logic after validation success
-	}
+    public function process()
+    {
+        //your logic after validation success
+    }
 
-	public function revert(){
-		//your logic when validation or process failed to running
-	}
-
-
+    public function revert()
+    {
+        //your logic when validation or process failed to running
+    }
 }

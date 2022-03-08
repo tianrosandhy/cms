@@ -6,7 +6,8 @@ use [NAMESPACE]\Http\Structure\[MODULE_NAME]Structure;
 
 class [MODULE_NAME]DatatableProcess extends BaseDatatableProcess
 {
-	public function structure(){
-		return new [MODULE_NAME]Structure;
-	}
+    public function structure()
+    {
+        return new [MODULE_NAME]Structure;
+    }
 }

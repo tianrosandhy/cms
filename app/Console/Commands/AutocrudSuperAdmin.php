@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Artisan;
 
 class AutocrudSuperAdmin extends Command
 {
@@ -23,24 +23,23 @@ class AutocrudSuperAdmin extends Command
         $email = $this->ask('Please insert the email');
         //cek email exists or not
         $warn = self::validateEmail($email);
-        if($warn){
+        if ($warn) {
             $this->error($warn);
             exit();
         }
-        if(self::checkEmailUsed($email)){
+        if (self::checkEmailUsed($email)) {
             $this->error('Email is already used for another account');
             exit();
         }
 
-
         $username = $this->ask('Type your name');
         $password = $this->secret('Type your password');
-        if(strlen($password) < 6){
+        if (strlen($password) < 6) {
             $this->error('Your password too short. Please use at least 6 characters');
             exit();
         }
 
-        if($this->confirm('We will create new admin for user '.$username.' with email '.$email.'. Do you wish to continue? ')){
+        if ($this->confirm('We will create new admin for user ' . $username . ' with email ' . $email . '. Do you wish to continue? ')) {
             //create user
             self::createUser($email, $username, $password);
             Artisan::call('autocrud:role');
@@ -48,25 +47,29 @@ class AutocrudSuperAdmin extends Command
         }
     }
 
-
-    protected function checkEmailUsed($email){
+    protected function checkEmailUsed($email)
+    {
         $n = DB::table('users')->where('email', $email)->count();
-        if($n > 0)
+        if ($n > 0) {
             return true;
+        }
+
         return false;
     }
 
-    protected function validateEmail($email){
+    protected function validateEmail($email)
+    {
         $validate = Validator::make(['email' => $email], [
-            'email' => 'required|email'
+            'email' => 'required|email',
         ]);
-        if($validate->fails()){
+        if ($validate->fails()) {
             return $validate->messages()->first();
         }
         return false;
     }
 
-    protected function createUser($email, $username, $password){
+    protected function createUser($email, $username, $password)
+    {
         DB::table('users')->insert([
             'name' => $username,
             'email' => $email,
@@ -75,7 +78,7 @@ class AutocrudSuperAdmin extends Command
             'image' => '',
             'activation_key' => null,
             'is_active' => 1,
-            'created_at' => date('Y-m-d H:i:s')
+            'created_at' => date('Y-m-d H:i:s'),
         ]);
-    }    
+    }
 }

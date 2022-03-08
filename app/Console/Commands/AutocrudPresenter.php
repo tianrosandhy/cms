@@ -10,9 +10,8 @@ class AutocrudPresenter extends Command
     protected $signature = 'autocrud:presenter';
     protected $description = 'Create presenter autocrud in module';
 
-    public 
-        $module_name,
-        $presenter_name;
+    public $module_name;
+    public $presenter_name;
 
     public function __construct()
     {
@@ -22,43 +21,41 @@ class AutocrudPresenter extends Command
     public function handle()
     {
         //
-        do{
+        do {
             $this->module_name = $this->ask('Where do you want to create the Presenter class?');
-        }while(strlen($this->module_name) == 0);
+        } while (strlen($this->module_name) == 0);
 
         $this->module_name = ucfirst($this->module_name);
-        if(strtolower($this->module_name) == 'core'){
+        if (strtolower($this->module_name) == 'core') {
             $this->mpath = 'Core';
+        } else {
+            $this->mpath = 'Modules/' . $this->module_name;
         }
-        else{
-            $this->mpath = 'Modules/'.$this->module_name;
-        }
-        $namespace = 'App/' . $this->mpath.'/Presenters';
+        $namespace = 'App/' . $this->mpath . '/Presenters';
 
-        $try_location = base_path('app/'.$this->mpath);
-        if(is_dir($try_location)){
-            do{
+        $try_location = base_path('app/' . $this->mpath);
+        if (is_dir($try_location)) {
+            do {
                 $this->presenter_name = $this->ask('Type your Presenters classname');
-            }while(strlen($this->presenter_name) == 0);
+            } while (strlen($this->presenter_name) == 0);
 
             $this->presenter_name = ucfirst($this->presenter_name);
             $this->createProcessCopy();
-            return $this->info('Presenter class has been made in "'.$namespace.'/'.$this->presenter_name.'"');
+            return $this->info('Presenter class has been made in "' . $namespace . '/' . $this->presenter_name . '"');
+        } else {
+            return $this->error('Module name "' . $this->module_name . '" is not exists.');
         }
-        else{
-            return $this->error('Module name "'.$this->module_name.'" is not exists.');
-        }    
     }
 
-
-    public function createProcessCopy(){
-        $savepath = base_path('app/'.$this->mpath.'/Presenters/'.$this->presenter_name.'.php');
-        if(is_file($savepath)){
-            $this->error('File ' . $savepath .' is already exists.');
+    public function createProcessCopy()
+    {
+        $savepath = base_path('app/' . $this->mpath . '/Presenters/' . $this->presenter_name . '.php');
+        if (is_file($savepath)) {
+            $this->error('File ' . $savepath . ' is already exists.');
             die();
         }
 
-        $namespace = 'App\\' . str_replace('/', '\\', $this->mpath) .'\\Presenters';
+        $namespace = 'App\\' . str_replace('/', '\\', $this->mpath) . '\\Presenters';
         $stub_path = base_path(config('module-setting.stubs.presenter'));
         $stub_file = fopen($stub_path, 'r');
         $stub_content = fread($stub_file, filesize($stub_path));

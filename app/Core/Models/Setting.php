@@ -7,13 +7,13 @@ class Setting extends Model
 {
     //
     protected $fillable = [
-    	'param',
-    	'name',
-    	'description',
-    	'default_value',
-    	'options',
+        'param',
+        'name',
+        'description',
+        'default_value',
+        'options',
         'group',
-    	'type',
+        'type',
     ];
 
 }

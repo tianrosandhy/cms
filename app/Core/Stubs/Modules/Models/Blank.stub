@@ -4,16 +4,18 @@ namespace [NAMESPACE]\Models;
 use App\Core\Models\BaseModel;
 use App\Core\Shared\Translateable;
 use App\Core\Shared\Sluggable;
+use App\Core\Shared\ImageGrabable;
 
 class [MODULE_NAME] extends BaseModel
 {
-	//use Translateable;
-	//use Sluggable;
+    // use Translateable;
+    // use Sluggable;
+    // use ImageGrabable;
 
-	//public $translate_model = '[NAMESPACE]\Models\[MODULE_NAME]Translator';
+    // public $translate_model = '[NAMESPACE]\Models\[MODULE_NAME]Translator';
 
-	//public function slugTarget(){
-	//	return 'title';
-	//}
-	
+    // public function slugTarget(){
+    //     return 'title';
+    // }
+
 }

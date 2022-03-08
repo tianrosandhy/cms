@@ -5,5 +5,5 @@ use Exception;
 
 class DataTableException extends Exception
 {
-	
+
 }

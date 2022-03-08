@@ -4,6 +4,8 @@ namespace App\Core\Http\Traits;
 use DB;
 use Artisan;
 use Schema;
+use Exception;
+use Illuminate\Database\QueryException;
 
 trait InstallerTrait
 {
@@ -11,7 +13,7 @@ trait InstallerTrait
 		try{
 			DB::table('cms_installs')->get();
 			return true;
-		}catch(\Illuminate\Database\QueryException $e){
+		}catch(QueryException $e){
 			return false;
 		}
 	}
@@ -75,7 +77,7 @@ trait InstallerTrait
 			$env = fread($file, filesize($env_path));
 			$env = explode("\n", $env);
 
-		}catch(\Exception $e){
+		}catch(Exception $e){
 			$env_path = false;
 			$env = [];
 		}
@@ -87,7 +89,7 @@ trait InstallerTrait
 			$string = implode("\n", $arr);
 			$env_path = base_path(".env");
 			file_put_contents($env_path, $string);
-		}catch(\Exception $e){
+		}catch(Exception $e){
 			return false;
 		}
 		return true;
@@ -99,7 +101,7 @@ trait InstallerTrait
 			//check connection exists
 			#will return error if connection failed
 			DB::query(DB::raw('SELECT 1'));
-		}catch(\Exception $e){
+		}catch(Exception $e){
 			dd($e);
 			return 'Wrong database connection';
 		}
@@ -119,7 +121,7 @@ trait InstallerTrait
 				DB::select('SHOW TABLES');
 			}
 
-		}catch(\Exception $e){
+		}catch(Exception $e){
 			return 'Database not exists';
 		}
 

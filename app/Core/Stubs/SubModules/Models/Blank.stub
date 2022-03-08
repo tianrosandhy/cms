@@ -8,14 +8,13 @@ use App\Core\Shared\ImageGrabable;
 
 class [MODULE_NAME] extends Model
 {
-	// use Translateable;
-	// use Sluggable;
-	use ImageGrabable;
+    // use Translateable;
+    // use Sluggable;
+    // use ImageGrabable;
 
-	// public $translate_model = '[NAMESPACE]\Models\[MODULE_NAME]Translator';
+    // public $translate_model = '[NAMESPACE]\Models\[MODULE_NAME]Translator';
 
-	// public function slugTarget(){
-	// 	return 'title';
-	// }
-	
+    // public function slugTarget(){
+    //     return 'title';
+    // }
 }

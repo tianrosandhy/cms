@@ -6,7 +6,8 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class ViewExporter implements FromView
 {
-    public function __construct(View $view){
+    public function __construct(View $view)
+    {
         $this->view = $view;
     }
 

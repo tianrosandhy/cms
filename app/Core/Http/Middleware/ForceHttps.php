@@ -2,9 +2,9 @@
 namespace App\Core\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\App;
 
-class ForceHttps {
+class ForceHttps
+{
 
     public function handle($request, Closure $next)
     {
@@ -12,6 +12,6 @@ class ForceHttps {
             return redirect()->secure($request->getRequestUri());
         }
 
-        return $next($request); 
+        return $next($request);
     }
 }

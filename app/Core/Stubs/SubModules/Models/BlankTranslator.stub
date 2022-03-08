@@ -5,5 +5,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class [MODULE_NAME]Translator extends Model
 {
-	
+    
 }

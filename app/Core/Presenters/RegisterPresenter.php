@@ -5,8 +5,9 @@ use App\Core\Base\Presenters\BaseViewPresenter;
 
 class RegisterPresenter extends BaseViewPresenter
 {
-	public function __construct(){
-		$this->title = 'Register';
-		$this->view = 'core::register';
-	}
+    public function __construct()
+    {
+        $this->title = 'Register';
+        $this->view = 'core::register';
+    }
 }

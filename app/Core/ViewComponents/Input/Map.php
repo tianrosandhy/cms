@@ -2,23 +2,23 @@
 namespace App\Core\ViewComponents\Input;
 
 use App\Core\Base\ViewComponents\BaseViewComponent;
- 
+
 class Map extends BaseViewComponent
 {
-  /*
-   * Component initialization : 
-   * <x-core::input.image-simple name="input_name" />
-   */
-  public string $view = 'core::components.input.map';
+    /*
+     * Component initialization :
+     * <x-core::input.image-simple name="input_name" />
+     */
+    public string $view = 'core::components.input.map';
 
-  // This component will generate a default map component for image component with its configuration
+    // This component will generate a default map component for image component with its configuration
 
-  public function __construct(
-    public string $name,
-    public $value = null,
-    public array $attr = [],
-    public bool $multiLanguage = false,
-    public $data = null,
-  ){}
+    public function __construct(
+        public string $name,
+        public $value = null,
+        public array $attr = [],
+        public bool $multiLanguage = false,
+        public $data = null,
+    ) {}
 
 }

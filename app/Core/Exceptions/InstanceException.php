@@ -3,4 +3,7 @@ namespace App\Core\Exceptions;
 
 use Exception;
 
-class InstanceException extends Exception{}
+class InstanceException extends Exception
+{
+
+}

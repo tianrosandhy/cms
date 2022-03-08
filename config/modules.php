@@ -1,6 +1,6 @@
 <?php
 return [
-	'load' => [
-		App\Modules\Example\Providers\ExampleServiceProvider::class,
-	],
+    'load' => [
+        App\Modules\Example\Providers\ExampleServiceProvider::class,
+    ],
 ];

@@ -1,26 +1,26 @@
 <?php
 namespace App\Core\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Arr;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Arr;
+use Illuminate\Support\ServiceProvider;
 
 class BaseServiceProvider extends ServiceProvider
 {
 
-    protected function registerFacadeAlias($alias_name, $target){
+    protected function registerFacadeAlias($alias_name, $target)
+    {
         AliasLoader::getInstance()->alias($alias_name, $target);
     }
 
-    protected function mergeConfigLists($arr=[]){
-        foreach($arr as $cfg_name => $path){
+    protected function mergeConfigLists($arr = [])
+    {
+        foreach ($arr as $cfg_name => $path) {
             $this->mergeConfigFrom($path, $cfg_name);
         }
     }
 
-
-	protected function mergeConfigFrom($path, $key)
+    protected function mergeConfigFrom($path, $key)
     {
         $config = $this->app['config']->get($key, []);
         $this->app['config']->set($key, $this->mergeConfig(require $path, $config));
@@ -36,10 +36,10 @@ class BaseServiceProvider extends ServiceProvider
     {
         $array = array_merge($original, $merging);
         foreach ($original as $key => $value) {
-            if (! is_array($value)) {
+            if (!is_array($value)) {
                 continue;
             }
-            if (! Arr::exists($merging, $key)) {
+            if (!Arr::exists($merging, $key)) {
                 continue;
             }
             if (is_numeric($key)) {
@@ -52,7 +52,7 @@ class BaseServiceProvider extends ServiceProvider
 
     protected function loadHelpers($dir)
     {
-        foreach (glob($dir.'/Helpers/*.php') as $filename) {
+        foreach (glob($dir . '/Helpers/*.php') as $filename) {
             require_once $filename;
         }
     }

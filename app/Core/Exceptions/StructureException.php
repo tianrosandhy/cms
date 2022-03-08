@@ -5,5 +5,5 @@ use Exception;
 
 class StructureException extends Exception
 {
-	
+
 }
