@@ -56,7 +56,11 @@ class BaseProcess
                 if (method_exists($e, 'getCode')) {
                     $this->setHttpCode($e->getCode());
                 }
-                $this->setErrorMessage($e->getMessage());
+                if (method_exists($e, 'getExceptionMessage')) {
+                    $this->setErrorMessage($e->getExceptionMessage());
+                } else {
+                    $this->setErrorMessage($e->getMessage());
+                }
 
                 if ($this->type == 'raw') {
                     // langsung throw aja exceptionnya
