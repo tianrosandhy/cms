@@ -5,6 +5,7 @@ use App\Core\Exceptions\DataTableException;
 use App\Core\Exceptions\ProcessException;
 use App\Core\Shared\DynamicProperty;
 use Log;
+use Exception;
 
 class BaseProcess
 {
@@ -34,7 +35,7 @@ class BaseProcess
 
     public function type($process_type = null)
     {
-        $available_process_type = ['http', 'ajax', 'datatable'];
+        $available_process_type = ['http', 'ajax', 'datatable', 'raw'];
         if (in_array(strtolower($process_type), $available_process_type)) {
             $this->type = strtolower($process_type);
         }
@@ -46,7 +47,7 @@ class BaseProcess
         if (method_exists($this, 'validate')) {
             try {
                 $this->validate();
-            } catch (ProcessException | DataTableException $e) {
+            } catch (ProcessException | DataTableException | Exception $e) {
                 Log::error("THROWN VALIDATION EXCEPTION IN " . get_class($this) . " : ", [
                     'message' => $e->getMessage(),
                     'exception' => $e,

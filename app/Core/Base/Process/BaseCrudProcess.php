@@ -37,6 +37,11 @@ class BaseCrudProcess extends BaseProcess implements CanProcess
                 throw new ProcessException($validator);
             }
         }
+
+        // create additional after validation hook in custom process class
+        if (method_exists($this, 'afterValidation')) {
+            $this->afterValidation();
+        }
     }
 
     public function process()

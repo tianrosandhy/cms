@@ -89,9 +89,7 @@ class ExampleController extends BaseController
 
     public function delete($id=null)
     {
-        return (new ExampleDeleteProcess)
-            ->setModel(new Example)
-            ->setId($id)
+        return (new ExampleDeleteProcess($id))
             ->type('ajax')
             ->handle();
     }

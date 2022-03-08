@@ -11,6 +11,11 @@ class ExampleCrudProcess extends BaseCrudProcess
         return new ExampleStructure;
     }
 
+    public function afterValidation()
+    {
+        // throw anything if you want to stop the process execution.
+    }
+
     /**
     * This method will be called after the default Create / Update process running successfully.
     * You can add additional logic after the basic data stored/updated.

@@ -8,6 +8,12 @@ use Validator;
 
 class ExampleDeleteProcess extends BaseDeleteProcess
 {
+    public function __construct($id=null)
+    {
+        parent::__construct();
+        $this->id = $id;
+    }
+
     /**
     * The model target that will be deleted
     */

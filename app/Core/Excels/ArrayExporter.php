@@ -16,6 +16,7 @@ class ArrayExporter extends DefaultValueBinder implements FromView, WithCustomVa
         $this->data = $data;
         $this->view = view('core::excel.export-array', compact('fieldTranslate', 'data'));
     }
+    
     public function view(): View
     {
         return $this->view;
