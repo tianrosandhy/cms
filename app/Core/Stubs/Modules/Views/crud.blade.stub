@@ -82,11 +82,18 @@
                                 }
                                 ?>
                                 <div class="form-group custom-form-group {!! $row->getInputType() == 'radio' ? 'radio-box' : '' !!}" data-crud="{{ $row->getField() }}">
+                                    @if($row->show_label)
                                     <label for="{{ $row->input_attribute['id'] }}" class="{{ strpos($validation_rule, 'required') !== false ? 'required' : '' }}">
                                         {{ $row->name }}
                                         <span class="label-language-holder text-uppercase"></span>
                                     </label>
+                                    @endif
                                     {!! $row->createInput($data, ($structure->multi_language ?? false)) !!}
+                                    @if($row->notes)
+                                    <div>
+                                        <small>{{ $row->notes }}</small>
+                                    </div>
+                                    @endif
                                 </div>
                             @endif
                         </div>

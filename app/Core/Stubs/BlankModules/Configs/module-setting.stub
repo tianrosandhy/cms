@@ -1,0 +1,6 @@
+<?php
+return [
+    '[LOWERCASE_MODULE_NAME]' => [
+        
+    ]
+];

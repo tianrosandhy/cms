@@ -1,0 +1,5 @@
+<?php
+#source : ./app/Core/Routes/autocrud.php
+generateAdminRoute('/[LOWERCASE_MODULE_NAME]', '\[NAMESPACE]\Http\Controllers\[MODULE_NAME]Controller', '[LOWERCASE_MODULE_NAME]');
+
+#you can append more routes here for the submodule

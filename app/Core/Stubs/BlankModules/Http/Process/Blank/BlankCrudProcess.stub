@@ -1,0 +1,18 @@
+<?php
+namespace [NAMESPACE]\Http\Process\[MODULE_NAME];
+
+use App\Core\Base\Process\BaseProcess;
+use Validator;
+
+class [MODULE_NAME]CrudProcess extends BaseProcess
+{
+    public function validate()
+    {
+        // $this->request->validate([...]);
+    }
+
+    public function process()
+    {
+        // your process logic here
+    }
+}
