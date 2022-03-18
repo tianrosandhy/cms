@@ -38,7 +38,14 @@ class ExampleStructure extends BaseStructure implements CanStructured
                 ]),
             DataStructure::field('number')
                 ->name('Number Example')
-                ->inputType('number'),
+                ->inputType('number')
+                ->notes("Contoh input dengan search override")
+                ->searchOverride(function($current_value, $context, $data_structures){
+                    // custom search override example
+                    return function($qry) use($current_value) {
+                        return $qry->where('number', '<=', $current_value);
+                    };
+                }),
             DataStructure::field('dates')
                 ->name('Date Example')
                 ->inputType('date'),
@@ -57,7 +64,9 @@ class ExampleStructure extends BaseStructure implements CanStructured
             DataStructure::field('textarea')
                 ->name('Textarea Example')
                 ->inputType('textarea')
-                ->exportable(false),
+                ->exportable(false)
+                ->notes("Contoh input dengan orderOverride")
+                ->orderOverride(\DB::raw('CHAR_LENGTH(textarea)')),
             DataStructure::field('richtext')
                 ->name('Rich Text Example')
                 ->inputType('richtext')
@@ -71,6 +80,7 @@ class ExampleStructure extends BaseStructure implements CanStructured
             DataStructure::field('image_multiple')
                 ->name('Image Multiple Example')
                 ->inputType('image_multiple')
+                ->showLabel(false)
                 ->searchable(false)
                 ->orderable(false)
                 ->exportable(false),

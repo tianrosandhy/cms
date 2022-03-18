@@ -129,19 +129,43 @@ trait DataTableProcessor
 
         //data-data yang diluar column listing boleh diabaikan dari filter
         $model_fields = ColumnListing::model($data);
+        $map_custom_filter = [];
+        $map_custom_orderby = [];
+
+        foreach ($this->structure->structure as $struct) {
+            if (!empty($struct->order_override)) {
+                $map_custom_orderby[$struct->field] = $struct->order_override;
+            }
+        }
+
         if (!empty($this->filter)) {
 
             // additional logic to check input type
             $map_input_type = [];
             foreach ($this->structure->structure as $struct) {
-                $map_input_type[$struct->field] = $struct->input_type;
+                // if current DataStructure contain search override, register it first
+                if (!empty($struct->search_override)) {
+                    $map_custom_filter[$struct->field] = $struct->search_override;
+                } else {
+                    $map_input_type[$struct->field] = $struct->input_type;
+                }
             }
 
             foreach ($this->filter as $column => $value) {
-                if (!in_array($column, $model_fields)) {
+                if (isset($map_custom_filter[$column])) {
+                    // handle filter override
+                    if (!is_callable($map_custom_filter[$column])) {
+                        throw new DataTableException("Filter '".$column."' search_override is invalid. You need to return a valid callback of query builder");
+                    }
+                    $call_result = call_user_func($map_custom_filter[$column], $value, $this->filter, $this);
+                    $data = $data->when(true, $call_result);
                     continue;
                 }
 
+                // default filter/search logic handle
+                if (!in_array($column, $model_fields)) {
+                    continue;
+                }
                 $input_type = $map_input_type[$column] ?? 'text';
 
                 //jika tipe input adalah dropdown / angka, query tidak perlu menggunakan where LIKE.
@@ -159,7 +183,14 @@ trait DataTableProcessor
         $without_filter = clone $data;
         $datacount = $without_filter->count();
 
-        $data = $data->orderBy($this->order_by, $this->order_dir);
+        // handle orderby
+        if (isset($map_custom_orderby[$this->order_by])) {
+            $order_by = $map_custom_orderby[$this->order_by];
+            $data = $data->orderBy($order_by, $this->order_dir);
+        } else {
+            $data = $data->orderBy($this->order_by, $this->order_dir);
+        }
+
         $data = $data->skip($this->start);
         $data = $data->take($this->length);
         $this->recordsFiltered = $datacount;

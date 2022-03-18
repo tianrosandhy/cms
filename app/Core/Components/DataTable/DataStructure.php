@@ -13,47 +13,50 @@ class DataStructure
     use DynamicProperty;
 
     // basic
-    public $field;
-    public $name;
-    public $default_order;
+    public $field; // (string) the field name that will be used in CRUD input and table field id
+    public $name; // (string) the human-readable name that will be shown as table header / form label
+    public $default_order; // (bool) default order of data (asc/desc) - default = desc
 
     // datatable
-    public $orderable;
-    public $searchable;
-    public $hide_table;
-    public $hide_form;
+    public $orderable; // (bool) set current field can be ordered (default = true)
+    public $searchable; // (bool) set current field can be filtered (default = true)
+    public $hide_table; // (bool) remove current field in DataTable (default = false)
+    public $hide_form; // (bool) remove current field in CRUD (default = false)
+    public $order_override; // (string|Closure) if you want to override the default order field name. Default : order by $field
+    public $search_override; // (Closure) if you want to override the search filter behavior of this field. Default : filter by $field
 
     // exporter
-    public $exportable;
-    public $export_searchable;
-    public $hide_export;
+    public $exportable; // (bool) set the current field can be exported (default = true)
+    public $export_searchable; // (bool) set the current field can be filtered in export modal (default = true)
+    public $hide_export; // (bool) remove current field in Export fields (defult = false)
 
-    // visibility
-    public $show_on_create;
-    public $show_on_update;
-    public $crud_show_condition;
-    public $table_show_condition;
+    // CRUD visibility
+    public $show_on_create; // (bool) set the current CRUD field is shown in create mode (default = true)
+    public $show_on_update; // (bool) set the current CRUD field is shown in update mode (default = true)
+    public $crud_show_condition; // (Closure) set current field in CRUD visibility by closure that return bool
+    public $table_show_condition; // (Closure) set current field in DataTable visibility by closure that return bool
 
     // form & input
-    public $form_column;
-    public $input_type;
-    public $input_attribute;
-    public $input_array;
+    public $form_column; // (int) set the CRUD field width in bootstrap column format (1-12). (Default = 12)
+    public $input_type; // (string) set the input type based on Input::class
+    public $input_attribute; // (array) append the input in CRUD with this attribute
+    public $input_array; // mark that the current input is array or single input (default = false)
+    public $show_label; // (bool) manage the CRUD label visibility (default = true)
+    public $notes; // (string) append string note on below CRUD input
 
     // validation
-    public $create_validation;
-    public $update_validation;
-    public $validation_translation;
+    public $create_validation; // (string) the Validation rule string that will be applied in CRUD create mode
+    public $update_validation; // (string) the Validation rule string that will be applied in CRUD update mode
+    public $validation_translation; // (array) the Validation translation override that will be applied in CRUD when processed
 
-    public $slug_target;
-    public $data_source;
-    public $value_source;
-    public $value_data;
-    public $translate;
-    public $view_source;
-    public $tab_group;
-    public $view;
-    public $fallback;
+    public $slug_target; // (string) Only used when $input_type="slug". Fill with target Input::class $field name, so slug will be automatically created based on that field 
+    public $data_source; // (array|Closure) The data source for multiple value input like "select", "checkbox", "radio". (Mandatory)
+    public $value_data; // (Closure) set the current CRUD input default value data.
+    public $translate; // (bool) mark this field as translateable or not (default = true)
+    public $view_source; // (string) Mandatory when you use $input_type="view". Fill the view path target of the custom input
+    public $tab_group; // (string) Set the CRUD tab group name if you want to have multiple tab form. (Default = null)
+    public $view; // (string) Append custom view in CRUD.  
+    public $fallback; // (any) Set the fallback value of current input
 
     public function __construct()
     {
@@ -64,6 +67,8 @@ class DataStructure
         $this->export_searchable = true;
         $this->hide_form = false;
         $this->hide_table = false;
+        $this->order_override = null;
+        $this->search_override = null;
         $this->show_on_create = true;
         $this->show_on_update = true;
         $this->crud_show_condition = null;
@@ -74,12 +79,13 @@ class DataStructure
         $this->input_type = 'text';
         $this->input_array = false;
         $this->slug_target = false;
-        $this->value_source = false;
         $this->translate = true;
         $this->tab_group = 'General';
         $this->validation_translation = [];
         $this->view = null;
         $this->fallback = null;
+        $this->show_label = true;
+        $this->notes = null;
     }
 
     public function createInput($data = null, $multi_language = false)
@@ -115,14 +121,7 @@ class DataStructure
         if (strpos($field_name, '[]') !== false) {
             $field_name = str_replace('[]', '', $field_name);
         }
-        if ($this->value_source) {
-            $grab_ = DB::table($this->value_source[0])->find($this->value_source[1]);
-            if ($multi_language) {
-                $value[Language::default()] = $grab_->{$this->value_source[2]};
-            } else {
-                $value = $grab_->{$this->value_source[2]};
-            }
-        } elseif ($this->value_data) {
+        if ($this->value_data) {
             if ($multi_language) {
                 foreach (Language::available() as $lang => $langlabel) {
                     $value[$lang] = call_user_func($this->value_data, $data, $lang);
@@ -259,6 +258,18 @@ class DataStructure
     public function name($name = '')
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function showLabel($show_condition=true)
+    {
+        $this->show_label = $show_condition;
+        return $this;
+    }
+
+    public function notes($notes=null)
+    {
+        $this->notes = $notes;
         return $this;
     }
 
@@ -440,12 +451,6 @@ class DataStructure
         return $this;
     }
 
-    public function valueSource($table = '', $id = '', $grab = '')
-    {
-        $this->value_source = [$table, $id, $grab];
-        return $this;
-    }
-
     public function setTranslate($bool = false)
     {
         $this->translate = $bool;
@@ -496,6 +501,18 @@ class DataStructure
     public function tableShowCondition(Closure $fn)
     {
         $this->table_show_condition = $fn;
+        return $this;
+    }
+
+    public function searchOverride(Closure $fn)
+    {
+        $this->search_override = $fn;
+        return $this;
+    }
+
+    public function orderOverride($fn)
+    {
+        $this->order_override = $fn;
         return $this;
     }
 
