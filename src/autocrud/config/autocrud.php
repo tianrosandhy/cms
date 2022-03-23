@@ -14,7 +14,7 @@ return [
         'load_bootstrap' => true,
         'load_jquery' => true,
         'load_iconify' => true,
-        'load_datetimepicker' => true,
+        'load_plugins' => true,
     ],
 
     'renderer' => [

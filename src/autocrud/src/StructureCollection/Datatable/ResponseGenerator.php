@@ -55,34 +55,20 @@ trait ResponseGenerator
 
     public function prepareDataTableVariables()
     {
-        $fallback_order = null;
         $this->filter = [];
 
-        foreach ($this->structure as $struct) {
-            if (!$struct->isVisible()) {
-                continue;
-            }
-
-            
-        }
-
-        foreach ($this->columns as $idx => $col) {
-            if (isset($col['search']['value'])) {
-                $this->filter[$col['data']] = $col['search']['value'];
-            }
-            if (empty($fallback_order) && $col['orderable'] != 'false') {
-                $fallback_order = $col['data'];
-            }
+        foreach ($this->request->keywords ?? [] as $field => $value) {
+            $this->filter[str_replace('[]', '', $field)] = $value;
         }
 
         if (isset($this->request->order[0]['column'])) {
             $cindex = $this->request->order[0]['column'];
-            $order_by = $this->columns[$cindex]['data'] ?? $fallback_order;
+            $order_by = $this->columns[$cindex]['data'] ?? null;
         } else {
-            $order_by = $fallback_order;
+            $order_by = null;
         }
         $order_dir = $this->request->order[0]['dir'] ?? 'desc';
-        $this->order_by = $order_by;
+        $this->order_by = null;
         $this->order_dir = $order_dir;
     }
 
@@ -97,7 +83,7 @@ trait ResponseGenerator
 
         foreach ($this->structure as $struct) {
             if (!empty($struct->order_override)) {
-                $map_custom_orderby[$struct->field] = $struct->order_override;
+                $map_custom_orderby[$struct->field()] = $struct->order_override;
             }
         }
 
@@ -108,13 +94,16 @@ trait ResponseGenerator
             foreach ($this->structure as $struct) {
                 // if current DataStructure contain search override, register it first
                 if (!empty($struct->search_override)) {
-                    $map_custom_filter[$struct->field] = $struct->search_override;
+                    $map_custom_filter[$struct->field()] = $struct->search_override;
                 } else {
-                    $map_input_type[$struct->field] = $struct->input_type;
+                    $map_input_type[$struct->field()] = $struct->getInputType();
                 }
             }
 
             foreach ($this->filter as $column => $value) {
+                if (empty($value)) {
+                    continue;
+                }
                 if (isset($map_custom_filter[$column])) {
                     // handle filter override
                     if (!is_callable($map_custom_filter[$column])) {
@@ -125,11 +114,7 @@ trait ResponseGenerator
                     continue;
                 }
 
-                // default filter/search logic handle
-                if (!in_array($column, $model_fields)) {
-                    continue;
-                }
-                $input_type = $map_input_type[$column] ?? 'text';
+                $input_type = $map_input_type[$column] ?? Input::TYPE_TEXT;
 
                 //jika tipe input adalah dropdown / angka, query tidak perlu menggunakan where LIKE.
                 if ((is_numeric($value) && strlen($value) < 6) || in_array($input_type, [

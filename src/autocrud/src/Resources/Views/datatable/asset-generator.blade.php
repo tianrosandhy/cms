@@ -28,6 +28,7 @@ $(function(){
             if (typeof afterDatatableLoad == 'function') {
                 afterDatatableLoad();
             }
+            refreshPlugins();
         },
 		'columns' : [
 			{!! $context->datatableColumns() !!}
@@ -62,6 +63,7 @@ $(function(){
         if (typeof afterDatatableFilterLoad == 'function') {
             afterDatatableFilterLoad();
         }
+        refreshPlugins();        
     });
 
 });
