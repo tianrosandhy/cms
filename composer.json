@@ -8,6 +8,12 @@
         "autocrud"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "./src/autocrud"
+        }
+    ],
     "require": {
         "php": "^8.0",
         "doctrine/dbal": "^3.3",
@@ -32,7 +38,8 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "TianRosandhy\\Autocrud\\": "src/autocrud/src/"
         }
     },
     "autoload-dev": {

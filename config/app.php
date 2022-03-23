@@ -179,6 +179,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Core\Providers\CoreServiceProvider::class,
+        TianRosandhy\Autocrud\AutocrudServiceProvider::class,
 
     ],
 

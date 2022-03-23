@@ -22,7 +22,7 @@ class CoreServiceProvider extends BaseServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/Translations', 'core');
 
         // blade view component registration
-        Blade::componentNamespace('App\Core\ViewComponents', 'core');
+        // Blade::componentNamespace('App\Core\ViewComponents', 'core');
     }
 
     public function register()
@@ -118,15 +118,15 @@ class CoreServiceProvider extends BaseServiceProvider
     {
         //automatically load alias
         $aliasData = [
-            'Input' => \App\Core\Facades\InputComponentFacade::class,
+            // 'Input' => \App\Core\Facades\InputComponentFacade::class,
             'Setting' => \App\Core\Facades\SettingComponentFacade::class,
             'Media' => \App\Core\Facades\MediaComponentFacade::class,
             'Sidebar' => \App\Core\Facades\SidebarComponentFacade::class,
             'SidebarItem' => \App\Core\Facades\SidebarItemComponentFacade::class,
-            'DataStructure' => \App\Core\Facades\DataStructureComponentFacade::class,
-            'DataTable' => \App\Core\Facades\DataTableComponentFacade::class,
             'Permission' => \App\Core\Facades\PermissionComponentFacade::class,
-            'Language' => \App\Core\Facades\LanguageComponentFacade::class,
+            // 'DataStructure' => \App\Core\Facades\DataStructureComponentFacade::class,
+            // 'DataTable' => \App\Core\Facades\DataTableComponentFacade::class,
+            // 'Language' => \App\Core\Facades\LanguageComponentFacade::class,
             'SlugMaster' => \App\Core\Facades\SlugMasterComponentFacade::class,
             'SEO' => \App\Core\Facades\SeoComponentFacade::class,
             'ColumnListing' => \App\Core\Facades\ColumnListingComponentFacade::class,

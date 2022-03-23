@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-class AutocrudSubmodule extends Command
+class AutocrudBlankSubmodule extends Command
 {
     protected $signature = 'autocrud:blanksubmodule';
     protected $description = 'Scaffold CMS Blank Sub Module';
