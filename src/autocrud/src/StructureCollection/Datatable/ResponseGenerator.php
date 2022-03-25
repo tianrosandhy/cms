@@ -31,6 +31,25 @@ trait ResponseGenerator
             if (empty($this->data)) {
                 $this->data = $this->raw_data;
             }
+
+            if (method_exists($this, 'beforeTableBody')) {
+                if (method_exists($this, 'toArray')) {
+                    $this->data = $this->data->toArray();
+                }
+
+                $pk = null;
+                if (method_exists($this, 'tableKey')) {
+                    $pk = $this->tableKey();
+                }
+
+                $final = [];
+                foreach ($this->data as $row) {
+                    $append = $this->beforeTableBody($row, $pk);
+                    $row = array_merge($append, $row);
+                    $final[] = $row;
+                }
+                $this->data = $final;
+            }
         } catch (Exception $e) {
             $this->datatable_error = $e->getMessage();
         }
@@ -61,14 +80,13 @@ trait ResponseGenerator
             $this->filter[str_replace('[]', '', $field)] = $value;
         }
 
+        $order_by = null;
         if (isset($this->request->order[0]['column'])) {
             $cindex = $this->request->order[0]['column'];
             $order_by = $this->columns[$cindex]['data'] ?? null;
-        } else {
-            $order_by = null;
         }
         $order_dir = $this->request->order[0]['dir'] ?? 'desc';
-        $this->order_by = null;
+        $this->order_by = $order_by;
         $this->order_dir = $order_dir;
     }
 
@@ -109,8 +127,10 @@ trait ResponseGenerator
                     if (!is_callable($map_custom_filter[$column])) {
                         throw new Exception("Filter '".$column."' search_override is invalid. You need to return a valid callback of query builder");
                     }
-                    $call_result = call_user_func($map_custom_filter[$column], $value, $this->filter, $this);
-                    $data = $data->when(true, $call_result);
+
+                    if (is_array($value) && isset(array_values($value)[0]) || is_string($value)) {
+                        $data = $data->when(true, $map_custom_filter[$column]);
+                    }
                     continue;
                 }
 
@@ -124,6 +144,17 @@ trait ResponseGenerator
                     Input::TYPE_NUMBER,
                 ])) {
                     $data = $data->where($column, trim($value));
+                } else if (is_array($value)) {
+                    // basic handle datetime filter
+                    $value = array_values($value);
+                    if (count($value) == 2) {
+                        if (strlen($value[0]) > 0) {
+                            $data = $data->where($column, '>=', $value[0]);
+                        }
+                        if (strlen($value[1]) > 0) {
+                            $data = $data->where($column, '<=', $value[1]);
+                        }
+                    }
                 } else {
                     $data = $data->where($column, 'like', '%' . trim($value) . '%');
                 }

@@ -1,6 +1,8 @@
 <?php
 namespace TianRosandhy\Autocrud\StructureCollection\Datatable;
 
+use Input;
+
 /**
  * DatatableStructureCollection Renderer logic collections
  */
@@ -29,12 +31,17 @@ trait Renderer
     public function generateSearchQuery()
     {
         $out = 'data.keywords = new Object; ';
-        $i = 0;
+        $i = $this->beforeRendererCount(); // if there is new before table append, $i will adapt
         foreach ($this->structure as $row) {
             if ($row->isVisible()) {
                 $fld = str_replace('[]', '', $row->getField());
-                // $out .= 'data.columns[' . $i . ']["search"]["value"] = $("#searchBox-'.$this->hash.' [data-id=\'datatable-filter-' . $fld . '\']").val(), ';
-                $out .= 'data.keywords["'.$fld.'"] = $("#searchBox-'.$this->hash.' [data-id=\'datatable-filter-' . $fld . '\']").val(); ';                
+                if (in_array($row->inputType(), [Input::TYPE_DATE, Input::TYPE_DATERANGE, Input::TYPE_DATERANGE])) {
+                    $out .= 'data.keywords["'.$fld.'"] = new Array;';
+                    $out .= 'data.keywords["'.$fld.'"][0] = $("#searchBox-'.$this->hash.' [data-id=\'datatable-filter-' . $fld . '\'][data-start-range]").val(); ';    
+                    $out .= 'data.keywords["'.$fld.'"][1] = $("#searchBox-'.$this->hash.' [data-id=\'datatable-filter-' . $fld . '\'][data-end-range]").val(); ';    
+                } else {
+                    $out .= 'data.keywords["'.$fld.'"] = $("#searchBox-'.$this->hash.' [data-id=\'datatable-filter-' . $fld . '\']").val(); ';
+                }
                 $i++;
             }
         }
@@ -44,7 +51,14 @@ trait Renderer
     public function datatableOrderable()
     {
         $out = '';
-        $i = 0;
+        $i = $this->beforeRendererCount(); // if there is new before table append, $i will adapt
+        if ($i > 0) {
+            // force disable orderable on appended before renderer
+            for ($x=0; $x<$i; $x++) {
+                $out .= "{'targets' : ".$x.", 'orderable' : false}, ";
+            }
+        }
+
         foreach ($this->structure as $row) {
             if ($row->isVisible()) {
                 if (!$row->getOrderable()) {
@@ -60,7 +74,7 @@ trait Renderer
     public function datatableDefaultOrder()
     {
         $order_data = ''; //fallback
-        $i = 0;
+        $i = $this->beforeRendererCount(); // if there is new before table append, $i will adapt
         foreach ($this->structure as $row) {
             if ($row->isVisible()) {
                 if (strlen($row->getDefaultOrder()) > 0) {
@@ -79,6 +93,12 @@ trait Renderer
     {
         $i = 0;
         $out = '';
+        if ($this->beforeRendererCount() > 0) {
+            foreach ($this->beforeTableHead() as $row) {
+                $out .= "{data : '".($row['field'] ?? 'unknown_field_' . substr(sha1(rand(1, 9999) . uniqid()), 0, 8) )."'}, ";
+            }
+        }
+
         foreach ($this->structure as $row) {
             if ($row->isVisible()) {
                 $fld = str_replace('[]', '', $row->field());
@@ -87,5 +107,14 @@ trait Renderer
         }
         $out .= "{data : 'action'}";
         return $out;
-    }        
+    }
+
+    protected function beforeRendererCount()
+    {
+        if (method_exists($this, 'beforeTableHead')) {
+            $before_table = $this->beforeTableHead();
+            return count($before_table);
+        }
+        return 0;
+    }
 }

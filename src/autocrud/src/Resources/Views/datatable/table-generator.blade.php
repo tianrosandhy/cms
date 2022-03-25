@@ -2,9 +2,15 @@
     @include ('autocrud::datatable.table-control-button')
     @include ('autocrud::datatable.table-filter-modal')
 
-    <table class="table datatable" id="autocrud-table-{{ $hash }}">
+    <table class="table datatable" id="autocrud-table-{{ $hash }}" data-id="tb_data_{{ $hash }}">
         <thead>
             <tr>
+                @if (method_exists($context, 'beforeTableHead'))
+                    @foreach ($context->beforeTableHead() as $row)
+                    <th data-field="{{ $row['field'] ?? '' }}" data-orderable="{{ false }}" data-searchable="{{ false }}">{!! $row['label'] ?? '' !!}</th>
+                    @endforeach
+                @endif
+
                 @foreach($structure as $struct)
                 <th data-field="{{ $struct->getField() }}" data-orderable="{{ $struct->getOrderable() }}" data-searchable="{{ $struct->getSearchable() }}" data-inputtype="{{ $struct->getInputType() }}">{{ $struct->getName() }}</th>
                 @endforeach

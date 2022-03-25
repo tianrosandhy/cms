@@ -3,7 +3,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h6>Filter Data</h6>
-				<button data-bs-dismiss="modal" class="close">&times;</button>
+				<button data-bs-dismiss="modal" class="close btn-close"></button>
 			</div>
 			<div class="modal-body modal-searchbox">
 				<!-- for datatable components -->
