@@ -1,4 +1,5 @@
-<form action="{{ $form_route ?? null }}" method="post" class="{{ $context->isAjax() ? 'ajax-form' : '' }}">
+<form action="{{ $form_route ?? null }}" method="post" class="{{ $context->isAjax() ? 'ajax-form' : '' }}" enctype="multipart/form-data">
+    @csrf
     @if ($context->isMultipleTabs())
     <div class="card">
         <ul class="nav nav-tabs" id="autocrud-tab" role="tablist">

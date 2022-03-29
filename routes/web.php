@@ -14,7 +14,7 @@ use App\Http\Controllers\Controller;
 |
 */
 
-Route::get('/', [Controller::class, 'index']);
+Route::get('/', [Controller::class, 'index'])->name('index');
 Route::get('/form', [Controller::class, 'form']);
 Route::post('/form', [Controller::class, 'formPost']);
 Route::match(['get', 'post'], 'datatable', [Controller::class, 'datatable'])->name('datatable-route');

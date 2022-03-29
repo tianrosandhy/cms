@@ -9,10 +9,6 @@ interface FormStructureCollectionContract extends BaseStructureCollectionContrac
 {
     public function formRoute(): string;
 
-    public function formCreateSuccessRedirect(): string;
-
-    public function formUpdateSuccessRedirect(): string;
-
     public function isMultiLanguage(): bool;
 
     public function isAjax(): bool;

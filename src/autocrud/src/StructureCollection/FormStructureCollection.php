@@ -3,10 +3,15 @@ namespace TianRosandhy\Autocrud\StructureCollection;
 
 use TianRosandhy\Autocrud\DataStructure\FormStructure;
 use TianRosandhy\Autocrud\StructureCollection\Form\Renderer;
+use TianRosandhy\Autocrud\StructureCollection\Form\Processor;
+use Illuminate\Database\Eloquent\Model;
 
 class FormStructureCollection extends BaseStructureCollection
 {
     use Renderer;
+    use Processor;
+
+    public Model $data;
 
     public function __construct()
     {

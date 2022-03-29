@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 use App\Modules\Example\Models\Example;
 use FormStructure;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Input;
 use TianRosandhy\Autocrud\StructureCollection\FormStructureCollection;
 use TianRosandhy\Autocrud\StructureCollection\FormStructureCollectionContract;
 
 class FormStruct extends FormStructureCollection implements FormStructureCollectionContract
 {
-    public function __construct($data=null)
+    public function __construct(Model $data=null)
     {
         $this->data = $data;
         parent::__construct();
@@ -18,17 +19,10 @@ class FormStruct extends FormStructureCollection implements FormStructureCollect
 
     public function formRoute(): string
     {
+        if ($this->data->getKey()) {
+            return route('form-route', ['id' => $this->data->getKey()]);
+        }
         return route('form-route');
-    }
-
-    public function formCreateSuccessRedirect(): string
-    {
-        return route('index');
-    }
-
-    public function formUpdateSuccessRedirect(): string
-    {
-        return route('index');
     }
 
     public function isMultiLanguage(): bool 

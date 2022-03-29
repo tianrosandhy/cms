@@ -12,7 +12,7 @@ use Exception;
 
 class ComponentController extends BaseController
 {
-s
+
     public function switcherMaster()
     {
         $this->request->validate([
