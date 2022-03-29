@@ -2,9 +2,12 @@
 namespace TianRosandhy\Autocrud\StructureCollection;
 
 use TianRosandhy\Autocrud\DataStructure\FormStructure;
+use TianRosandhy\Autocrud\StructureCollection\Form\Renderer;
 
-class FormStructureCollection extends BaseStructure
+class FormStructureCollection extends BaseStructureCollection
 {
+    use Renderer;
+
     public function __construct()
     {
         $this->struct_type = 'form';
@@ -17,7 +20,7 @@ class FormStructureCollection extends BaseStructure
         return $this;
     }
 
-    public function registers(array $item)
+    public function registers(array $arr)
     {
         foreach ($arr as $item) {
             if ($item instanceof FormStructure) {

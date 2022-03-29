@@ -119,8 +119,8 @@ class CoreServiceProvider extends BaseServiceProvider
         //automatically load alias
         $aliasData = [
             // 'Input' => \App\Core\Facades\InputComponentFacade::class,
+            // 'Media' => \App\Core\Facades\MediaComponentFacade::class,
             'Setting' => \App\Core\Facades\SettingComponentFacade::class,
-            'Media' => \App\Core\Facades\MediaComponentFacade::class,
             'Sidebar' => \App\Core\Facades\SidebarComponentFacade::class,
             'SidebarItem' => \App\Core\Facades\SidebarItemComponentFacade::class,
             'Permission' => \App\Core\Facades\PermissionComponentFacade::class,

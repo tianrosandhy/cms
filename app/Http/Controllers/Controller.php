@@ -19,6 +19,14 @@ class Controller extends BaseController
         ]);
     }
 
+    public function form()
+    {
+        $struct = new FormStruct;
+        return view('form', [
+            'struct' => $struct
+        ]);
+    }
+
     public function datatable()
     {
         $struct = new ExampleStruct;

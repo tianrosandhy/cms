@@ -8,6 +8,10 @@ return [
         ],
         'default' => 'en',
     ],
+    'max_filesize' => [
+        'file' => 20,
+        'image' => 20,
+    ],
 
     'asset_url' => 'autocrud-assets/',
     'asset_dependency' => [
@@ -19,6 +23,7 @@ return [
 
     'renderer' => [
         'table' => 'autocrud::datatable.table-generator',
-        'asset' => 'autocrud::datatable.asset-generator',
+        'table_asset' => 'autocrud::datatable.asset-generator',
+        'form' => 'autocrud::form.generator',
     ],
 ];

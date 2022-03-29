@@ -12,7 +12,7 @@ if(!isset($name)){
 		<?php
 		$max_size = (file_upload_max_size(config('cms.max_filesize.file')) / 1024 /1024);
 		?>
-		<div class="dropzone custom-dropzone dz-clickable filedropzone-multiple" data-hash="{{ $hash }}" upload-limit="{{ intval($max_size) }}" {!! isset($attr['accept']) ? 'accept="'.$attr['accept'].'"' : '' !!} data-target="{{ route('admin.post-document') }}"></div>
+		<div class="dropzone custom-dropzone dz-clickable filedropzone-multiple" data-hash="{{ $hash }}" upload-limit="{{ intval($max_size) }}" {!! isset($attr['accept']) ? 'accept="'.$attr['accept'].'"' : '' !!} data-target="{{ route('autocrud.post-document') }}"></div>
 	</div>
 	<div class="{{ isset($horizontal) ? 'col-sm-6' : 'col-sm-12' }}">
 		<div class="uploaded-holder" data-hash="{{ $hash }}">

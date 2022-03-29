@@ -36,7 +36,7 @@ $(function(){
     hash = $(this).attr('data-hash');
     data = $(".listen_uploaded_file[data-hash='"+hash+"']").val();
     $.ajax({
-      url : window.BASE_URL + '/delete-document',
+      url : window.AUTOCRUD_FILE_REMOVE_DOCUMENT_URL,
       type : 'POST',
       dataType : 'json',
       data : {
@@ -78,7 +78,7 @@ $(function(){
     }
 
     $.ajax({
-      url : window.BASE_URL + '/delete-document',
+      url : window.AUTOCRUD_FILE_REMOVE_DOCUMENT_URL,
       type : 'POST',
       dataType : 'json',
       data : {

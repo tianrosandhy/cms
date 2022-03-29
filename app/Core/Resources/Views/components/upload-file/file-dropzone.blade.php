@@ -15,7 +15,7 @@ if(!isset($name)){
 			?>
 			<span style="opacity:.5; font-size:.7em; padding:0 .75em;">Maximum Upload Size : {{ number_format($max_size, 2) }} MB</span>
 		</div>
-		<div class="dropzone custom-dropzone dz-clickable filedropzone" data-hash="{{ $hash }}" upload-limit="{{ intval($max_size) }}" {!! isset($attr['accept']) ? 'accept="'.$attr['accept'].'"' : '' !!} data-target="{{ route('admin.post-document') }}"></div>
+		<div class="dropzone custom-dropzone dz-clickable filedropzone" data-hash="{{ $hash }}" upload-limit="{{ intval($max_size) }}" {!! isset($attr['accept']) ? 'accept="'.$attr['accept'].'"' : '' !!} data-target="{{ route('autocrud.post-document') }}"></div>
 	</div>
 	<div class="{{ isset($horizontal) ? 'col-sm-6' : 'col-sm-12' }}">
 		<div class="uploaded-holder" data-hash="{{ $hash }}">

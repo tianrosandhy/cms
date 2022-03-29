@@ -8,7 +8,7 @@ use Input;
  */
 trait Renderer
 {
-    public function renderTable()
+    public function render()
     {
         $pass = get_object_vars($this);
         $pass['context'] = $this;
@@ -22,7 +22,7 @@ trait Renderer
         $pass = get_object_vars($this);
         $pass['context'] = $this;
         return view(
-            config('autocrud.renderer.asset'), $pass 
+            config('autocrud.renderer.table_asset'), $pass 
         )->render();
     }
     

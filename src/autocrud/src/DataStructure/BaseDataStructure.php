@@ -66,7 +66,7 @@ class BaseDataStructure
         }
 
         if ($method == 'get' && property_exists($this, $prop)) {
-            return $this->{$prop};
+            return isset($this->{$prop}) ? $this->{$prop} : null;
         }
         if ($method == 'set' && isset($arguments[0])) {
             $this->{$prop} = $arguments[0];
