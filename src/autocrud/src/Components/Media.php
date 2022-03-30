@@ -1,7 +1,6 @@
 <?php
 namespace TianRosandhy\Autocrud\Components;
 
-use App\Core\Models\Media as Model;
 use Storage;
 use TianRosandhy\Autocrud\Components\Media\Uploader;
 use TianRosandhy\Autocrud\Components\Media\MediaCacheManager;

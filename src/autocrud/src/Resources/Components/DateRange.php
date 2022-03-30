@@ -1,7 +1,5 @@
 <?php
-namespace App\Core\ViewComponents\Input;
-
-use App\Core\Base\ViewComponents\BaseViewComponent;
+namespace TianRosandhy\Autocrud\Resources\Components;
 
 class DateRange extends BaseViewComponent
 {
