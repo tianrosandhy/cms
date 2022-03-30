@@ -40,6 +40,13 @@
 
                             <div>
                                 {!! $row->generateInput($data ?? null, $row->translateable() ? $context->isMultiLanguage() : false) !!}
+                                @if ($row->translateable() && $context->isMultiLanguage())
+                                <div class="autocrud-language-toggle">
+                                    @foreach(Autocrud::langs() as $langid => $langlabel)
+                                    <span data-lang="{{ $langid }}" class="badge bg-secondary c-pointer {{ $langid == Autocrud::currentLang() ? 'active' : '' }}">{{ $langlabel }}</span>
+                                    @endforeach
+                                </div>
+                                @endif
                             </div>
 
                             @if ($row->notes())

@@ -6,10 +6,10 @@ use FormStructure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Input;
-use TianRosandhy\Autocrud\StructureCollection\FormStructureCollection;
-use TianRosandhy\Autocrud\StructureCollection\FormStructureCollectionContract;
+use TianRosandhy\Autocrud\Generator\Form\FormCollection;
+use TianRosandhy\Autocrud\Generator\Form\FormCollectionContract;
 
-class FormStruct extends FormStructureCollection implements FormStructureCollectionContract
+class FormStruct extends FormCollection implements FormCollectionContract
 {
     public function __construct(Model $data=null)
     {

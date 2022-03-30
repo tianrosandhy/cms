@@ -7,6 +7,6 @@ class Media extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \TianRosandhy\Autocrud\Media\Media::class;
+        return \TianRosandhy\Autocrud\Components\Media::class;
     }
 }

@@ -21,7 +21,7 @@ if(!isset($multiLanguage)){
 }
 ?>
 @if($multiLanguage)
-  @foreach(Language::available() as $lang => $langname)
+  @foreach(Autocrud::langs() as $lang => $langname)
     <?php
     if(strpos($name, '[]') !== false){
       $input_name = str_replace('[]', '['.$lang.'][]', $name);

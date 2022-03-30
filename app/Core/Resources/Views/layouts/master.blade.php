@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ Language::current() }}">
+<html lang="{{ Autocrud::currentLang() }}">
 <head>
 	@include ('core::layouts.partials.metadata')
 </head>

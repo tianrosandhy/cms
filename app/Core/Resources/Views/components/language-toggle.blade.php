@@ -1,6 +1,6 @@
-@if(count(Language::available()) > 1)
+@if(count(Autocrud::langs()) > 1)
 <div class="language-toggle mb-2 text-right">
-	@foreach(Language::available() as $code => $name)
+	@foreach(Autocrud::langs() as $code => $name)
 	<a href="#" data-lang="{{ $code }}" class="btn btn-success {{ $loop->first ? 'active default' : '' }}" title="{{ $loop->first ? 'Default Language' : '' }}">{{ $name }}</a>
 	@endforeach
 </div>

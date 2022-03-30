@@ -18,7 +18,7 @@ class AutocrudServiceProvider extends BaseServiceProvider
         ]);
 
         // boot blade component
-        Blade::componentNamespace('TianRosandhy\Autocrud\InputGenerator\Components', 'autocrud-input');
+        Blade::componentNamespace('TianRosandhy\Autocrud\Components\Input', 'autocrud-input');
     }
 
     public function register()
@@ -37,8 +37,7 @@ class AutocrudServiceProvider extends BaseServiceProvider
         // handle facade to service alias
         $aliases = [
             'Autocrud' => \TianRosandhy\Autocrud\Autocrud::class,
-            'Input' => \TianRosandhy\Autocrud\InputGenerator\Input::class,
-            'Language' => \TianRosandhy\Autocrud\Facades\Language::class,
+            'Input' => \TianRosandhy\Autocrud\Components\Input::class,
             'Media' => \TianRosandhy\Autocrud\Facades\Media::class,
             'DatatableStructure' => \TianRosandhy\Autocrud\Facades\DatatableStructure::class,
             'ExportStructure' => \TianRosandhy\Autocrud\Facades\ExportStructure::class,

@@ -5,11 +5,11 @@ use App\Modules\Example\Models\Example;
 use DatatableStructure;
 use Illuminate\Database\Eloquent\Builder;
 use Input;
-use TianRosandhy\Autocrud\StructureCollection\DatatableStructureCollection;
-use TianRosandhy\Autocrud\StructureCollection\DatatableStructureCollectionContract;
-use TianRosandhy\Autocrud\StructureCollection\Datatable\TableChecker;
+use TianRosandhy\Autocrud\Generator\Datatable\DatatableCollection;
+use TianRosandhy\Autocrud\Generator\Datatable\DatatableCollectionContract;
+use TianRosandhy\Autocrud\Generator\Datatable\TableChecker;
 
-class ExampleStruct extends DatatableStructureCollection implements DatatableStructureCollectionContract
+class ExampleStruct extends DatatableCollection implements DatatableCollectionContract
 {
     use TableChecker;
 

@@ -66,3 +66,4 @@
     </div>
   </div>
 </div>
+<script src="{{ asset(config('autocrud.asset_url') . '/media/media.js') }}"></script>

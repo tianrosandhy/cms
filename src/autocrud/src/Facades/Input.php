@@ -7,7 +7,7 @@ class Input extends RefreshableFacade
 {
     protected static function getFacadeAccessor()
     {
-        return \TianRosandhy\Autocrud\InputGenerator\Input::class;
+        return \TianRosandhy\Autocrud\Components\Input::class;
     }
 }
 

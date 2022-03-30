@@ -22,7 +22,7 @@ if(!isset($multiLanguage)){
 }
 ?>
 @if($multiLanguage)
-  @foreach(Language::available() as $lang => $langdata)
+  @foreach(Autocrud::langs() as $lang => $langdata)
     <?php
     if(strpos($name, '[]') !== false){
       $input_name = str_replace('[]', '['.$lang.'][]', $name);
@@ -31,7 +31,7 @@ if(!isset($multiLanguage)){
       $input_name = $name.'['.$lang.']';
     }
     ?>
-    <div class="input-language" data-lang="{{ $lang }}" style="{!! Language::default() == $lang ? '' : 'display:none;' !!}">
+    <div class="input-language" data-lang="{{ $lang }}" style="{!! Autocrud::defaultLang() == $lang ? '' : 'display:none;' !!}">
       <input type="{{ $type }}" name="{!! $input_name !!}" class="{!! implode(' ', $base_class) !!}" {!! isset($attr) ? array_to_html_prop($attr, ['class', 'type', 'name', 'id']) : null !!} value="{{ old($cleaned_name.'.'.$lang, (isset($value[$lang]) ? $value[$lang] : null)) }}" id="input-{{ $cleaned_name }}-{{ $lang }}">
     </div>
   @endforeach

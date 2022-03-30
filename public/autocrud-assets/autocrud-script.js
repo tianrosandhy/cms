@@ -11,6 +11,7 @@ function initPlugins(){
   loadFile();
   loadMask();
   simpleImage();
+  loadLanguageToggle();
 }
 
 // you can call this method everytime to reload the plugin dom
@@ -23,6 +24,23 @@ function refreshPlugins(){
   loadFile();
   loadMask();
   simpleImage();
+  loadLanguageToggle();
+}
+
+function loadLanguageToggle() {
+    $('.autocrud-language-toggle span[data-lang]').on('click', function(e){
+        e.preventDefault();
+        selectedLang = $(this).attr('data-lang');
+        $('.custom-form-group .input-language[data-lang="'+selectedLang+'"]').slideDown(200);
+        $('.custom-form-group .input-language:not([data-lang="'+selectedLang+'"])').slideUp(200);
+        $(".autocrud-language-toggle span[data-lang='"+selectedLang+"']").addClass('active');
+        $(".autocrud-language-toggle span:not([data-lang='"+selectedLang+"'])").removeClass('active');
+
+        cfg = $(this).closest('.custom-form-group');
+        setTimeout(function(){
+            cfg.find('input.form-control:visible').focus();
+        }, 250);
+    });
 }
 
 function simpleImage(){

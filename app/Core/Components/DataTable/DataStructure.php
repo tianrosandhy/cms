@@ -5,7 +5,7 @@ use App\Core\Shared\DynamicProperty;
 use Closure;
 use DB;
 use Input;
-use Language;
+use Autocrud;
 use SlugInstance;
 
 class DataStructure
@@ -123,7 +123,7 @@ class DataStructure
         }
         if ($this->value_data) {
             if ($multi_language) {
-                foreach (Language::available() as $lang => $langlabel) {
+                foreach (Autocrud::langs() as $lang => $langlabel) {
                     $value[$lang] = call_user_func($this->value_data, $data, $lang);
                 }
             } else {
@@ -131,7 +131,7 @@ class DataStructure
             }
         } else {
             if ($multi_language) {
-                foreach (Language::available() as $lang => $langlabel) {
+                foreach (Autocrud::langs() as $lang => $langlabel) {
                     $value[$lang] = isset($data->{$field_name}) ? $data->outputTranslate($field_name, $lang, true) : null;
                 }
             } else {
@@ -209,13 +209,13 @@ class DataStructure
         $this->inputType('slug');
         $this->slugTarget($target);
 
-        if (!Language::active()) {
+        if (!Autocrud::activeLang()) {
             $this->setTranslate(false);
         }
 
         $this->valueData(function ($data, $lang = null) {
             if (empty($lang)) {
-                $lang = Language::default();
+                $lang = Autocrud::defaultLang();
             }
             if (isset($data->id)) {
                 return SlugInstance::get($data, $data->id, $lang);

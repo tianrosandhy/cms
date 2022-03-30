@@ -2,7 +2,7 @@
 namespace App\Core\Components;
 
 use App\Core\Models\SlugMaster as Model;
-use Language;
+use Autocrud;
 
 class SlugMaster
 {
@@ -22,7 +22,7 @@ class SlugMaster
     {
         $table = $model->getTable();
         $pk = $model->getKey();
-        $language = Language::default();
+        $language = Autocrud::defaultLang();
 
         $instance = Model::where('table', $table)->where('primary_key', $pk)->where('language', $language)->first();
         $slug = $this->slugForSaved($slug_string, $instance);

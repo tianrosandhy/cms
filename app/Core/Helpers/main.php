@@ -73,7 +73,7 @@ function ajax_response($type, $message = '')
 
 function def_lang()
 {
-    return Language::default();
+    return Autocrud::defaultLang();
 }
 
 function canSendPushNotif()

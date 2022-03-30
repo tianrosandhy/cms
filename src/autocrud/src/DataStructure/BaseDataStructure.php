@@ -2,7 +2,7 @@
 namespace TianRosandhy\Autocrud\DataStructure;
 
 use Illuminate\Http\Request;
-use TianRosandhy\Autocrud\InputGenerator\Input;
+use TianRosandhy\Autocrud\Components\Input;
 use Illuminate\Support\Str;
 use Closure;
 
@@ -28,7 +28,7 @@ class BaseDataStructure
     protected string $name;
 
     /**
-     * @source TianRosandhy\Autocrud\InputGenerator\Input constants
+     * @source TianRosandhy\Autocrud\Components\Input constants
      */
     protected string $input_type = Input::TYPE_TEXT;
 

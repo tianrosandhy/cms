@@ -1,7 +1,7 @@
 <?php
 namespace App\Core\Shared;
 
-use Language;
+use Autocrud;
 
 trait Translateable
 {

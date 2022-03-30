@@ -1,0 +1,4 @@
+.c-pointer {cursor: pointer;}
+.autocrud-language-toggle {margin-bottom:15px;}
+.autocrud-language-toggle span {opacity:.4}
+.autocrud-language-toggle span.active, .autocrud-language-toggle span:hover {opacity:1;}

@@ -7,7 +7,7 @@ use App\Core\Exceptions\ProcessException;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Http\UploadedFile;
-use Language;
+use Autocrud;
 use SlugMaster;
 use Storage;
 
@@ -56,7 +56,7 @@ class BaseCrudProcess extends BaseProcess implements CanProcess
         if (!empty($structure_inputs)) {
             $inputs = $structure_inputs;
             if ($this->structure->multi_language) {
-                $inputs = $structure_inputs[Language::default()] ?? $structure_inputs;
+                $inputs = $structure_inputs[Autocrud::defaultLang()] ?? $structure_inputs;
             }
 
             #DYNAMIC SINGLE MODE
@@ -80,7 +80,7 @@ class BaseCrudProcess extends BaseProcess implements CanProcess
             if (method_exists($instance, 'translatorInstance')) {
                 #clear translate data setiap kali insert/update data
                 $instance->clearTranslate();
-                foreach (Language::available() as $lang => $langname) {
+                foreach (Autocrud::langs() as $lang => $langname) {
                     $trans = $instance->translatorInstance();
                     $trans->lang = $lang;
                     $inputs = $structure_inputs[$lang] ?? [];

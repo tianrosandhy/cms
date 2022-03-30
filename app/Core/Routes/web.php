@@ -4,12 +4,6 @@ Route::get('my-profile', 'CoreController@myProfile')->name('admin.my-profile');
 Route::post('my-profile', 'CoreController@storeMyProfile')->name('admin.my-profile.store');
 Route::post('store-setting', 'CoreController@storeSetting')->name('admin.setting.store');
 
-Route::get('language', 'CoreController@language')->name('admin.language.index');
-Route::post('language', 'CoreController@addLanguage')->name('admin.language.create');
-Route::get('language/set-as-default/{id}', 'CoreController@setAsDefaultLanguage')->name('admin.language.set-as-default');
-Route::get('language/delete/{id}', 'CoreController@removeLanguage')->name('admin.language.delete');
-
-
 Route::get('privilege', 'CoreController@privilege')->name('admin.privilege.index');
 Route::get('privilege/create', 'CoreController@privilegeCreate')->name('admin.privilege.create');
 Route::post('privilege/store', 'CoreController@privilegeStore')->name('admin.privilege.store');
@@ -18,7 +12,6 @@ Route::post('privilege/update/{id}', 'CoreController@privilegeUpdate')->name('ad
 Route::post('privilege/delete/{id}', 'CoreController@privilegeDelete')->name('admin.privilege.delete');
 Route::get('privilege/manage-privilege/{id}', 'CoreController@privilegeManage')->name('admin.privilege.manage');
 Route::post('privilege/manage-privilege/{id}', 'CoreController@privilegeStoreManage')->name('admin.privilege.store-manage');
-
 
 Route::match(['get', 'post'], 'datatable/user', 'CoreController@userManagementDataTable')->name('admin.user.datatable');
 Route::get('user-management', 'CoreController@userManagement')->name('admin.user.index');
