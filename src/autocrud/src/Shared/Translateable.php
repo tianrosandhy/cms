@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Shared;
+namespace TianRosandhy\Autocrud\Shared;
 
 use Autocrud;
 

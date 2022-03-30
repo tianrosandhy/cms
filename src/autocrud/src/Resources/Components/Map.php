@@ -7,7 +7,7 @@ class Map extends BaseViewComponent
      * Component initialization :
      * <x-core::input.image-simple name="input_name" />
      */
-    public string $view = 'core::components.input.map';
+    public string $view = 'autocrud::input.map';
 
     // This component will generate a default map component for image component with its configuration
 

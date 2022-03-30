@@ -90,9 +90,6 @@ class CoreServiceProvider extends BaseServiceProvider
         $this->app->singleton('setting', function ($app) {
             return Setting::get();
         });
-        $this->app->singleton('language', function ($app) {
-            return (new Language)->allCached();
-        });
         $this->app->singleton('role', function ($app) {
             return (new Role)->allCached();
         });
@@ -118,16 +115,10 @@ class CoreServiceProvider extends BaseServiceProvider
     {
         //automatically load alias
         $aliasData = [
-            // 'Input' => \App\Core\Facades\InputComponentFacade::class,
-            // 'Media' => \App\Core\Facades\MediaComponentFacade::class,
             'Setting' => \App\Core\Facades\SettingComponentFacade::class,
             'Sidebar' => \App\Core\Facades\SidebarComponentFacade::class,
             'SidebarItem' => \App\Core\Facades\SidebarItemComponentFacade::class,
             'Permission' => \App\Core\Facades\PermissionComponentFacade::class,
-            // 'DataStructure' => \App\Core\Facades\DataStructureComponentFacade::class,
-            // 'DataTable' => \App\Core\Facades\DataTableComponentFacade::class,
-            // 'Language' => \App\Core\Facades\LanguageComponentFacade::class,
-            'SlugMaster' => \App\Core\Facades\SlugMasterComponentFacade::class,
             'SEO' => \App\Core\Facades\SeoComponentFacade::class,
             'ColumnListing' => \App\Core\Facades\ColumnListingComponentFacade::class,
         ];

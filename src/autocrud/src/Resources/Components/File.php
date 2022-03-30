@@ -9,7 +9,7 @@ class File extends BaseViewComponent
      */
 
     public string $type = 'single';
-    public string $view = 'core::components.input.file';
+    public string $view = 'autocrud::input.file';
 
     // This component will generate a default <input type="file"> with its configuration
 

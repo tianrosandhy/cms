@@ -1,7 +1,7 @@
 <?php
-namespace App\Core\Components;
+namespace TianRosandhy\Autocrud\Components;
 
-use App\Core\Models\SlugMaster as Model;
+use TianRosandhy\Autocrud\Models\SlugMaster as Model;
 use Autocrud;
 
 class SlugMaster

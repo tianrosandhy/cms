@@ -7,7 +7,7 @@ class Password extends BaseViewComponent
      * Component initialization :
      * <x-core::input.password name="input_name" />
      */
-    public string $view = 'core::components.input.text';
+    public string $view = 'autocrud::input.text';
     public string $type = 'password';
 
     // This component will generate a default <input type="password"> with its configuration

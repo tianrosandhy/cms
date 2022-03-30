@@ -9,7 +9,7 @@ class Tags extends BaseViewComponent
      */
 
     public string $type = 'tags';
-    public string $view = 'core::components.input.text';
+    public string $view = 'autocrud::input.text';
 
     // This component will generate a default tags component input with its configuration
 

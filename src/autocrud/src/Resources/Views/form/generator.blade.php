@@ -1,5 +1,10 @@
 <form action="{{ $form_route ?? null }}" method="post" class="{{ $context->isAjax() ? 'ajax-form' : '' }}" enctype="multipart/form-data">
     @csrf
+
+    @if(method_exists($data, 'slugTarget'))
+        @include ('autocrud::form.slug-master')
+    @endif
+
     @if ($context->isMultipleTabs())
     <div class="card">
         <ul class="nav nav-tabs" id="autocrud-tab" role="tablist">
@@ -10,6 +15,10 @@
             @endforeach
         </ul>
     </div>
+    @endif
+
+    @if (method_exists($context, 'prependForm'))
+        {!! $context->prependForm($data) !!}
     @endif
 
     <div class="tab-content card" id="autocrud-tab-content">
@@ -62,6 +71,10 @@
         </div>
         @endforeach
     </div>
+
+    @if (method_exists($context, 'appendForm'))
+        {!! $context->appendForm($data) !!}
+    @endif
 
     <div class="save-buttons my-3">
         <button type="submit" class="btn btn-lg btn-primary"><span class="iconify" data-icon="carbon:save"></span> Save Data</button>

@@ -7,7 +7,7 @@ class Number extends BaseViewComponent
      * Component initialization :
      * <x-core::input.number name="input_name" />
      */
-    public string $view = 'core::components.input.number';
+    public string $view = 'autocrud::input.number';
 
     // This component will generate a default <input type="number"> with its configuration
 

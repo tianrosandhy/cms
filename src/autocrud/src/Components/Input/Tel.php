@@ -9,7 +9,7 @@ class Tel extends BaseViewComponent
      */
 
     public string $type = 'tel';
-    public string $view = 'core::components.input.text';
+    public string $view = 'autocrud::input.text';
 
     // This component will generate a default <input type="tel"> with its configuration
 

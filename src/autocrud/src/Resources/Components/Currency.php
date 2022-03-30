@@ -7,7 +7,7 @@ class Currency extends BaseViewComponent
      * Component initialization :
      * <x-core::input.currency name="input_name" />
      */
-    public string $view = 'core::components.input.currency';
+    public string $view = 'autocrud::input.currency';
 
     // This component will generate a default input currency component with its configuration
 

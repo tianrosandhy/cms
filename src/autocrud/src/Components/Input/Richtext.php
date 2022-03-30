@@ -7,7 +7,7 @@ class Richtext extends BaseViewComponent
      * Component initialization :
      * <x-core::input.richtext name="input_name" />
      */
-    public string $view = 'core::components.input.richtext';
+    public string $view = 'autocrud::input.richtext';
 
     // This component will generate a default <textarea data-tinymce> with its configuration
 

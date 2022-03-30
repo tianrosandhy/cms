@@ -42,6 +42,7 @@ class AutocrudServiceProvider extends BaseServiceProvider
             'DatatableStructure' => \TianRosandhy\Autocrud\Facades\DatatableStructure::class,
             'ExportStructure' => \TianRosandhy\Autocrud\Facades\ExportStructure::class,
             'FormStructure' => \TianRosandhy\Autocrud\Facades\FormStructure::class,
+            'SlugMaster' => \TianRosandhy\Autocrud\Facades\SlugMaster::class,
         ];
         foreach ($aliases as $key => $class) {
             AliasLoader::getInstance()->alias($key, $class);

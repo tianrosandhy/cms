@@ -9,7 +9,7 @@ class SelectMultiple extends BaseViewComponent
      */
 
     public string $type = 'select_multiple'; //select
-    public string $view = 'core::components.input.select';
+    public string $view = 'autocrud::input.select';
 
     // This component will generate a default <select multiple> with its configuration
 

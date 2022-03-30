@@ -7,7 +7,7 @@ class Yesno extends BaseViewComponent
      * Component initialization :
      * <x-core::input.yesno name="input_name" />
      */
-    public string $view = 'core::components.input.yesno';
+    public string $view = 'autocrud::input.yesno';
 
     // This component will generate a default <switchery yesno> component with its configuration
 

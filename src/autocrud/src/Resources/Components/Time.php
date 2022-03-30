@@ -9,7 +9,7 @@ class Time extends BaseViewComponent
      */
 
     public $type = 'time';
-    public string $view = 'core::components.input.datetime';
+    public string $view = 'autocrud::input.datetime';
 
     // This component will generate a default input currency component with its configuration
 

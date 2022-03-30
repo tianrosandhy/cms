@@ -7,7 +7,7 @@ class Textarea extends BaseViewComponent
      * Component initialization :
      * <x-core::input.textarea name="input_name" />
      */
-    public string $view = 'core::components.input.textarea';
+    public string $view = 'autocrud::input.textarea';
 
     // This component will generate a default <textarea> with its configuration
 

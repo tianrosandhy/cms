@@ -7,7 +7,7 @@ class Radio extends BaseViewComponent
      * Component initialization :
      * <x-core::input.number name="input_name" />
      */
-    public string $view = 'core::components.input.radio';
+    public string $view = 'autocrud::input.radio';
 
     // This component will generate a default <input type="number"> with its configuration
 

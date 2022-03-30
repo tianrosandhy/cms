@@ -7,7 +7,7 @@ class Slug extends BaseViewComponent
      * Component initialization :
      * <x-core::input.slug name="input_name" />
      */
-    public string $view = 'core::components.input.slug';
+    public string $view = 'autocrud::input.slug';
 
     // This component will generate a default <input type="slug"> with its configuration
 

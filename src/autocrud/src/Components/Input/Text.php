@@ -7,7 +7,7 @@ class Text extends BaseViewComponent
      * Component initialization :
      * <x-core::input.text name="input_name" />
      */
-    public string $view = 'core::components.input.text';
+    public string $view = 'autocrud::input.text';
 
     // This component will generate a default <input type="text"> with its configuration
 

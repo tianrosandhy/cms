@@ -9,7 +9,7 @@ class Email extends BaseViewComponent
      */
 
     public string $type = 'email';
-    public string $view = 'core::components.input.text';
+    public string $view = 'autocrud::input.text';
 
     // This component will generate a default <input type="email"> with its configuration
 

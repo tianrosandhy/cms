@@ -35,6 +35,18 @@ class FormStruct extends FormCollection implements FormCollectionContract
         return true;
     }
 
+    public function prependForm($data=null): ?string
+    {
+        // return any html string via view()->render();
+        return null;
+    }
+
+    public function appendForm($data=null): ?string
+    {
+        // return any html string via view()->render();
+        return null;
+    }
+
     public function handle()
     {
         $this->registers([

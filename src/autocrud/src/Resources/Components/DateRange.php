@@ -7,7 +7,7 @@ class DateRange extends BaseViewComponent
      * Component initialization :
      * <x-core::input.date-range name="input_name" />
      */
-    public string $view = 'core::components.input.daterange';
+    public string $view = 'autocrud::input.daterange';
 
     // This component will generate a default input currency component with its configuration
 

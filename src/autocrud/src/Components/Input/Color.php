@@ -9,7 +9,7 @@ class Color extends BaseViewComponent
      */
 
     public string $type = 'color';
-    public string $view = 'core::components.input.text';
+    public string $view = 'autocrud::input.text';
 
     // This component will generate a default <input type="color"> with its configuration
 

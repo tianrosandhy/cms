@@ -5,6 +5,7 @@ use Exception;
 use Input;
 use Storage;
 use Validator;
+use SlugMaster;
 use Illuminate\Http\UploadedFile;
 
 /**
@@ -82,6 +83,11 @@ trait Processor
                 $this->response->handleException($e);
                 return $this->response;
             }
+        }
+
+        if (method_exists($this->data, 'slugTarget') && $this->request->slug_master) {
+            //store current slug master to
+            $slug_instance = SlugMaster::insert($this->data, $this->request->slug_master);
         }
 
         $this->response->setData($this->data);

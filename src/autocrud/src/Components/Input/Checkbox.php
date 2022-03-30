@@ -9,7 +9,7 @@ class Checkbox extends BaseViewComponent
      */
 
     public string $type = 'checkbox';
-    public string $view = 'core::components.input.radio';
+    public string $view = 'autocrud::input.radio';
 
     // This component will generate a default <input type="number"> with its configuration
 

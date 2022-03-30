@@ -31,7 +31,7 @@ $max_size = (file_upload_max_size() / 1024 /1024);
 $type = $type ?? 'single';
 ?>
 @if($type == 'single')
-  @include ('core::components.upload-file.file-dropzone')
+  @include ('autocrud::upload-file.file-dropzone')
 @else
-  @include ('core::components.upload-file.file-dropzone-multiple')
+  @include ('autocrud::upload-file.file-dropzone-multiple')
 @endif

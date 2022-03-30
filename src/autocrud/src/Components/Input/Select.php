@@ -8,7 +8,7 @@ class Select extends BaseViewComponent
      * <x-core::input.select name="input_name" :source=[array] />
      */
     public string $type = 'select'; //select
-    public string $view = 'core::components.input.select';
+    public string $view = 'autocrud::input.select';
 
     // This component will generate a default <select> with its configuration
 

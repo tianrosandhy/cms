@@ -1,5 +1,5 @@
 <?php
-namespace App\Core\Models;
+namespace TianRosandhy\Autocrud\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
