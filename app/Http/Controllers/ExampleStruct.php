@@ -24,11 +24,13 @@ class ExampleStruct extends DatatableCollection implements DatatableCollectionCo
                 ->name('Date')
                 ->inputType(Input::TYPE_DATE)
                 ->searchable(true)
+                ->hideOnDatatable(true)
                 ->orderable(true),
             DatatableStructure::field('select')
                 ->name('Contoh List')
                 ->inputType(Input::TYPE_SELECT)
                 ->searchable(true)
+                ->hideOnExport(true)
                 ->orderable(true)
                 ->dataSource([
                     5 => 'Lorem ipusm',
@@ -48,6 +50,11 @@ class ExampleStruct extends DatatableCollection implements DatatableCollectionCo
         return route('data-delete-route');
     }
 
+    public function exportRoute(): string
+    {
+        return route('datatable-export');
+    }
+
     public function queryBuilder(): Builder
     {
         return Example::query();
@@ -58,5 +65,15 @@ class ExampleStruct extends DatatableCollection implements DatatableCollectionCo
         $single = $raw_data->toArray();
         $single['action'] = '';
         return $single;
+    }
+
+    public function exportRow($raw_data): array
+    {
+        return $raw_data->toArray();
+    }
+
+    public function exportFileName()
+    {
+        return "Example Report";
     }
 }

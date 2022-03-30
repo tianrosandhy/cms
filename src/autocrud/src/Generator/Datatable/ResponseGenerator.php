@@ -3,6 +3,8 @@ namespace TianRosandhy\Autocrud\Generator\Datatable;
 
 use Exception;
 use Input;
+use Excel;
+use Storage;
 
 trait ResponseGenerator
 {
@@ -13,7 +15,7 @@ trait ResponseGenerator
     public $data = [];
     public int $data_count = 0;
 
-    public function ajaxResponse()
+    public function datatableResponse()
     {
         try {
             $this->validateDatatableRequest();
@@ -90,7 +92,94 @@ trait ResponseGenerator
         $this->order_dir = $order_dir;
     }
 
-    public function generateDataByRequest()
+    protected function renderDatatableResponse()
+    {
+        if ($this->datatable_error) {
+            return [
+                'draw' => $this->request->draw ?? 0,
+                'error' => $this->datatable_error
+            ];
+        } else {
+            return [
+                'draw' => $this->request->draw ?? 0,
+                'page' => $this->page,
+                'data' => $this->data,
+                'recordsFiltered' => $this->data_count,
+                'recordsTotal' => $this->data_count,
+            ];
+        }
+    }
+
+
+    public function exportResponse()
+    {
+        try {
+            $savepath = $this->getExportResponsePath();
+            return redirect(Storage::url($savepath));
+        } catch (Exception $e) {
+            abort(500);
+        }
+    }
+
+    public function getExportResponsePath()
+    {
+        $this->prepareExportVariables();
+        $this->getExportableFields();
+        $this->generateDataByRequest(false);
+
+        if (method_exists($this, 'exportRow')) {
+            $this->data = [];
+            foreach ($this->raw_data as $item) {
+                $this->data[] = $this->exportRow($item);
+            }
+        }
+        if (empty($this->data)) {
+            $this->data = $this->raw_data;
+        }
+
+        // generate excel stream data
+        $savepath = 'export/ExportReport' . date('YmdHis').'.xlsx';
+        if (method_exists($this, 'exportFileName')) {
+            $savepath = 'export/' . $this->exportFileName() .'-'. date('YmdHis') . '.xlsx';
+        }
+
+        Excel::store(new ArrayDataExporter($this->exportHeaders, $this->data), $savepath);
+        return $savepath;
+    }
+
+    protected function getExportableFields()
+    {
+        $this->exportHeaders = [];
+        foreach ($this->structure as $struct) {
+            if ($struct->hideOnExport()) {
+                continue;
+            }
+            $this->exportHeaders[$struct->field()] = $struct->name();
+        }
+    }
+
+    public function prepareExportVariables()
+    {
+        $this->filter = [];
+
+        foreach ($this->request->keywords ?? [] as $field => $value) {
+            $this->filter[str_replace('[]', '', $field)] = $value;
+        }
+
+        $order_by = null;
+        if (isset($this->request->order[0]['column'])) {
+            $cindex = $this->request->order[0]['column'];
+            $order_by = $this->columns[$cindex]['data'] ?? null;
+        }
+        $order_dir = $this->request->order[0]['dir'] ?? 'desc';
+        $this->order_by = $order_by;
+        $this->order_dir = $order_dir;
+    }
+
+
+
+
+    public function generateDataByRequest($paging=true)
     {
         $data = $this->queryBuilder();
         $without_filter = $data;
@@ -164,9 +253,7 @@ trait ResponseGenerator
         if (method_exists($this, 'customFilter')) {
             $data = $this->customFilter($data);
         }
-        $without_filter = clone $data;
-        $datacount = $without_filter->count();
-
+        
         // handle orderby
         if (isset($map_custom_orderby[$this->order_by])) {
             $order_by = $map_custom_orderby[$this->order_by];
@@ -175,29 +262,20 @@ trait ResponseGenerator
             $data = $data->orderBy($this->order_by, $this->order_dir);
         }
 
-        $data = $data->skip($this->start);
-        $data = $data->take($this->length);
-        $this->data_count = $datacount;
-        $this->data_count = $datacount;
-        $this->page = ($this->start / $this->length) + 1;
-        $this->raw_data = $data->get();
-    }
+        if ($paging) {
+            $without_filter = clone $data;
+            $datacount = $without_filter->count();
 
-    protected function renderDatatableResponse()
-    {
-        if ($this->datatable_error) {
-            return [
-                'draw' => $this->request->draw ?? 0,
-                'error' => $this->datatable_error
-            ];
+            $data = $data->skip($this->start);
+            $data = $data->take($this->length);
+            $this->data_count = $datacount;
+            $this->data_count = $datacount;
+            $this->page = ($this->start / $this->length) + 1;
+            $this->raw_data = $data->get();
         } else {
-            return [
-                'draw' => $this->request->draw ?? 0,
-                'page' => $this->page,
-                'data' => $this->data,
-                'recordsFiltered' => $this->data_count,
-                'recordsTotal' => $this->data_count,
-            ];
+            $data = $data->take(config('autocrud.max_export_row_limit'));
+            $this->raw_data = $data->get();
         }
     }
+
 }

@@ -27,6 +27,12 @@ class Controller extends BaseController
         ]);
     }
 
+    public function export()
+    {
+        $struct = new ExampleStruct;
+        return $struct->exportResponse();
+    }
+
     public function form()
     {
         $struct = new FormStruct(new Example);
@@ -53,6 +59,6 @@ class Controller extends BaseController
     public function datatable()
     {
         $struct = new ExampleStruct;
-        return $struct->ajaxResponse();
+        return $struct->datatableResponse();
     }
 }

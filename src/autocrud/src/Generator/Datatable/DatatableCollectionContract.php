@@ -13,4 +13,6 @@ interface DatatableCollectionContract extends BaseGeneratorContract
     public function queryBuilder(): QueryBuilder|EloquentBuilder;
 
     public function transformer($raw_data): array;
+
+    public function exportRow($raw_data): array;
 }

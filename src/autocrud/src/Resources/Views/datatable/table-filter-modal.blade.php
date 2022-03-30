@@ -10,7 +10,7 @@
 				<div class="search-box my-2">
 					<div class="row">
 						@foreach($structure as $struct)
-							@if($struct->searchable())
+							@if($struct->searchable() && !$struct->hideOnDatatable())
 							<div class="col-lg-4 col-md-6">
 								<div class="form-group">
 									<label>Search {{ $struct->name() }}</label>

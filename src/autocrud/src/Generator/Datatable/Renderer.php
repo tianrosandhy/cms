@@ -33,7 +33,7 @@ trait Renderer
         $out = 'data.keywords = new Object; ';
         $i = $this->beforeRendererCount(); // if there is new before table append, $i will adapt
         foreach ($this->structure as $row) {
-            if ($row->isVisible()) {
+            if ($row->isVisible() && !$row->hideOnDatatable()) {
                 $fld = str_replace('[]', '', $row->getField());
                 if (in_array($row->inputType(), [Input::TYPE_DATE, Input::TYPE_DATERANGE, Input::TYPE_DATERANGE])) {
                     $out .= 'data.keywords["'.$fld.'"] = new Array;';
@@ -60,7 +60,7 @@ trait Renderer
         }
 
         foreach ($this->structure as $row) {
-            if ($row->isVisible()) {
+            if ($row->isVisible() && !$row->hideOnDatatable()) {
                 if (!$row->getOrderable()) {
                     $out .= "{'targets' : " . $i . ", 'orderable' : false}, ";
                 }
@@ -76,7 +76,7 @@ trait Renderer
         $order_data = ''; //fallback
         $i = $this->beforeRendererCount(); // if there is new before table append, $i will adapt
         foreach ($this->structure as $row) {
-            if ($row->isVisible()) {
+            if ($row->isVisible() && !$row->hideOnDatatable()) {
                 if (strlen($row->getDefaultOrder()) > 0) {
                     //kalau ada salah satu field yang set default order, langsung hentikan loop
                     $order_data = '[' . $i . ', "' . $row->getDefaultOrder() . '"]';
@@ -100,7 +100,7 @@ trait Renderer
         }
 
         foreach ($this->structure as $row) {
-            if ($row->isVisible()) {
+            if ($row->isVisible() && !$row->hideOnDatatable()) {
                 $fld = str_replace('[]', '', $row->field());
                 $out .= "{data : '" . $fld . "'}, ";
             }

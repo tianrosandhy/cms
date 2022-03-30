@@ -13,6 +13,8 @@ return [
         'image' => 20,
     ],
 
+    'max_export_row_limit' => 1000000,
+
     'asset_url' => 'autocrud-assets/',
     'asset_dependency' => [
         'load_bootstrap' => true,

@@ -1,13 +1,14 @@
 <?php
 $rfield = str_replace('[]', '', $struct->getField());
+$name = isset($name) ? $name : 'datatable_filter';
 ?>
 @if($struct->getDataSource() == null)
     @if(in_array($struct->getInputType(), [Input::TYPE_DATE, Input::TYPE_DATERANGE, Input::TYPE_DATETIME]))
-        <x-autocrud-input::daterange :name="'datatable_filter['.$rfield.'][]'" :attr="[
+        <x-autocrud-input::daterange :name="$name.'['.$rfield.'][]'" :attr="[
             'data-id' => 'datatable-filter-' . $rfield
         ]" />
     @else
-        <x-autocrud-input::text :name="'datatable_filter['.$rfield.']'" :attr="[
+        <x-autocrud-input::text :name="$name.'['.$rfield.']'" :attr="[
             'data-id' => 'datatable-filter-' . $rfield
         ]" />
     @endif
@@ -22,7 +23,7 @@ $rfield = str_replace('[]', '', $struct->getField());
     }
     ?>
     @if(is_array($source))
-    <x-autocrud-input::select name="'datatable_filter['.$rfield.']'" :source="$source" :attr="[
+    <x-autocrud-input::select name="$name.'['.$rfield.']'" :source="$source" :attr="[
         'data-id' => 'datatable-filter-' . $rfield
     ]" />
     @endif

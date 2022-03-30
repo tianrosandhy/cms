@@ -9,12 +9,12 @@ class DatatableStructure extends BaseDataStructure
     }
 
     /**
-     * (bool) set current field can be ordered (default = true)
+     * (bool) set current field can be ordered (default = false)
      */
     public $orderable = false;
 
     /**
-     * (bool) set current field can be filtered (default = true)
+     * (bool) set current field can be filtered (default = false)
      */
     public $searchable = false;
 
@@ -33,4 +33,19 @@ class DatatableStructure extends BaseDataStructure
      */
     public string $default_order = '';
     
+    /**
+     * (bool) set current field can be filtered in export mode (default = false)
+     */
+    public $export_searchable = false;
+
+    /**
+     * (bool) set current field will not shown in datatable mode
+     */
+    public $hide_on_datatable = false;
+
+    /**
+     * (bool) set current field will not shown in export mode
+     */
+    public $hide_on_export = false;
+
 }
