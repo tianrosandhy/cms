@@ -10,6 +10,7 @@
                 <!-- Control buttons here -->
 
                 <div class="btn-groups btn-rounded">
+                    @yield ('control_buttons')
                     @if(isset($control_buttons))
                         @foreach($control_buttons as $btn)
                             @if(isset($btn['label']))

@@ -115,7 +115,7 @@ class ExampleDatatableStructure extends DatatableCollection implements Datatable
 
     public function batchDeleteRoute(): string
     {
-        return route('admin.example.delete');
+        return route('admin.example.destroy');
     }
 
     public function exportRoute(): string
@@ -156,8 +156,8 @@ class ExampleDatatableStructure extends DatatableCollection implements Datatable
         if (Permission::has('admin.example.edit')) {
             $out .= '<a href="' . route('admin.example.edit', ['id' => $row->id]) . '" class="btn btn-light text-primary" data-popup-lg title="Edit"><span class="iconify" data-icon="dashicons:edit"></span></a>';
         }
-        if (Permission::has('admin.example.delete')) {
-            $out .= '<a href="' . route('admin.example.delete', ['id' => $row->id]) . '" class="btn btn-light text-danger delete-button" title="Delete"><span class="iconify" data-icon="fluent:delete-16-filled"></span></a>';
+        if (Permission::has('admin.example.destroy')) {
+            $out .= '<a href="' . route('admin.example.destroy', ['id' => $row->id]) . '" class="btn btn-light text-danger delete-button" title="Delete"><span class="iconify" data-icon="fluent:delete-16-filled"></span></a>';
         }
         $out .= '</div>';
         return $out;

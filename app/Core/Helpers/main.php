@@ -71,7 +71,6 @@ function ajax_response($type, $message = '')
     return api_response($type, $message);
 }
 
-
 function canSendPushNotif()
 {
     //push notif can be sent if all .env below is filled
@@ -94,4 +93,24 @@ function removeCache($key)
 
     // cache key not found
     return false;
+}
+
+function filenameOnly($fullpath = '')
+{
+    $pch = explode('/', $fullpath);
+    return $pch[(count($pch) - 1)];
+}
+
+function getExtension($filename)
+{
+    $pch = explode('.', $filename);
+    return $pch[(count($pch) - 1)];
+}
+
+function filesize_formatted($path)
+{
+    $size = filesize($path);
+    $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+    $power = $size > 0 ? floor(log($size, 1024)) : 0;
+    return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
 }

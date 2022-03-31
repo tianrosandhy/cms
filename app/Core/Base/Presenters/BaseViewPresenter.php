@@ -24,13 +24,11 @@ class BaseViewPresenter
     {
         $request = request();
         $this->request = $request;
-        $this->user = $request->get('user');
         $this->role = $request->get('role');
         $this->is_sa = $request->get('is_sa');
         $this->base_permission = $request->get('base_permission');
 
         $this->setting = Setting::data();
-        $this->sidebar = Sidebar::generate();
 
         if (empty($this->selected_menu)) {
             if (method_exists($this, 'setSelectedMenuName')) {

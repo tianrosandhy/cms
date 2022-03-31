@@ -5,6 +5,8 @@ use App\Core\Base\Process\BaseProcess;
 use App\Core\Contracts\CanProcess;
 use App\Core\Exceptions\ProcessException;
 use Validator;
+use Exception;
+use DB;
 
 class BaseDeleteProcess extends BaseProcess implements CanProcess
 {
@@ -58,12 +60,19 @@ class BaseDeleteProcess extends BaseProcess implements CanProcess
 
     public function process()
     {
-        if (empty($this->id) && $this->request->list_id && is_array($this->request->list_id)) {
-            $this->runBatchDelete($this->request->list_id);
-            $this->afterBatchDelete($this->request->list_id);
-        } else {
-            $this->runSingleDelete($this->id);
-            $this->afterSingleDelete($this->id);
+        DB::beginTransaction();
+        try {
+            if (empty($this->id) && $this->request->list_id && is_array($this->request->list_id)) {
+                $this->runBatchDelete($this->request->list_id);
+                $this->afterBatchDelete($this->request->list_id);
+            } else {
+                $this->runSingleDelete($this->id);
+                $this->afterSingleDelete($this->id);
+            }
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw $e;
         }
     }
 

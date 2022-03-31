@@ -4,17 +4,26 @@ namespace App\Modules\Example\Http\Controllers;
 use App\Core\Base\Controllers\BaseController;
 use App\Modules\Example\Models\Example;
 use App\Modules\Example\Http\Structure\ExampleDatatableStructure;
-use App\Modules\Example\Presenters\ExampleIndexPresenter;
+use App\Modules\Example\Http\Structure\ExampleFormStructure;
 use App\Modules\Example\Presenters\ExampleCrudPresenter;
 use App\Modules\Example\Http\Process\ExampleCrudProcess;
 use App\Modules\Example\Http\Process\ExampleDeleteProcess;
 use App\Modules\Example\Http\Process\ExampleExportProcess;
+use Permission;
 
 class ExampleController extends BaseController
 {
     public function index()
     {
-        return (new ExampleIndexPresenter)->render();
+        $title = __('example::module.example.index');
+        $structure = new ExampleDatatableStructure;
+        $selected_menu = 'example';
+
+        return view('example::index', compact(
+            'title',
+            'structure',
+            'selected_menu'
+        ));
     }
 
     public function export()
@@ -29,8 +38,22 @@ class ExampleController extends BaseController
 
     public function create()
     {
+        $title = __('example::module.example.add');
         $data = new Example;
-        return (new ExampleCrudPresenter($data))->render();
+        $structure = new ExampleFormStructure($data);
+        $breadcrumb = [
+            [
+                'label' => __('example::module.example.index'),
+                'url' => route('admin.example.index'),
+            ],
+        ];
+
+        return view('example::crud', compact(
+            'title',
+            'data',
+            'structure',
+            'breadcrumb'
+        ));
     }
 
     public function store()
@@ -43,8 +66,22 @@ class ExampleController extends BaseController
 
     public function edit($id)
     {
+        $title = __('example::module.example.edit');
         $data = Example::findOrFail($id);
-        return (new ExampleCrudPresenter($data))->render();
+        $structure = new ExampleFormStructure($data);
+        $breadcrumb = [
+            [
+                'label' => __('example::module.example.index'),
+                'url' => route('admin.example.index'),
+            ],
+        ];
+
+        return view('example::crud', compact(
+            'title',
+            'data',
+            'structure',
+            'breadcrumb'
+        ));
     }
 
     public function update($id)

@@ -1,3 +1,6 @@
+<?php
+$selected_menu = $selected_menu ?? null;
+?>
 <!-- Left Menu Start -->
 <ul class="metismenu list-unstyled" id="side-menu">
     <li class="menu-title">Menu</li>

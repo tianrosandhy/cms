@@ -16,6 +16,9 @@
 /*!
  * additional.css
  */
+.card{
+    border:none!important;
+}
 
 .auth-page-sidebar img {
 	width: 100%;

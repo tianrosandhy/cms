@@ -7,22 +7,14 @@ use Setting;
 
 class SettingProcess extends BaseProcess implements CanProcess
 {
-    public function config()
-    {
-        return [
-            'error_redirect_target' => null, //ex : url('your-url-when-fail')
-            'success_redirect_target' => null, //ex : url('your-url-when-success')
-            'success_message' => 'Your setting has been saved successfully',
-            'error_message' => 'Sorry we cannot save your setting right now',
-        ];
-    }
-
     public function validate()
     {
+        // 
     }
 
     public function process()
     {
+        $this->setSuccessMessage('Your setting has been saved successfully');
         //your logic after validation success
         $lists = Setting::all();
         $savedata = [];
@@ -65,11 +57,6 @@ class SettingProcess extends BaseProcess implements CanProcess
             }
         }
         removeCache('setting');
-    }
-
-    public function revert()
-    {
-        //your logic when validation or process failed to running
     }
 
 }

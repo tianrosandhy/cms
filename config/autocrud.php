@@ -65,8 +65,8 @@ return [
     'asset_url' => 'autocrud-assets/',
     'asset_dependency' => [
         'load_bootstrap' => true,
-        'load_jquery' => false,
-        'load_iconify' => false,
+        'load_jquery' => true,
+        'load_iconify' => true,
         'load_plugins' => true,
     ],
 

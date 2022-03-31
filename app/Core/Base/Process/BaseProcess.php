@@ -1,11 +1,11 @@
 <?php
 namespace App\Core\Base\Process;
 
-use App\Core\Exceptions\DataTableException;
 use App\Core\Exceptions\ProcessException;
 use App\Core\Shared\DynamicProperty;
 use Log;
 use Exception;
+use DB;
 
 class BaseProcess
 {
@@ -17,25 +17,19 @@ class BaseProcess
     public $response_type = 'success';
     public $data = null;
 
+    public $error_redirect_target = null;
+    public $success_redirect_target = null;
+    public $error_message = null;
+    public $success_message = "Success";
+
     public function __construct()
     {
         $this->request = request();
-        $this->config = $this->config();
-    }
-
-    public function config()
-    {
-        return [
-            'error_redirect_target' => null, //ex : url('your-url-when-fail')
-            'success_redirect_target' => null, //ex : url('your-url-when-success')
-            'success_message' => 'Success',
-            'error_message' => null,
-        ];
     }
 
     public function type($process_type = null)
     {
-        $available_process_type = ['http', 'ajax', 'datatable', 'raw'];
+        $available_process_type = ['http', 'ajax', 'raw'];
         if (in_array(strtolower($process_type), $available_process_type)) {
             $this->type = strtolower($process_type);
         }
@@ -47,7 +41,7 @@ class BaseProcess
         if (method_exists($this, 'validate')) {
             try {
                 $this->validate();
-            } catch (ProcessException | DataTableException | Exception $e) {
+            } catch (ProcessException | Exception $e) {
                 Log::error("THROWN VALIDATION EXCEPTION IN " . get_class($this) . " : ", [
                     'message' => $e->getMessage(),
                     'exception' => $e,
@@ -70,9 +64,12 @@ class BaseProcess
             }
         }
 
+        DB::beginTransaction();
         try {
             $this->data = $this->process();
-        } catch (ProcessException | DataTableException $e) {
+            DB::commit();
+        } catch (ProcessException $e) {
+            DB::rollback();
             Log::error("THROWN PROCESS EXCEPTION IN " . get_class($this) . " : ", [
                 'message' => $e->getMessage(),
                 'exception' => $e,
@@ -82,9 +79,6 @@ class BaseProcess
                 $this->setHttpCode($e->getCode());
             }
             $this->setErrorMessage($e->getMessage());
-            if (method_exists($this, 'revert')) {
-                $this->revert();
-            }
 
             if ($this->type == 'raw') {
                 // langsung throw aja exceptionnya
@@ -118,9 +112,6 @@ class BaseProcess
         if ($this->type == 'ajax') {
             return $this->generateAjaxResponse();
         }
-        if ($this->type == 'datatable') {
-            return $this->generateDatatableResponse();
-        }
         if ($this->type == 'raw') {
             return $this->data;
         }
@@ -142,55 +133,50 @@ class BaseProcess
             'message' => $this->response_type == 'success' ? $this->getSuccessMessage() : null,
             'data' => $this->data ?? null,
             'error' => $this->response_type == 'error' ? $this->getErrorMessage() : [],
-            'redirect' => $this->config['success_redirect_target'] ?? null,
+            'redirect' => $this->success_redirect_target ?? null,
         ], $this->http_code);
-    }
-
-    private function generateDatatableResponse()
-    {
-        return response()->json($this->data, $this->http_code);
     }
 
     // property getter and setter
 
     public function setErrorMessage($err)
     {
-        $this->config['error_message'] = $err;
+        $this->error_message = $err;
         return $this;
     }
     public function getErrorMessage()
     {
-        return $this->config['error_message'] ?? ['Sorry, we cannot process your request.'];
+        return $this->error_message ?? ['Sorry, we cannot process your request.'];
     }
 
     public function setSuccessMessage($msg)
     {
-        $this->config['success_message'] = $msg;
+        $this->success_message = $msg;
         return $this;
     }
     public function getSuccessMessage()
     {
-        return $this->config['success_message'] ?? ['Your data has been saved.'];
+        return $this->success_message ?? ['Your data has been saved.'];
     }
 
     public function setErrorRedirectTarget($target)
     {
-        $this->config['error_redirect_target'] = $target;
+        $this->error_redirect_target = $target;
         return $this;
     }
     public function getErrorRedirectTarget()
     {
-        return isset($this->config['error_redirect_target']) ? redirect($this->config['error_redirect_target']) : redirect()->back();
+        return isset($this->error_redirect_target) ? redirect($this->error_redirect_target) : redirect()->back();
     }
 
     public function setSuccessRedirectTarget($target)
     {
-        $this->config['success_redirect_target'] = $target;
+        $this->success_redirect_target = $target;
         return $this;
     }
     public function getSuccessRedirectTarget()
     {
-        return isset($this->config['success_redirect_target']) ? redirect($this->config['success_redirect_target']) : redirect()->back();
+        return isset($this->success_redirect_target) ? redirect($this->success_redirect_target) : redirect()->back();
     }
 
 }

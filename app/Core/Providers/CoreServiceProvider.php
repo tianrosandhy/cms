@@ -9,6 +9,9 @@ use Illuminate\Database\Schema\Builder;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
+use Sidebar;
 use Exception;
 
 class CoreServiceProvider extends BaseServiceProvider
@@ -20,6 +23,13 @@ class CoreServiceProvider extends BaseServiceProvider
         Builder::defaultStringLength(191);
         $this->loadMigrationsFrom(realpath(__DIR__ . "/../Migrations"));
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/Translations', 'core');
+        View::composer('*', function($view){
+            $current_user = request()->get('user');
+            if ($current_user) {
+                $view->with('user', $current_user)
+                    ->with('sidebar', Sidebar::generate());
+            }
+        });
     }
 
     public function register()
@@ -31,6 +41,9 @@ class CoreServiceProvider extends BaseServiceProvider
         $this->mergeMainConfig();
         $this->registerAlias();
         $this->registerContainer();
+
+        // share view globally
+        View::share('user', request()->get('user'));
     }
 
     protected function mergeMainConfig()

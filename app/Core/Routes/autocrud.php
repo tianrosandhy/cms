@@ -10,7 +10,7 @@ Route::group([
 	Route::post('create', 'store')->name('admin.'.$bs_route.'.store');
 	Route::post('edit/{id}', 'update')->name('admin.'.$bs_route.'.update');
 	Route::post('switch/{id}', 'switch')->name('admin.'.$bs_route.'.switch');
-	Route::post('delete/{id?}', 'delete')->name('admin.'.$bs_route.'.delete');
+	Route::post('delete/{id?}', 'delete')->name('admin.'.$bs_route.'.destroy');
 
 	// ajax route
 	Route::match(['get', 'post'], 'datatable/post', 'dataTable')->name('admin.'.$bs_route.'.datatable');
