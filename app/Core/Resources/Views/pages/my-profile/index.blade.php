@@ -10,7 +10,7 @@
 				<div class="col-md-8">
 					<div class="form-group">
 						<label>Name</label>
-						<x-core::input.text name="name" :attr="[
+						<x-autocrud-input::text name="name" :attr="[
 								'required' => 'required',
 								'placeholder' => 'Type Your Name',
 								'maxlength' => 50
@@ -18,7 +18,7 @@
 					</div>
 					<div class="form-group">
 						<label>Email</label>
-						<x-core::input.email name="email" :value="$user->email" :attr="[
+						<x-autocrud-input::email name="email" :value="$user->email" :attr="[
 								'maxlength' => 75,
 								'required' => 'required'
 						]" />
@@ -32,7 +32,7 @@
 							<div class="col-6">
 								<div class="form-group custom-form-group searchable">
 									<label>Password</label>
-									<x-core::input.password name="password" :attr="[
+									<x-autocrud-input::password name="password" :attr="[
 										'data-password' => 'true',
 										'placeholder' => 'Keep blank if you dont want to change',
 										'autocomplete' => 'off'
@@ -42,7 +42,7 @@
 							<div class="col-6">
 								<div class="form-group custom-form-group searchable">
 									<label>Repeat Password</label>
-									<x-core::input.password name="password_confirmation" :attr="[
+									<x-autocrud-input::password name="password_confirmation" :attr="[
 										'data-password' => 'true',
 										'autocomplete' => 'off'
 									]" />
@@ -62,7 +62,7 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>Profile Photo</label>
-						<x-core::input.image name="image" :value="$user->image" />
+						<x-autocrud-input::image name="image" :value="$user->image" />
 					</div>
 				</div>
 			</div>
