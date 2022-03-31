@@ -9,7 +9,6 @@ class CoreController extends BaseController
 {
     use Partials\AuthController;
     use Partials\ProfileController;
-    use Partials\LanguageController;
     use Partials\PrivilegeController;
     use Partials\UserManagementController;
     use Partials\LogController;

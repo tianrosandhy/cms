@@ -3,8 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="{{ setting('general.favicon', admin_asset('images/logo.png')) }}">
 
+{!! Autocrud::css() !!}
 <link href="{{ admin_asset('css/style.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ admin_asset('css/additional.css') }}?v={{ time() }}" rel="stylesheet" type="text/css" />
+
 @if(isset($custom_css))
 <link rel="stylesheet" href="{{ $custom_css }}">
 @endif

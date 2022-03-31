@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1abaf524a339b0f74b73f1fe90db57b",
+    "content-hash": "c9aa45ed20b1ec9cb59b90f9f044da21",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5830,6 +5830,56 @@
             "time": "2022-01-17T16:30:44+00:00"
         },
         {
+            "name": "tianrosandhy/autocrud",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tianrosandhy/tianrosandhy-autocrud.git",
+                "reference": "565e76945b62e297c64407b8d5750fa88e68111f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tianrosandhy/tianrosandhy-autocrud/zipball/565e76945b62e297c64407b8d5750fa88e68111f",
+                "reference": "565e76945b62e297c64407b8d5750fa88e68111f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.2",
+                "intervention/image": "^2.7",
+                "laravel/framework": "^5|^6|^7|^8|^9",
+                "maatwebsite/excel": "^3.1",
+                "php": ">=7.2"
+            },
+            "default-branch": true,
+            "type": "module",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TianRosandhy\\Autocrud\\AutocrudServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TianRosandhy\\Autocrud\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Christian Rosandhy",
+                    "homepage": "https://tianrosandhy.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Autocrud component to help easily generate datatable & form",
+            "support": {
+                "issues": "https://github.com/tianrosandhy/tianrosandhy-autocrud/issues",
+                "source": "https://github.com/tianrosandhy/tianrosandhy-autocrud/tree/main"
+            },
+            "time": "2022-03-30T12:36:32+00:00"
+        },
+        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "2.2.4",
             "source": {
@@ -8964,7 +9014,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "tianrosandhy/autocrud": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

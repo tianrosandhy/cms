@@ -19,17 +19,10 @@ class SidebarGenerator extends SidebarRegistration
 
             SidebarItem::setName('ADMIN.MANAGEMENT')
                 ->setLabel(__('core::module.menu.management'))
-                ->setPrivilege(['admin.user.index', 'admin.privilege.index', 'admin.language.index'])
+                ->setPrivilege(['admin.user.index', 'admin.privilege.index'])
                 ->setIcon('uim:user-md')
                 ->setSortNo(100)
                 ->setActiveKey(['user', 'privilege']),
-
-            SidebarItem::setName('ADMIN.LANGUAGE')
-                ->setLabel(__('core::module.menu.language_management'))
-                ->setPrivilege('admin.language.index')
-                ->setRoute('admin.language.index')
-                ->setParent('ADMIN.MANAGEMENT')
-                ->setActiveKey('language'),
 
             SidebarItem::setName('ADMIN.PRIVILEGE')
                 ->setLabel(__('core::module.menu.privilege_management'))

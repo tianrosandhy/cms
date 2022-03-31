@@ -71,10 +71,6 @@ function ajax_response($type, $message = '')
     return api_response($type, $message);
 }
 
-function def_lang()
-{
-    return Language::default();
-}
 
 function canSendPushNotif()
 {

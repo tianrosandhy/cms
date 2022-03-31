@@ -3,14 +3,14 @@ namespace App\Core\Http\Middleware;
 
 use App;
 use Closure;
-use Language;
+use Autocrud;
 
 class SetLocale
 {
 
     public function handle($request, Closure $next)
     {
-        $lang = session('lang', Language::default());
+        $lang = session('lang', Autocrud::defaultLang());
         App::setLocale($lang);
         session(['lang' => $lang]);
 

@@ -4,7 +4,7 @@ namespace App\Core\Http\Controllers;
 use App\Core\Base\Controllers\BaseController;
 use App\Core\Exceptions\MediaException;
 use DB;
-use Language;
+use Autocrud;
 use Media;
 use Storage;
 use Validator;
@@ -156,7 +156,7 @@ class ComponentController extends BaseController
 
     public function switchLang()
     {
-        $available_lang = Language::available();
+        $available_lang = Autocrud::langs();
         if ($this->request->lang) {
             if (isset($available_lang[$this->request->lang])) {
                 session(['lang' => $this->request->lang]);

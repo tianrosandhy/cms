@@ -2,9 +2,9 @@
 namespace App\Modules\Example\Models;
 
 use App\Core\Models\BaseModel;
-use App\Core\Shared\Sluggable;
-use App\Core\Shared\Translateable;
-use App\Core\Shared\ImageGrabable;
+use TianRosandhy\Autocrud\Shared\Sluggable;
+use TianRosandhy\Autocrud\Shared\Translateable;
+use TianRosandhy\Autocrud\Shared\ImageGrabable;
 
 class Example extends BaseModel
 {

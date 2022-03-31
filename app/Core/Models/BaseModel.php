@@ -1,8 +1,8 @@
 <?php
 namespace App\Core\Models;
 
-use App\Core\Shared\FileGrabable;
-use App\Core\Shared\ImageGrabable;
+use TianRosandhy\Autocrud\Shared\FileGrabable;
+use TianRosandhy\Autocrud\Shared\ImageGrabable;
 use Illuminate\Database\Eloquent\Model;
 
 //helper methods for every model in CMS

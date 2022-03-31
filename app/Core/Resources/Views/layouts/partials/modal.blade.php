@@ -8,6 +8,4 @@
     'modal_size' => 'xl'
 ])
 
-@include ('core::components.media.assets')
-
 @stack ('modal')

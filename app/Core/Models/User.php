@@ -1,7 +1,7 @@
 <?php
 namespace App\Core\Models;
 
-use App\Core\Shared\ImageGrabable;
+use TianRosandhy\Autocrud\Shared\ImageGrabable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

@@ -4,7 +4,7 @@ namespace App\Core\Base\Structure;
 use App\Core\Exceptions\StructureException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Language;
+use Autocrud;
 use Exception;
 
 trait StructureHelper
@@ -87,7 +87,7 @@ trait StructureHelper
         $table_name = $this->getTableName();
 
         if (empty($lang)) {
-            $lang = Language::default();
+            $lang = Autocrud::defaultLang();
         }
 
         $post = [];
@@ -101,7 +101,7 @@ trait StructureHelper
                 if (in_array($field_name, $table_listing)) {
                     $value_for_saved = $this->request->{$field_name} ?? null;
                     if ($this->multi_language) {
-                        $fallback = $value_for_saved[Language::default()] ?? null;
+                        $fallback = $value_for_saved[Autocrud::defaultLang()] ?? null;
                         $value_for_saved = $value_for_saved[$lang] ?? $fallback;
                     }
                     if ($row->input_type == 'currency') {
@@ -147,7 +147,7 @@ trait StructureHelper
     public function autoCrudMultiLanguage()
     {
         $out = [];
-        foreach (Language::available() as $lang => $langname) {
+        foreach (Autocrud::langs() as $lang => $langname) {
             $out[$lang] = $this->autoCrud($lang);
         }
         return $out;
