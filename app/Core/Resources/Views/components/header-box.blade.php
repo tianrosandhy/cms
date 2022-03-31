@@ -7,7 +7,7 @@
                 <h4 class="page-title mb-1">{{ $title ?? '' }}</h4>
 				@include ('core::components.breadcrumb')
             </div>
-            <div class="col-md-6 text-right">
+            <div class="col-md-6 text-right text-end">
 				<!-- Control buttons here -->
 
 				<div class="btn-groups btn-rounded">

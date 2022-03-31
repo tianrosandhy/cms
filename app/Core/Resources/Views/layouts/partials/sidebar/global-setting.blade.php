@@ -14,7 +14,7 @@
                 @foreach($lists['items'] as $item)
                     <div class="form-group">
                         <label class="font-weight-medium">{{ $item->getTitle() }}</label>
-                        {!! Input::type($item->getType(), $group.'['.$item->getName().']', [
+                        {!! TianRosandhy\Autocrud\Facades\Input::type($item->getType(), $group.'['.$item->getName().']', [
                             'attr' => $item->getConfig(),
                             'value' => $item->getValue()
                         ]) !!}

@@ -1,5 +1,5 @@
 @if(isset($data->id))
-<div class="py-2 text-right">
+<div class="py-2 text-right text-end">
 	<a href="#" class="btn btn-info btn-change-password"><span class="iconify" data-icon="uim:key-structure"></span> Change Password</a>
 </div>
 <script>

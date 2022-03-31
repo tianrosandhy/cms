@@ -2,7 +2,7 @@
 namespace App\Core\Presenters;
 
 use App\Core\Base\Presenters\BaseViewPresenter;
-use App\Core\Http\Structure\UserStructure;
+use App\Core\Http\Structure\UserFormStructure;
 
 class UserCrudPresenter extends BaseViewPresenter
 {
@@ -16,7 +16,7 @@ class UserCrudPresenter extends BaseViewPresenter
         $this->data = $instance;
         $this->back_url = route('admin.user.index');
         $this->view = 'core::master.crud';
-        $this->structure = new UserStructure;
+        $this->structure = new UserFormStructure($instance);
         $this->config = config('module-setting.user');
     }
 

@@ -71,7 +71,7 @@ class BaseDeleteProcess extends BaseProcess implements CanProcess
     {
         $model = $this->currentModel();
         $pk = $model->getKeyName();
-        return $model->whereIn([$pk => $ids])->delete();
+        return $model->whereIn($pk, $ids)->delete();
     }
 
     protected function runSingleDelete($id)
