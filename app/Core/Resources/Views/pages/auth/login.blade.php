@@ -24,11 +24,9 @@
                                     <div class="form-group">
                                         <label class="form-control-label">Email</label>
                                         <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-white">
-                                                    <span class="iconify" data-icon="uim:user-md"></span>
-                                                </span>
-                                            </div>
+                                            <span class="input-group-text bg-white">
+                                                <span class="iconify" data-icon="uim:user-md"></span>
+                                            </span>
                                             <input type="email" class="form-control" id="email" placeholder="your@email.com" name="email">
                                         </div>
                                     </div>
@@ -36,11 +34,9 @@
                                     <div class="form-group mt-4">
                                         <label class="form-control-label">Password</label>
                                         <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-white">
-                                                    <span class="iconify" data-icon="bi:key-fill"></span>
-                                                </span>
-                                            </div>
+                                            <span class="input-group-text bg-white">
+                                                <span class="iconify" data-icon="bi:key-fill"></span>
+                                            </span>
                                             <input type="password" class="form-control" id="password"
                                                 placeholder="Enter your password" name="password">
                                         </div>
@@ -51,12 +47,12 @@
                                             <input type="checkbox" class="custom-control-input"
                                                 id="checkbox-signin" checked name="remember" value="1">
                                             <label class="custom-control-label" for="checkbox-signin">{{ __('core::module.login.remember_me') }}</label>
-                                            <a href="#" class="float-right text-muted text-unline-dashed ml-1" data-toggle="modal" data-target="#forgot-password-modal">{{ __('core::module.login.forgot_password') }}</a>
+                                            <a href="#" class="float-end text-muted text-unline-dashed ml-1" data-toggle="modal" data-target="#forgot-password-modal">{{ __('core::module.login.forgot_password') }}</a>
                                         </div>
                                     </div>
 
                                     <div class="form-group mb-0 text-center">
-                                        <button class="btn btn-primary btn-block" type="submit">LOG IN
+                                        <button class="btn btn-primary d-block font-weight-bold" type="submit"><span class="iconify" data-icon="bi:key-fill"></span> LOG IN
                                         </button>
                                     </div>
                                 </form>                                
@@ -80,7 +76,7 @@
                     {{ csrf_field() }}
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">{{ __('core::module.login.forgot_password') }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close btn-close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -89,7 +85,7 @@
                         <input type="email" name="email" class="form-control" placeholder="your@email.com">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('core::module.form.close') }}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">{{ __('core::module.form.close') }}</button>
                         <button type="submit" class="btn btn-primary">Reset Password</button>
                     </div>
                 </form>

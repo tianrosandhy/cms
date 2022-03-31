@@ -1,28 +1,34 @@
 <?php
 namespace App\Modules\Example\Http\Process;
 
-use App\Core\Base\Process\BaseCrudProcess;
-use App\Modules\Example\Http\Structure\ExampleStructure;
+use App\Core\Base\Process\BaseProcess;
+use App\Core\Exceptions\ProcessException;
+use App\Modules\Example\Http\Structure\ExampleFormStructure;
 
-class ExampleCrudProcess extends BaseCrudProcess
+class ExampleCrudProcess extends BaseProcess
 {
-    public function setStructure()
+    public function __construct($instance = null)
     {
-        return new ExampleStructure;
+        parent::__construct();
+        if (isset($instance->id)) {
+            $this->mode = 'update';
+        } else {
+            $this->mode = 'create';
+        }
+        $this->instance = $instance;
+        $this->structure = new ExampleFormStructure($this->instance);
     }
 
-    public function afterValidation()
+    public function validate()
     {
-        // throw anything if you want to stop the process execution.
+        // 
     }
 
-    /**
-    * This method will be called after the default Create / Update process running successfully.
-    * You can add additional logic after the basic data stored/updated.
-    * @param any $instance : the model of the inserted/updated data 
-    */
-    public function afterCrud($instance=null)
+    public function process()
     {
-        
+        $response = $this->structure->autoCrud();
+        if (!$response->ok()) {
+            throw new ProcessException($response->errorFirst());
+        }
     }
 }

@@ -3,21 +3,21 @@
         <div class="modal-content">
             <div class="modal-header">
                 Confirmation
-                <button class="close" data-dismiss="modal">&times;</button>
+                <button class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="back-confirmation">
                     <p class="lead">Your data <strong>will not be saved</strong> if you go back now. Do you still want to go back?</p>
                     <div>
                         <a href="#" class="btn btn-danger btn-real-back">Back, and Remove All Changes</a>
-                        <a href="#" class="btn btn-white" data-dismiss="modal">Cancel</a>
+                        <a href="#" class="btn btn-white" data-dismiss="modal" data-bs-dismiss="modal">Cancel</a>
                     </div>
                 </div>
                 <div class="save-confirmation">
                     <p class="lead">Please make sure that all the data is correctly filled. Click button below to continue save your data</p>
                     <div>
                         <a href="#" class="btn btn-success btn-trigger-resend">Continue, and Save Data</a>
-                        <a href="#" class="btn btn-white" data-dismiss="modal">Cancel</a>
+                        <a href="#" class="btn btn-white" data-dismiss="modal" data-bs-dismiss="modal">Cancel</a>
                     </div>
                 </div>
             </div>

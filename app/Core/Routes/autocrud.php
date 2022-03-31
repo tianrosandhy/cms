@@ -16,6 +16,6 @@ Route::group([
 	Route::match(['get', 'post'], 'datatable/post', 'dataTable')->name('admin.'.$bs_route.'.datatable');
 
 	// import/export route
-	Route::get('export', 'export')->name('admin.'.$bs_route.'.export');
+	Route::match(['get', 'post'], 'export', 'export')->name('admin.'.$bs_route.'.export');
 	Route::post('import', 'import')->name('admin.'.$bs_route.'.import');
 });

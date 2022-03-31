@@ -2,8 +2,7 @@
 namespace App\Modules\Example\Presenters;
 
 use App\Core\Base\Presenters\BaseViewPresenter;
-use App\Modules\Example\Http\Structure\ExampleStructure;
-use DataTable;
+use App\Modules\Example\Http\Structure\ExampleDatatableStructure;
 use Permission;
 
 class ExampleIndexPresenter extends BaseViewPresenter
@@ -15,9 +14,7 @@ class ExampleIndexPresenter extends BaseViewPresenter
         #if you want to override this index view, you can use below view instead
         //$this->view = 'example::index';
 
-        $this->batch_delete_url = route('admin.example.delete');
-        $this->structure = new ExampleStructure;
-        $this->datatable = DataTable::setStructure($this->structure);
+        $this->structure = new ExampleDatatableStructure;
         $this->control_buttons = [];
         if (Permission::has('admin.example.create')) {
             $this->control_buttons[] = [

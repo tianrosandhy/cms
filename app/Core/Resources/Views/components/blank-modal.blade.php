@@ -7,7 +7,7 @@ $modal_size = $modal_size ?? 'lg';
     <div class="modal-content">
       <div class="modal-header">
         <span class="title"></span>
-        <button class="close" data-dismiss="modal">&times;</button>
+        <button class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
       

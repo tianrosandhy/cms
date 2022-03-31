@@ -2,25 +2,19 @@
 namespace App\Modules\Example\Presenters;
 
 use App\Core\Base\Presenters\BaseViewPresenter;
-use App\Modules\Example\Http\Structure\ExampleStructure;
+use App\Modules\Example\Http\Structure\ExampleFormStructure;
 
 class ExampleCrudPresenter extends BaseViewPresenter
 {
     public function __construct($instance = null)
     {
+        $this->title = __('example::module.example.add');
         if (isset($instance->id)) {
             $this->title = __('example::module.example.edit');
-            $this->form_route = route('admin.example.update', ['id' => $instance->id]);
-        } else {
-            $this->title = __('example::module.example.add');
-            $this->form_route = route('admin.example.store');
         }
         $this->data = $instance;
         $this->back_url = route('admin.example.index');
-        $this->hide_export_import = true;
         $this->view = 'core::master.crud';
-        #if you want to override this crud view, you can use below view instead
-        // $this->view = 'example::crud';
 
         $this->breadcrumb = [
             [
@@ -29,7 +23,7 @@ class ExampleCrudPresenter extends BaseViewPresenter
             ],
         ];
 
-        $this->structure = new ExampleStructure;
+        $this->structure = new ExampleFormStructure($this->data);
         $this->config = config('module-setting.example');
     }
 
