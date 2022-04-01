@@ -1,9 +1,9 @@
 <?php
-namespace App\Modules\Example\Http\Process;
+namespace App\Modules\Example\Http\Process\Example;
 
 use App\Core\Base\Process\BaseProcess;
 use App\Core\Exceptions\ProcessException;
-use App\Modules\Example\Http\Structure\ExampleFormStructure;
+use App\Modules\Example\Http\Structure\Example\ExampleFormStructure;
 
 class ExampleCrudProcess extends BaseProcess
 {

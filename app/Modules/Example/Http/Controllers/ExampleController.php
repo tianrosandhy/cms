@@ -3,19 +3,16 @@ namespace App\Modules\Example\Http\Controllers;
 
 use App\Core\Base\Controllers\BaseController;
 use App\Modules\Example\Models\Example;
-use App\Modules\Example\Http\Structure\ExampleDatatableStructure;
-use App\Modules\Example\Http\Structure\ExampleFormStructure;
-use App\Modules\Example\Presenters\ExampleCrudPresenter;
-use App\Modules\Example\Http\Process\ExampleCrudProcess;
-use App\Modules\Example\Http\Process\ExampleDeleteProcess;
-use App\Modules\Example\Http\Process\ExampleExportProcess;
-use Permission;
+use App\Modules\Example\Http\Structure\Example\ExampleDatatableStructure;
+use App\Modules\Example\Http\Structure\Example\ExampleFormStructure;
+use App\Modules\Example\Http\Process\Example\ExampleCrudProcess;
+use App\Modules\Example\Http\Process\Example\ExampleDeleteProcess;
 
 class ExampleController extends BaseController
 {
     public function index()
     {
-        $title = __('example::module.example.index');
+        $title = "Example Data";
         $structure = new ExampleDatatableStructure;
         $selected_menu = 'example';
 
@@ -38,7 +35,7 @@ class ExampleController extends BaseController
 
     public function create()
     {
-        $title = __('example::module.example.add');
+        $title = "Add New Example";
         $data = new Example;
         $structure = new ExampleFormStructure($data);
         $breadcrumb = [
@@ -66,7 +63,7 @@ class ExampleController extends BaseController
 
     public function edit($id)
     {
-        $title = __('example::module.example.edit');
+        $title = "Edit Example Data";
         $data = Example::findOrFail($id);
         $structure = new ExampleFormStructure($data);
         $breadcrumb = [

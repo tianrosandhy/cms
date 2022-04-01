@@ -1,5 +1,5 @@
 <?php
-namespace App\Modules\Example\Http\Structure;
+namespace App\Modules\Example\Http\Structure\Example;
 
 use App\Modules\Example\Models\Example;
 use FormStructure;

@@ -1,5 +1,5 @@
 <?php
-namespace App\Modules\Example\Http\Structure;
+namespace App\Modules\Example\Http\Structure\Example;
 
 use App\Modules\Example\Models\Example;
 use DatatableStructure;
@@ -145,7 +145,7 @@ class ExampleDatatableStructure extends DatatableCollection implements Datatable
             'file_multiple' => $row->outputFile('file_multiple'),
             'radio' => $row->radio,
             'checkbox' => $row->generateTags('checkbox'),
-            'yesno' => $row->yesno ? '<span class="p-1 btn btn-success" title="Active"><span class="iconify" data-icon="uim:check"></span>' : '<span class="p-1 btn btn-danger" title="Not Active"><span class="iconify" data-icon="uim:multiply"></span></span>',
+            'yesno' => $this->switcherFormat($row, 'yesno', Permission::has('admin.example.edit') ? 'toggle' : 'label'),
             'action' => $this->actionButton($row),
         ];
     }

@@ -1,5 +1,5 @@
 <?php
-namespace App\Modules\Example\Http\Process;
+namespace App\Modules\Example\Http\Process\Example;
 
 use App\Core\Base\Process\BaseDeleteProcess;
 use App\Core\Exceptions\ProcessException;

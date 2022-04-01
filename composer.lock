@@ -5905,12 +5905,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tianrosandhy/tianrosandhy-autocrud.git",
-                "reference": "30d4641ed0b60ce5c336af4a292bcd678aa03094"
+                "reference": "9d31590682cbcb17a32ebc49f8633f437fd6f216"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tianrosandhy/tianrosandhy-autocrud/zipball/30d4641ed0b60ce5c336af4a292bcd678aa03094",
-                "reference": "30d4641ed0b60ce5c336af4a292bcd678aa03094",
+                "url": "https://api.github.com/repos/tianrosandhy/tianrosandhy-autocrud/zipball/9d31590682cbcb17a32ebc49f8633f437fd6f216",
+                "reference": "9d31590682cbcb17a32ebc49f8633f437fd6f216",
                 "shasum": ""
             },
             "require": {
@@ -5947,7 +5947,7 @@
                 "issues": "https://github.com/tianrosandhy/tianrosandhy-autocrud/issues",
                 "source": "https://github.com/tianrosandhy/tianrosandhy-autocrud/tree/main"
             },
-            "time": "2022-03-31T15:58:40+00:00"
+            "time": "2022-04-01T05:45:49+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
