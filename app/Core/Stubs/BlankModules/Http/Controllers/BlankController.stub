@@ -3,9 +3,6 @@ namespace [NAMESPACE]\Http\Controllers;
 
 use App\Core\Base\Controllers\BaseController;
 use [NAMESPACE]\Models\[MODULE_NAME];
-use [NAMESPACE]\Presenters\[MODULE_NAME]\[MODULE_NAME]IndexPresenter;
-use [NAMESPACE]\Presenters\[MODULE_NAME]\[MODULE_NAME]CrudPresenter;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]DatatableProcess;
 use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]CrudProcess;
 use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]DeleteProcess;
 
@@ -13,13 +10,30 @@ class [MODULE_NAME]Controller extends BaseController
 {
     public function index()
     {
-        return (new [MODULE_NAME]IndexPresenter)->render();
+        $title = "[PROPER_MODULE_NAME] Data";
+        $selected_menu = '[LOWERCASE_MODULE_NAME]';
+        return view('[LOWERCASE_MODULE_NAME]::index', compact(
+            'title',
+            'selected_menu'
+        ));
     }
 
     public function create()
     {
+        $title = "Add New [PROPER_MODULE_NAME]";
         $data = new [MODULE_NAME];
-        return (new [MODULE_NAME]CrudPresenter($data))->render();
+        $breadcrumb = [
+            [
+                'label' => '[PROPER_MODULE_NAME]',
+                'url' => route('admin.[LOWERCASE_MODULE_NAME].index'),
+            ],
+        ];
+
+        return view('[LOWERCASE_MODULE_NAME]::crud', compact(
+            'title',
+            'data',
+            'breadcrumb'
+        ));
     }
 
     public function store()
@@ -32,8 +46,20 @@ class [MODULE_NAME]Controller extends BaseController
 
     public function edit($id)
     {
+        $title = "Edit [PROPER_MODULE_NAME] Data";
         $data = [MODULE_NAME]::findOrFail($id);
-        return (new [MODULE_NAME]CrudPresenter($data))->render();
+        $breadcrumb = [
+            [
+                'label' => '[PROPER_MODULE_NAME]',
+                'url' => route('admin.[LOWERCASE_MODULE_NAME].index'),
+            ],
+        ];
+
+        return view('[LOWERCASE_MODULE_NAME]::crud', compact(
+            'title',
+            'data',
+            'breadcrumb'
+        ));
     }
 
     public function update($id)

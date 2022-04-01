@@ -1,4 +1,4 @@
-@extends ($base_layout ?? 'core::layouts.master')
+@extends (request()->ajax() ? 'core::layouts.master-ajax' : 'core::layouts.master')
 @section ('content')
     {{-- remove the "ajax-form" class if you want to load this form in normal HTTP sync --}}
     <form action="{{ $form_route ?? null }}" method="post" class="ajax-form">

@@ -8,7 +8,7 @@ use RecursiveIteratorIterator;
 
 class AutocrudBlankModule extends Command
 {
-    protected $signature = 'autocrud:blankmodule';
+    protected $signature = 'autocrud:blankmodule {module_name?}';
     protected $description = 'Scaffold new Blank CMS Module';
 
     public $proper_name, $lowercase_name, $namespace, $module_name, $module_dir;
@@ -20,7 +20,11 @@ class AutocrudBlankModule extends Command
 
     public function handle()
     {
-        $name = $this->ask('Please insert module name');
+        $name = $this->argument('module_name');
+        if (empty($name)) {
+            $name = $this->ask('Please insert module name');
+        }
+
         $this->proper_name = ucwords($name);
         $this->module_name = str_replace(' ', '', $this->proper_name);
         $this->lowercase_name = strtolower(str_replace(' ', '_', $this->proper_name));
@@ -53,8 +57,6 @@ class AutocrudBlankModule extends Command
                 'Migrations/2022_02_01_000001_blank_translator.php',
                 'Models/Blank.php',
                 'Models/BlankTranslator.php',
-                'Presenters/' . $this->module_name . '/BlankCrudPresenter.php',
-                'Presenters/' . $this->module_name . '/BlankIndexPresenter.php',
                 'Providers/BlankServiceProvider.php',
                 'Services/BlankInstance.php',
             ]);
@@ -63,7 +65,6 @@ class AutocrudBlankModule extends Command
                 'Configs/module-setting.php',
                 'Configs/permission.php',
                 'Exceptions/' . $this->module_name . 'Exception.php',
-                'Extenders/MigrationModifier.php',
                 'Extenders/SettingGenerator.php',
                 'Extenders/SidebarGenerator.php',
                 'Facades/' . $this->module_name . 'Facade.php',
@@ -74,14 +75,11 @@ class AutocrudBlankModule extends Command
                 'Migrations/2022_02_01_000001_' . $this->lowercase_name . '_translator.php',
                 'Models/' . $this->module_name . '.php',
                 'Models/' . $this->module_name . 'Translator.php',
-                'Presenters/' . $this->module_name . '/' . $this->module_name . 'CrudPresenter.php',
-                'Presenters/' . $this->module_name . '/' . $this->module_name . 'IndexPresenter.php',
                 'Providers/' . $this->module_name . 'ServiceProvider.php',
                 'Routes/web.php',
                 'Services/' . $this->module_name . 'Instance.php',
-                'Translations/en/module.php',
-                'Translations/id/module.php',
                 'Views/crud.blade.php',
+                'Views/index.blade.php',
             ]);
 
             $this->info('New blank module has been created for you. Now you just need to register the service provider (in config/modules.php or in config/app.php) , manage migration, manage the model and structure.');
@@ -98,10 +96,6 @@ class AutocrudBlankModule extends Command
         rename(
             $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Process' . DIRECTORY_SEPARATOR . 'Blank',
             $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Process' . DIRECTORY_SEPARATOR . $this->module_name
-        );
-        rename(
-            $path . DIRECTORY_SEPARATOR . 'Presenters' . DIRECTORY_SEPARATOR . 'Blank',
-            $path . DIRECTORY_SEPARATOR . 'Presenters' . DIRECTORY_SEPARATOR . $this->module_name
         );
 
         $di = new RecursiveIteratorIterator(
