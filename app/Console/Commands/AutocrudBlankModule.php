@@ -78,8 +78,8 @@ class AutocrudBlankModule extends Command
                 'Providers/' . $this->module_name . 'ServiceProvider.php',
                 'Routes/web.php',
                 'Services/' . $this->module_name . 'Instance.php',
-                'Views/crud.blade.php',
-                'Views/index.blade.php',
+                'Views/' . $this->lowercase_name . '/crud.blade.php',
+                'Views/' . $this->lowercase_name . '/index.blade.php',
             ]);
 
             $this->info('New blank module has been created for you. Now you just need to register the service provider (in config/modules.php or in config/app.php) , manage migration, manage the model and structure.');
@@ -96,6 +96,10 @@ class AutocrudBlankModule extends Command
         rename(
             $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Process' . DIRECTORY_SEPARATOR . 'Blank',
             $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Process' . DIRECTORY_SEPARATOR . $this->module_name
+        );
+        rename(
+            $path . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'blank',
+            $path . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . $this->lowercase_name,
         );
 
         $di = new RecursiveIteratorIterator(

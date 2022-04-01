@@ -1,5 +1,5 @@
 <?php
-namespace [CURRENT_NAMESPACE];
+namespace [NAMESPACE]\Http\Structure\[MODULE_NAME];
 
 use [NAMESPACE]\Models\[MODULE_NAME];
 use FormStructure;

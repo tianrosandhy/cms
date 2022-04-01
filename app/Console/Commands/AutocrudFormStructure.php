@@ -4,11 +4,11 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class AutocrudStructure extends Command
+class AutocrudFormStructure extends Command
 {
 
-    protected $signature = 'autocrud:structure';
-    protected $description = 'Create structure autocrud in module';
+    protected $signature = 'autocrud:form-structure {module_name?} {structure_name?}';
+    protected $description = 'Create form structure autocrud in module';
 
     public $module_name;
     public $structure_name;
@@ -21,9 +21,12 @@ class AutocrudStructure extends Command
     public function handle()
     {
         //
-        do {
+        $this->module_name = $this->argument('module_name');
+        $this->structure_name = $this->argument('structure_name');
+
+        while (strlen($this->module_name) == 0) {
             $this->module_name = $this->ask('Where do you want to create the Structure class?');
-        } while (strlen($this->module_name) == 0);
+        }
 
         $this->module_name = ucfirst($this->module_name);
         if (strtolower($this->module_name) == 'core') {
@@ -31,13 +34,13 @@ class AutocrudStructure extends Command
         } else {
             $this->mpath = 'Modules/' . $this->module_name;
         }
-        $namespace = 'App/' . $this->mpath . '/Http/Structure';
+        $namespace = 'App/' . $this->mpath . '/Http/Structure/' . $this->module_name;
 
         $try_location = base_path('app/' . $this->mpath);
         if (is_dir($try_location)) {
-            do {
+            while (strlen($this->structure_name) == 0) {
                 $this->structure_name = $this->ask('Type your Structure classname');
-            } while (strlen($this->structure_name) == 0);
+            }
 
             $this->proper_name = ucwords($this->structure_name);
             $this->structure_name = ucfirst(str_replace(' ', '', $this->structure_name));
@@ -52,14 +55,19 @@ class AutocrudStructure extends Command
 
     public function createStructureCopy()
     {
-        $savepath = base_path('app/' . $this->mpath . '/Http/Structure/' . $this->structure_name . '.php');
+        $dirpath = base_path('app/' . $this->mpath . '/Http/Structure/' . $this->structure_name);
+        if (!is_dir($dirpath)) {
+            mkdir($dirpath, 0755, true);
+        }
+
+        $savepath = $dirpath . '/' . $this->structure_name . 'FormStructure.php';
         if (is_file($savepath)) {
             $this->error('File ' . $savepath . ' is already exists.');
             die();
         }
 
         $namespace = 'App\\' . str_replace('/', '\\', $this->mpath);
-        $stub_path = base_path(config('module-setting.stubs.structure'));
+        $stub_path = base_path(config('module-setting.stubs.form-structure'));
         $stub_file = fopen($stub_path, 'r');
         $stub_content = fread($stub_file, filesize($stub_path));
         $stub_content = str_replace('[CURRENT_NAMESPACE]', $namespace, $stub_content);

@@ -16,7 +16,7 @@ class [MODULE_NAME]Controller extends BaseController
         $structure = new [MODULE_NAME]DatatableStructure;
         $selected_menu = '[LOWERCASE_MODULE_NAME]';
 
-        return view('[LOWERCASE_MODULE_NAME]::index', compact(
+        return view('[LOWERCASE_MODULE_NAME]::[LOWERCASE_MODULE_NAME].index', compact(
             'title',
             'structure',
             'selected_menu'
@@ -40,12 +40,12 @@ class [MODULE_NAME]Controller extends BaseController
         $structure = new [MODULE_NAME]FormStructure($data);
         $breadcrumb = [
             [
-                'label' => __('[LOWERCASE_MODULE_NAME]::module.[LOWERCASE_MODULE_NAME].index'),
+                'label' => '[PROPER_MODULE_NAME]',
                 'url' => route('admin.[LOWERCASE_MODULE_NAME].index'),
             ],
         ];
 
-        return view('[LOWERCASE_MODULE_NAME]::crud', compact(
+        return view('[LOWERCASE_MODULE_NAME]::[LOWERCASE_MODULE_NAME].crud', compact(
             'title',
             'data',
             'structure',
@@ -68,12 +68,12 @@ class [MODULE_NAME]Controller extends BaseController
         $structure = new [MODULE_NAME]FormStructure($data);
         $breadcrumb = [
             [
-                'label' => __('[LOWERCASE_MODULE_NAME]::module.[LOWERCASE_MODULE_NAME].index'),
+                'label' => '[PROPER_MODULE_NAME]',
                 'url' => route('admin.[LOWERCASE_MODULE_NAME].index'),
             ],
         ];
 
-        return view('[LOWERCASE_MODULE_NAME]::crud', compact(
+        return view('[LOWERCASE_MODULE_NAME]::[LOWERCASE_MODULE_NAME].crud', compact(
             'title',
             'data',
             'structure',

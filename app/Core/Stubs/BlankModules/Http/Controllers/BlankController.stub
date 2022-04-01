@@ -12,7 +12,7 @@ class [MODULE_NAME]Controller extends BaseController
     {
         $title = "[PROPER_MODULE_NAME] Data";
         $selected_menu = '[LOWERCASE_MODULE_NAME]';
-        return view('[LOWERCASE_MODULE_NAME]::index', compact(
+        return view('[LOWERCASE_MODULE_NAME]::[LOWERCASE_MODULE_NAME].index', compact(
             'title',
             'selected_menu'
         ));
@@ -29,7 +29,7 @@ class [MODULE_NAME]Controller extends BaseController
             ],
         ];
 
-        return view('[LOWERCASE_MODULE_NAME]::crud', compact(
+        return view('[LOWERCASE_MODULE_NAME]::[LOWERCASE_MODULE_NAME].crud', compact(
             'title',
             'data',
             'breadcrumb'
@@ -55,7 +55,7 @@ class [MODULE_NAME]Controller extends BaseController
             ],
         ];
 
-        return view('[LOWERCASE_MODULE_NAME]::crud', compact(
+        return view('[LOWERCASE_MODULE_NAME]::[LOWERCASE_MODULE_NAME].crud', compact(
             'title',
             'data',
             'breadcrumb'
