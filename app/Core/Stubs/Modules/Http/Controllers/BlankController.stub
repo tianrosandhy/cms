@@ -3,65 +3,54 @@ namespace [NAMESPACE]\Http\Controllers;
 
 use App\Core\Base\Controllers\BaseController;
 use [NAMESPACE]\Models\[MODULE_NAME];
-use [NAMESPACE]\Presenters\[MODULE_NAME]\[MODULE_NAME]IndexPresenter;
-use [NAMESPACE]\Presenters\[MODULE_NAME]\[MODULE_NAME]CrudPresenter;
-use [NAMESPACE]\Presenters\[MODULE_NAME]\[MODULE_NAME]PreimportPresenter;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]DatatableProcess;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]ExportProcess;
+use [NAMESPACE]\Http\Structure\[MODULE_NAME]\[MODULE_NAME]DatatableStructure;
+use [NAMESPACE]\Http\Structure\[MODULE_NAME]\[MODULE_NAME]FormStructure;
 use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]CrudProcess;
 use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]DeleteProcess;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]PreimportProcess;
-use [NAMESPACE]\Http\Process\[MODULE_NAME]\[MODULE_NAME]ImportProcess;
 
 class [MODULE_NAME]Controller extends BaseController
 {
     public function index()
     {
-        return (new [MODULE_NAME]IndexPresenter)->render();
+        $title = "[PROPER_MODULE_NAME] Data";
+        $structure = new [MODULE_NAME]DatatableStructure;
+        $selected_menu = '[LOWERCASE_MODULE_NAME]';
+
+        return view('[LOWERCASE_MODULE_NAME]::index', compact(
+            'title',
+            'structure',
+            'selected_menu'
+        ));
     }
 
     public function export()
     {
-        return (new [MODULE_NAME]ExportProcess)
-            ->type('http')
-            ->handle();
-    }
-
-    public function import()
-    {
-        if($this->request->import_id){
-            // real import : handled via process
-            return (new [MODULE_NAME]ImportProcess($this->request->import_id))
-                ->setType('http')
-                ->setSuccessRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
-                ->setErrorRedirectTarget(route('admin.[LOWERCASE_MODULE_NAME].index'))
-                ->handle();
-        }
-        else if($this->request->pre_import_id){
-            // preimport : handled via preview
-            $preimport = (new [MODULE_NAME]PreimportProcess)
-                ->setType('raw')
-                ->handle();
-
-            return (new [MODULE_NAME]PreimportPresenter($preimport))
-                ->render();			
-        }
-        else{
-            abort(400);
-        }
+        return (new [MODULE_NAME]DatatableStructure)->exportResponse();
     }
 
     public function datatable()
     {
-        return (new [MODULE_NAME]DatatableProcess)
-            ->type('datatable')
-            ->handle();
+        return (new [MODULE_NAME]DatatableStructure)->datatableResponse();
     }
 
     public function create()
     {
+        $title = "Add New [PROPER_MODULE_NAME]";
         $data = new [MODULE_NAME];
-        return (new [MODULE_NAME]CrudPresenter($data))->render();
+        $structure = new [MODULE_NAME]FormStructure($data);
+        $breadcrumb = [
+            [
+                'label' => __('[LOWERCASE_MODULE_NAME]::module.[LOWERCASE_MODULE_NAME].index'),
+                'url' => route('admin.[LOWERCASE_MODULE_NAME].index'),
+            ],
+        ];
+
+        return view('[LOWERCASE_MODULE_NAME]::crud', compact(
+            'title',
+            'data',
+            'structure',
+            'breadcrumb'
+        ));
     }
 
     public function store()
@@ -74,8 +63,22 @@ class [MODULE_NAME]Controller extends BaseController
 
     public function edit($id)
     {
+        $title = "Edit [PROPER_MODULE_NAME] Data";
         $data = [MODULE_NAME]::findOrFail($id);
-        return (new [MODULE_NAME]CrudPresenter($data))->render();
+        $structure = new [MODULE_NAME]FormStructure($data);
+        $breadcrumb = [
+            [
+                'label' => __('[LOWERCASE_MODULE_NAME]::module.[LOWERCASE_MODULE_NAME].index'),
+                'url' => route('admin.[LOWERCASE_MODULE_NAME].index'),
+            ],
+        ];
+
+        return view('[LOWERCASE_MODULE_NAME]::crud', compact(
+            'title',
+            'data',
+            'structure',
+            'breadcrumb'
+        ));
     }
 
     public function update($id)

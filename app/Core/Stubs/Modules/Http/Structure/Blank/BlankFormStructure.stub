@@ -1,0 +1,70 @@
+<?php
+namespace [NAMESPACE]\Http\Structure\[MODULE_NAME];
+
+use [NAMESPACE]\Models\[MODULE_NAME];
+use FormStructure;
+use Illuminate\Database\Eloquent\Model;
+use Input;
+use TianRosandhy\Autocrud\Generator\Form\FormCollection;
+use TianRosandhy\Autocrud\Generator\Form\FormCollectionContract;
+
+class [MODULE_NAME]FormStructure extends FormCollection implements FormCollectionContract
+{
+    public function __construct(Model $data=null)
+    {
+        $this->data = $data;
+        parent::__construct();
+    }
+
+    public function formRoute(): string
+    {
+        if ($this->data->getKey()) {
+            return route('admin.[LOWERCASE_MODULE_NAME].update', ['id' => $this->data->getKey()]);
+        }
+        return route('admin.[LOWERCASE_MODULE_NAME].store');
+    }
+
+    public function isMultiLanguage(): bool 
+    {
+        return false;
+    }
+
+    public function isAjax(): bool
+    {
+        return true;
+    }
+
+    public function prependForm($data=null): ?string
+    {
+        // return any html string via view()->render();
+        return null;
+    }
+
+    public function appendForm($data=null): ?string
+    {
+        // return any html string via view()->render();
+        return null;
+    }
+
+    public function handle()
+    {
+        $this->registers([
+            FormStructure::field('title')
+                ->name('Title Example')
+                ->inputType(Input::TYPE_TEXT)
+                ->validation('required'),
+            FormStructure::field('description')
+                ->name('Richtext Description Example')
+                ->inputType(Input::TYPE_RICHTEXT),
+            FormStructure::field('image')
+                ->name('Image Example')
+                ->inputType(Input::TYPE_IMAGE)
+                ->formColumn(4),
+            FormStructure::field('is_active')
+                ->name('Is Active Yes/No')
+                ->inputType(Input::TYPE_YESNO)
+                ->formColumn(4),
+        ]);
+    }
+
+}
