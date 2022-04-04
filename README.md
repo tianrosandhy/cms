@@ -16,12 +16,25 @@ $ php artisan storage:link
 Last, open via browser for initial setup (superadmin account), then after setup finish, you can open CMS in {base_url}/p4n3lb04rd to access the CMS
 
 ### Available Command
+
+##### Generate Superadmin
+You must run this command first to activate the CMS : 
+```sh
+php artisan autocrud:superadmin
+```
+This command will guide you to create an initial superadmin account that have all access in CMS. 
+
 ##### Module Scaffolding
 You can create module easily with this command : 
 ```sh
-$ php artisan autocrud:module
+$ php artisan autocrud:module {Module Name}
 ```
-after that, type the module name that you want to create. Ex : "ModuleExample". Then, you need to register the new service provider in config (config/modules.php) :
+```sh
+$ php artisan autocrud:blankmodule {Module Name}
+```
+Note : module name will be generated in PascalCase without space.
+
+autocrud:module is to generate a full auto crud, and autocrud:blankmodule is to generate a module basic scaffolding without autocrud. Blank module is useful when you want to create a really customized module without AutoCRUD scaffolding. Then, you need to register the new module's service provider to config (config/modules.php) :
 ```php
 <?php
 //config/modules.php
@@ -33,27 +46,16 @@ return [
 ```
 After that, you will be able to manage the module in "app/Modules/ModuleExample" for mor customization.
 
-##### Migration Update
-In every "modules/ModuleName" directory, there is "Extenders" called "MigrationModifier". This file is useful when you already migrate some table, and you need to change, add column, or drop column the migrated table. This class method is look like migration structure with some improvement.
-```php
-<?php
-namespace App\Modules\ModuleName\Extenders;
-
-use App\Core\Components\DatabaseStructureModifier;
-
-class MigrationModifier extends DatabaseStructureModifier
-{
-	public function handle(){
-        $this->handleTable('tablename', function($table){
-            $table->integer('field_name')->nullable(); //add column
-            $table->string('field_name')->nullable()->change(); //modify column
-            $table->dropColumn('field_name'); //drop column
-        });
-	}
-}
-```
-To apply these migration modifier, you need to run the command 
+##### Submodule scaffolding
+You can create a submodule easily with this command : 
 ```sh
-$ php artisan autocrud:migration-update
+$ php artisan autocrud:submodule {Module Target} {Sub Module Name}
 ```
-This command is safe for multiple calling. If the database structure already handled before and return exception, then it will be ignored.
+```sh
+$ php artisan autocrud:blanksubmodule {Module Target} {Sub Module Name}
+```
+Note : {Module Target} must be a valid and exists module name. Sub module name will be generated in PascalCase without space.
+
+Same as module scaffolding, but this command will generate a scaffolding in a existing module. So you can group a bunch of module that have a same purpose.
+
+

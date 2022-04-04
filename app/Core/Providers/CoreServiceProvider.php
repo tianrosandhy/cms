@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use Sidebar;
+use Setting as SettingFacade;
 use Exception;
 
 class CoreServiceProvider extends BaseServiceProvider
@@ -27,7 +28,8 @@ class CoreServiceProvider extends BaseServiceProvider
             $current_user = request()->get('user');
             if ($current_user) {
                 $view->with('user', $current_user)
-                    ->with('sidebar', Sidebar::generate());
+                    ->with('sidebar', Sidebar::generate())
+                    ->with('setting', SettingFacade::data());
             }
         });
     }

@@ -40,7 +40,7 @@ class ExampleController extends BaseController
         $structure = new ExampleFormStructure($data);
         $breadcrumb = [
             [
-                'label' => __('example::module.example.index'),
+                'label' => "Example",
                 'url' => route('admin.example.index'),
             ],
         ];
@@ -68,7 +68,7 @@ class ExampleController extends BaseController
         $structure = new ExampleFormStructure($data);
         $breadcrumb = [
             [
-                'label' => __('example::module.example.index'),
+                'label' => "Example",
                 'url' => route('admin.example.index'),
             ],
         ];
