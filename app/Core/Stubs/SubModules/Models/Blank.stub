@@ -1,12 +1,12 @@
 <?php
 namespace [NAMESPACE]\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Core\Shared\Translateable;
-use App\Core\Shared\Sluggable;
-use App\Core\Shared\ImageGrabable;
+use App\Core\Models\BaseModel;
+use TianRosandhy\Autocrud\Shared\Translateable;
+use TianRosandhy\Autocrud\Shared\Sluggable;
+use TianRosandhy\Autocrud\Shared\ImageGrabable;
 
-class [MODULE_NAME] extends Model
+class [MODULE_NAME] extends BaseModel
 {
     // use Translateable;
     // use Sluggable;
@@ -17,4 +17,5 @@ class [MODULE_NAME] extends Model
     // public function slugTarget(){
     //     return 'title';
     // }
+
 }

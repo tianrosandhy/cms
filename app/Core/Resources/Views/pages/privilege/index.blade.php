@@ -45,7 +45,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title">Manage Privilege</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close btn-close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>

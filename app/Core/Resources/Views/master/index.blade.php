@@ -1,24 +1,16 @@
 @extends ($base_layout ?? 'core::layouts.master')
 @section ('content')
+    @if (isset($structure))
 	<div class="card">
 		<div class="card-body">
-		@if(isset($datatable))
-			@if($datatable->mode  <> 'datatable')
-				{!! $datatable->customTableView() !!}
-			@else
-				{!! $datatable->tableView() !!}
-			@endif
-		@endif
+        {!! $structure->render() !!}
 		</div>
 	</div>
+    @endif
 @stop
-
-@section ('datatable_script')
-	@if(isset($datatable))
-		@if($datatable->mode <> 'datatable')
-			{!! $datatable->customAssets() !!}
-		@else
-			{!! $datatable->assets() !!}
-		@endif
+ 
+@push ('script')
+	@if(isset($structure))
+        {!! $structure->renderAsset() !!}
 	@endif
-@stop
+@endpush

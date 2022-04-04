@@ -33,18 +33,11 @@ class [MODULE_NAME]DeleteProcess extends BaseDeleteProcess
 
     /**
     * This method will be called after the single data deleted successfully
-    * @param array $deleted_id : The single ID of deleted data in defined model
+    * @param $deleted_id : The single ID of deleted data in defined model
     */
     public function afterSingleDelete($deleted_id=null)
     {
         // 
     }
 
-    /**
-    * This method will always be called when the error occured in process() method. 
-    */
-    public function revert()
-    {
-
-    }
 }

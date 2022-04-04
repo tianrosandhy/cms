@@ -12,7 +12,6 @@ class ExampleServiceProvider extends BaseServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom(realpath(__DIR__ . "/../Migrations"));
-        $this->loadTranslationsFrom(__DIR__ . '/../Translations', 'example');
     }
 
     public function register()

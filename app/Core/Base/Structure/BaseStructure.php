@@ -2,7 +2,7 @@
 namespace App\Core\Base\Structure;
 
 use App\Core\Components\DataTable\DataStructure;
-use Language;
+use Autocrud;
 use Validator;
 
 class BaseStructure
@@ -31,7 +31,7 @@ class BaseStructure
     {
         $prefix = '';
         if ($this->multi_language) {
-            $prefix = '.' . Language::default();
+            $prefix = '.' . Autocrud::defaultLang();
         }
         if (empty($id)) {
             $id = 0;

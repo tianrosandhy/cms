@@ -10,7 +10,6 @@
 
         <div class="d-flex">
             @include ('core::layouts.partials.header.search-mobile')
-            @include ('core::layouts.partials.header.language-toggle')
             @if(Permission::has('admin.setting.store'))
             <div class="dropdown d-inline-block">
                 <!-- setting trigger button -->

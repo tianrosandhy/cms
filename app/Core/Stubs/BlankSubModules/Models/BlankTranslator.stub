@@ -1,9 +1,9 @@
 <?php
 namespace [NAMESPACE]\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\Models\BaseModel;
 
-class [MODULE_NAME]Translator extends Model
+class [MODULE_NAME]Translator extends BaseModel
 {
     
 }

@@ -11,7 +11,7 @@ class SidebarGenerator extends SidebarRegistration
         // generate sidebar for core menus
         $this->registerSidebars([
             SidebarItem::setName('ADMIN.[MODULE_NAME]')
-                ->setLabel(__('[LOWERCASE_MODULE_NAME]::module.[LOWERCASE_MODULE_NAME].menu'))
+                ->setLabel('[PROPER_MODULE_NAME]')
                 ->setRoute('admin.[LOWERCASE_MODULE_NAME].index')
                 ->setIcon('uim:paperclip')
                 ->setSortNo(5)

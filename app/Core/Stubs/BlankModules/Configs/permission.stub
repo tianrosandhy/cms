@@ -6,7 +6,6 @@ return [
             'admin.[LOWERCASE_MODULE_NAME].create',
             'admin.[LOWERCASE_MODULE_NAME].edit',
             'admin.[LOWERCASE_MODULE_NAME].delete',
-            'admin.[LOWERCASE_MODULE_NAME].switch',
         ]
     ]
 ];

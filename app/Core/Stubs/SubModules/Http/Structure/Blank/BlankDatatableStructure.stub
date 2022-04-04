@@ -1,0 +1,99 @@
+<?php
+namespace [NAMESPACE]\Http\Structure\[MODULE_NAME];
+
+use [NAMESPACE]\Models\[MODULE_NAME];
+use DatatableStructure;
+use DB;
+use Illuminate\Database\Eloquent\Builder;
+use Input;
+use Permission;
+use TianRosandhy\Autocrud\Generator\Datatable\DatatableCollection;
+use TianRosandhy\Autocrud\Generator\Datatable\DatatableCollectionContract;
+use TianRosandhy\Autocrud\Generator\Datatable\TableChecker;
+
+class [MODULE_NAME]DatatableStructure extends DatatableCollection implements DatatableCollectionContract
+{
+    use TableChecker;
+
+    public function handle()
+    {
+        $this->registers([
+            DatatableStructure::field('title')
+                ->name('Title Example')
+                ->inputType(Input::TYPE_TEXT)
+                ->searchable(true)
+                ->orderable(true),
+            DatatableStructure::field('description')
+                ->name('Richtext Description Example')
+                ->inputType(Input::TYPE_RICHTEXT),
+            DatatableStructure::field('image')
+                ->name('Image Example')
+                ->inputType(Input::TYPE_IMAGE)
+                ->hideOnExport(true),
+            DatatableStructure::field('is_active')
+                ->name('Is Active Yes/No')
+                ->searchable(true)
+                ->orderable(true)
+                ->inputType(Input::TYPE_YESNO),
+        ]);
+    }
+
+    public function dataTableRoute(): string
+    {
+        return route('admin.[LOWERCASE_MODULE_NAME].datatable');
+    }
+
+    public function batchDeleteRoute(): string
+    {
+        return route('admin.[LOWERCASE_MODULE_NAME].destroy');
+    }
+
+    public function exportRoute(): string
+    {
+        return route('admin.[LOWERCASE_MODULE_NAME].export');
+    }
+
+    public function queryBuilder(): Builder
+    {
+        return [MODULE_NAME]::query();
+    }
+
+    public function transformer($row): array
+    {
+        return [
+            'title' => $row->title,
+            'description' => $row->description,
+            'image' => $row->outputImage('image'),
+            'is_active' => $this->switcherFormat($row, 'is_active', Permission::has('admin.[LOWERCASE_MODULE_NAME].edit') ? 'toggle' : 'label'),
+            'action' => $this->actionButton($row),
+        ];
+    }
+
+    protected function actionButton($row)
+    {
+        $out = '<div class="btn-group">';
+        if (Permission::has('admin.[LOWERCASE_MODULE_NAME].edit')) {
+            $out .= '<a href="' . route('admin.[LOWERCASE_MODULE_NAME].edit', ['id' => $row->id]) . '" class="btn btn-light text-primary" data-popup-lg title="Edit"><span class="iconify" data-icon="dashicons:edit"></span></a>';
+        }
+        if (Permission::has('admin.[LOWERCASE_MODULE_NAME].destroy')) {
+            $out .= '<a href="' . route('admin.[LOWERCASE_MODULE_NAME].destroy', ['id' => $row->id]) . '" class="btn btn-light text-danger delete-button" title="Delete"><span class="iconify" data-icon="fluent:delete-16-filled"></span></a>';
+        }
+        $out .= '</div>';
+        return $out;
+    }
+
+    public function exportRow($row): array
+    {
+        return [
+            'title' => $row->title,
+            'description' => $row->description,
+            'is_active' => $row->is_active ? 'YES' : 'NO',
+        ];
+    }
+
+    public function exportFileName()
+    {
+        return "[PROPER_MODULE_NAME] Report";
+    }
+
+}

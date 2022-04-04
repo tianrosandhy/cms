@@ -40,12 +40,4 @@ class [MODULE_NAME]DeleteProcess extends BaseDeleteProcess
         // 
     }
 
-    /**
-    * This method will always be called when the error occured in process() method. 
-    */
-    public function revert()
-    {
-
-    }
-
 }

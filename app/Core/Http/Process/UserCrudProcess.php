@@ -4,7 +4,7 @@ namespace App\Core\Http\Process;
 use App\Core\Base\Process\BaseProcess;
 use App\Core\Contracts\CanProcess;
 use App\Core\Exceptions\ProcessException;
-use App\Core\Http\Structure\UserStructure;
+use App\Core\Http\Structure\UserFormStructure;
 use Validator;
 
 class UserCrudProcess extends BaseProcess implements CanProcess
@@ -18,61 +18,26 @@ class UserCrudProcess extends BaseProcess implements CanProcess
             $this->mode = 'create';
         }
         $this->instance = $instance;
-        $this->structure = new UserStructure;
+        $this->structure = new UserFormStructure($this->instance);
     }
 
     public function validate()
     {
-        $current_key = empty($this->instance) ? null : $this->instance->getKey();
-        $validator = $this->structure->generateValidation($this->mode, $current_key);
-        if ($validator) {
-            if ($validator->fails()) {
-                throw new ProcessException($validator);
-            }
-        }
-
-        //tambahan validasi jika dalam kondisi update + ganti password
-        if ($this->mode == 'update' && $this->request->password) {
-            $validator = Validator::make($this->request->all(), [
-                'password' => 'required|confirmed|min:6',
-            ]);
-            if ($validator->fails()) {
-                throw new ProcessException($validator);
-            }
-        }
-        // dd($this->request->all());
+        // 
     }
 
     public function process()
     {
-        //your logic after validation success
-        $structure_inputs = $this->structure->autoCrud();
-        if (!empty($structure_inputs)) {
-            //create new instance if not exists, but use selected instance if exists
-            $instance = $this->instance ?? $this->structure->model();
-            foreach ($structure_inputs as $field => $value) {
-                //gausah ubah password dalam mode update jika tidak diperlukan
-                if ($this->mode == 'update' && $field == 'password' && empty($value)) {
-                    continue;
-                }
-                if ($field == 'password') {
-                    $value = bcrypt($value);
-                }
-
-                $instance->{$field} = $value;
-            }
-            $instance->save();
-        }
-        if ($this->request->save_only) {
-            $this->setSuccessRedirectTarget(route('admin.user.edit', ['id' => $instance->id]));
+        $response = $this->structure->autoCrud();
+        if (!$response->ok()) {
+            throw new ProcessException($response->errorFirst());
         }
 
-        // if you have another logic for storing data that doesnt cover by Structure, you can define them here.
-    }
-
-    public function revert()
-    {
-        //your logic when validation or process failed to running
+        if ($this->request->password && $this->request->password_confirmation) {
+            $value = bcrypt($this->request->value);
+            $this->instance->password = $value;
+            $this->instance->save();
+        }
     }
 
 }

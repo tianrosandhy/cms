@@ -8,7 +8,7 @@ use RecursiveIteratorIterator;
 
 class AutocrudSubmodule extends Command
 {
-    protected $signature = 'autocrud:submodule';
+    protected $signature = 'autocrud:submodule {old_module?} {module_name?}';
     protected $description = 'Scaffold CMS Sub Module';
 
     public $proper_name, $lowercase_name, $namespace, $old_module_name, $module_name, $module_dir;
@@ -20,7 +20,12 @@ class AutocrudSubmodule extends Command
 
     public function handle()
     {
-        $old_module = $this->ask('Please insert your existing module name : ');
+        $old_module = $this->argument('old_module');
+        $name = $this->argument('module_name');
+
+        if (empty($old_module)) {
+            $old_module = $this->ask('Please insert your existing module name : ');
+        }
 
         $this->old_module_name = ucwords($old_module);
         $this->old_module_name = str_replace(' ', '', $this->old_module_name);
@@ -30,7 +35,10 @@ class AutocrudSubmodule extends Command
             return $this->error('Old Module name ' . $this->old_module_name . ' is not exists');
         }
 
-        $name = $this->ask('Please insert your new submodule name');
+        if (empty($name)) {
+            $name = $this->ask('Please insert your new submodule name');
+        }
+
         $this->proper_name = ucwords($name);
         $this->module_name = str_replace(' ', '', $this->proper_name);
         $this->lowercase_name = strtolower(str_replace(' ', '_', $this->proper_name));
@@ -50,38 +58,30 @@ class AutocrudSubmodule extends Command
                 'Facades/BlankFacade.php',
                 'Http/Controllers/BlankController.php',
                 'Http/Process/' . $this->module_name . '/BlankCrudProcess.php',
-                'Http/Process/' . $this->module_name . '/BlankDatatableProcess.php',
                 'Http/Process/' . $this->module_name . '/BlankDeleteProcess.php',
-                'Http/Process/' . $this->module_name . '/BlankExportProcess.php',
-                'Http/Process/' . $this->module_name . '/BlankImportProcess.php',
-                'Http/Process/' . $this->module_name . '/BlankPreimportProcess.php',
-                'Http/Structure/BlankStructure.php',
-                'Migrations/2020_06_20_000000_blank.php',
-                'Migrations/2020_06_20_000000_blank_translator.php',
+                'Http/Structure/' . $this->module_name . '/BlankDatatableStructure.php',
+                'Http/Structure/' . $this->module_name . '/BlankFormStructure.php',
+                'Migrations/2022_02_01_000000_blank.php',
+                'Migrations/2022_02_01_000001_blank_translator.php',
                 'Models/Blank.php',
                 'Models/BlankTranslator.php',
-                'Presenters/' . $this->module_name . '/BlankCrudPresenter.php',
-                'Presenters/' . $this->module_name . '/BlankIndexPresenter.php',
-                'Presenters/' . $this->module_name . '/BlankPreimportPresenter.php',
                 'Services/BlankInstance.php',
-                'Transformers/BlankTransformer.php',
             ]);
 
             $this->changeContents([
                 'Facades/' . $this->module_name . 'Facade.php',
                 'Http/Controllers/' . $this->module_name . 'Controller.php',
                 'Http/Process/' . $this->module_name . '/' . $this->module_name . 'CrudProcess.php',
-                'Http/Process/' . $this->module_name . '/' . $this->module_name . 'DatatableProcess.php',
                 'Http/Process/' . $this->module_name . '/' . $this->module_name . 'DeleteProcess.php',
-                'Http/Structure/' . $this->module_name . 'Structure.php',
-                'Migrations/2020_06_20_000000_' . $this->lowercase_name . '.php',
-                'Migrations/2020_06_20_000000_' . $this->lowercase_name . '_translator.php',
+                'Http/Structure/' . $this->module_name . '/'  . $this->module_name . 'DatatableStructure.php',
+                'Http/Structure/' . $this->module_name . '/'  . $this->module_name . 'FormStructure.php',
+                'Migrations/2022_02_01_000000_' . $this->lowercase_name . '.php',
+                'Migrations/2022_02_01_000001_' . $this->lowercase_name . '_translator.php',
                 'Models/' . $this->module_name . '.php',
                 'Models/' . $this->module_name . 'Translator.php',
-                'Presenters/' . $this->module_name . '/' . $this->module_name . 'CrudPresenter.php',
-                'Presenters/' . $this->module_name . '/' . $this->module_name . 'IndexPresenter.php',
                 'Services/' . $this->module_name . 'Instance.php',
-                'Transformers/' . $this->module_name . 'Transformer.php',
+                'Views/' . $this->lowercase_name . '/crud.blade.php',
+                'Views/' . $this->lowercase_name . '/index.blade.php',
             ]);
 
             // last step : add new Route appender
@@ -109,8 +109,12 @@ class AutocrudSubmodule extends Command
             $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Process' . DIRECTORY_SEPARATOR . $this->module_name
         );
         rename(
-            $path . DIRECTORY_SEPARATOR . 'Presenters' . DIRECTORY_SEPARATOR . 'Blank',
-            $path . DIRECTORY_SEPARATOR . 'Presenters' . DIRECTORY_SEPARATOR . $this->module_name
+            $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Structure' . DIRECTORY_SEPARATOR . 'Blank',
+            $path . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'Structure' . DIRECTORY_SEPARATOR . $this->module_name
+        );
+        rename(
+            $path . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . 'blank',
+            $path . DIRECTORY_SEPARATOR . 'Views' . DIRECTORY_SEPARATOR . $this->lowercase_name,
         );
 
         $di = new RecursiveIteratorIterator(

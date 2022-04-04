@@ -3,65 +3,54 @@ namespace App\Modules\Example\Http\Controllers;
 
 use App\Core\Base\Controllers\BaseController;
 use App\Modules\Example\Models\Example;
-use App\Modules\Example\Presenters\ExampleIndexPresenter;
-use App\Modules\Example\Presenters\ExampleCrudPresenter;
-use App\Modules\Example\Presenters\ExamplePreimportPresenter;
-use App\Modules\Example\Http\Process\ExampleDatatableProcess;
-use App\Modules\Example\Http\Process\ExampleCrudProcess;
-use App\Modules\Example\Http\Process\ExampleDeleteProcess;
-use App\Modules\Example\Http\Process\ExampleExportProcess;
-use App\Modules\Example\Http\Process\ExamplePreimportProcess;
-use App\Modules\Example\Http\Process\ExampleImportProcess;
+use App\Modules\Example\Http\Structure\Example\ExampleDatatableStructure;
+use App\Modules\Example\Http\Structure\Example\ExampleFormStructure;
+use App\Modules\Example\Http\Process\Example\ExampleCrudProcess;
+use App\Modules\Example\Http\Process\Example\ExampleDeleteProcess;
 
 class ExampleController extends BaseController
 {
     public function index()
     {
-        return (new ExampleIndexPresenter)->render();
+        $title = "Example Data";
+        $structure = new ExampleDatatableStructure;
+        $selected_menu = 'example';
+
+        return view('example::index', compact(
+            'title',
+            'structure',
+            'selected_menu'
+        ));
     }
 
     public function export()
     {
-        return (new ExampleExportProcess)
-            ->type('http')
-            ->handle();
-    }
-
-    public function import()
-    {
-        if($this->request->import_id){
-            // real import : handled via process
-            return (new ExampleImportProcess($this->request->import_id))
-                ->setType('http')
-                ->setSuccessRedirectTarget(route('admin.example.index'))
-                ->setErrorRedirectTarget(route('admin.example.index'))
-                ->handle();
-        }
-        else if($this->request->pre_import_id){
-            // preimport : handled via preview
-            $preimport = (new ExamplePreimportProcess)
-                ->setType('raw')
-                ->handle();
-
-            return (new ExamplePreimportPresenter($preimport))
-                ->render();			
-        }
-        else{
-            abort(400);
-        }
+        return (new ExampleDatatableStructure)->exportResponse();
     }
 
     public function datatable()
     {
-        return (new ExampleDatatableProcess)
-            ->type('datatable')
-            ->handle();
+        return (new ExampleDatatableStructure)->datatableResponse();
     }
 
     public function create()
     {
+        $title = "Add New Example";
         $data = new Example;
-        return (new ExampleCrudPresenter($data))->render();
+        $structure = new ExampleFormStructure($data);
+        $breadcrumb = [
+            [
+                'label' => "Example",
+                'url' => route('admin.example.index'),
+            ],
+        ];
+
+        return view('example::crud', compact(
+            'title',
+            'data',
+            'structure',
+            'breadcrumb'
+        ));
     }
 
     public function store()
@@ -74,8 +63,22 @@ class ExampleController extends BaseController
 
     public function edit($id)
     {
+        $title = "Edit Example Data";
         $data = Example::findOrFail($id);
-        return (new ExampleCrudPresenter($data))->render();
+        $structure = new ExampleFormStructure($data);
+        $breadcrumb = [
+            [
+                'label' => "Example",
+                'url' => route('admin.example.index'),
+            ],
+        ];
+
+        return view('example::crud', compact(
+            'title',
+            'data',
+            'structure',
+            'breadcrumb'
+        ));
     }
 
     public function update($id)

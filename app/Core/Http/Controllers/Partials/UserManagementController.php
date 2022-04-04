@@ -9,6 +9,8 @@ use App\Core\Models\User;
 use App\Core\Presenters\UserCrudPresenter;
 use App\Core\Presenters\UserPresenter;
 
+use App\Core\Http\Structure\UserDatatableStructure;
+
 trait UserManagementController
 {
     public function userManagement()
@@ -18,10 +20,8 @@ trait UserManagementController
 
     public function userManagementDataTable()
     {
-        return (new BaseDatatableProcess)
-            ->setStructure(new UserStructure)
-            ->type('datatable')
-            ->handle();
+        $struct = new UserDatatableStructure;
+        return $struct->datatableResponse();
     }
 
     public function userManagementCreate()
@@ -55,7 +55,7 @@ trait UserManagementController
             ->handle();
     }
 
-    public function userManagementDelete($id)
+    public function userManagementDelete($id=null)
     {
         return (new BaseDeleteProcess)
             ->setModel(new User)

@@ -2,7 +2,7 @@
 return [
     'stubs' => [
         'process' => 'app/Core/Stubs/Process/ExampleProcess.stub',
-        'presenter' => 'app/Core/Stubs/Presenters/ExamplePresenter.stub',
-        'structure' => 'app/Core/Stubs/Structure/ExampleStructure.stub',
+        'datatable-structure' => 'app/Core/Stubs/Structure/ExampleDatatableStructure.stub',
+        'form-structure' => 'app/Core/Stubs/Structure/ExampleFormStructure.stub',
     ],
 ];

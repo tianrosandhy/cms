@@ -1,29 +1,23 @@
 @extends ($base_layout ?? 'core::layouts.master')
-@section ('content')
-    @include ('core::components.header-box')
 
-    <div class="page-content-wrapper">
-        <div class="container-fluid">
-            <form action="" method="post">
-                {{ csrf_field() }}
-                @if(isset($datatable))
-                    @if($datatable->mode  <> 'datatable')
-                        {!! $datatable->customTableView() !!}
-                    @else
-                        {!! $datatable->tableView() !!}
-                    @endif
-                @endif
-            </form>
-        </div>
-    </div>	
+@section ('control_buttons')
+    <a href="{{ route('admin.example.create') }}" class="btn btn-rounded btn-success page-navigate" data-popup-lg="1">
+        <span>Tambah Data</span>
+    </a>
 @stop
 
-@section ('datatable_script')
-    @if(isset($datatable))
-        @if($datatable->mode <> 'datatable')
-            {!! $datatable->customAssets() !!}
-        @else
-            {!! $datatable->assets() !!}
-        @endif
+@section ('content')
+    @if (isset($structure))
+	<div class="card">
+		<div class="card-body">
+        {!! $structure->render() !!}
+		</div>
+	</div>
     @endif
 @stop
+ 
+@push ('script')
+	@if(isset($structure))
+        {!! $structure->renderAsset() !!}
+	@endif
+@endpush

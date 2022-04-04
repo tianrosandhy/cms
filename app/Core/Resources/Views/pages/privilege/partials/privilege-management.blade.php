@@ -16,7 +16,7 @@
 					</label></td>
 					<td>
 						@foreach(array_unique($list) as $item)
-						<div class="priviledge-check">
+						<div class="priviledge-check mb-1">
 							<label class="d-block"><input type="checkbox" name="check[]" value="{{ $item }}" {{ in_array($item, $checked) ? 'checked' : '' }}><?php
 								//penamaan yg dimunculkan ambil explode terakhir aja
 								$exp = explode('.', $item);
