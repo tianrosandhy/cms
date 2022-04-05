@@ -38,6 +38,7 @@ class [MODULE_NAME]Controller extends BaseController
         $title = "Add New [PROPER_MODULE_NAME]";
         $data = new [MODULE_NAME];
         $structure = new [MODULE_NAME]FormStructure($data);
+        $selected_menu = '[LOWERCASE_MODULE_NAME]';
         $breadcrumb = [
             [
                 'label' => '[PROPER_MODULE_NAME]',
@@ -49,7 +50,8 @@ class [MODULE_NAME]Controller extends BaseController
             'title',
             'data',
             'structure',
-            'breadcrumb'
+            'breadcrumb',
+            'selected_menu'
         ));
     }
 
@@ -65,6 +67,7 @@ class [MODULE_NAME]Controller extends BaseController
     {
         $title = "Edit [PROPER_MODULE_NAME] Data";
         $data = [MODULE_NAME]::findOrFail($id);
+        $selected_menu = '[LOWERCASE_MODULE_NAME]';
         $structure = new [MODULE_NAME]FormStructure($data);
         $breadcrumb = [
             [
@@ -77,7 +80,8 @@ class [MODULE_NAME]Controller extends BaseController
             'title',
             'data',
             'structure',
-            'breadcrumb'
+            'breadcrumb',
+            'selected_menu'
         ));
     }
 
