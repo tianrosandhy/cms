@@ -15,6 +15,14 @@ $ php artisan storage:link
 ```
 Last, open via browser for initial setup (superadmin account), then after setup finish, you can open CMS in {base_url}/p4n3lb04rd to access the CMS
 
+### Workflow
+- [Generate module scaffolding](#module-scaffolding)
+- Register the module service provider to config/modules.php
+- Prepare the migration file in modules.
+- Generate the datatable & form structure in .app/Modules/{ModuleName}/Http/Structure based on generated migrations (More complete docs will be updated later)
+- Setup the sidebar in ./app/Modules/{ModuleName}/Extenders/SidebarGenerator.php
+- Override controller or route like usual custom module
+
 ### Available Command
 
 ##### Generate Superadmin
