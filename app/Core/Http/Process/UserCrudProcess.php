@@ -34,7 +34,7 @@ class UserCrudProcess extends BaseProcess implements CanProcess
         }
 
         if ($this->request->password && $this->request->password_confirmation) {
-            $value = bcrypt($this->request->value);
+            $value = bcrypt($this->request->password);
             $this->instance->password = $value;
             $this->instance->save();
         }
