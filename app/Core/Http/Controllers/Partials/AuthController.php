@@ -43,7 +43,7 @@ trait AuthController
             return back()->with('error', 'Sorry, we cannot find your email address in our system.');
         }
 
-        dispatch(new ResetPasswordJob($user));
+        ResetPasswordJob::dispatch($user);
         return back()->with('success', 'Password reset link has been sent to your email. Please check your email and reset your password');
     }
 
