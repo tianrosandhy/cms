@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  autocrud-cms:
+    container_name: autocrud-cms
+    image: autocrud-cms:latest
+    restart: always
+    ports:
+      - 30080:80
+    volumes:
+      - ./:/var/www/html
+      - ./docker/sites-available:/etc/apache2/sites-available
+      - ./docker/logs:/var/log/apache2
