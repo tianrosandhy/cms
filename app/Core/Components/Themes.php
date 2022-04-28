@@ -5,7 +5,7 @@ class Themes
 {
     public function __construct()
     {
-        $this->fallback_theme = config('cms.admin.theme', 'xoric');
+        $this->fallback_theme = config('cms.admin.themes', 'xoric');
         $this->base_path = config('cms.admin.theme_paths', 'themes');
     }
 

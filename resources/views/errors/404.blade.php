@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    @include ('core::layouts.partials.metadata')
+    @include ('themes::partials.metadata')
   </head>
   <body class="bg-primary bg-pattern">
     <div class="account-pages my-5 pt-sm-5">
@@ -26,6 +26,6 @@
       </div>
     </div>
     <!-- end Account pages -->
-    @include ('core::layouts.partials.script')
+    @include ('themes::partials.script')
   </body>
 </html>

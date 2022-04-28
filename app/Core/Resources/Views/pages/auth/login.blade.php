@@ -25,7 +25,7 @@
                                         <label class="form-control-label">Email</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text bg-white">
-                                                <span class="iconify" data-icon="uim:user-md"></span>
+                                                <span class="iconify text-dark" data-icon="uim:user-md"></span>
                                             </span>
                                             <input type="email" class="form-control" id="email" placeholder="your@email.com" name="email">
                                         </div>
@@ -35,7 +35,7 @@
                                         <label class="form-control-label">Password</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text bg-white">
-                                                <span class="iconify" data-icon="bi:key-fill"></span>
+                                                <span class="iconify text-dark" data-icon="bi:key-fill"></span>
                                             </span>
                                             <input type="password" class="form-control" id="password"
                                                 placeholder="Enter your password" name="password">
