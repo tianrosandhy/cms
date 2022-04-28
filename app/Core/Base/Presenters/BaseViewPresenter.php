@@ -18,7 +18,7 @@ class BaseViewPresenter
     public $custom_css;
     public $custom_js;
     public $base_layout = null;
-    public $default_base_layout = 'core::layouts.master'; // default view layout main extends
+    public $default_base_layout = 'themes::master'; // default view layout main extends
 
     public function setDefaultProperty()
     {
@@ -46,7 +46,7 @@ class BaseViewPresenter
             $this->base_layout = $this->default_base_layout;
             if ($this->request->ajax()) {
                 // return a blank base layout instead if the base_layout not defined
-                $this->base_layout = 'core::layouts.master-ajax';
+                $this->base_layout = 'themes::master-ajax';
             }
         }
     }

@@ -1,5 +1,5 @@
 <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
-<script src="{{ asset('themes/'.config('cms.admin.themes', 'xoric').'/script.js') }}"></script>
+<script src="{{ asset('themes/'.config('cms.admin.themes', 'xoric').'/assets/script.js') }}"></script>
 {!! Autocrud::js() !!}
 
 <!-- Plugins -->
@@ -13,7 +13,7 @@ var CSRF_TOKEN = '{{ csrf_token() }}';
 var DEFAULT_LANGUAGE = '{{ Autocrud::defaultLang() }}';
 </script>
 
-@include ('core::layouts.include.error-management')
+@include ('themes::include.error-management')
 @stack ('script')
 @yield ('datatable_script')
 @if(isset($custom_js))

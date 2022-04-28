@@ -1,4 +1,4 @@
-@extends ('core::layouts.box')
+@extends ('themes::box')
 @section ('content')
 	<h2>CMS Install</h2>
 

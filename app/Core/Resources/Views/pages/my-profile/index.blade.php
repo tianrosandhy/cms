@@ -1,4 +1,4 @@
-@extends ('core::layouts.master')
+@extends ('themes::master')
 @section ('content')
 
 <div class="card">

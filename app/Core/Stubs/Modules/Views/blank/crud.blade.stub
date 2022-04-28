@@ -1,4 +1,4 @@
-@extends (request()->ajax() ? 'core::layouts.master-ajax' : 'core::layouts.master')
+@extends (request()->ajax() ? 'themes::master-ajax' : 'themes::master')
 @section ('content')
     @if (isset($structure))
         <div class="card card-body">

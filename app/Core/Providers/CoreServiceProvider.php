@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Sidebar;
 use Setting as SettingFacade;
 use Exception;
+use App\Core\Components\Themes;
 
 class CoreServiceProvider extends BaseServiceProvider
 {
@@ -32,6 +33,12 @@ class CoreServiceProvider extends BaseServiceProvider
                     ->with('setting', SettingFacade::data());
             }
         });
+
+        $theme = new Themes;
+        if ($theme->validTheme()) {
+            $this->loadViewsFrom($theme->layoutPath(), 'themes');
+        }
+
     }
 
     public function register()
@@ -130,6 +137,7 @@ class CoreServiceProvider extends BaseServiceProvider
             'Permission' => \App\Core\Facades\PermissionComponentFacade::class,
             'SEO' => \App\Core\Facades\SeoComponentFacade::class,
             'ColumnListing' => \App\Core\Facades\ColumnListingComponentFacade::class,
+            'Themes' => \App\Core\Facades\ThemeFacade::class,
         ];
 
         foreach ($aliasData as $al => $src) {

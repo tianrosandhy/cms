@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        @include ('core::layouts.partials.metadata')
+        @include ('themes::partials.metadata')
     </head>
 
     <body class="authentication-bg bg-primary bg-pattern">
@@ -13,7 +13,7 @@
                         <div class="card">
                             <div class="card-body p-5">
                                 <div class="mx-auto mb-5">
-                                    @include ('core::layouts.include.logo', ['height' => 50])
+                                    @include ('themes::include.logo', ['height' => 50])
                                 </div>
 
                                 <h6 class="h5 mb-0 mt-4">{{ __('core::module.login.h1') }}</h6>
@@ -93,6 +93,6 @@
           </div>
         </div>        
 
-        @include ('core::layouts.partials.script')
+        @include ('themes::partials.script')
     </body>
 </html>

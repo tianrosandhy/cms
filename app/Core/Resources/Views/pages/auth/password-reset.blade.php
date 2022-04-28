@@ -1,4 +1,4 @@
-@extends ('core::layouts.box')
+@extends ('themes::box')
 @section ('content')
 	<h6 class="h5 mb-0 mt-4">{{ $title }}</h6>
 	<p class="text-muted mt-1 mb-4">Just one step again before you can access your account. <br>Please type your new password below</p>

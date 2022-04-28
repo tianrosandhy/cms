@@ -3,7 +3,7 @@
     <div data-simplebar class="h-100">
         <!--- Sidemenu -->
         <div id="sidebar-menu">
-            @include ('core::layouts.partials.sidebar.navigation-generation')
+            @include ('themes::partials.sidebar.navigation-generation')
         </div>
         <!-- Sidebar -->
     </div>

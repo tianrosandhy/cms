@@ -5,7 +5,7 @@
 </tr>
 <tr>
 	<td style="padding: 16px;">
-		@include ('core::layouts.include.logo', ['width' => 150])
+		@include ('themes::include.logo', ['width' => 150])
 	</td>
 </tr>
 @if(isset($banner_image))

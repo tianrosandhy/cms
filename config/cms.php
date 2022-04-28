@@ -5,6 +5,7 @@ return [
         'auth_guard_name' => 'admin',
         'assets' => 'core',
         'themes' => env('APP_THEME', 'xoric'),
+        'theme_paths' => 'themes',
         'crud_confirmation_on_save' => false,
         'crud_confirmation_on_back' => true,
     ],

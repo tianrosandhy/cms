@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ Autocrud::currentLang() }}">
 <head>
-	@include ('core::layouts.partials.metadata')
+	@include ('themes::partials.metadata')
 </head>
 <body data-topbar="colored">
     <div id="page-loader">
@@ -9,8 +9,8 @@
     </div>
     <!-- Begin page -->
     <div id="layout-wrapper">
-        @include ('core::layouts.partials.header')
-        @include ('core::layouts.partials.sidebar')        
+        @include ('themes::partials.header')
+        @include ('themes::partials.sidebar')        
 
         <div class="main-content">
             <div class="page-content">
@@ -22,14 +22,14 @@
                 </div>
             </div>
             <!-- End Page-content -->
-            @include ('core::layouts.partials.footer')
+            @include ('themes::partials.footer')
         </div>
         <!-- end main content-->
     </div>
     <!-- END layout-wrapper -->
 
-    @include ('core::layouts.partials.sidebar.global-setting')
-    @include ('core::layouts.partials.modal')
-	@include ('core::layouts.partials.script')
+    @include ('themes::partials.sidebar.global-setting')
+    @include ('themes::partials.modal')
+	@include ('themes::partials.script')
 </body>
 </html>

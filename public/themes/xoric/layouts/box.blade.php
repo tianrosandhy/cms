@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        @include ('core::layouts.partials.metadata')
+        @include ('themes::partials.metadata')
     </head>
 
     <body class="authentication-bg bg-primary bg-pattern">
@@ -13,7 +13,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="mx-auto mb-5">
-                                    @include ('core::layouts.include.logo', ['height' => 50])
+                                    @include ('themes::include.logo', ['height' => 50])
                                 </div>
                                 @yield ('content')
                                 
@@ -29,6 +29,6 @@
             <!-- end container -->
         </div>
         <!-- end page -->
-        @include ('core::layouts.partials.script')
+        @include ('themes::partials.script')
     </body>
 </html>
