@@ -4,6 +4,7 @@ return [
         'prefix' => env('ADMIN_PREFIX', 'p4n3lb04rd'),
         'auth_guard_name' => 'admin',
         'assets' => 'core',
+        'themes' => env('APP_THEME', 'xoric'),
         'crud_confirmation_on_save' => false,
         'crud_confirmation_on_back' => true,
     ],

@@ -1,5 +1,5 @@
 <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
-<script src="{{ asset('themes/xoric/script.js') }}"></script>
+<script src="{{ asset('themes/'.config('cms.admin.themes', 'xoric').'/script.js') }}"></script>
 {!! Autocrud::js() !!}
 
 <!-- Plugins -->
