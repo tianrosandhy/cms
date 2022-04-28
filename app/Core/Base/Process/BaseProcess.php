@@ -67,7 +67,11 @@ class BaseProcess
         DB::beginTransaction();
         try {
             $this->data = $this->process();
-            DB::commit();
+            try {
+                DB::commit();
+            } catch (Exception $e) {
+                // do nothing. this to prevent No active transaction exception
+            }
         } catch (ProcessException $e) {
             DB::rollback();
             Log::error("THROWN PROCESS EXCEPTION IN " . get_class($this) . " : ", [

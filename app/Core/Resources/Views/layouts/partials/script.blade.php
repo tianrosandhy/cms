@@ -1,10 +1,10 @@
 <script src="https://code.iconify.design/2/2.0.4/iconify.min.js"></script>
-<script src="{{ admin_asset('js/app.js') }}"></script>
+<script src="{{ asset('themes/xoric/script.js') }}"></script>
 {!! Autocrud::js() !!}
 
 <!-- Plugins -->
-<script src="{{ admin_asset('js/helper.js') }}?v={{ time() }}"></script>
-<script src="{{ admin_asset('js/additional.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('core/js/helper.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('core/js/additional.js') }}?v={{ time() }}"></script>
 <script>
 var BASE_URL = '{{ admin_url('/') }}';
 var SITE_URL = '{{ url('/') }}';
