@@ -1,6 +1,8 @@
 <?php
 namespace App\Core\Components;
 
+use Exception;
+
 class Themes
 {
     public function __construct()
@@ -22,7 +24,11 @@ class Themes
 
     public function activeTheme()
     {
-        return setting('general.theme', $this->fallback_theme);
+        try {
+            return setting('general.theme', $this->fallback_theme);
+        } catch(Exception $e) {
+            return $this->fallback_theme;
+        }
     }
 
     public function layoutPath()
