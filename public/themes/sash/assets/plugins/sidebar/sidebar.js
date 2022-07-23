@@ -113,19 +113,19 @@
         $target.sidebar(option)
     })
 
-    $('html').on('click.bs.sidebar.autohide', function(event) {
-        var $this = $(event.target);
-        var isButtonOrSidebar = $this.is('.sidebar, [data-bs-toggle="sidebar-right"]') || $this.parents('.sidebar, [data-bs-toggle="sidebar-right"]').length;
-        if (isButtonOrSidebar) {
-            return;
-        } else {
-            var $target = $('.sidebar');
-            $target.each(function(i, trgt) {
-                var $trgt = $(trgt);
-                if ($trgt.data('bs.sidebar') && $trgt.hasClass('sidebar-open')) {
-                    $trgt.sidebar('hide');
-                }
-            })
-        }
-    });
+    // $('html').on('click.bs.sidebar.autohide', function(event) {
+    //     var $this = $(event.target);
+    //     var isButtonOrSidebar = $this.is('.sidebar, [data-bs-toggle="sidebar-right"]') || $this.parents('.sidebar, [data-bs-toggle="sidebar-right"]').length;
+    //     if (isButtonOrSidebar) {
+    //         return;
+    //     } else {
+    //         var $target = $('.sidebar');
+    //         $target.each(function(i, trgt) {
+    //             var $trgt = $(trgt);
+    //             if ($trgt.data('bs.sidebar') && $trgt.hasClass('sidebar-open')) {
+    //                 $trgt.sidebar('hide');
+    //             }
+    //         })
+    //     }
+    // });
 }(jQuery);

@@ -134,7 +134,9 @@ function ajaxUrlProcess(url, callback, ajax_type){
         }
 
         if(typeof tb_data != 'undefined'){
-          tb_data.ajax.reload();
+            $.each(tb_data, function(k, itm){
+                itm.ajax.reload(null, false);
+            });
         }
       }
       else if(resp.type == 'error'){
@@ -179,6 +181,13 @@ function RegisterAjaxForm(){
         else{
           toastr.error(resp.message);
         }
+      }
+      if (typeof tb_data != 'undefined') {
+        $.each(tb_data, function(k, itm){
+            itm.ajax.reload(null, false);
+        });
+        $(".modal").modal('hide');
+        return;
       }
       if(resp.redirect){
         showLoading();
