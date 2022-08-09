@@ -50,7 +50,7 @@ function error_handling(resp){
     }
     else{
       $.each(resp.error, function(k, v){
-        toastr.error(v[0]);
+        toastr.error(v);
       });
     }
   }
